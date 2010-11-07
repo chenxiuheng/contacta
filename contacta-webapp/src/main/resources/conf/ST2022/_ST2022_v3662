@@ -1,0 +1,32 @@
+
+Before launching provisioning,
+
+-Make sure your phone will be able to fetch the *.inf file by configuring your DHCP server or preconfiguring the phone
+
+-Modify ComConf2022SG_v3.66.2.txt for your environment
+
+-Modify the name of ST2022S_00147FE191CD.txt to match your phone's MAC address
+
+-Modify ST2022S_00147FE191CD.txt for your environment
+
+-The tones provided within the files are just examples: 
+   "Tone-Melodies.txt"
+   "Tone-RG.txt"
+   "Tone-CW.txt"
+You can create your own using RTTTL format. 
+If you do not want them to be downloaded during provisioning, please remove them from ST2022S.inf
+
+-The Lang and Tones tables provided within the files are just examples: 
+   "LangTbl.zz"
+   "ToneTbl.zz"
+You can create your own, please refer to "ST20xx SIP New Features SG vx.59.doc" to activate the feature.
+If you do not want them to be downloaded during provisioning, please remove them from ST2022S.inf
+
+-Please do not leave empty parameters in .inf file, for example, if you do not want to load any melody or extra table, remove the lines complety:
+	melodies=Tone-Melodies.txt
+	system_melodies=tone-RG.txt
+	call_waiting_tone=Tone-CW.txt
+	tone_table=ToneTable.txt
+	language_table=LangTable.txt
+
+EOF-

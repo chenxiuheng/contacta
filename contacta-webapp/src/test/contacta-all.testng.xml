@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- :xml.validate=true: -->
+<suite name="mic.contacta" verbose="1" annotations="JDK">
+ <test name="mic.contacta" parallel="false">
+  <packages>
+   <package name="mic.contacta.*">
+    <include name=".*Test"/>
+   </package>
+  </packages>
+  <!--
+  <classes>
+   <class name="mic.organic.aaa.dao.AccountDaoTest"/>
+  </classes>
+   -->
+ </test>
+</suite>

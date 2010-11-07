@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+ <!-- contacta-pro -->
+ <persistence-unit name="contacta-pro" transaction-type="RESOURCE_LOCAL">
+  <provider>org.hibernate.ejb.HibernatePersistence</provider>
+  <mapping-file>mic/contacta/contacta-orm-mapping.xml</mapping-file>
+  <exclude-unlisted-classes/>
+  <properties>
+   <property name="hibernate.id.new_generator_mappings" value="true"/>
+   <property name="hibernate.hbm2ddl.auto" value="validate"/>
+   <property name="hibernate.show_sql" value="false"/>
+  </properties>
+ </persistence-unit>
+
+ <!-- contacta-dev -->
+ <persistence-unit name="contacta-dev" transaction-type="RESOURCE_LOCAL">
+  <provider>org.hibernate.ejb.HibernatePersistence</provider>
+  <mapping-file>mic/contacta/contacta-orm-mapping.xml</mapping-file>
+  <exclude-unlisted-classes/>
+  <properties>
+   <!-- FIXME move to new! --><property name="hibernate.id.new_generator_mappings" value="true"/>
+   <property name="hibernate.hbm2ddl.auto" value="update"/>
+   <!--
+   <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
+    -->
+   <property name="hibernate.show_sql" value="false"/>
+   <property name="hibernate.format_sql" value="true"/>
+
+   <property name="hibernate.ejb.event.post-insert" value="org.hibernate.ejb.event.EJB3PostInsertEventListener,org.hibernate.envers.event.AuditEventListener"/>
+   <property name="hibernate.ejb.event.post-update" value="org.hibernate.ejb.event.EJB3PostUpdateEventListener,org.hibernate.envers.event.AuditEventListener"/>
+   <property name="hibernate.ejb.event.post-delete" value="org.hibernate.ejb.event.EJB3PostDeleteEventListener,org.hibernate.envers.event.AuditEventListener"/>
+   <property name="hibernate.ejb.event.pre-collection-update" value="org.hibernate.envers.event.AuditEventListener"/>
+   <property name="hibernate.ejb.event.pre-collection-remove" value="org.hibernate.envers.event.AuditEventListener"/>
+   <property name="hibernate.ejb.event.post-collection-recreate" value="org.hibernate.envers.event.AuditEventListener"/>
+  </properties>
+ </persistence-unit>
+
+ <!-- intport-persistence-unit
+ <persistence-unit name="intport-persistence-unit" transaction-type="RESOURCE_LOCAL">
+  <provider>org.hibernate.ejb.HibernatePersistence</provider>
+  <mapping-file>META-INF/contacta-intport-orm-mapping.xml</mapping-file>
+  <exclude-unlisted-classes/>
+  <properties>
+   <property name="hibernate.id.new_generator_mappings" value="true"/>
+   <property name="hibernate.hbm2ddl.auto" value="validate"/>
+   <property name="hibernate.show_sql" value="false"/>
+  </properties>
+ </persistence-unit>-->
+</persistence>
+

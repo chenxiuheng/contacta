@@ -1,0 +1,8 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<!-- $Id$ -->
+<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+ <Call class="org.mortbay.log.Log" name="debug"><Arg>executing jetty-web.xml</Arg></Call>
+ <Set name="contextPath">/</Set>
+</Configure>
+

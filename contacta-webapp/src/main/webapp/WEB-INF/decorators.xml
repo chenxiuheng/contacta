@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: decorators.xml 217 2008-11-16 10:15:04Z michele.bianchi@gmail.com $ -->
+<!-- Copyright(C) 2008 [michele.bianchi@gmail.com] -->
+<!-- All rights reserved. -->
+<!-- :xml.validate=true: -->
+
+<!-- decorators -->
+<decorators defaultdir="/WEB-INF/decorators">
+ <excludes>
+  <pattern>/index.*</pattern>
+  <pattern>/css/*</pattern>
+  <pattern>/js/*</pattern>
+  <pattern>/static/*</pattern>
+  <pattern>/struts/*</pattern>
+  <pattern>/nodecorate/*</pattern>
+  <pattern>/o/ldap-*.action</pattern>
+  <pattern>/o/empty.action</pattern>
+  <pattern>/o/channels.action</pattern>
+  <pattern>/o/phonebook-*.action*</pattern>
+ </excludes>
+
+ <decorator name="plain" page="plain.ftl">
+  <pattern>/o/*.action</pattern>
+ </decorator>
+
+ <decorator name="dojo" page="dojo.ftl">
+  <pattern>/s/main.action</pattern>
+  <pattern>/a/main.action</pattern>
+ </decorator>
+</decorators>
+

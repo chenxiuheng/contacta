@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+ <!-- test-persistence-unit-hsql -->
+ <persistence-unit name="test-persistence-unit" transaction-type="RESOURCE_LOCAL">
+  <provider>org.hibernate.ejb.HibernatePersistence</provider>
+  <mapping-file>mic/contacta/test-orm-mapping.xml</mapping-file>
+  <properties>
+   <property name="hibernate.id.new_generator_mappings" value="true"/>
+   <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+   <property name="hibernate.bytecode.provider" value="javassist"/>
+   <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
+   <property name="hibernate.show_sql" value="false"/>
+   <property name="hibernate.format_sql" value="true"/>
+   <!--
+   <property name="hibernate.query.substitutions" value="Y"/>
+   <property name="hibernate.use_sql_comments" value="false"/>
+   <property name="hibernate.max_fetch_depth" value="3"/>
+   <property name="hibernate.archive.autodetection" value="none"/>
+   <property name="hibernate.ejb.cfgfile" value="/hibernate.cfg.xml"/>
+     -->
+  </properties>
+ </persistence-unit>
+
+ <!-- test-persistence-unit-psql -->
+ <persistence-unit name="test-persistence-unit-psql" transaction-type="RESOURCE_LOCAL">
+  <provider>org.hibernate.ejb.HibernatePersistence</provider>
+  <mapping-file>mic.contacta/ptool-orm-mapping.xml</mapping-file>
+  <properties>
+   <property name="hibernate.id.new_generator_mappings" value="true"/>
+   <property name="hibernate.hbm2ddl.auto" value="update"/>
+   <property name="hibernate.bytecode.provider" value="javassist"/>
+   <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
+   <property name="hibernate.show_sql" value="false"/>
+   <property name="hibernate.format_sql" value="false"/>
+  </properties>
+ </persistence-unit>
+</persistence>
+

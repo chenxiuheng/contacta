@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: contacta.spring.xml 680 2010-11-07 14:24:51Z michele.bianchi $ -->
+<!-- Copyright (c) 2005-2009 michele.bianchi@gmail.com -->
+<!-- All rights reserved. -->
+<!-- :xml.validate=true: -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:p="http://www.springframework.org/schema/p"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:util="http://www.springframework.org/schema/util"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:tx="http://www.springframework.org/schema/tx"
+ xmlns:jee="http://www.springframework.org/schema/jee"
+ xmlns:security="http://www.springframework.org/schema/security"
+ xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+  http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.3.xsd
+  ">
+
+ <!--================================================================-->
+ <!--   properties                                                     -->
+ <!--================================================================-->
+ <bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+  <property name="ignoreResourceNotFound" value="true"/>
+  <property name="locations">
+   <list>
+    <value>classpath:/mic/contacta/contacta.properties</value>
+    <value>file:./contacta.properties</value>
+   </list>
+  </property>
+ </bean>
+
+ <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+  <property name="defaultEncoding" value="UTF-8"/>
+  <property name="cacheSeconds" value="-1"/>
+  <property name="basenames">
+   <list>
+    <value>classpath:/mic/contacta/l10n/contacta-messages</value>
+   </list>
+  </property>
+ </bean>
+
+ <!--================================================================-->
+ <!--   mic.contacta                                                            -->
+ <!--================================================================-->
+ <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
+ <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+ <!-- datasource -->
+ <jee:jndi-lookup id="dataSource" jndi-name="jdbc/contactaDs"></jee:jndi-lookup>
+
+ <!-- entityManagerFactory: full-featured in spring app, no jndi  (p:persistenceUnitName="the-name") -->
+ <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" p:dataSource-ref="dataSource">
+  <property name="jpaVendorAdapter">
+   <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:showSql="false"/>
+  </property>
+ </bean>
+
+ <!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
+ <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" p:entityManagerFactory-ref="entityManagerFactory"/>
+
+ <!--================================================================-->
+ <!--   organic (and struts2) integrations                             -->
+ <!--================================================================-->
+ <context:component-scan base-package="mic.organic.vfs"/>
+ <context:component-scan base-package="mic.organic.l10n"/>
+ <context:component-scan base-package="mic.organic.scripting"/>
+ <context:component-scan base-package="mic.organic.aaa.jpa"/>
+ <context:component-scan base-package="mic.organic.aaa.dao"/>
+ <context:component-scan base-package="mic.organic.aaa.spi"/>
+ <context:component-scan base-package="mic.organic.json"/>
+ <context:component-scan base-package="mic.organic.web.spi"/>
+ <context:component-scan base-package="mic.organic.web.struts2"/>
+
+ <context:component-scan base-package="mic.organic.gateway"/>
+
+ <!--================================================================-->
+ <!--   contacta                                                       -->
+ <!--================================================================-->
+ <aop:aspectj-autoproxy proxy-target-class="true"/>
+ <context:annotation-config/>
+
+ <!-- imports -->
+ <!--
+ <context:component-scan base-package="mic.contacta.server.jmx"/>
+  -->
+ <import resource="classpath:/mic/contacta/contacta-security.spring.xml"/>
+ <context:component-scan base-package="mic.contacta.pmod"/>
+ <context:component-scan base-package="mic.contacta.server.dao"/>
+ <context:component-scan base-package="mic.contacta.server.spi"/>
+ <context:component-scan base-package="mic.contacta.gateway"/>
+ <context:component-scan base-package="mic.contacta.webapp"/>
+ <context:component-scan base-package="mic.contacta.struts2"/>
+
+ <context:component-scan base-package="mic.contacta.asterisk.agi"/>
+ <context:component-scan base-package="mic.contacta.asterisk.spi"/>
+
+ <!--  -->
+ <bean id="organicSession" class="mic.contacta.server.spi.ContactaSession" scope="session">
+  <aop:scoped-proxy/>
+ </bean>
+
+
+ <!-- contactaService -->
+ <bean id="contactaService" class="mic.contacta.server.spi.ContactaServiceImpl" lazy-init="false" primary="true">
+  <property name="configurerList">
+   <util:list>
+    <ref bean="thomson2022Configurer"/>
+    <ref bean="thomson2030Configurer"/>
+    <ref bean="polycomConfigurer"/>
+   </util:list>
+ </property>
+ </bean>
+
+ <!--================================================================-->
+ <!--   cache                                                        -->
+ <!--================================================================-->
+ <!-- cacheManager -->
+ <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+  <property name="configLocation" value="classpath:/mic/contacta/ehcache.xml"/>
+ </bean>
+
+ <!-- provisioningSessionCache -->
+ <bean id="provisioningSessionCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+  <property name="cacheManager" ref="cacheManager"/>
+  <property name="cacheName" value="mic.contacta.server.provisioningSession"/>
+ </bean>
+
+ <!--================================================================-->
+ <!--   asterisk                                                       -->
+ <!--================================================================-->
+ <context:component-scan base-package="mic.contacta.asterisk.agi"/>
+ <context:component-scan base-package="mic.contacta.asterisk.aop"/>
+ <context:component-scan base-package="mic.contacta.asterisk.handlers"/>
+
+ <!-- asteriskService -->
+ <bean id="asteriskService" class="mic.contacta.asterisk.spi.AsteriskServiceImpl"/>
+
+ <!-- agiServer -->
+ <bean id="agiServer" class="mic.contacta.asterisk.spi.AgiServerFactoryBean">
+  <property name="mappingStrategy">
+   <bean class="org.asteriskjava.fastagi.SimpleMappingStrategy">
+    <property name="mappings">
+     <util:map>
+      <entry key="pickup" value-ref="pickupAgi"/>
+      <entry key="pickupAll" value-ref="pickupAllAgi"/>
+      <entry key="cocSet" value-ref="cocSetAgi"/>
+      <entry key="cocReset" value-ref="cocResetAgi"/>
+      <entry key="coverage" value-ref="coverageAgi"/>
+      <entry key="coveragePickup" value-ref="coveragePickupAgi"/>
+      <entry key="presence" value-ref="presenceAgi"/>
+      <!--
+      <entry key="drop612" value-ref="drop612Agi"/>
+       -->
+     </util:map>
+    </property>
+   </bean>
+  </property>
+ </bean>
+
+ <!-- eventDispatcher -->
+ <bean id="eventDispatcher" class="mic.contacta.asterisk.spi.EventDispatcherImpl">
+  <property name="handlerMap">
+   <util:map>
+    <entry key="org.asteriskjava.manager.event.DisconnectEvent" value-ref="disconnectHandler"/>
+    <entry key="org.asteriskjava.manager.event.NewChannelEvent" value-ref="newChannelHandler"/>
+    <entry key="org.asteriskjava.manager.event.HangupEvent" value-ref="hangupHandler"/>
+    <entry key="org.asteriskjava.manager.event.PeerEntryEvent" value-ref="peerEntryHandler"/>
+    <entry key="org.asteriskjava.manager.event.PeerlistCompleteEvent" value-ref="peerlistCompleteHandler"/>
+    <!--
+     <entry key="org.asteriskjava.manager.event.ManagerEvent" value-ref="managerHandler"/>
+     -->
+   </util:map>
+  </property>
+ </bean>
+
+ <!--================================================================-->
+ <!--    quartz and jobs                                               -->
+ <!--================================================================-->
+ <!--
+ <bean id="conferenceJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+  <property name="jobClass" value="mic.contacta.server.spi.ConferenceActivatorJob"/>
+  <property name="jobDataAsMap">
+   <map>
+    <entry key="message" value="This is a message from the Spring configuration file!"/>
+    <entry key="calendarService" value-ref="calendarService"/>
+   </map>
+  </property>
+ </bean>
+
+ <bean id="conferenceTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+  <property name="jobDetail" ref="conferenceJob"/>
+  <property name="cronExpression" value="0 24,25,29,30,31,54,55,59,00,01 * * * ?"/><!- - 24,25,29,30,31,54,55,59,00,01 or 0/1 every minute:) - ->
+ </bean>
+
+ <bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+  <property name="triggers">
+   <list>
+    <ref local="conferenceTrigger"/>
+   </list>
+  </property>
+  <property name="jobFactory">
+   <bean id="jobFactory" class="org.springframework.scheduling.quartz.SpringBeanJobFactory"/>
+  </property>
+ </bean>
+  -->
+ <!--================================================================-->
+ <!--    mail                                                          -->
+ <!--================================================================-->
+ <!-- scans -->
+ <context:component-scan base-package="mic.organic.mail"/>
+
+ <!-- mailSender -->
+ <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+  <property name="host" value="localhost"/>
+ </bean>
+
+ <!-- freeMarkerConfigurer -->
+ <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+  <property name="templateLoaderPath" value="classpath:/mic/contacta/mail"/>
+ </bean>
+
+ <!--================================================================-->
+ <!--   jmx                                                            -->
+ <!--================================================================-->
+ <!-- mbeanServer and exporter
+ <bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+  <property name="locateExistingServerIfPossible" value="true"/>
+ </bean>
+ <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter">
+  <property name="beans">
+   <map>
+    <entry key="bean:name=contactaMbean" value-ref="contactaMbean"/>
+   </map>
+  </property>
+ </bean>
+ -->
+
+</beans>

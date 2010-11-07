@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- :xml.validate=true: -->
+<suite name="mic.contacta.ptool.integration" verbose="1" annotations="JDK">
+ <test name="mic.contacta.ptool.integration" parallel="false">
+  <packages>
+   <package name="mic.contacta.ptool.*">
+    <include name=".*Itest"/>
+   </package>
+  </packages>
+ </test>
+</suite>

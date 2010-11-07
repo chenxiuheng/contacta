@@ -1,0 +1,9 @@
+{
+identifier:id,
+label:label,
+items:[],
+ec:'${exception.class.name}',
+error:'${exception}',
+exception:'${exception}',
+stack:'${exceptionStack}'
+}

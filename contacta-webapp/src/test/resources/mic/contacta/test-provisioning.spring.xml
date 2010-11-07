@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: mic.module.xml 26 2005-10-22 16:27:16Z mic $ -->
+<!-- Copyright (c) 2005-2009 michele.bianchi@gmail.com -->
+<!-- All rights reserved. -->
+<!-- :xml.validate=true: -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:util="http://www.springframework.org/schema/util"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+  ">
+
+ <!--================================================================-->
+ <!--                                                                -->
+ <!--================================================================-->
+<!-- Activates Spring, JSR 250 and JPA annotations -->
+ <context:annotation-config/>
+ <import resource="classpath:/mic/contacta/test-orm.spring.xml"/>
+
+ <!-- imports -->
+ <context:component-scan base-package="mic.organic.vfs"/>
+ <context:component-scan base-package="mic.organic.scripting"/>
+ <context:component-scan base-package="mic.organic.aaa.jpa"/>
+ <context:component-scan base-package="mic.organic.aaa.dao"/>
+ <context:component-scan base-package="mic.organic.aaa.spi"/>
+ <context:component-scan base-package="mic.contacta.server.dao"/>
+<!--
+ <context:component-scan base-package="mic.contacta.server.spi">
+  <context:exclude-filter type="assignable" expression="mic.contacta.server.spi.ContactaService"/>
+  <context:exclude-filter type="assignable" expression="mic.contacta.server.spi.CalendarService"/>
+  <context:exclude-filter type="assignable" expression="mic.contacta.server.spi.PhonebarService"/>
+ </context:component-scan>
+
+ <bean class="mic.contacta.server.spi.ContactaConfiguration"/>
+ <bean class="mic.contacta.server.spi.InventoryServiceImpl"/>
+ <bean class="mic.contacta.server.spi.SipServiceImpl"/>
+ <bean class="mic.contacta.server.spi.CocServiceImpl"/>
+ -->
+
+ <context:component-scan base-package="mic.contacta.pmod.polycom"/>
+ <context:component-scan base-package="mic.contacta.pmod.thomson"/>
+
+ <bean class="mic.contacta.server.spi.ContactaConfiguration"/>
+ <bean class="mic.contacta.server.spi.TemplateServiceImpl"/>
+ <bean class="mic.contacta.server.spi.InventoryServiceImpl"/>
+ <bean class="mic.contacta.server.spi.SipServiceImpl"/>
+ <bean class="mic.contacta.server.spi.ProvisioningServiceImpl"/>
+ <bean class="mic.contacta.asterisk.spi.ExtenHintWriter"/>
+ <bean class="mic.contacta.asterisk.spi.ExtenProfileWriter"/>
+
+
+ <!--================================================================-->
+ <!--   cache                                                        -->
+ <!--================================================================-->
+ <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+  <property name="configLocation" value="classpath:/mic/contacta/ehcache.xml"/>
+ </bean>
+ <bean id="provisioningSessionCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+  <property name="cacheManager" ref="cacheManager"/>
+  <property name="cacheName" value="mic.contacta.server.provisioningSession"/>
+ </bean>
+
+</beans>

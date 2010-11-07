@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: contacta-ldap.spring.xml 681 2010-11-07 14:41:37Z michele.bianchi $ -->
+<!-- Copyright (c) 2005-2009 [michele.bianchi@gmail.com] -->
+<!-- All rights reserved. -->
+<!-- :xml.validate=true: -->
+<beans
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:p="http://www.springframework.org/schema/p"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:util="http://www.springframework.org/schema/util"
+ xmlns:security="http://www.springframework.org/schema/security"
+ xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.3.xsd
+  ">
+
+ <!--================================================================-->
+ <!--    security                                                      -->
+ <!--================================================================-->
+ <!-- http -->
+ <security:http auto-config="false">
+  <security:form-login login-page="/o/login.action" login-processing-url="/o/j_spring_security_check.action" default-target-url="/" authentication-failure-url="/o/denied.action"/>
+  <security:logout logout-url="/j_spring_security_logout" logout-success-url="/o/logout.action"/>
+  <security:intercept-url pattern="/admin/*" access="ROLE_ADMIN"/>
+  <security:intercept-url pattern="/s/*"  access="IS_AUTHENTICATED_FULLY"/>
+  <!--
+  <security:intercept-url pattern="/o/*" access="ROLE_GUEST"/>
+  <security:anonymous username="guest" granted-authority="ROLE_GUEST"/>
+   -->
+ </security:http>
+
+ <!-- _securityContextSource -->
+ <security:ldap-server url="${ldap.url}/${ldap.base}"/>
+
+ <!-- _authenticationManager -->
+ <security:ldap-authentication-provider user-dn-pattern="cn={0},ou=people" group-search-base="ou=group"/>
+
+
+ <!-- altre prove su ldap
+ <bean id="ldapAuthProvider" class="org.springframework.security.authentication.ldap.LdapAuthenticationProvider">
+  <constructor-arg>
+   <bean class="org.springframework.security.authentication.ldap.authenticator.BindAuthenticator">
+    <constructor-arg ref="contextSource" />
+    <property name="userDnPatterns">
+     <list>
+      <value>uid={0},ou=people</value>
+     </list>
+    </property>
+   </bean>
+  </constructor-arg>
+  <constructor-arg>
+   <bean class="org.springframework.security.ldap.populator.DefaultLdapAuthoritiesPopulator">
+    <constructor-arg ref="contextSource" />
+    <constructor-arg value="ou=group" />
+    <property name="groupRoleAttribute" value="ou"/>
+    <property name="defaultRole" value="ROLE_USER"/>
+   </bean>
+  </constructor-arg>
+ </bean>
+
+ <security:authentication-provider>
+  <security:ldap-user-service user-search-filter="uid={0},ou=people" group-search-base="ou=group"/>
+ </security:authentication-provider>
+ -->
+
+
+ <!--================================================================-->
+ <!--     ldap                                                         -->
+ <!--================================================================-->
+ <!-- this was in the main.spring.xml, to access ldap w/o authentication
+      the code before instead authenticate against ldap and may conflict
+      with this rest of code.
+   -->
+ <context:component-scan base-package="mic.organic.aaa.ldap"/>
+ <!--
+ <bean id="personDao" class="mic.organic.aaa.mock.PersonDaoMock"/>
+  -->
+ <bean id="personDao" class="mic.organic.aaa.ldap.PersonDaoLdap">
+  <property name="ldapTemplate" ref="ldapTemplate"/>
+ </bean>
+
+ <bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">
+  <constructor-arg ref="contextSource"/>
+ </bean>
+
+ <!-- external ldap server -->
+ <bean id="contextSource" class="org.springframework.ldap.core.support.LdapContextSource">
+  <property name="url" value="${ldap.url}"/>
+  <property name="base" value="${ldap.base}"/>
+  <!-- w/o authentication
+  <property name="authenticationSource">
+   <bean id="springSecurityAuthenticationSource" class="org.springframework.security.ldap.SpringSecurityAuthenticationSource"/>
+  </property>
+  -->
+  <property name="userDn" value="cn=admin,dc=asterisk,dc=net"/>
+  <property name="password" value="XXXX"/>
+ </bean>
+
+ <!-- embedded ldap server
+ <bean id="contextSource" class="org.springframework.ldap.test.TestContextSourceFactoryBean" lazy-init="false">
+  <property name="defaultPartitionSuffix" value="${ldap.base}"/>
+  <property name="defaultPartitionName" value="openinnovation.it"/>
+  <property name="principal" value="uid=admin,ou=system"/>
+  <property name="password" value="secret"/>
+  <property name="ldifFile" value="classpath:openinnovation.ldif"/>
+  <property name="port" value="3900"/>
+ </bean> -->
+
+
+ <!--
+ <bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <property name="location" value="classpath:/ldap.properties"/>
+ </bean>
+
+ <bean id="authenticationSource" class="org.springframework.ldap.authentication.DefaultValuesAuthenticationSourceDecorator">
+  <property name="target" ref="springSecurityAuthenticationSource"/>
+  <property name="defaultUser" value="uid=admin,ou=system"/>
+  <property name="defaultPassword" value="secret"/>
+ </bean>
+   -->
+
+
+ <!--================================================================-->
+ <!--   properties                                                     -->
+ <!--================================================================-->
+ <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <property name="ignoreResourceNotFound" value="true"/>
+  <property name="locations">
+   <list>
+    <value>classpath:/mic/contacta/contacta-auth.properties</value>
+    <value>file:./contacta-auth.properties</value>
+   </list>
+  </property>
+ </bean>
+</beans>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: remote-servlet.xml 642 2010-05-30 09:15:27Z michele.bianchi $ -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:p="http://www.springframework.org/schema/p"
+ xmlns:util="http://www.springframework.org/schema/util"
+ xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+  ">
+
+ <!--================================================================-->
+ <!--  exporters                                                     -->
+ <!--================================================================-->
+ <!--  -->
+ <bean id="micExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" p:service-ref="provisioningService">
+  <property name="serviceInterface">
+   <value>mic.contacta.server.spi.ProvisioningService</value>
+  </property>
+ </bean>
+
+ <!--================================================================-->
+ <!--  mappings                                                      -->
+ <!--================================================================-->
+ <!-- urlMapping -->
+ <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+  <property name="mappings">
+   <props>
+    <prop key="/mic">micExporter</prop>
+   </props>
+  </property>
+  <!--
+  <property name="alwaysUseFullPath"><value>true</value></property>
+   -->
+ </bean>
+
+</beans>

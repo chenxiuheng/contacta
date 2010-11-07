@@ -1,0 +1,15 @@
+;
+; Message Information file
+;
+[message]
+origmailbox=300
+context=macro-userdef
+macrocontext=interni
+exten=15-NOANSWER
+priority=1
+callerchan=SIP/300-0821f8b8
+callerid="demo" <300>
+origdate=Sat May 24 07:54:50 PM CEST 2008
+origtime=1211651690
+category=
+duration=6

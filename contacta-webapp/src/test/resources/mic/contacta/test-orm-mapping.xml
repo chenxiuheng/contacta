@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="1.0">
+
+ <!-- real jpa entities -->
+ <entity class="mic.organic.aaa.model.PersonModel"><table name="abper"/></entity>
+ <entity class="mic.organic.aaa.model.AddressModel"><table name="abadr"/></entity>
+ <entity class="mic.organic.aaa.model.OrganizationModel"><table name="aborg"/></entity>
+ <entity class="mic.organic.aaa.model.GroupModel"><table name="acgrp"/></entity>
+ <entity class="mic.organic.aaa.model.RoleModel"><table name="acrol"/></entity>
+ <entity class="mic.organic.aaa.model.AccountModel"><table name="acacc"/></entity>
+
+ <entity class="mic.contacta.model.ProductModel"/>
+ <entity class="mic.contacta.model.PhoneModel"/>
+ <entity class="mic.contacta.model.SipAccountModel"/>
+ <entity class="mic.contacta.model.CoverageModel"/>
+ <entity class="mic.contacta.model.CocModel"/>
+ <entity class="mic.contacta.model.SipUserModel"/>
+ <entity class="mic.contacta.model.VoicemailModel"/>
+ <entity class="mic.contacta.model.ExtenModel"/>
+ <entity class="mic.contacta.model.ConferenceModel"/>
+ <entity class="mic.contacta.model.AppointmentModel"/>
+
+ <entity class="mic.contacta.model.PbxContextModel"/>
+ <entity class="mic.contacta.model.PbxProfileModel"/>
+</entity-mappings>

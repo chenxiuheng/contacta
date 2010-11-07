@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="1.0">
+
+ <!-- real jpa entities -->
+ <entity class="mic.organic.aaa.model.PersonModel"><table name="abper"/></entity>
+ <entity class="mic.organic.aaa.model.AddressModel"><table name="abadr"/></entity>
+ <entity class="mic.organic.aaa.model.OrganizationModel"><table name="aborg"/></entity>
+ <entity class="mic.organic.aaa.model.GroupModel"><table name="acgrp"/></entity>
+ <entity class="mic.organic.aaa.model.RoleModel"><table name="acrol"/></entity>
+ <entity class="mic.organic.aaa.model.AccountModel"><table name="acacc"/></entity>
+
+ <entity class="mic.contacta.model.ProductModel"></entity>
+ <entity class="mic.contacta.model.PhoneModel"></entity>
+ <entity class="mic.contacta.model.SipAccountModel"></entity>
+ <entity class="mic.contacta.model.CoverageModel"></entity>
+ <entity class="mic.contacta.model.CocModel"></entity>
+
+ <!-- asterisk entities -->
+ <entity class="mic.contacta.model.SipUserModel">
+  <attribute-override name="cancallforward"><column column-definition="bpchar"/></attribute-override>
+  <attribute-override name="canreinvite"><column column-definition="bpchar"/></attribute-override>
+  <attribute-override name="language"><column column-definition="bpchar"/></attribute-override>
+  <attribute-override name="qualify"><column column-definition="bpchar"/></attribute-override>
+  <attribute-override name="restrictcid"><column column-definition="bpchar"/></attribute-override>
+  <attribute-override name="rtptimeout"><column column-definition="bpchar"/></attribute-override>
+  <attribute-override name="rtpholdtimeout"><column column-definition="bpchar"/></attribute-override>
+  <attribute-override name="port"><column column-definition="varchar(5)"/></attribute-override>
+  <attribute-override name="lastms"><column column-definition="varchar"/></attribute-override>
+  <attributes>
+   <transient name="insecure"/>
+   <transient name="deny"/>
+   <transient name="permit"/>
+   <transient name="mask"/>
+   <transient name="disallow"/>
+   <transient name="allow"/>
+   <transient name="qualify"/>
+   <transient name="fromuser"/>
+   <transient name="fromdomain"/>
+   <transient name="nat"/>
+   <transient name="canreinvite"/>
+   <transient name="cancallforward"/>
+   <transient name="rtptimeout"/>
+   <transient name="rtpholdtimeout"/>
+  </attributes>
+ </entity>
+ <entity class="mic.contacta.model.VoicemailModel">
+  <attribute-override name="id"><column name="uniqueid"/></attribute-override>
+  <attribute-override name="saydurationm"><column column-definition="int2"/></attribute-override>
+ </entity>
+ <entity class="mic.contacta.model.ExtenModel"/>
+ <entity class="mic.contacta.model.ConferenceModel"/>
+ <entity class="mic.contacta.model.CdrModel">
+  <!-- <attribute-override name="id"><column name="uniqueid" column-definition="text"/></attribute-override> -->
+ </entity>
+ <!--  -->
+ <entity class="mic.contacta.model.AppointmentModel"/>
+ <entity class="mic.contacta.model.PbxContextModel"/>
+ <entity class="mic.contacta.model.PbxProfileModel">
+  <attribute-override name="code" ><column unique="false"/></attribute-override>
+ </entity>
+
+</entity-mappings>

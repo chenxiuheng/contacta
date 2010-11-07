@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: test-connectors.spring.xml 1470 2008-05-25 16:10:13Z michele.bianchi@gmail.com $ -->
+<!-- Copyright (c) 2005-2009 michele.bianchi@gmail.com -->
+<!-- All rights reserved. -->
+<!-- :xml.validate=true: -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:util="http://www.springframework.org/schema/util"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+  ">
+
+ <!--================================================================-->
+ <!--   contacta                                                       -->
+ <!--================================================================-->
+ <!-- Activates Spring, JSR 250 and JPA annotations -->
+ <context:annotation-config/>
+ <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+ <bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+  <property name="properties">
+   <value>
+    asteriskService.managerHost=127.0.0.1
+    asteriskService.managerUsername=register
+    asteriskService.managerPassword=XXXX
+   </value>
+  </property>
+ </bean>
+
+ <context:component-scan base-package="mic.contacta.asterisk.agi"/>
+ <context:component-scan base-package="mic.contacta.asterisk.aop"/>
+ <context:component-scan base-package="mic.contacta.asterisk.handlers"/>
+ <context:component-scan base-package="mic.contacta.server.spi"/>
+ <bean class="mic.contacta.asterisk.spi.ExtenHintWriter"/>
+ <bean class="mic.contacta.asterisk.spi.ExtenProfileWriter"/>
+
+ <!--  primary="true" -->
+ <bean id="agiServer" class="mic.contacta.asterisk.spi.AgiServerFactoryBean">
+  <property name="disabled" value="true"/>
+  <property name="port" value="4573"/>
+  <property name="mappingStrategy">
+   <bean class="org.asteriskjava.fastagi.SimpleMappingStrategy">
+    <property name="mappings">
+     <util:map>
+      <entry key="hello" value-ref="sampleAgi"/>
+     </util:map>
+    </property>
+   </bean>
+  </property>
+ </bean>
+
+</beans>

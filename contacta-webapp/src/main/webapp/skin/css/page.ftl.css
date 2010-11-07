@@ -1,0 +1,84 @@
+/* $Revision:121 $
+ * :encoding=UTF-8:
+ *
+ * FIXME css ${base}r
+ */
+@import url('${base}${dojoBase}/dijit/themes/${dojoTheme}/${dojoTheme}.css');
+@import url('${base}${dojoBase}/dojox/grid/resources/${dojoTheme}Grid.css');
+@import url('${base}${dojoBase}/dojox/form/resources/FileInput.css');
+
+/*
+@import url('${base}${dojoBase}/dojox/layout/resources/ExpandoPane.css');
+@import url('${base}${dojoBase}/dojox/grid/enhanced/resources/${dojoTheme}EnhancedGrid.css');
+.dojoxGrid table { padding:10px; }
+*/
+
+/*** MERGE ME IN ORGANIC CSS  [BEGIN]  ***/
+@import url('../r/organic.css');
+/*** MERGE ME IN ORGANIC CSS  [END]  ***/
+
+.contacta {  }
+.contactaDisabledTextBox { border:1px solid #b3b3b3; background: url("${base}/r/buttons/background/validationInputDisabledBg.png") repeat-x top left; }
+
+.bg00 { margin-left:auto; margin-right:auto; border:1px solid #8a8f9c; padding:4px; background-color:#F2F2F2; }
+
+.adminTab { margin:auto; width:1000px; height:700px; }
+.adminTabContent {  border:1px solid silver; width:1000px; height:700px; }
+
+.statusPane {  border:1px solid silver; margin:2px 2px 2px 2px; padding:5px; }
+
+.toolbar { height:34px; margin:0px; padding:2px 5px 2px 5px; background-color:#efefef; border-bottom:1px solid silver;}
+
+.ico00 { width:200px; height:110px; background:transparent url('${base}/r/static/logo.png') no-repeat left; }
+.ico01 { width:14px; height:14px; background:transparent url('${base}/r/static/greenCircle14.png') no-repeat top left; }
+.ico02 { width:14px; height:14px; background:transparent url('${base}/r/static/redCircle14.png') no-repeat top left; }
+
+.ico10 { width:120px; height:120px; background:transparent url('${base}/r/buttons/120/phone.png') no-repeat top left; }
+.ico11 { width:120px; height:120px; background:transparent url('${base}/r/buttons/120/person.png') no-repeat top left; }
+.ico12 { width:120px; height:120px; background:transparent url('${base}/r/buttons/120/person-n-phone.png') no-repeat top left; }
+.ico13 { width:120px; height:120px; background:transparent url('${base}/r/buttons/120/assign-phone.png') no-repeat top left; }
+
+.ico23 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/ok.png') no-repeat top; }
+.ico24 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/cancel.png') no-repeat top; }
+.ico25 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/exit.png') no-repeat top; }
+
+.ico30 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/phone.png') no-repeat top left; }
+.ico31 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/person.png') no-repeat top left; }
+.ico32 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/person-n-phone.png') no-repeat top left; }
+.ico33 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/assign-phone.png') no-repeat top left; }
+
+.ico40 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/file-new.png') no-repeat top; }
+.ico41 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/dialog-ok.png') no-repeat top left; }
+.ico42 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/go-next.png') no-repeat top left; }
+.ico43 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/go-previous.png') no-repeat top left; }
+.ico44 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/list-add.png') no-repeat top left; }
+.ico45 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/gtk-mail.png') no-repeat top left; }
+.ico46 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/emblem-generic.png') no-repeat top left; }
+
+.ico50 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/new.png') no-repeat top; }
+.ico51 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/delete.png') no-repeat top; }
+.ico52 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/edit.png') no-repeat top; }
+.ico53 { width:22px; height:22px; background:transparent url('${base}/r/buttons/22/view-refresh.png') no-repeat top; }
+
+.errorImgPane { width:30px; height:26px; margin-right:4px; background:transparent url('${base}/r/static/alert.png') no-repeat top; }
+
+
+.cal { display:block; margin:0px; width:70px; height:14px; background-color:#e0f6ed; border-bottom:1px dotted #ccc; border-right:1px dotted #ccc; text-align:center; vertical-align:middle; }
+.cal_free  { background-color:#fbfbfb; border:1px solid silver; }
+.cal_busy { background-color:#e0f6ed; border:1px solid #12c260; }
+table.cal { border:0px; }
+th div.cal  { background-color:#FFDDBF; height:30px; border-top:1px dotted #ccc; font-weight:bold; }
+td div.hour { background-color:#fbfbfb; height:28px; border-right:1px dotted #ccc; border-bottom:1px dotted #ccc; border-left:1px dotted #ccc;  }
+
+.booking { -moz-border-radius:8px; margin-bottom:10px; padding:1em; }
+.booking_true  { background-color:#fbfbfb; border:1px solid silver; }
+.booking_false { background-color:#e0f6ed; border:1px solid #12c260; }
+
+table.detailTable { border-collapse:collapse; width:100%; }
+.detailTable tr.yellow td { border:1px solid #FB7A31; background:#FFC; text-align:left; font-weight:bold; }
+.detailTable th { padding:2px; text-align:center; background-color:red; }
+.detailTable td { border:1px solid #cccccc; padding:1px; background-color:#eeeeee; }
+.detailTable td:first-child { padding-left:0.5em; padding-right:0.5em; background-color:#dddddd; text-align:right; }
+.detailTable ul { margin:0px; padding:0px; list-style:none; }
+.detailTable li {  }
+.detailTable li:hover {  }

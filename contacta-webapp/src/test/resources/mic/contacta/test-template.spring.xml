@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: test-template.spring.xml 680 2010-11-07 14:24:51Z michele.bianchi $ -->
+<!-- Copyright (c) 2005-2009 michele.bianchi@gmail.com -->
+<!-- All rights reserved. -->
+<!-- :xml.validate=true: -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:util="http://www.springframework.org/schema/util"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+  ">
+
+ <!--================================================================-->
+ <!--                                                                -->
+ <!--================================================================-->
+ <context:annotation-config/>
+
+ <!-- imports -->
+ <context:component-scan base-package="mic.organic.vfs"/>
+ <context:component-scan base-package="mic.organic.scripting"/>
+
+ <bean class="mic.contacta.server.spi.ContactaConfiguration"/>
+ <bean class="mic.contacta.server.spi.TemplateServiceImpl"/>
+</beans>
