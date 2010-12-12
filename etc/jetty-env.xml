@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+
+ <!-- http://docs.codehaus.org/display/JETTY/JNDI -->
+ <New class="org.mortbay.jetty.plus.naming.EnvEntry">
+  <Arg></Arg>
+  <Arg>contacta/properties/file</Arg>
+  <Arg type="java.lang.String">file:./contacta.properties</Arg>
+  <Arg type="boolean">true</Arg>
+ </New>
+
+ <!-- PGConnectionPoolDataSource,PGSimpleDataSource -->
+ <New id="contactaDs" class="org.mortbay.jetty.plus.naming.Resource">
+  <Arg></Arg>
+  <Arg>jdbc/contactaDs</Arg>
+  <Arg>
+   <!-- derby (Embedded+ConnectionPool/XA/Simple/+DataSource+/40)
+   <New class="org.apache.derby.jdbc.EmbeddedDataSource40">
+    <Set name="DatabaseName">target/db/contacta</Set>
+    <Set name="createDatabase">create</Set>
+   </New>
+    -->
+
+   <!-- postgres: PGConnectionPoolDataSource or PGSimpleDataSource
+   <New class="org.postgresql.ds.PGSimpleDataSource">
+    <Set name="User">XXXX</Set>
+    <Set name="Password">XXXX</Set>
+    <Set name="DatabaseName">contacta</Set>
+    <Set name="ServerName">localhost</Set>
+    <Set name="PortNumber">5432</Set>
+   </New>
+    -->
+
+   <!-- c3p0 -->
+   <New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <Set name="driverClass">org.postgresql.Driver</Set>
+    <Set name="jdbcUrl">jdbc:postgresql://127.0.0.1/contacta</Set>
+    <Set name="user">XXXX</Set>
+    <Set name="password">XXXX</Set>
+   </New>
+
+   <!-- dbcp
+   <New class="org.apache.commons.dbcp.BasicDataSource">
+    <Set name="driverClass">org.postgresql.Driver</Set>
+    <Set name="jdbcUrl">url="jdbc:postgresql://127.0.0.1/contacta</Set>
+    <Set name="user">XXXX</Set>
+    <Set name="password">XXXX</Set>
+   </New>
+   -->
+  </Arg>
+ </New>
+
+ <!-- an XADataSource
+ <New id="mydatasource99" class="org.mortbay.jetty.plus.naming.Resource">
+  <Arg>jdbc/mydatasource99</Arg>
+  <Arg>
+   <New class="com.atomikos.jdbc.SimpleDataSourceBean">
+    <Set name="xaDataSourceClassName">org.apache.derby.jdbc.EmbeddedXADataSource</Set>
+    <Set name="xaDataSourceProperties">databaseName=testdb99;createDatabase=create</Set>
+    <Set name="UniqueResourceName">mydatasource99</Set>
+   </New>
+  </Arg>
+ </New> -->
+
+ <!-- mail
+ <New id="mail" class="org.mortbay.jetty.plus.naming.Resource">
+  <Arg>
+   <Ref id="wac"/>
+  </Arg>
+  <Arg>mail/Session</Arg>
+  <Arg>
+   <New class="org.mortbay.naming.factories.MailSessionReference">
+    <Set name="user">XXXX</Set>
+    <Set name="password">XXXX</Set>
+    <Set name="properties">
+     <New class="java.util.Properties">
+      <Put name="mail.smtp.host">XXX</Put>
+      <Put name="mail.from">me@me</Put>
+      <Put name="mail.debug">true</Put>
+     </New>
+    </Set>
+   </New>
+  </Arg>
+ </New> -->
+
+ <!--
+ <New id="map1" class="org.mortbay.jetty.plus.naming.Link">
+  <Arg><Ref id='wac'/></Arg>
+  <Arg>jdbc/mydatasource1</Arg> <!- - name in web.xml - ->
+  <Arg>jdbc/mydatasource</Arg>  <!- - name in container environment - ->
+ </New> -->
+
+</Configure>
+
+

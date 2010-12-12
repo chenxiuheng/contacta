@@ -1,0 +1,10 @@
+glob:target
+glob:.classpath
+glob:.project
+glob:.settings
+glob:.springBeans
+glob:logs
+relre:.*\.log
+
+syntax: regexp
+^contacta-webapp/contacta\.properties$

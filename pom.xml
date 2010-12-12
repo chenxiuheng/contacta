@@ -392,6 +392,7 @@
       <dependency><groupId>c3p0</groupId><artifactId>c3p0</artifactId><version>0.9.1.2</version></dependency>
       <dependency><groupId>postgresql</groupId><artifactId>postgresql</artifactId><version>9.0-801.jdbc4</version></dependency>
       <dependency><groupId>org.postgis</groupId><artifactId>postgis</artifactId><version>1.5.1</version></dependency>
+      <dependency><groupId>p6spy</groupId><artifactId>p6spy</artifactId><version>1.3</version></dependency>
      </dependencies>
     </plugin>
 
@@ -462,7 +463,7 @@
         <plugin>
          <groupId>org.apache.cxf</groupId>
          <artifactId>cxf-codegen-plugin</artifactId>
-     <version>2.2.10</version>
+     <version>2.3.0</version>
     </plugin>
    </plugins>
   </pluginManagement>
@@ -752,7 +753,7 @@
    -->
 
    <dependency><groupId>org.jasypt</groupId><artifactId>jasypt</artifactId><version>1.6</version></dependency>
-   <dependency><groupId>joda-time</groupId><artifactId>joda-time</artifactId><version>1.6.1</version></dependency>
+   <dependency><groupId>joda-time</groupId><artifactId>joda-time</artifactId><version>1.6.2</version></dependency>
 
    <!-- javax/java.sun.com -->
    <dependency><groupId>javax.servlet</groupId><artifactId>servlet-api</artifactId><version>2.5</version><scope>provided</scope></dependency>
@@ -874,7 +875,7 @@
    <dependency><groupId>org.freemarker</groupId><artifactId>freemarker</artifactId><version>2.3.16</version></dependency>
    <dependency><groupId>opensymphony</groupId><artifactId>sitemesh</artifactId><version>2.4.2</version></dependency>
    <dependency><groupId>org.quartz-scheduler</groupId><artifactId>quartz</artifactId><version>1.8.4</version></dependency>
-   <dependency><groupId>ognl</groupId><artifactId>ognl</artifactId><version>2.7.3</version><exclusions><exclusion><groupId>jboss</groupId><artifactId>javassist</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>ognl</groupId><artifactId>ognl</artifactId><version>3.0</version></dependency>
    <dependency><groupId>bsf</groupId><artifactId>bsf</artifactId><version>2.4.0</version></dependency>
 
    <dependency><groupId>net.sf.opencsv</groupId><artifactId>opencsv</artifactId><version>2.1</version></dependency>
@@ -967,17 +968,19 @@
    <dependency><groupId>xmlunit</groupId><artifactId>xmlunit</artifactId><version>1.1</version></dependency>
 
    <!-- ws -->
-   <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-frontend-simple</artifactId><version>2.2.10</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
-   <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-frontend-jaxws</artifactId><version>2.2.10</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
-   <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-transports-http</artifactId><version>2.2.10</version></dependency>
-   <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-ws-security</artifactId><version>2.2.10</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-frontend-simple</artifactId><version>2.3.0</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-frontend-jaxws</artifactId><version>2.3.0</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-transports-http</artifactId><version>2.3.0</version></dependency>
+   <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-ws-security</artifactId><version>2.3.0</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <!--
    <dependency><groupId>org.apache.ws.security</groupId><artifactId>wss4j</artifactId><version>1.5.8</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>org.apache.xmlbeans</groupId><artifactId>xmlbeans</artifactId><version>2.4.0</version></dependency>
+   -->
    <!-- Jetty is needed if you're are not using the CXFServlet
    <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-transports-http-jetty</artifactId></dependency>
    -->
    <!-- bindings: xmlbeans
-   <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-databinding-xmlbeans</artifactId><version>2.2.10</version></dependency>
+   <dependency><groupId>org.apache.cxf</groupId><artifactId>cxf-rt-databinding-xmlbeans</artifactId><version>2.3.0</version></dependency>
    -->
    <dependency><groupId>com.sun.xml.bind</groupId><artifactId>jaxb-impl</artifactId><version>2.2.1</version></dependency>
 
@@ -992,13 +995,45 @@
    <dependency><groupId>backport-util-concurrent</groupId><artifactId>backport-util-concurrent</artifactId><version>3.1</version></dependency>
    <dependency><groupId>org.apache.neethi</groupId><artifactId>neethi</artifactId><version>2.0.4</version></dependency>
    <dependency><groupId>org.apache.woden</groupId><artifactId>woden-impl-dom</artifactId><version>1.0M8</version></dependency>
-   <dependency><groupId>concurrent</groupId><artifactId>concurrent</artifactId><version>1.3.4</version></dependency>
 -->
    <dependency><groupId>xml-apis</groupId><artifactId>xml-apis</artifactId><version>2.0.2</version></dependency>
    <dependency><groupId>xerces</groupId><artifactId>xercesImpl</artifactId><version>2.9.1</version></dependency>
    <dependency><groupId>org.apache.avalon.framework</groupId><artifactId>avalon-framework-impl</artifactId><version>4.3.1</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
 
+   <dependency><groupId>com.yahoo</groupId><artifactId>yui</artifactId><version>2.5.2</version></dependency>
    <dependency><groupId>org.tuckey</groupId><artifactId>urlrewritefilter</artifactId><version>3.1.0</version></dependency>
+   <!--
+   <dependency><groupId>concurrent</groupId><artifactId>concurrent</artifactId><version>1.3.4</version></dependency>
+   -->
+
+   <dependency><groupId>org.apache.ws.commons.util</groupId><artifactId>ws-commons-util</artifactId><version>1.0.2</version></dependency>
+   <dependency><groupId>org.apache.xmlrpc</groupId><artifactId>xmlrpc-common</artifactId><version>3.1</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.apache.xmlrpc</groupId><artifactId>xmlrpc-client</artifactId><version>3.1</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.apache.xmlrpc</groupId><artifactId>xmlrpc-server</artifactId><version>3.1</version><scope>runtime</scope><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>net.java.dev.springmodules</groupId><artifactId>spring-modules-jcr</artifactId><version>0.9</version></dependency>
+   <!--
+   <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-jcr</artifactId><version>0.8a</version>
+    <exclusions>
+     <exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion>
+     <exclusion><groupId>jeceira</groupId><artifactId>jeceira</artifactId></exclusion>
+     <exclusion><groupId>jug</groupId><artifactId>jug-asl</artifactId></exclusion>
+     <exclusion><groupId>aparzev</groupId><artifactId>commons</artifactId></exclusion>
+     <exclusion><groupId>aparzev</groupId><artifactId>doka</artifactId></exclusion>
+     <exclusion><groupId>cglib</groupId><artifactId>cglib-nodep</artifactId></exclusion>
+     <exclusion><groupId>jsr170</groupId><artifactId>jsr170</artifactId></exclusion>
+     <exclusion><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-jca</artifactId></exclusion>
+     <exclusion><groupId>geronimo-spec</groupId><artifactId>geronimo-spec-j2ee-connector</artifactId></exclusion>
+     <exclusion><groupId>org.springframework</groupId><artifactId>spring</artifactId></exclusion>
+    </exclusions>
+   </dependency>
+   -->
+   <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-ant</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-aop</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-cache</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-jbpm31</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-jsr94</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-lucene</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-osworkflow</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
   </dependencies>
  </dependencyManagement>
 </project>
