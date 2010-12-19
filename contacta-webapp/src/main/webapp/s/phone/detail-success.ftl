@@ -1,15 +1,4 @@
 [#ftl]<!-- $Revision: 666 $  :encoding=UTF-8:-->
-[#-- tmp here, see also main css --]
-<style>
-table.detailTable { border-collapse:collapse; width:100%; }
-.detailTable tr.yellow td { border:1px solid #FB7A31; background:#FFC; text-align:left; font-weight:bold; }
-.detailTable th { padding:2px; text-align:center; background-color:red; }
-.detailTable td { border:1px solid #cccccc; padding:1px; background-color:#eeeeee; }
-.detailTable td:first-child { padding-left:0.5em; padding-right:0.5em; background-color:#dddddd; text-align:right; }
-.detailTable ul { margin:0px; padding:0px; list-style:none; }
-.detailTable li {  }
-.detailTable li:hover {  }
-</style>
 <div dojoType="dijit.layout.ContentPane" class="detailInner" title="Telefono">
  <table class="detailTable">
   <tr><td>Product</td><td>${model.product.code!"N/A"}</td></tr>

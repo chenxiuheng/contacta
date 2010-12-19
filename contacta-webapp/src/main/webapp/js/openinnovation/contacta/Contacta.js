@@ -16,6 +16,12 @@ dojo.declare("openinnovation.contacta.Contacta", null,
   sip:null,
   coverage:null,
   phone:null,
+  session:
+  {
+    admin:false,
+    user:false,
+    guest:true
+  },
   _i18n:null,
 
 
@@ -32,11 +38,13 @@ dojo.declare("openinnovation.contacta.Contacta", null,
     //
     if (config)
     {
-      if (config.session != undefined) this.session = config.session;
+      if (config.session !== undefined)
+      {
+        this.session = config.session;
+      }
       this.develMode = config.develMode ? config.develMode : false;
     }
     //console.log('openinnovation.contacta.Contacta: constructor');
-    this.coverage = new openinnovation.contacta.Coverage();
   },
 
 
@@ -49,7 +57,7 @@ dojo.declare("openinnovation.contacta.Contacta", null,
 
     this.contactaService = new dojo.rpc.JsonService(organic.baseUrl+"/smd/contacta.action");
 
-    if (this.session.admin)
+    if (this.session.admin == true)
     {
       this.aaa = new openinnovation.organic.Aaa();
 
@@ -70,6 +78,7 @@ dojo.declare("openinnovation.contacta.Contacta", null,
 
       ui.phone.productSelect.attr('store', this.product._store);
 
+      this.coverage = new openinnovation.contacta.Coverage();
       this.coverage.grid = ui.coverageGrid;
       dojo.connect(ui.coverageGrid, "onRowClick", this.coverage, this.coverage.showDetail);
 

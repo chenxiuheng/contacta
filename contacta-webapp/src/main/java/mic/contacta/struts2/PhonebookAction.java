@@ -15,6 +15,7 @@
  */
 package mic.contacta.struts2;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.struts2.json.annotations.SMDMethod;
 import org.slf4j.Logger;
@@ -34,7 +35,6 @@ import mic.organic.json.PersonJson;
 
 
 /**
- *
  * @author mic
  * @created Apr 16, 2008
  */
@@ -45,14 +45,89 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private AaaGateway aaaGateway;//PersonDao cocDao;
-  @Autowired private AddressbookService addressbookService;
+  @Autowired
+  private AaaGateway aaaGateway;// PersonDao cocDao;
+  @Autowired
+  private AddressbookService addressbookService;
 
   private String ipAddr;
   private String mac;
   private String search;
+  private int page;
   private List<PersonModel> personList;
+  private List<Menu> menuList;
 
+
+  /**
+   *
+   *
+   * @author mic
+   * @created Dec 19, 2010
+   */
+  class Menu
+  {
+    private String name;
+    private String url;
+
+
+    /**
+     *
+     */
+    public Menu()
+    {
+      super();
+    }
+
+
+    /**
+     * @param name
+     * @param url
+     */
+    public Menu(String name, String url)
+    {
+      this();
+
+      this.name = name;
+      this.url = url;
+    }
+
+
+    /**
+     * @return the name
+     */
+    public String getName()
+    {
+      return name;
+    }
+
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name)
+    {
+      this.name = name;
+    }
+
+
+    /**
+     * @return the url
+     */
+    public String getUrl()
+    {
+      return url;
+    }
+
+
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url)
+    {
+      this.url = url;
+    }
+
+  }
 
 
   /*
@@ -64,7 +139,6 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   }
 
 
-
   /**
    * @return the ipAddr
    */
@@ -72,7 +146,6 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   {
     return ipAddr;
   }
-
 
 
   /**
@@ -84,7 +157,6 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   }
 
 
-
   /**
    * @return the mac
    */
@@ -92,7 +164,6 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   {
     return mac;
   }
-
 
 
   /**
@@ -104,7 +175,6 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   }
 
 
-
   /**
    * @return the search
    */
@@ -113,6 +183,23 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
     return search;
   }
 
+
+  /**
+   * @return the page
+   */
+  public int getPage()
+  {
+    return page;
+  }
+
+
+  /**
+   * @param page the page to set
+   */
+  public void setPage(int page)
+  {
+    this.page = page;
+  }
 
 
   /**
@@ -124,7 +211,6 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   }
 
 
-
   /**
    * @return the personList
    */
@@ -134,6 +220,14 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   }
 
 
+  /**
+   * @return the menuList
+   */
+  public List<Menu> getMenuList()
+  {
+    return menuList;
+  }
+
 
   /**
    *
@@ -141,11 +235,32 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   public String search()
   {
     log().info("ipAddr={}, mac={}, search={}", new Object[] { ipAddr, mac, search });
-    String displayName = search+"%";
-    personList = addressbookService.findPersonLikeDisplayName(displayName);
-    return SUCCESS;
-  }
+    String displayName = search + "%";
 
+    String result = "dir"+SUCCESS;
+    List<PersonModel> list = addressbookService.findPersonLikeDisplayName(displayName);
+    int s = list.size();
+    if (s > 32)
+    {
+      result = "menu"+SUCCESS;
+      menuList = new ArrayList<PhonebookAction.Menu>();
+      int pages = s/32 + 1;
+      for (int i = 0; i < pages; i++)
+      {
+        menuList.add(new Menu("name "+i, "url "+i));
+      }
+//      int x0 = Math.min(32 * page, s);
+//      int x1 = Math.min(32 * (page + 1), list.size());
+//      list = list.subList(x0, x1);
+//      log().info("displayName={}, page={}, size={} x0={}, x1={}, dx={}", new Object[] { displayName, page, s, x0, x1, list.size() });
+    }
+    else
+    {
+      result = "dir"+SUCCESS;
+      personList = list;
+    }
+    return result;
+  }
 
 
   /*
