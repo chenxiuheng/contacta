@@ -10,7 +10,7 @@ table.detailTable { border-collapse:collapse; width:100%; }
 .detailTable li {  }
 .detailTable li:hover {  }
 </style>
-<div dojoType="dijit.TitlePane" title="Telefono">
+<div dojoType="dijit.layout.ContentPane" class="detailInner" title="Telefono">
  <table class="detailTable">
   <tr><td>Product</td><td>${model.product.code!"N/A"}</td></tr>
   <tr><td>Vendor</td><td>${model.product.vendor!"N/A"}</td></tr>
@@ -26,7 +26,7 @@ table.detailTable { border-collapse:collapse; width:100%; }
 
 [#if model.sipAccountList.size() != 0]
  <div class="spacer"></div>
- <div dojoType="dijit.TitlePane" title="Linee SIP">
+ <div dojoType="dijit.layout.ContentPane" class="detailInner" title="Linee SIP">
   <table class="detailTable">
    [#list model.sipAccountList as ac]
     <tr><td>${ac.login}</td><td>${ac.displayName}</td></tr>
@@ -41,7 +41,7 @@ table.detailTable { border-collapse:collapse; width:100%; }
 [/#if]
 <div class="spacer"></div>
 [#if model.product.code?starts_with("SPIP")]
-<div dojoType="dijit.TitlePane" title="Provisioning" tooltip="I'm the tooltip for Provisioning's title bar">
+<div dojoType="dijit.layout.ContentPane" class="detailInner" title="Provisioning" tooltip="I'm the tooltip for Provisioning's title bar">
 <!--div class="contacta" style="margin:6px; border:1px dotted #aaaaaa; padding:6px; "-->
  [#assign mac = model.macAddress?replace(":","")/]
  <ul class="detailTable">

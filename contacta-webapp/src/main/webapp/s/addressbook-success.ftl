@@ -1,5 +1,5 @@
 <!-- $Revision: 666 $  :encoding=UTF-8:-->
-<div dojoType="dijit.TitlePane" title="Contatto">
+<div dojoType="dijit.layout.ContentPane" class="detailInner" title="Contatto">
 <style>
 table.addressbook { width:100%; }
 table.addressbook th { border:1px dotted navy; padding:1px 8px; font-weight:bold; background-color:#FAF0E6; }

@@ -1,5 +1,5 @@
 [#ftl]<!-- $Revision: 673 $  :encoding=UTF-8:-->
-<div dojoType="dijit.TitlePane" title="CDR">
+<div dojoType="dijit.layout.ContentPane" class="detailInner" title="CDR">
 <table class="detailTable">
 [#--
 <tr><td>${m.t("label.id")}:</td><td>${model.id}</td></tr>

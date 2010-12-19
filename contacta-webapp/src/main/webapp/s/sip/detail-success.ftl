@@ -1,5 +1,5 @@
 [#ftl]<!-- $Revision: 663 $  :encoding=UTF-8:-->
-<div dojoType="dijit.TitlePane" title="Utente">
+<div dojoType="dijit.layout.ContentPane" class="detailInner" title="Utente">
  <table class="detailTable">
   <tr><td>Nome Completo</td><td>${sipAccount.displayName!"N/A"}</td></tr>
   <tr><td>Email</td><td><a href="mailto:${sipAccount.email}" title="${sipAccount.email}">${sipAccount.email}[#--?substring(0,sipAccount.email?index_of("@"))--]</a></td></tr>
@@ -38,7 +38,7 @@
 [#if sipAccount.phone??]
 [#assign phone = sipAccount.phone/]
 <div class="spacer"></div>
-<div dojoType="dijit.TitlePane" title="Telefono">
+<div dojoType="dijit.layout.ContentPane" class="detailInner" title="Telefono">
  <table class="detailTable">
   <tr><td>Vendor</td><td>${phone.product.vendor!"N/A"}</select></td></tr>
   <tr><td>Modello</td><td>${phone.product.code!"N/A"}</td></tr>

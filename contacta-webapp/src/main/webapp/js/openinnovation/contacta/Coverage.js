@@ -18,6 +18,15 @@ dojo.declare("openinnovation.contacta.Coverage", null,
     //         bla bla bla...
     //
     console.log('contacta.Coverage: constructor');
+    this.structure = [{ cells: [[
+     { name:'${m.t("label.cid.from")?js_string}', field:'fromCid', width:'18em' },
+     { name:'${m.t("label.cid.to")?js_string}', field:'toCid', width:'18em' },
+     { name:'${m.t("label.type")?js_string}', field:'type', width:'auto' },
+     { name:'${m.t("label.timeout")?js_string}', field:'ringTimeout', width:'4em' },
+     { name:'${m.t("label.rank")?js_string}', field:'rank', width:'4em' }
+    ]] } ];
+
+    ui.coverageGrid.set('structure', this.structure);
   },
 
   code:'coverage',
@@ -25,13 +34,8 @@ dojo.declare("openinnovation.contacta.Coverage", null,
 
   grid:null,
   store:null,
-  structure: [{ cells: [[
-     { name:'${m.t("label.cid.from")?js_string}', field:'fromCid', width:'18em' },
-     { name:'${m.t("label.cid.to")?js_string}', field:'toCid', width:'18em' },
-     { name:'${m.t("label.type")?js_string}', field:'type', width:'auto' },
-     { name:'${m.t("label.timeout")?js_string}', field:'ringTimeout', width:'4em' },
-     { name:'${m.t("label.rank")?js_string}', field:'rank', width:'4em' }
-  ]] } ],
+  structure:null,
+
 
 
   /*

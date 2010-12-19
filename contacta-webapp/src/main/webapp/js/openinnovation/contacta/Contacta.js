@@ -1,27 +1,28 @@
 // -*- js-var:ui,ApplicationState,console,dojo,dijit,dojox; -*-
 /* $Id: contacta.ftl.js 671 2010-07-22 22:06:44Z michele.bianchi $ */
-// < #include "organic.ftl.js"/>
-// < #include "organic-gridpad.ftl.js"/>
-// < #include "formatter.ftl.js"/>
 
 dojo.require('openinnovation.organic.Organic');
-
-// < #include "person.ftl.js"/>
-// < #include "pbx.ftl.js"/>
-// < #include "phone.ftl.js"/>
-// < #include "sip.ftl.js"/>
-// < #include "coverage.ftl.js"/>
-
-dojo.provide("openinnovation.contacta.Contacta");
-
 
 /* =========================
  *    Contacta
  * =========================
  */
+dojo.provide("openinnovation.contacta.Contacta");
 dojo.declare("openinnovation.contacta.Contacta", null,
 {
-  constructor: function(args)
+  contactaService:null,
+  develMode:false,
+  //addressbookService:null,
+  sip:null,
+  coverage:null,
+  phone:null,
+  _i18n:null,
+
+
+  /*
+   *
+   */
+  constructor: function(config)
   {
     // summary:
     //   bla bla bla...
@@ -29,30 +30,24 @@ dojo.declare("openinnovation.contacta.Contacta", null,
     //  args: object
     //         bla bla bla...
     //
-    /*console.log('TEST constructor', this.genError);
-    if(args)
+    if (config)
     {
-    }*/
+      if (config.session != undefined) this.session = config.session;
+      this.develMode = config.develMode ? config.develMode : false;
+    }
     //console.log('openinnovation.contacta.Contacta: constructor');
     this.coverage = new openinnovation.contacta.Coverage();
   },
 
-  contactaService:null,
-  //addressbookService:null,
-  sip:null,
-  coverage:null,
-  phone:null,
-
-  session:{ admin:${contactaSession.admin?string}, user:${contactaSession.user?string}, guest:${contactaSession.guest?string} },
 
   /*
    *
    */
   init:function()
   {
-    dojo.requireLocalization("contacta", "contacta-messages");
+    this._i18n = dojo.requireLocalization("contacta", "contacta-messages");
 
-    this.contactaService = new dojo.rpc.JsonService("${base}/smd/contacta.action");
+    this.contactaService = new dojo.rpc.JsonService(organic.baseUrl+"/smd/contacta.action");
 
     if (this.session.admin)
     {
@@ -112,15 +107,17 @@ dojo.declare("openinnovation.contacta.Contacta", null,
     dojo.back.setInitialState(appState);
     dojo.back.addToHistory(appState);
 
-    var now = new Date();
-    //var d = dojo.date.locale.format(now, {selector:'date',datePattern:'yyyy-MM-dd'});
-    //var b = ''+now.getHours()+':00';
-    //var e = ''+(now.getHours()+1)+':00';
-    //console.log('XXXXXX', d);
-    ui.confDayInput.attr('value', now);
-    //ui.confBeginInput.attr('value', b);
-    //ui.confEndInput.attr('value', e);
-
+    if (this.develMode)
+    {
+      var now = new Date();
+      //var d = dojo.date.locale.format(now, {selector:'date',datePattern:'yyyy-MM-dd'});
+      //var b = ''+now.getHours()+':00';
+      //var e = ''+(now.getHours()+1)+':00';
+      //console.log('XXXXXX', d);
+      ui.confDayInput.attr('value', now);
+      //ui.confBeginInput.attr('value', b);
+      //ui.confEndInput.attr('value', e);
+    }
     ui.progressBar.update({ progress:100 });
   },
 

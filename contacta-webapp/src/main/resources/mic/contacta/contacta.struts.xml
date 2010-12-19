@@ -43,6 +43,7 @@
   <default-interceptor-ref name="organicAuthStack"/>
 
   <action name="main" class="mainAction">
+   <interceptor-ref name="i18n"/>
   </action>
 
   <action name="info" class="infoAction">
@@ -127,7 +128,6 @@
    <!-- beforeStack -->
    <interceptor-stack name="beforeStack">
     <interceptor-ref name="timer"/>
-    <interceptor-ref name="i18n"/>
     <interceptor-ref name="exception">
      <param name="logEnabled">true</param>
      <param name="logLevel">WARN</param>
@@ -159,6 +159,9 @@
   <!-- ========================= actions ========================= -->
   <!-- main -->
   <action name="main" class="mainAction" method="execute">
+   <interceptor-ref name="i18n"/>
+   <interceptor-ref name="beforeStack"/>
+   <interceptor-ref name="afterStack"/>
    <result name="success" type="freemarker">/o/login.ftl</result>
    <result name="ROLE_USER" type="redirect">
     <param name="location">/s/main.action</param>

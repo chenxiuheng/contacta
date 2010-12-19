@@ -6,15 +6,14 @@
 [#--<script type="text/javascript" src="${base}/r/organic.js"></script>--]
 <script type="text/javascript" src="${base}/r/openinnovation/organic/Organic.js"></script>
 <script type="text/javascript" src="${base}/r/openinnovation/organic/gridpad/Controller.js"></script>
-<script type="text/javascript" src="${base}/res/js_formatter.action"></script>
-<script type="text/javascript" src="${base}/res/js_person.action"></script>
-<script type="text/javascript" src="${base}/a/aaa.js"></script>
-<script type="text/javascript" src="${base}/js/pbx.js"></script>
-<script type="text/javascript" src="${base}/s/phone/phone.js"></script>
-<script type="text/javascript" src="${base}/s/sip/sip.js"></script>
-<script type="text/javascript" src="${base}/s/coc/coc.js"></script>
-<script type="text/javascript" src="${base}/res/js_coverage.action"></script>
-<script type="text/javascript" src="${base}/res/js_contacta.action"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/organic/Aaa.js"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/contacta/Phonebook.js"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/contacta/PbxContext.js"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/contacta/Phone.js"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/contacta/Coc.js"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/contacta/Sip.js"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/contacta/Coverage.js"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/contacta/Contacta.js"></script>
 
 <script type="text/javascript">
 var ApplicationState = function(){};
@@ -33,12 +32,20 @@ dojo.extend(ApplicationState, {
  showBackForwardMessage: function(message) { }
 });
 
-var organic = { util:new openinnovation.organic.Organic(), baseUrl:'${base!""}' };
-var contacta = new openinnovation.contacta.Contacta();
+var organic = { util:new openinnovation.organic.Organic({ baseUrl:'${base!""}' }), appName:'contacta', baseUrl:'${base!""}' };
+var contacta = null;
 
 dojo.addOnLoad(function()
 {
-  //contacta = new openinnovation.contacta.Contacta();
+ contacta = new openinnovation.contacta.Contacta({
+     develMode:${contactaConfiguration.develMode?string},
+     session:
+     {
+       admin:${contactaSession.admin?string},
+       user:${contactaSession.user?string},
+       guest:${contactaSession.guest?string}
+     }
+   });
   contacta.init();
 });
 </script>
@@ -53,7 +60,7 @@ dojo.addOnLoad(function()
  <div jsId="ui.menubar" dojoType="dijit.layout.ContentPane" style="height:31px; border-bottom:1px solid #4E9595; border-right:1px solid #4E9595;" region="top">
   <div style="padding:2px 10px 1px 10px;" class="organicBg">
    <div style="float:right; padding:2px 4px;"><div class="ico25" title="Logout" onclick="organic.util.logout()"></div></div>
-   <div style="float:right; padding-top:13px; padding-bottom:0px; padding-right:20px; color:white; font-size:9px;">${m.t("title.version")}</div>
+   [#--<div style="float:right; padding-top:13px; padding-bottom:0px; padding-right:20px; color:white; font-size:9px;">${m.t("title.version")}</div>--]
    <div style="float:left; margin-right:80px; width:152px; height:25px; background:transparent url('${base}/r/static/contacta.png') no-repeat left bottom;"></div>
    <div style="white-space:nowrap; color:navy; font-weight:bold;">
     [#if contactaSession.admin]
@@ -83,7 +90,7 @@ dojo.addOnLoad(function()
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="${m.t("title.coverage")}">
-     [#include "../tabs/coverage.ftl"/]
+     [#include "./coverage/tab.ftl"/]
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="ChangeOfContext">
@@ -96,7 +103,7 @@ dojo.addOnLoad(function()
     <div jsId="ui.ptool.consolePane" dojoType="dijit.layout.ContentPane" title="${m.t("title.menu")}"
          refreshOnShow="false" preventCache="true" preload="true"
          >
-     [#include "../tabs/ptool.ftl"/]
+     [#include "./ptool/ptool.ftl"/]
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="${m.t("title.cdr")}">
@@ -119,7 +126,7 @@ dojo.addOnLoad(function()
    [#-- advanced --]
    <div dojoType="dijit.layout.TabContainer" title="Advanced" nested="true">
     <div dojoType="dijit.layout.ContentPane" title="${m.t("title.advanced")}">
-     [#include "../tabs/advanced.ftl"/]
+     [#include "./advanced/advanced.ftl"/]
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="${m.t("title.audit")}">
@@ -132,6 +139,8 @@ dojo.addOnLoad(function()
    </div>
 
    [#-- administration --]
+   [#if contactaConfiguration.develMode]
+   [/#if]
    <div dojoType="dijit.layout.TabContainer" title="Administration" nested="true">
     <div dojoType="dijit.layout.ContentPane" title="Account">
      [#include "../a/account/tab.ftl"/]
@@ -167,16 +176,17 @@ dojo.addOnLoad(function()
     [#include "./phonebook/tab.ftl"/]
    </div>
 
+   [#if contactaConfiguration.develMode]
    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.calendar")}">
-    [#include "../tabs/calendar.ftl"/]
+    [#include "./calendar/calendar.ftl"/]
    </div>
 
    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.mybooking")}">
-    [#include "../tabs/conference.ftl"/]
+    [#include "./conference/conference.ftl"/]
    </div>
 
    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.channels")}">
-    [#include "../tabs/channels.ftl"/]
+    [#include "./channels/channels.ftl"/]
    </div>
 
    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.selfcare")}"
@@ -184,6 +194,7 @@ dojo.addOnLoad(function()
         >
     ${m.t("short.disabled")}[#--include "./XXX/tab.ftl"/--]
    </div>
+   [/#if]
 
   </div>
  </div>

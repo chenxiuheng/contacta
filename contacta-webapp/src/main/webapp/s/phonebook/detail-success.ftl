@@ -1,7 +1,6 @@
 [#ftl]<!-- $Revision: 673 $  :encoding=UTF-8:-->
-<div dojoType="dijit.TitlePane" title="Contatto">
+<div dojoType="dijit.layout.ContentPane" class="detailInner" title="Contatto">
 <table class="detailTable">
-<tr><td>${m.t("label.id")}:</td><td>${model.id?string}</td></tr>
 <tr><td>${m.t("label.firstName")}:</td><td>${model.firstName!"N/A"}</td></tr>
 <tr><td>${m.t("label.lastName")}:</td><td>${model.lastName!"N/A"}</td></tr>
 <tr><td>${m.t("label.displayName")}:</td><td>${model.displayName!"N/A"}</td></tr>

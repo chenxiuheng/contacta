@@ -8,3 +8,5 @@ relre:.*\.log
 
 syntax: regexp
 ^contacta-webapp/contacta\.properties$
+syntax: regexp
+^contacta-webapp/jetty-env\.xml$

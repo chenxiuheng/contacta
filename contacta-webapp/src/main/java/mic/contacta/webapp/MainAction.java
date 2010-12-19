@@ -16,26 +16,22 @@
 package mic.contacta.webapp;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import com.opensymphony.xwork2.ActionContext;
 import mic.contacta.model.PbxContextModel;
 import mic.contacta.model.PbxProfileModel;
-import mic.contacta.model.SipAccountModel;
 import mic.contacta.server.dao.PbxContextDao;
 import mic.contacta.server.dao.PbxProfileDao;
-import mic.contacta.server.dao.SipAccountDao;
 import mic.contacta.server.spi.ContactaConfiguration;
-import mic.organic.aaa.ldap.PersonDao;
+import mic.organic.aaa.spi.AccountService;
 
 
 /**
@@ -50,13 +46,13 @@ public class MainAction extends AbstractContactaAction
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private PersonDao personDao;
-  @Autowired private SipAccountDao sipAccountDao;
+  //@Autowired private mic.organic.aaa.ldap.PersonDao personDao;
   @Autowired private ContactaConfiguration contactaConfiguration;
   @Autowired private PbxContextDao pbxContextDao;
   @Autowired private PbxProfileDao pbxProfileDao;
 //  private List<PbxContextModel> contextList;
 //  private List<PbxProfileModel> profileList;
+  @Autowired private AccountService accountService;
 
 
   /**
@@ -117,27 +113,15 @@ public class MainAction extends AbstractContactaAction
    */
   public String login()
   {
-    if (contactaSession == null)
-    {
-      log().warn("no session at all");
-    }
-    else
-    {
-      if (contactaSession.getAccount() == null)
-      {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        if (authentication != null && StringUtils.isNotBlank(authentication.getName()))
-        {
-          log().info("authentication.name={}", authentication.getName());
+    ActionContext context = ActionContext.getContext();
+    Locale locale = context.getLocale();
+    contactaSession.setLocale(locale);
 
-          SipAccountModel account = sipAccountDao.findByLogin(authentication.getName());
-          contactaSession.setAccount(account);
-          contactaSession.refreshAuthenticationContext();
-        }
-        contactaSession.setWeekN(0);
-      }
-    }
+    log().info("ActionContext: locale={}", locale);
+    log().info("ActionContext: name={}", context.getName());
+
+    accountService.login(contactaSession);
+
     return SUCCESS;
   }
 
