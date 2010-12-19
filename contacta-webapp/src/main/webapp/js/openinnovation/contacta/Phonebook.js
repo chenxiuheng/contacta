@@ -34,6 +34,7 @@ dojo.declare("openinnovation.contacta.Phonebook", openinnovation.organic.gridpad
     var json = this.inherited(arguments);
     //json.bornDate = dojo.date.locale.format(json.bornDate, {selector:'date',datePattern:"yyyy-MM-dd"});
     json.bornDate = json.bornDate ? dojo.date.stamp.toISOString(json.bornDate) : null;
+    this._blankIsNull(json);
     return json;
   },
 
