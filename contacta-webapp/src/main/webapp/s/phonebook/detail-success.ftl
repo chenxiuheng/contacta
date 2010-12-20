@@ -4,9 +4,9 @@
 </style>
 <div dojoType="dijit.layout.ContentPane" class="detailInner" title="Contatto">
 <table class="detailTable">
+<tr><td>${m.t("label.displayName")}:</td><td><div>${model.displayName!""}</div></td></tr>
 <tr><td>${m.t("label.firstName")}:</td><td><div>${model.firstName!""}</div></td></tr>
 <tr><td>${m.t("label.lastName")}:</td><td><div>${model.lastName!""}</div></td></tr>
-<tr><td>${m.t("label.displayName")}:</td><td><div>${model.displayName!""}</div></td></tr>
 <tr><td>${m.t("label.company")}:</td><td><div>${model.company!""}</div></td></tr>
 <tr><td>${m.t("label.email")}:</td><td><div>${model.email!""}</div></td></tr>
 <tr><td>${m.t("label.phone")}:</td><td><div>${model.phone!""}</div></td></tr>
