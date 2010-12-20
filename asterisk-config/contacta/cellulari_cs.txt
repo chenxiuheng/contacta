@@ -1,0 +1,2 @@
+# exten => 0333xyz,1,macro(DialGSM,${GSMEXT},${EXTEN:1},${OUTRINGTIMEOUT})
+
