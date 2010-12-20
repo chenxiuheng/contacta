@@ -15,6 +15,8 @@
  */
 package mic.contacta.struts2;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.struts2.json.annotations.SMDMethod;
@@ -23,6 +25,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import mic.contacta.pmod.thomson.MenuItem;
+import mic.contacta.server.spi.ContactaConfiguration;
 import mic.contacta.webapp.AbstractContactaSmd;
 import mic.organic.aaa.model.PersonModel;
 import mic.organic.aaa.spi.AddressbookService;
@@ -45,89 +49,16 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired
-  private AaaGateway aaaGateway;// PersonDao cocDao;
-  @Autowired
-  private AddressbookService addressbookService;
+  @Autowired private AaaGateway aaaGateway;// PersonDao cocDao;
+  @Autowired private AddressbookService addressbookService;
+  @Autowired private ContactaConfiguration contactaConfiguration;
 
   private String ipAddr;
   private String mac;
   private String search;
-  private int page;
+  private Integer page;
   private List<PersonModel> personList;
-  private List<Menu> menuList;
-
-
-  /**
-   *
-   *
-   * @author mic
-   * @created Dec 19, 2010
-   */
-  class Menu
-  {
-    private String name;
-    private String url;
-
-
-    /**
-     *
-     */
-    public Menu()
-    {
-      super();
-    }
-
-
-    /**
-     * @param name
-     * @param url
-     */
-    public Menu(String name, String url)
-    {
-      this();
-
-      this.name = name;
-      this.url = url;
-    }
-
-
-    /**
-     * @return the name
-     */
-    public String getName()
-    {
-      return name;
-    }
-
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name)
-    {
-      this.name = name;
-    }
-
-
-    /**
-     * @return the url
-     */
-    public String getUrl()
-    {
-      return url;
-    }
-
-
-    /**
-     * @param url the url to set
-     */
-    public void setUrl(String url)
-    {
-      this.url = url;
-    }
-
-  }
+  private List<MenuItem> menuList;
 
 
   /*
@@ -187,7 +118,7 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   /**
    * @return the page
    */
-  public int getPage()
+  public Integer getPage()
   {
     return page;
   }
@@ -196,7 +127,7 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   /**
    * @param page the page to set
    */
-  public void setPage(int page)
+  public void setPage(Integer page)
   {
     this.page = page;
   }
@@ -223,7 +154,7 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   /**
    * @return the menuList
    */
-  public List<Menu> getMenuList()
+  public List<MenuItem> getMenuList()
   {
     return menuList;
   }
@@ -237,27 +168,42 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
     log().info("ipAddr={}, mac={}, search={}", new Object[] { ipAddr, mac, search });
     String displayName = search + "%";
 
-    String result = "dir"+SUCCESS;
+    String result = "dir-"+SUCCESS;
     List<PersonModel> list = addressbookService.findPersonLikeDisplayName(displayName);
     int s = list.size();
-    if (s > 32)
+    if (page != null)
     {
-      result = "menu"+SUCCESS;
-      menuList = new ArrayList<PhonebookAction.Menu>();
-      int pages = s/32 + 1;
-      for (int i = 0; i < pages; i++)
-      {
-        menuList.add(new Menu("name "+i, "url "+i));
-      }
-//      int x0 = Math.min(32 * page, s);
-//      int x1 = Math.min(32 * (page + 1), list.size());
-//      list = list.subList(x0, x1);
-//      log().info("displayName={}, page={}, size={} x0={}, x1={}, dx={}", new Object[] { displayName, page, s, x0, x1, list.size() });
+      int x0 = Math.min(32*page, s);
+      int x1 = Math.min(32*(page+1), s);
+      list = list.subList(x0, x1);
+      //log().info("displayName={}, page={}, size={} x0={}, x1={}, dx={}", new Object[] { displayName, page, s, x0, x1, list.size() });
+
+      result = "dir-"+SUCCESS;
+      personList = list;
     }
     else
     {
-      result = "dir"+SUCCESS;
-      personList = list;
+      if (s > 32)
+      {
+        result = "menu-"+SUCCESS;
+        menuList = new ArrayList<MenuItem>();
+        int pages = s/32 + 1;
+        for (int i = 0; i < pages; i++)
+        {
+          String url = "http://"+contactaConfiguration.getServerHost()+":"+contactaConfiguration.getServerPort()+"/o/phonebook-search.action";
+          url += "?ipAddr="+ipAddr+"&amp;mac="+mac+"&amp;search="+search+"&amp;page=";
+
+          int x0 = Math.min(32*i, s);
+          int x1 = Math.min(32*(i+1), s);
+          String label = list.get(x0).getDisplayName()+" - "+list.get(x1-1).getDisplayName();
+          menuList.add(new MenuItem(label, url+i));
+        }
+      }
+      else
+      {
+        result = "dir-"+SUCCESS;
+        personList = list;
+      }
     }
     return result;
   }

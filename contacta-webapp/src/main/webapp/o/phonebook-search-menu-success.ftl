@@ -2,8 +2,8 @@
 <ThomsonPhoneMenu>
  [#list menuList as p]
  <MenuItem>
-  <Name>${p.displayName}</Name>
-  <URL>${p.phone!"n/a"}</URL>
+  <Name>${p.name!""}</Name>
+  <URL>${p.url!""}</URL>
  </MenuItem>
  [/#list]
 </ThomsonPhoneMenu>
