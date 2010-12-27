@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/contacta" docBase="/var/lib/openinnovation/contacta-webapp.war" reloadable="false" unpackWAR="false">
+<!-- docBase="${catalina.home}/contacta-webapp.war" -->
+
+ <Environment name="contacta/properties/file" type="java.lang.String" value="file:/var/lib/openinnovation/contacta.properties"/>
+
+ <Resource name="jdbc/contactaDs" auth="Container" type="javax.sql.DataSource"
+           username="contacta"
+           password="XXXX"
+           driverClassName="org.postgresql.Driver"
+           url="jdbc:postgresql://127.0.0.1/contacta"
+           maxActive="10" maxIdle="3" maxWait="10000"
+           removeAbandoned="true" removeAbandonedTimeout="60" logAbandoned="true"
+           />
+
+ <!--
+ <Resource name="mail/Session" auth="Container"
+           type="javax.mail.Session"
+           mail.smtp.host="localhost"/>
+  -->
+</Context>
+
