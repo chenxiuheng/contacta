@@ -77,6 +77,8 @@
  <!-- ============================================================= -->
  <package name="contacta-smd" namespace="/smd" extends="organic-smd">
   <default-interceptor-ref name="organicSmdStack"/>
+  <action name="*" class="{1}Action" method="bind"></action>
+  <!--
   <action name="product" class="pbxcontextAction" method="bind"></action>
   <action name="cdr" class="cdrAction" method="bind"></action>
   <action name="pbxcontext" class="pbxcontextAction" method="bind"></action>
@@ -93,6 +95,7 @@
   <action name="role" class="roleAction" method="bind"></action>
   <action name="group" class="groupAction" method="bind"></action>
   <action name="policy" class="policyAction" method="bind"></action>
+   -->
  </package>
 
  <!-- ============================================================= -->

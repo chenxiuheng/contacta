@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id: contacta.spring.xml 680 2010-11-07 14:24:51Z michele.bianchi $ -->
-<!-- Copyright (c) 2005-2009 michele.bianchi@gmail.com -->
+<!-- Copyright (c) 1999-2011 [michele.bianchi@gmail.com] -->
 <!-- All rights reserved. -->
 <!-- :xml.validate=true: -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -23,8 +23,12 @@
   ">
 
  <!--================================================================-->
- <!--   properties                                                     -->
+ <!--   configurations                                               -->
  <!--================================================================-->
+ <context:annotation-config/>
+ <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+ <!-- properties -->
  <bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
   <property name="ignoreResourceNotFound" value="true"/>
   <property name="locations">
@@ -36,6 +40,7 @@
   </property>
  </bean>
 
+ <!-- i18n -->
  <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
   <property name="defaultEncoding" value="UTF-8"/>
   <property name="cacheSeconds" value="-1"/>
@@ -46,9 +51,6 @@
   </property>
  </bean>
 
- <!--================================================================-->
- <!--   mic.contacta                                                            -->
- <!--================================================================-->
  <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
@@ -66,27 +68,21 @@
  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" p:entityManagerFactory-ref="entityManagerFactory"/>
 
  <!--================================================================-->
- <!--   organic (and struts2) integrations                             -->
+ <!--   imports                                                      -->
  <!--================================================================-->
  <context:component-scan base-package="mic.organic.vfs"/>
  <context:component-scan base-package="mic.organic.l10n"/>
  <context:component-scan base-package="mic.organic.scripting"/>
- <context:component-scan base-package="mic.organic.aaa.jpa"/>
  <context:component-scan base-package="mic.organic.aaa.dao"/>
+ <context:component-scan base-package="mic.organic.aaa.jpa"/>
  <context:component-scan base-package="mic.organic.aaa.spi"/>
+ <context:component-scan base-package="mic.organic.aaa.web"/>
  <context:component-scan base-package="mic.organic.json"/>
  <context:component-scan base-package="mic.organic.web.spi"/>
  <context:component-scan base-package="mic.organic.web.struts2"/>
 
  <context:component-scan base-package="mic.organic.gateway"/>
 
- <!--================================================================-->
- <!--   contacta                                                       -->
- <!--================================================================-->
- <aop:aspectj-autoproxy proxy-target-class="true"/>
- <context:annotation-config/>
-
- <!-- imports -->
  <!--
  <context:component-scan base-package="mic.contacta.server.jmx"/>
   -->
