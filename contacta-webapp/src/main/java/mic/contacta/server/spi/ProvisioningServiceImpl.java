@@ -286,8 +286,8 @@ public class ProvisioningServiceImpl implements ProvisioningService
     Map<String,Object> params = new HashMap<String,Object>();
     params.put("sipAccountList", sipService.findAccountList());
     params.put("phoneList", inventoryService.findPhoneList());
-    params.put("personList", addressbookService.findPersonList());
-    params.put("organizationList", addressbookService.findAllOrganizations());
+    params.put("personList", addressbookService.personList());
+    params.put("organizationList", addressbookService.organizationList());
 
     params.put("speedDialList", null);
 

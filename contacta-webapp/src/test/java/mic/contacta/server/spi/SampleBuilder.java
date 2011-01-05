@@ -42,7 +42,7 @@ public class SampleBuilder
   public static SipAccountModel buildContactaAccount(String suffix)
   {
     SipAccountModel account = new SipAccountModel();
-    account.setDisplayName("name_" + suffix);
+    account.setLabel("name_" + suffix);
     account.setEmail("email_" + suffix);
     account.setCode("login" + suffix);
     account.setPassword("password" + suffix);

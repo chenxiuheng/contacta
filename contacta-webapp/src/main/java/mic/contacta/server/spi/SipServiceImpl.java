@@ -180,7 +180,7 @@ public class SipServiceImpl implements SipService
   public SipAccountModel updateAccount(SipAccountModel model)
   {
     //validateProfile(model);
-    String callerId = '"'+model.getDisplayName()+"\" <"+model.getLogin()+">";
+    String callerId = '"'+model.getLabel()+"\" <"+model.getLogin()+">";
     model.getSipUser().setCallerid(callerId);
     return sipAccountDao.update(model);
   }

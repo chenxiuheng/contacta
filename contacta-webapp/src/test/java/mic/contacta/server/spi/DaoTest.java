@@ -81,7 +81,7 @@ public class DaoTest extends AbstractTransactionalTestNGSpringContextTests
     SipAccountModel account = new SipAccountModel();
     account.setCode(login);
     account.setPassword(password);
-    account.setDisplayName("displayName "+login);
+    account.setLabel("displayName "+login);
     account.setCallerId("callerId "+login);
     return account;
   }

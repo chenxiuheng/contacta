@@ -215,9 +215,9 @@ public class ContactaServiceImpl implements ContactaService
     {
       inventoryService.deletePhone(phone);
     }
-    for (PersonModel person : addressbookService.findPersonList())
+    for (PersonModel person : addressbookService.personList())
     {
-      addressbookService.deletePerson(person);
+      addressbookService.personDelete(person);
     }
   }
 

@@ -52,7 +52,7 @@ public class SipAccountConverter extends AbstractJsonConverter<SipAccountModel, 
 
     String email = from.getEmail();
     email = StringUtils.isNotBlank(email) ? email : from.getLogin()+"@interni.local";
-    to.setDisplayName(from.getFullName());
+    to.setLabel(from.getFullName());
     to.setEmail(email);
     to.setPassword(from.getPassword());
     to.setCallgroup(from.getCallgroup());
@@ -112,9 +112,9 @@ public class SipAccountConverter extends AbstractJsonConverter<SipAccountModel, 
     to.setId(from.getId());
 
     to.setEmail(from.getEmail());
-    to.setFirstName(from.getDisplayName());
-    to.setLastName(from.getDisplayName());
-    to.setFullName(from.getDisplayName());
+    to.setFirstName(from.getLabel());
+    to.setLastName(from.getLabel());
+    to.setFullName(from.getLabel());
 
     to.setLogin(from.getLogin());
     to.setPassword(from.getPassword());

@@ -87,7 +87,7 @@ public class ContactaSampleBuilder extends OrganicSampleBuilder
     SipAccountModel account = new SipAccountModel();
     account.setCode(login);
     account.setPassword(password);
-    account.setDisplayName("contacta administrator");
+    account.setLabel("contacta administrator");
     account.setEmail(login+"@localhost");
     //account.getSipUser().setCallgroup("callGroup" + suffix);
     //account.getSipUser().setPickupgroup("pickup" + suffix);

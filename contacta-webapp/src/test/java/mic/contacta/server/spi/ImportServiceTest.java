@@ -57,8 +57,8 @@ public class ImportServiceTest extends AbstractProvisioningTests
     int lines = 10;
     assertEquals(sipService.findAccountList().size(), lines);
     assertEquals(inventoryService.findPhoneList().size(), lines);
-    assertEquals(addressbookService.findPersonList().size(), 0);
-    assertEquals(addressbookService.findAllOrganizations().size(), 0);
+    assertEquals(addressbookService.personList().size(), 0);
+    assertEquals(addressbookService.organizationList().size(), 0);
   }
 
 

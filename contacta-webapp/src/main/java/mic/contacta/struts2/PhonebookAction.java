@@ -169,7 +169,7 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
     String displayName = search + "%";
 
     String result = "dir-"+SUCCESS;
-    List<PersonModel> list = addressbookService.findPersonLikeDisplayName(displayName);
+    List<PersonModel> list = addressbookService.personLikeDisplayName(displayName);
     int s = list.size();
     if (page != null)
     {
@@ -275,7 +275,7 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
   @Override
   public Model findModel(Integer oid)
   {
-    return addressbookService.findPerson(oid);
+    return addressbookService.personFind(oid);
   }
 
 }

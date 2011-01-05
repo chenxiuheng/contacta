@@ -90,7 +90,7 @@ public class SipAccountModel extends AccountModel
   public SipAccountModel(String displayName, String email, String login, String password, PbxContextModel context)
   {
     this();
-    setDisplayName(displayName);
+    setLabel(displayName);
     setEmail(email);
 
     callerId = ContactaUtils.mkCallerId(displayName, login);
@@ -107,7 +107,7 @@ public class SipAccountModel extends AccountModel
 
     vmBox = new VoicemailModel();               // FIXME move me in default ctor when it will be not null
     vmBox.setContext(voicemailContext);         // FIXME move me in default ctor when it will be not null
-    vmBox.setFullname(getDisplayName());
+    vmBox.setFullname(getLabel());
     vmBox.setMailbox(login);
     vmBox.setPin(password);
     vmBox.setEmail(getVmSendEmail() ? getEmail() : "");

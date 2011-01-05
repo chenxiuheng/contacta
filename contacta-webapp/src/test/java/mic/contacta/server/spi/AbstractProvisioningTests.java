@@ -66,7 +66,7 @@ public abstract class AbstractProvisioningTests extends AbstractTransactionalTes
   protected PersonModel buildPerson(String suffix) throws OrganicException
   {
     PersonModel person = SampleBuilder.buildPerson(suffix);
-    person = addressbookService.createPerson(person);
+    person = addressbookService.personPersist(person);
     return person;
   }
 

@@ -448,7 +448,7 @@ public class ContactaGatewayImpl implements ContactaGateway
         {
           //log().info("deleting person: {}", account.getPerson());
           PersonModel person = account.getPerson();
-          addressbookService.deletePerson(person);
+          addressbookService.personDelete(person);
         }
       }
       catch(Exception e)

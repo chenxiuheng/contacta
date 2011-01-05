@@ -94,7 +94,7 @@ public class UpgradeTo052
 
           sipUser.setMailbox(login+"@"+voicemailContext);
 
-          vmBox.setFullname(account.getDisplayName());
+          vmBox.setFullname(account.getLabel());
           vmBox.setMailbox(login);
           vmBox.setPin(account.getPassword());
           vmBox.setEmail(account.getVmSendEmail() ? account.getPerson().getEmail() : "");

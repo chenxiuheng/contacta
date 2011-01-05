@@ -41,7 +41,7 @@
  </div>
 
  <div dojoType="dijit.layout.ContentPane" splitter="true" region="right" class="detailPane">
-  <div jsId="${ui}.detailBlank" dojoType="dijit.layout.ContentPane" style="padding:10px;">${m.t("label.detailPaneEmpty")}</div>
+  <div jsId="${ui}.detailPane" dojoType="dijit.layout.ContentPane" preventCache="true"></div>
  </div>
 </div>
 

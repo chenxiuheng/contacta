@@ -229,7 +229,7 @@ public class PhonebarServiceImpl implements PhonebarService
   @Override
   public String dial(SipAccountModel sipAccount, String exten)
   {
-    log().info("displayName={}, exten={}", sipAccount.getDisplayName(), exten);
+    log().info("displayName={}, exten={}", sipAccount.getLabel(), exten);
 
     log().warn("========= USER REGISTERED CHECK IS TURNED OFF =========");
     SipUserModel sipUser = sipAccount.getSipUser();
