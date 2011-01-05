@@ -67,7 +67,7 @@ dojo.addOnLoad(function()
     <div dojoType="dijit.form.Button" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.contactaTabContainer)"><span>${m.t("label.user")}</span></div>
     <div dojoType="dijit.form.Button" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.adminTabContainer)"><span>${m.t("label.admin")}</span></div>
     [#else]
-    <div style="height:28px; color:yellow; vertical-align:bottom;"><p>Welcome ${contactaSession.account.displayName}<p></div>
+    <div style="height:28px; color:yellow; vertical-align:bottom;"><p>Welcome ${contactaSession.account.label}<p></div>
     [/#if]
    </div>
   </div>

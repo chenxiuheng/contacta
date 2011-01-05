@@ -102,7 +102,7 @@ public class ThomsonTest extends AbstractPmodTests
     //body = body.replaceFirst("<!-- \\$Id:.*\\$ -->", "<!-- \\$Id\\$ -->");
     //body = body.replaceFirst("http://.+:8088/o/.+\\.action", "http://localhost:8088/o/.+\\.action");
     body = body.replaceAll("http://.+:8088/p/thomson", "http://localhost:8088/p/thomson");
-    log().info("resourceName={}\n{}", resourceName, body);
+    log().debug("resourceName={}\n{}", resourceName, body);
     log().debug("ASSERT resourceName={}", resourceName);
     assertEquals(body.length(), responseLength);
   }
