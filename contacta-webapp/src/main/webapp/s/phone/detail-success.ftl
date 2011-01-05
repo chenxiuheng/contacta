@@ -18,7 +18,7 @@
  <div dojoType="dijit.layout.ContentPane" class="detailInner" title="Linee SIP">
   <table class="detailTable">
    [#list model.sipAccountList as ac]
-    <tr><td>${ac.login}</td><td>${ac.displayName}</td></tr>
+    <tr><td>${ac.login}</td><td>${ac.label}</td></tr>
     [#if ac.hasCoverage]
     [#list ac.coverageList as cvg]
      <tr><td>&nbsp;</td><td>&nbsp;&nbsp;${cvg.type} (${cvg.ringTimeout} sec) -&gt; ${cvg.toSip.login}</td></tr>

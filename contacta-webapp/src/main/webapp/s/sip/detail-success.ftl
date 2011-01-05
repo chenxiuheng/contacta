@@ -1,7 +1,7 @@
 [#ftl]<!-- $Revision: 663 $  :encoding=UTF-8:-->
 <div dojoType="dijit.layout.ContentPane" class="detailInner" title="Utente">
  <table class="detailTable">
-  <tr><td>Nome Completo</td><td>${sipAccount.displayName!"N/A"}</td></tr>
+  <tr><td>Nome Completo</td><td>${sipAccount.label!"N/A"}</td></tr>
   <tr><td>Email</td><td><a href="mailto:${sipAccount.email}" title="${sipAccount.email}">${sipAccount.email}[#--?substring(0,sipAccount.email?index_of("@"))--]</a></td></tr>
   <tr class="yellow"><td colspan="2">Linea SIP</td></tr>
   <tr><td>SIP Login</td><td>${sipAccount.login}</td></tr>
@@ -53,7 +53,7 @@
   [#if phone.sipAccountList.size() != 0]
   <tr class="yellow"><td colspan="2">Linee SIP</td></tr>
   [#list phone.sipAccountList as ac]
-  <tr><td>${ac.login}</td><td>${ac.displayName}</td></tr>
+  <tr><td>${ac.login}</td><td>${ac.label}</td></tr>
   [/#list]
   [/#if]
  </table>
