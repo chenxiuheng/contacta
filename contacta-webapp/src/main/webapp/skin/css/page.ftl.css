@@ -20,8 +20,6 @@
 .contacta {  }
 .contactaDisabledTextBox { border:1px solid #b3b3b3; background: url("${base}/r/buttons/background/validationInputDisabledBg.png") repeat-x top left; }
 
-.bg00 { margin-left:auto; margin-right:auto; border:1px solid #8a8f9c; padding:4px; background-color:#F2F2F2; }
-
 .adminTab { margin:auto; width:1000px; height:700px; }
 .adminTabContent {  border:1px solid silver; width:1000px; height:700px; }
 

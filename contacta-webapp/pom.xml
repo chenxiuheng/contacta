@@ -98,6 +98,7 @@
   <dependency><groupId>mic</groupId><artifactId>contacta-server</artifactId><classifier>tests</classifier><scope>test</scope></dependency> -->
   <dependency><groupId>mic</groupId><artifactId>organic-core</artifactId></dependency>
   <dependency><groupId>mic</groupId><artifactId>organic-core</artifactId><scope>test</scope><classifier>tests</classifier></dependency>
+  <dependency><groupId>mic</groupId><artifactId>organic-webapp</artifactId><type>war</type><scope>runtime</scope></dependency>
 
   <!-- apache.org, jakarta.apache.org, codehaus.org, sf.net ... -->
   <dependency><groupId>log4j</groupId><artifactId>log4j</artifactId><scope>compile</scope></dependency>

@@ -38,9 +38,9 @@
 
  <!-- scm -->
  <scm>
-  <connection>scm:svn:http://svn.openinnovation.lab/src/contacta/trunk</connection>
-  <developerConnection>scm:svn:http://svn.openinnovation.lab/src/contacta/trunk</developerConnection>
-  <url>http://svn.openinnovation.lab/viewvc</url>
+  <connection>scm:hg:http://openinnovation.it/hg/contacta</connection>
+  <developerConnection>scm:hg:http://openinnovation.it/hg/contacta</developerConnection>
+  <url>https://svn.openinnovation.it/hg</url>
  </scm>
 
  <!--================================================================-->
@@ -151,7 +151,7 @@
  </issueManagement>
 
  <!--================================================================-->
- <!--        Project modules section                                   -->
+ <!--        Project modules section                                 -->
  <!--================================================================-->
  <!-- modules -->
  <modules>
@@ -159,7 +159,7 @@
  </modules>
 
  <!--================================================================-->
- <!--        Profiles section                                          -->
+ <!--        Profiles section                                        -->
  <!--================================================================-->
  <profiles>
   <profile>
@@ -214,9 +214,8 @@
  </profiles>
 
  <!--================================================================-->
- <!--        Project build section                                     -->
+ <!--        Project build section                                   -->
  <!--================================================================-->
- <!-- build michele.bianchi@gmail.com -->
  <build>
   <plugins>
    <!-- help -->
@@ -273,7 +272,7 @@
     <plugin>
      <groupId>org.apache.maven.plugins</groupId>
      <artifactId>maven-surefire-plugin</artifactId>
-     <version>2.6</version>
+     <version>2.7.1</version>
     </plugin>
 
     <!-- jar -->
@@ -283,11 +282,14 @@
      <version>2.3.1</version>
     </plugin>
 
-    <!-- war 2.0.2 / 2.1-beta-1-->
+    <!-- war -->
     <plugin>
      <groupId>org.apache.maven.plugins</groupId>
      <artifactId>maven-war-plugin</artifactId>
-     <version>2.1</version>
+     <version>2.1.1</version>
+     <configuration>
+      <dependentWarExcludes>WEB-INF/web.xml</dependentWarExcludes>
+     </configuration>
     </plugin>
 
     <!-- source -->
@@ -308,18 +310,15 @@
     <plugin>
      <groupId>org.apache.maven.plugins</groupId>
      <artifactId>maven-assembly-plugin</artifactId>
-     <version>2.2-beta-5</version>
+     <version>2.2</version>
     </plugin>
 
     <!-- release -->
     <plugin>
      <groupId>org.apache.maven.plugins</groupId>
      <artifactId>maven-release-plugin</artifactId>
-     <version>2.0</version>
+     <version>2.1</version>
      <configuration>
-      <!--
-      <tagBase>http://svn.openinnovation.lab/organic/releases</tagBase>
-      -->
       <autoVersionSubmodules>true</autoVersionSubmodules>
      </configuration>
     </plugin>
@@ -356,14 +355,15 @@
     <plugin>
      <groupId>org.apache.maven.plugins</groupId>
      <artifactId>maven-antrun-plugin</artifactId>
-     <version>1.3</version>
+     <version>1.6</version>
     </plugin>
 
     <!-- mvn site:run / mvn site:stage-deploy / mvn site:stage -DstagingDirectory=$PWD/target/fullsite -->
+    <!-- 2.2 for mvn 2.x and 3.0-beta-3 for mvn 3.x -->
     <plugin>
      <groupId>org.apache.maven.plugins</groupId>
      <artifactId>maven-site-plugin</artifactId>
-     <version>2.1.1</version>
+     <version>2.2</version>
      <configuration>
       <port>9000</port>
       <tempWebappDirectory>${basedir}/target/site/tempdir</tempWebappDirectory>
@@ -374,6 +374,13 @@
       <excludeModules>fml</excludeModules>
       <locales>en,it</locales>
      </configuration-->
+    </plugin>
+
+    <!-- emma -->
+    <plugin>
+     <groupId>org.sonatype.maven.plugin</groupId>
+     <artifactId>emma-maven-plugin</artifactId>
+     <version>1.1</version>
     </plugin>
 
     <!-- cargo -->
@@ -470,12 +477,12 @@
  </build>
 
  <!--================================================================-->
- <!--        Project reports section                                -->
+ <!--        Project reports section                                 -->
  <!--================================================================-->
  <!-- reports -->
  <reporting>
   <plugins>
-   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-report-plugin</artifactId><version>2.6</version></plugin>
+   <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-report-plugin</artifactId><version>2.7.1</version></plugin>
    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId><version>2.7</version></plugin>
    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jxr-plugin</artifactId><version>2.2</version></plugin>
    <plugin><groupId>org.codehaus.mojo</groupId><artifactId>dashboard-maven-plugin</artifactId><version>1.0.0-beta-1</version></plugin>
@@ -516,7 +523,7 @@
    <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-project-info-reports-plugin</artifactId>
-    <version>2.2</version>
+    <version>2.3.1</version>
     <reportSets>
      <reportSet>
       <reports>
@@ -538,7 +545,7 @@
  </reporting>
 
  <!--================================================================-->
- <!--        Repositories section                                      -->
+ <!--        Repositories section                                    -->
  <!--================================================================-->
  <repositories>
   <!-- central -->
@@ -592,7 +599,7 @@
  </pluginRepositories>
 
  <!--================================================================-->
- <!--        Project dependency section                                -->
+ <!--        Project dependency section                              -->
  <!--================================================================-->
  <!-- dependencies -->
  <dependencyManagement>
@@ -600,7 +607,7 @@
    <!-- organic/openinnovation -->
    <dependency><groupId>mic</groupId><artifactId>organic-core</artifactId><version>${mic.organic.version}</version></dependency>
    <dependency><groupId>mic</groupId><artifactId>organic-core</artifactId><version>${mic.organic.version}</version><classifier>tests</classifier></dependency>
-   <dependency><groupId>mic</groupId><artifactId>organic-web</artifactId><version>${mic.organic.version}</version></dependency>
+   <dependency><groupId>mic</groupId><artifactId>organic-webapp</artifactId><version>${mic.organic.version}</version><type>war</type></dependency>
    <dependency><groupId>mic</groupId><artifactId>organic-creo</artifactId><version>${mic.organic.version}</version></dependency>
    <dependency><groupId>mic</groupId><artifactId>contacta-webapp</artifactId><version>${project.version}</version><type>war</type></dependency>
 
@@ -619,7 +626,7 @@
    <dependency><groupId>commons-httpclient</groupId><artifactId>commons-httpclient</artifactId><version>3.1</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>commons-vfs</groupId><artifactId>commons-vfs</artifactId><version>1.0</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>commons-dbcp</groupId><artifactId>commons-dbcp</artifactId><version>1.4</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
-   <dependency><groupId>commons-pool</groupId><artifactId>commons-pool</artifactId><version>1.5.4</version></dependency>
+   <dependency><groupId>commons-pool</groupId><artifactId>commons-pool</artifactId><version>1.5.5</version></dependency>
    <dependency><groupId>commons-cli</groupId><artifactId>commons-cli</artifactId><version>1.2</version></dependency>
    <dependency><groupId>commons-codec</groupId><artifactId>commons-codec</artifactId><version>1.4</version></dependency>
 
@@ -644,15 +651,16 @@
    <dependency><groupId>org.apache.lucene</groupId><artifactId>lucene-snowball</artifactId><version>2.4.1</version></dependency>
 
    <!-- jcr/jackrabbit 1.6.2 / 2.1.1 !!! -->
-   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-api</artifactId><version>1.6.0</version></dependency>
-   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-core</artifactId><version>1.6.0</version></dependency>
-   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-ocm</artifactId><version>1.6.0</version></dependency>
-   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-webdav</artifactId><version>1.6.0</version></dependency>
-   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-jcr-commons</artifactId><version>1.6.0</version></dependency>
-   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-jcr-rmi</artifactId><version>1.5.0</version></dependency>
-   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-jcr-server</artifactId><version>1.6.0</version></dependency>
+   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-api</artifactId><version>2.2.0</version></dependency>
+   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-core</artifactId><version>2.2.0</version></dependency>
+   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-ocm</artifactId><version>1.5.3</version></dependency>
+
+   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-webdav</artifactId><version>2.2.0</version></dependency>
+   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-jcr-commons</artifactId><version>2.2.0</version></dependency>
+   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-jcr-rmi</artifactId><version>2.2.0</version></dependency>
+   <dependency><groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-jcr-server</artifactId><version>2.2.0</version></dependency>
    <dependency>
-    <groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-text-extractors</artifactId><version>1.6.0</version>
+    <groupId>org.apache.jackrabbit</groupId><artifactId>jackrabbit-text-extractors</artifactId><version>1.6.4</version>
     <!--exclusions>
      <exclusion><groupId>poi</groupId><artifactId>poi</artifactId></exclusion>
     </exclusions-->
@@ -962,8 +970,8 @@
    </dependency>
 
    <!-- testing -->
-   <dependency><groupId>org.testng</groupId><artifactId>testng</artifactId><version>5.13.1</version></dependency>
-   <dependency><groupId>junit</groupId><artifactId>junit</artifactId><version>4.7</version></dependency>
+   <dependency><groupId>org.testng</groupId><artifactId>testng</artifactId><version>5.14.2</version></dependency>
+   <dependency><groupId>junit</groupId><artifactId>junit</artifactId><version>4.8.2</version></dependency>
    <dependency><groupId>org.easymock</groupId><artifactId>easymock</artifactId><version>2.0</version></dependency>
    <dependency><groupId>xmlunit</groupId><artifactId>xmlunit</artifactId><version>1.1</version></dependency>
 
@@ -1026,7 +1034,6 @@
      <exclusion><groupId>org.springframework</groupId><artifactId>spring</artifactId></exclusion>
     </exclusions>
    </dependency>
-   -->
    <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-ant</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-aop</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-cache</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
@@ -1034,6 +1041,7 @@
    <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-jsr94</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-lucene</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>org.springmodules</groupId><artifactId>spring-modules-osworkflow</artifactId><version>0.8a</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   -->
   </dependencies>
  </dependencyManagement>
 </project>
