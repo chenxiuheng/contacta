@@ -30,12 +30,12 @@ import mic.contacta.server.spi.ContactaConfiguration;
 import mic.contacta.webapp.AbstractContactaSmd;
 import mic.organic.aaa.model.PersonModel;
 import mic.organic.aaa.spi.AddressbookService;
+import mic.organic.aaa.web.AaaGateway;
+import mic.organic.aaa.web.PersonJson;
 import mic.organic.core.Model;
-import mic.organic.gateway.AaaGateway;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
 import mic.organic.gateway.JsonException;
-import mic.organic.json.PersonJson;
 
 
 /**

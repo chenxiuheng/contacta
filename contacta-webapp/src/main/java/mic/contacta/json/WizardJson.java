@@ -18,8 +18,8 @@ package mic.contacta.json;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import mic.organic.aaa.web.PersonJson;
 import mic.organic.gateway.AbstractJson;
-import mic.organic.json.PersonJson;
 
 
 /**
