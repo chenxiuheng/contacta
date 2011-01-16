@@ -38,7 +38,7 @@
 <div dojoType="dijit.layout.BorderContainer" gutters="false" liveSplitters="false" class="gridpad">
  <div dojoType="dijit.layout.ContentPane" region="top" class="toolbarContainer">
   <div dojoType="dijit.Toolbar" class="toolbarToolbar">
-   [#if contactaSession.account??]
+   [#if organicSession.account??]
     <input jsId="ui.digitInput" dojoType="dijit.form.TextBox" value="" style="width:12em;height:26px;"/>
     <div dojoType="dijit.form.Button" iconClass="ico30" onclick="contacta.dial()"><span>${m.t("label.dial")}</span></div>
     <div dojoType="dijit.form.Button" iconClass="ico33" onclick="contacta.transfer()"><span>${m.t("label.transfer")}</span></div>

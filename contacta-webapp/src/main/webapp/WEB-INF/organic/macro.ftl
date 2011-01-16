@@ -13,7 +13,7 @@
 [/#macro]
 
 [#macro coverageOptions]
-[#list contactaConfiguration.coverageCombo.options as opt]<option value="${opt}">${opt}</option>[/#list]
+[#list organicConfiguration.coverageCombo.options as opt]<option value="${opt}">${opt}</option>[/#list]
 [/#macro]
 
 [#macro contextOptions]

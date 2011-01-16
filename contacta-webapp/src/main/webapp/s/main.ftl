@@ -38,12 +38,12 @@ var contacta = null;
 dojo.addOnLoad(function()
 {
  contacta = new openinnovation.contacta.Contacta({
-     develMode:${contactaConfiguration.develMode?string},
+     develMode:${organicConfiguration.develMode?string},
      session:
      {
-       admin:${contactaSession.admin?string},
-       user:${contactaSession.user?string},
-       guest:${contactaSession.guest?string}
+       admin:${organicSession.admin?string},
+       user:${organicSession.user?string},
+       guest:${organicSession.guest?string}
      }
    });
   contacta.init();
@@ -63,20 +63,25 @@ dojo.addOnLoad(function()
    [#--<div style="float:right; padding-top:13px; padding-bottom:0px; padding-right:20px; color:white; font-size:9px;">${m.t("title.version")}</div>--]
    <div style="float:left; margin-right:80px; width:152px; height:25px; background:transparent url('${base}/r/static/contacta.png') no-repeat left bottom;"></div>
    <div style="white-space:nowrap; color:navy; font-weight:bold;">
-    [#if contactaSession.admin]
+    [#if organicSession.admin]
     <div dojoType="dijit.form.Button" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.contactaTabContainer)"><span>${m.t("label.user")}</span></div>
     <div dojoType="dijit.form.Button" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.adminTabContainer)"><span>${m.t("label.admin")}</span></div>
     [#else]
-    <div style="height:28px; color:yellow; vertical-align:bottom;"><p>Welcome ${contactaSession.account.label}<p></div>
+    <div style="height:28px; color:yellow; vertical-align:bottom;"><p>Welcome ${organicSession.account.label}<p></div>
     [/#if]
    </div>
   </div>
  </div>
 
+ [#-- statusbar --]
+ <div jsId="ui.statusbar" dojoType="dijit.layout.ContentPane" style="height:16px;" region="bottom">
+  [@organicStatusbar/]
+ </div>
+
  [#-- center region: stack'n'tabs --]
  <div jsId="ui.mainStackPane" dojoType="dijit.layout.StackContainer" region="center">
  [#-- =================== admin =================== --]
-  [#if contactaSession.admin]
+  [#if organicSession.admin]
 
   <div jsId="ui.adminTabContainer" dojoType="dijit.layout.TabContainer" tabStrip="true">
    [#-- telephony --]
@@ -139,7 +144,7 @@ dojo.addOnLoad(function()
    </div>
 
    [#-- administration --]
-   [#if contactaConfiguration.develMode]
+   [#if organicConfiguration.develMode]
    [/#if]
    <div dojoType="dijit.layout.TabContainer" title="Administration" nested="true">
     <div dojoType="dijit.layout.ContentPane" title="Account">
@@ -176,7 +181,7 @@ dojo.addOnLoad(function()
     [#include "./phonebook/tab.ftl"/]
    </div>
 
-   [#if contactaConfiguration.develMode]
+   [#if organicConfiguration.develMode]
    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.calendar")}">
     [#include "./calendar/calendar.ftl"/]
    </div>

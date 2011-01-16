@@ -44,5 +44,5 @@
 </#list>
 
 <#if appointmentList.size() == 0>
-<div>${m.t("short.booking.none", [contactaSession.account.email])}</div>
+<div>${m.t("short.booking.none", [organicSession.account.email])}</div>
 </#if>

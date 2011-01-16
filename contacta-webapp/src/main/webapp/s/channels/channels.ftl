@@ -2,8 +2,8 @@
 <div dojoType="dijit.layout.BorderContainer" gutters="false">
  <div dojoType="dijit.layout.ContentPane" region="center">
   <div style="border: 1px solid silver; margin-top:6px; padding:5px;">
-   <#if contactaSession.account??>
-   <div style="font-size:16px;">${m.t("short.phonebar", [contactaSession.account.login, contactaSession.account.callerId])}</div>
+   <#if organicSession.account??>
+   <div style="font-size:16px;">${m.t("short.phonebar", [organicSession.account.login, organicSession.account.callerId])}</div>
    </#if>
    <div>
     <div dojoType="dijit.form.Button" onclick="ui.channelPane.attr('href', '${base}/o/channels.action');"><span>${m.t("label.reloadChannels")}</span></div>

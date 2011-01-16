@@ -4,10 +4,10 @@
  <div dojoType="dijit.layout.ContentPane" style="padding:1em" region="top">
   <div dojoType="dijit.form.Form" jsId="ui.confBookForm" style="border:1px dotted #cccccc; padding:1em">
    <div style="padding-bottom:1em; font-weight:normal;">
-    <#if contactaSession.account??>
-     <b>${m.t("label.firstName")}:</b> ${contactaSession.account.label!"N/A"}, <b>${m.t("label.email")}:</b> ${contactaSession.mail!"N/A"}, <b>${m.t("label.exten")}:</b> ${contactaSession.account.login!"N/A"}
+    <#if organicSession.account??>
+     <b>${m.t("label.firstName")}:</b> ${organicSession.account.label!"N/A"}, <b>${m.t("label.email")}:</b> ${organicSession.mail!"N/A"}, <b>${m.t("label.exten")}:</b> ${organicSession.account.login!"N/A"}
     <#else/>
-     <b>${m.t("label.email")}:</b> ${contactaSession.account.email!"N/A"}
+     <b>${m.t("label.email")}:</b> ${organicSession.account.email!"N/A"}
     </#if>
    </div>
    <table>
