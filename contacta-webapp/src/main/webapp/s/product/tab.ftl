@@ -18,7 +18,7 @@
     <tr><td>${m.t("label.product.userAgent")}</td><td><input dojoType="dijit.form.TextBox" name="userAgent"/></td></tr>
    </table>
   </div>
-  [@oko5 pad/]
+  [@oko6 pad/]
  </form>
 </div>
 
@@ -36,7 +36,7 @@
  </div>
 
  <div dojoType="dijit.layout.ContentPane" region="center" class="gridPane">
-  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid" selectable="true">
+  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid">
   </table>
  </div>
 

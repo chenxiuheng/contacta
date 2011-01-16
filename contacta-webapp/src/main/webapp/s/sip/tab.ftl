@@ -35,7 +35,7 @@
     <tr><td id="cocPinDescription">${m.t("label.coc.password")}</td><td><input jsId="ui.cocPinInput" dojoType="dijit.form.ValidationTextBox" required="false" name="cocPin" regExp="\d{4}" promptMessage="${m.t("message.coc.password.prompt")}" invalidMessage="${m.t("message.coc.password.invalid")}"/></td></tr>
    </table>
   </div>
-  [#--@oko5/--]
+  [#--@oko6/--]
   <div class="dijitDialogPaneActionBar">
    <button dojoType="dijit.form.Button" iconClass="icoApply" onclick="contacta.contactaService.notifyCheckCfg(${ui}.loginInput.get('value'));">Reboot</button>
    <button dojoType="dijit.form.Button" iconClass="icoApply"  type="submit">${m.t("label.ok")}</button>
@@ -76,7 +76,7 @@
  </div>
 
  <div dojoType="dijit.layout.ContentPane" region="center" class="gridPane">
-  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid" selectable="true" rowsPerPage="100"></table>
+  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid"></table>
  </div>
 
  <div dojoType="dijit.layout.ContentPane" splitter="true" region="right" class="detailPane">

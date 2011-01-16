@@ -18,7 +18,7 @@
     <tr><td>${m.t("label.phone.sn")}</td><td><input dojoType="dijit.form.TextBox" name="serialNumber"/></td></tr>
    </table>
   </div>
-  [@oko5 pad/]
+  [@oko6 pad/]
  </form>
 </div>
 
@@ -65,7 +65,7 @@
   --]
   <table jsId="${ui}.grid"
        dojoType="dojox.grid.DataGrid"
-       selectable="true">
+      >
 
    [#--
    <script type="dojo/method" event="onStyleRow" args="row">

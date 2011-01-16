@@ -1,5 +1,5 @@
 [#ftl]<!-- $Revision: 671 $  :encoding=UTF-8:-->
-[#include "../util/macro.ftl"/]
+[#include "../WEB-INF/organic/macro.ftl"/]
 <html>
 <head>
 <title>home</title>
@@ -143,27 +143,27 @@ dojo.addOnLoad(function()
    [/#if]
    <div dojoType="dijit.layout.TabContainer" title="Administration" nested="true">
     <div dojoType="dijit.layout.ContentPane" title="Account">
-     [#include "../a/account/tab.ftl"/]
+     [#include "./account/tab.ftl"/]
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="Group">
-     [#include "../a/group/tab.ftl"/]
+     [#include "./group/tab.ftl"/]
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="Role">
-     [#include "../a/role/tab.ftl"/]
+     [#include "./role/tab.ftl"/]
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="Person">
-     [#include "../a/person/tab.ftl"/]
+     [#include "./person/tab.ftl"/]
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="Organization">
-     [#include "../a/organization/tab.ftl"/]
+     [#include "./organization/tab.ftl"/]
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="Policy">
-     [#include "../a/policy/tab.ftl"/]
+     [#include "./policy/tab.ftl"/]
     </div>
    </div>
 

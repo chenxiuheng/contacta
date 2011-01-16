@@ -21,19 +21,6 @@
 
   <action name="phonebook-*" class="phonebookAction" method="{1}">
   </action>
-
- </package>
-
- <!-- ============================================================= -->
- <!--   ADMINISTRATION/a                                                    -->
- <!-- ============================================================= -->
- <package name="organic-admin" extends="contacta-default" namespace="/a">
-  <default-interceptor-ref name="organicAuthStack"/>
-
-  <!-- *-* -->
-  <action name="*-*" class="{1}Action" method="{2}">
-   <result name="success" type="freemarker">/a/{1}/{2}.ftl</result>
-  </action>
  </package>
 
  <!-- ============================================================= -->

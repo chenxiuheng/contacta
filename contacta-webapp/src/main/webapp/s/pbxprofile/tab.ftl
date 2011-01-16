@@ -17,7 +17,7 @@
     <tr><td>${m.t("label.macro")}</td><td></td></tr>
    </table>
    <textarea dojoType="dijit.form.Textarea" jsId="${ui}.macroEditor" name="macro"></textarea>
-   [@oko5 pad/]
+   [@oko6 pad/]
   </form>
  </div>
 </div>
@@ -36,7 +36,7 @@
  </div>
 
  <div dojoType="dijit.layout.ContentPane" region="center" class="gridPane">
-  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid" selectable="true">
+  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid">
   </table>
  </div>
 

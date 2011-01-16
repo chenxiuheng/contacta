@@ -1,4 +1,4 @@
-/* $Id: ContactaSampleBuilder.java 665 2010-07-19 17:21:54Z michele.bianchi $
+/* $Id: ContactaBuilder.java 665 2010-07-19 17:21:54Z michele.bianchi $
  *
  * Copyright(C) 2010 [michele.bianchi@gmail.com]
  * All Rights Reserved
@@ -14,7 +14,8 @@ import mic.contacta.model.PbxProfileModel;
 import mic.contacta.model.PhoneModel;
 import mic.contacta.model.ProductModel;
 import mic.contacta.model.SipAccountModel;
-import mic.organic.aaa.spi.OrganicSampleBuilder;
+import mic.organic.aaa.spi.OrganicBuilder;
+import mic.organic.vfs.OrganicVfs;
 
 
 /**
@@ -23,7 +24,7 @@ import mic.organic.aaa.spi.OrganicSampleBuilder;
  * @created Jul 2, 2010
  */
 @Service
-public class ContactaSampleBuilder extends OrganicSampleBuilder
+public class ContactaBuilder extends OrganicBuilder
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
@@ -32,7 +33,7 @@ public class ContactaSampleBuilder extends OrganicSampleBuilder
   /**
    *
    */
-  public ContactaSampleBuilder()
+  public ContactaBuilder()
   {
     super();
   }
@@ -57,7 +58,7 @@ public class ContactaSampleBuilder extends OrganicSampleBuilder
    * @param string2
    * @return
    */
-  public PbxProfileModel buildPbxProfile(String code, String label, String command, String macroUrl)
+  public PbxProfileModel buildPbxProfile(OrganicVfs organicVfs, String code, String label, String command, String macroUrl)
   {
     PbxProfileModel model = new PbxProfileModel();
     model.setCode(code);

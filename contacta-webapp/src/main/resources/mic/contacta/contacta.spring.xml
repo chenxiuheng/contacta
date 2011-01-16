@@ -46,7 +46,8 @@
   <property name="cacheSeconds" value="-1"/>
   <property name="basenames">
    <list>
-    <value>classpath:/mic/contacta/l10n/contacta-messages</value>
+    <value>classpath:/mic/organic/organic-messages</value>
+    <value>classpath:/mic/contacta/contacta-messages</value>
    </list>
   </property>
  </bean>

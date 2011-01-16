@@ -49,6 +49,7 @@ import mic.organic.aaa.model.PersonModel;
 import mic.organic.aaa.spi.AddressbookService;
 import mic.organic.core.OrganicException;
 import mic.organic.util.Banner;
+import mic.organic.vfs.OrganicVfs;
 
 
 /**
@@ -67,6 +68,7 @@ public class ContactaServiceImpl implements ContactaService
 
   @PersistenceContext EntityManager entityManager;
 
+  @Autowired protected OrganicVfs organicVfs;
   @Autowired private ContactaConfiguration configuration;
   @Autowired private ContactaUserDetailsService contactaUserDetailsService;
 
@@ -75,12 +77,12 @@ public class ContactaServiceImpl implements ContactaService
   @Autowired private ProvisioningService provisioningService;
   @Autowired private InventoryService inventoryService;
   @Autowired private SipService sipService;
-  @Autowired private CocService cocService;
-  @Autowired private CalendarService calendarService;
-  @Autowired private PhonebarService phonebarService;
+//  @Autowired private CocService cocService;
+//  @Autowired private CalendarService calendarService;
+//  @Autowired private PhonebarService phonebarService;
   @Autowired private SipAccountDao sipAccountDao;
   @Autowired(required=false) private AsteriskService asteriskService;
-  @Autowired private ContactaSampleBuilder sampleBuilder;
+  @Autowired private ContactaBuilder sampleBuilder;
   @Autowired private PbxContextDao pbxContextDao;
   @Autowired private PbxProfileDao pbxProfileDao;
 
@@ -147,11 +149,11 @@ public class ContactaServiceImpl implements ContactaService
     count = (Long)(entityManager.createQuery("select count(*) from PbxProfileModel").getSingleResult());
     if (count == 0)
     {
-      pbxProfileDao.create(sampleBuilder.buildPbxProfile("dial", "Dial", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/stdexten_nos.conf"));
-      pbxProfileDao.create(sampleBuilder.buildPbxProfile("dial-vm", "Dial + segreteria", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/stdexten.conf"));
-      pbxProfileDao.create(sampleBuilder.buildPbxProfile("dial-hunt", "Dial a cascata", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/stdextentwo.conf"));
-      pbxProfileDao.create(sampleBuilder.buildPbxProfile("dial-hunt-vm", "Dial a cascata + segreteria", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/outisbusy.conf"));
-      pbxProfileDao.create(sampleBuilder.buildPbxProfile("coverage", "Coverage", "macro(boss_assistant,${EXTEN},SIP/,${RINGTIMEOUT})", "res:conf/asterisk/macro/boss_assistant.conf"));
+      pbxProfileDao.create(sampleBuilder.buildPbxProfile(organicVfs, "dial", "Dial", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/stdexten_nos.conf"));
+      pbxProfileDao.create(sampleBuilder.buildPbxProfile(organicVfs, "dial-vm", "Dial + segreteria", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/stdexten.conf"));
+      pbxProfileDao.create(sampleBuilder.buildPbxProfile(organicVfs, "dial-hunt", "Dial a cascata", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/stdextentwo.conf"));
+      pbxProfileDao.create(sampleBuilder.buildPbxProfile(organicVfs, "dial-hunt-vm", "Dial a cascata + segreteria", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/outisbusy.conf"));
+      pbxProfileDao.create(sampleBuilder.buildPbxProfile(organicVfs, "coverage", "Coverage", "macro(boss_assistant,${EXTEN},SIP/,${RINGTIMEOUT})", "res:conf/asterisk/macro/boss_assistant.conf"));
     }
   }
 
@@ -183,6 +185,7 @@ public class ContactaServiceImpl implements ContactaService
   /**
    *
    */
+  @SuppressWarnings("unused")
   private void automaticUpgrade()
   {
     if (StringUtils.isNotBlank(automaticUpgrade))

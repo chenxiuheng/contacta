@@ -1,7 +1,9 @@
 [#ftl][#-- $Revision: 674 $  :encoding=UTF-8:--]
-[#-- $Id$ --]
+
+[#include "./macro-common.ftl"/]
+
 [#-- ====================================================================== --]
-[#--      macros                                                            --]
+[#--      local macros                                                      --]
 [#-- ====================================================================== --]
 [#--#assign reLogin = "\\d{2,4}"/--]
 [#assign reLogin = ".+"/]
@@ -44,33 +46,3 @@
   <center><div dojoType="dijit.form.Button" onclick="organic.util.dojoAlertHide();" style="margin:auto;"><span>${m.t("label.ok")}</span></div></center>
  </div>
 </div>
-
-
-
-
-
-
-
-
-
-[#-- ====================================================================== --]
-[#--   macros                                                               --]
-[#-- ====================================================================== --]
-
-[#-- Ok/Cancel buttons dojo 1.5 style :) --]
-[#macro oko5 pad]
-<div class="dijitDialogPaneActionBar">
- <button dojoType="dijit.form.Button" iconClass="icoApply"  type="submit">${m.t("label.ok")}</button>
- <button dojoType="dijit.form.Button" iconClass="icoCancel" onclick="dojo.hitch(${pad}, ${pad}._crudHide());return false;">${m.t("label.ko")}</button>
-</div>
-[/#macro]
-
-[#-- Ok/Cancel buttons --]
-[#macro close ok]
- <div dojoType="dijit.layout.ContentPane" style="width:100%; height:34; padding:2px 0px 2px 0px; margin-top:10px;">
-  <div style="float:right;">
-   <div dojoType="dijit.form.Button" iconClass="icoApply" onclick="${ok}"><span>Chiudi</span></div>
-  </div>
- </div>
-[/#macro]
-

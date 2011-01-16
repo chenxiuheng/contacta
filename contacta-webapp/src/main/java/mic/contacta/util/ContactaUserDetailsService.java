@@ -15,30 +15,26 @@
  */
 package mic.contacta.util;
 
-import java.util.List;
 import java.util.ArrayList;
-
-import org.apache.commons.lang.StringUtils;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.MessageSourceAccessor;
-import org.springframework.dao.DataAccessException;
-
 import mic.contacta.model.VoicemailModel;
 import mic.contacta.server.dao.SipAccountDao;
 import mic.contacta.server.dao.VoicemailDao;
 import mic.organic.aaa.model.AccountModel;
 import mic.organic.aaa.model.Role;
+import mic.organic.aaa.spi.OrganicUserDetailsService;
 
 
 /**
@@ -61,19 +57,28 @@ import mic.organic.aaa.model.Role;
  * @author michele bianchi
  * @version $Id: ContactaUserDetailsService.java 664 2010-07-18 18:47:19Z michele.bianchi $
  */
-public class ContactaUserDetailsService implements UserDetailsService
+public class ContactaUserDetailsService extends OrganicUserDetailsService
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private SipAccountDao accountDao;
-  @Autowired private VoicemailDao voicemailDao;
-
   protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
   private UserDetailsBackend backend = UserDetailsBackend.None;
-  private String adminLogin = "root";
-  private String adminPassword = "root";
+
+  @Autowired private SipAccountDao accountDao;
+  @Autowired private VoicemailDao voicemailDao;
+
+
+  /*
+   *
+   */
+  public ContactaUserDetailsService()
+  {
+    super();
+
+    addAdminAuthority(Role.ROLE_VOICEMAIL.toString());
+  }
 
 
   /**
@@ -95,67 +100,16 @@ public class ContactaUserDetailsService implements UserDetailsService
 
 
   /*
-   *
-   */
-  public ContactaUserDetailsService()
-  {
-    super();
-  }
-
-
-  /**
-   * @return the adminLogin
-   */
-  public String getAdminLogin()
-  {
-    return adminLogin;
-  }
-
-
-  /**
-   * @param adminLogin the adminLogin to set
-   */
-  public void setAdminLogin(String adminLogin)
-  {
-    this.adminLogin = adminLogin;
-  }
-
-
-  /**
-   * @return the adminPassword
-   */
-  public String getAdminPassword()
-  {
-    return adminPassword;
-  }
-
-
-  /**
-   * @param adminPassword the adminPassword to set
-   */
-  public void setAdminPassword(String adminPassword)
-  {
-    this.adminPassword = adminPassword;
-  }
-
-  /*
    * @see org.springframework.security.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
    */
   @Transactional(readOnly=true)
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException
   {
-    List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-    UserDetails user = null;
-    if (StringUtils.equals(username, adminLogin))
+    UserDetails user = checkAdmin(username);
+    if (user == null)
     {
-      authorities.add(new GrantedAuthorityImpl(Role.ROLE_ADMIN.toString()));
-      authorities.add(new GrantedAuthorityImpl(Role.ROLE_USER.toString()));
-      authorities.add(new GrantedAuthorityImpl(Role.ROLE_VOICEMAIL.toString()));
-      user = new User(username, adminPassword, true, true, true, true, authorities);
-    }
-    else
-    {
+      List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
       switch(backend)
       {
       case SipAccount:

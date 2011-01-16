@@ -15,7 +15,7 @@
     <tr><td>${m.t("label.pin")}</td><td><input dojoType="dijit.form.TextBox" name="pin"/></td></tr>
    </table>
   </div>
-  [@oko5 pad/]
+  [@oko6 pad/]
  </form>
 </div>
 
@@ -33,7 +33,7 @@
  </div>
 
  <div dojoType="dijit.layout.ContentPane" region="center" class="gridPane">
-  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid" selectable="true">
+  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid">
   </table>
  </div>
 
