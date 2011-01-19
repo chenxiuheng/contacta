@@ -38,9 +38,9 @@
 
  <!-- scm -->
  <scm>
-  <connection>scm:hg:http://openinnovation.it/hg/contacta</connection>
-  <developerConnection>scm:hg:http://openinnovation.it/hg/contacta</developerConnection>
-  <url>https://svn.openinnovation.it/hg</url>
+  <connection>scm:hg:http://contacta.googlecode.com/hg</connection>
+  <developerConnection>scm:hg:https://contacta.googlecode.com/hg</developerConnection>
+  <url>http://code.google.com/p/contacta/source/browse</url>
  </scm>
 
  <!--================================================================-->
@@ -101,7 +101,7 @@
    <organizationUrl>http://openinnovation.it</organizationUrl>
    <timezone>+1</timezone>
    <roles>
-    <role>Java Developer</role>
+    <role>Developer</role>
    </roles>
   </developer>
   <developer>
@@ -112,7 +112,7 @@
    <organizationUrl>http://openinnovation.it</organizationUrl>
    <timezone>+1</timezone>
    <roles>
-    <role>ICT consultant</role>
+    <role>Developer</role>
    </roles>
   </developer>
   <developer>
@@ -121,7 +121,7 @@
    <email>alessandro.panza@openinnovation.it</email>
    <timezone>+1</timezone>
    <roles>
-    <role>Java Developer</role>
+    <role>Developer</role>
    </roles>
   </developer>
   <developer>
@@ -130,7 +130,7 @@
    <email>anna.amidani@openinnovation.it</email>
    <timezone>+1</timezone>
    <roles>
-    <role>Java Developer</role>
+    <role>Developer</role>
    </roles>
   </developer>
   <developer>
@@ -139,7 +139,7 @@
    <email>luca.pinelli@openinnovation.it</email>
    <timezone>+1</timezone>
    <roles>
-    <role>Java Developer</role>
+    <role>Developer</role>
    </roles>
   </developer>
  </developers>
@@ -352,11 +352,10 @@
     </plugin>
 
     <!-- mvn site:run / mvn site:stage-deploy / mvn site:stage -DstagingDirectory=$PWD/target/fullsite -->
-    <!-- 2.2 for mvn 2.x and 3.0-beta-3 for mvn 3.x -->
     <plugin>
      <groupId>org.apache.maven.plugins</groupId>
      <artifactId>maven-site-plugin</artifactId>
-     <version>2.2</version>
+     <version>3.0-beta-3</version>
      <configuration>
       <port>9000</port>
       <tempWebappDirectory>${basedir}/target/site/tempdir</tempWebappDirectory>
@@ -367,6 +366,63 @@
       <excludeModules>fml</excludeModules>
       <locales>en,it</locales>
      </configuration-->
+    </plugin>
+
+    <!-- license -->
+    <plugin>
+     <groupId>com.mycila.maven-license-plugin</groupId>
+     <artifactId>maven-license-plugin</artifactId>
+     <version>1.9.0</version>
+     <configuration>
+      <header>./etc/header.txt</header>
+      <failIfMissing>false</failIfMissing>
+      <strictCheck>true</strictCheck>
+      <encoding>UTF-8</encoding>
+      <properties>
+       <appname>Contacta</appname>
+       <year>1999-2011</year>
+       <owner>Michele Bianchi, Roberto Grasso</owner>
+       <email>info@openinnovation.it</email>
+       <www>http://www.openinnovation.it</www>
+      </properties>
+      <includes>
+       <include>src/**/*.java</include>
+      </includes>
+      <!--
+      <basedir>${basedir}</basedir>
+      <validHeaders>
+       <validHeader>/otherSupportedHeader.txt</validHeader>
+       <validHeader>http://www.company.com/yetAnotherSupportedHeader.txt</validHeader>
+      </validHeaders>
+      <quiet>false</quiet>
+      <aggregate>false</aggregate>
+      <excludes>
+       <exclude>target/**</exclude>
+       <exclude>.clover/**</exclude>
+      </excludes>
+      <useDefaultExcludes>true</useDefaultExcludes>
+      <mapping>
+       <jwc>XML_STYLE</jwc>
+       <application>XML_STYLE</application>
+       <myFileExtension>JAVADOC_STYLE</myFileExtension>
+      </mapping>
+      <useDefaultMapping>true</useDefaultMapping>
+      <headerDefinitions>
+       <headerDefinition>def1.xml</headerDefinition>
+       <headerDefinition>def2.xml</headerDefinition>
+      </headerDefinitions>
+       -->
+     </configuration>
+     <!--
+     <executions>
+      <execution>
+       <phase>test</phase>
+       <goals>
+        <goal>check</goal>
+       </goals>
+      </execution>
+     </executions>
+      -->
     </plugin>
 
     <!-- emma -->
@@ -396,7 +452,7 @@
      </dependencies>
     </plugin>
 
-    <!--  -->
+    <!-- cobertura -->
     <plugin>
      <groupId>org.codehaus.mojo</groupId>
      <artifactId>cobertura-maven-plugin</artifactId>
@@ -610,7 +666,7 @@
    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-jdk14</artifactId><version>1.6.1</version></dependency>
    <dependency><groupId>org.slf4j</groupId><artifactId>jcl-over-slf4j</artifactId><version>1.6.1</version></dependency>
    <dependency><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId><version>1.1.1</version></dependency>
-   <dependency><groupId>commons-lang</groupId><artifactId>commons-lang</artifactId><version>2.5</version></dependency>
+   <dependency><groupId>commons-lang</groupId><artifactId>commons-lang</artifactId><version>2.6</version></dependency>
    <dependency><groupId>commons-collections</groupId><artifactId>commons-collections</artifactId><version>3.2.1</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>commons-beanutils</groupId><artifactId>commons-beanutils</artifactId><version>1.8.3</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>commons-io</groupId><artifactId>commons-io</artifactId><version>2.0</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>

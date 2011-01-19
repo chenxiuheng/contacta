@@ -1,7 +1,6 @@
-/* $Id: ContactaHelper.java 1468 2008-05-25 14:03:10Z michele.bianchi@gmail.com $
- *
- * Contacta, http://openinnovation.it - roberto grasso, michele bianchi
- * Copyright(C) 1998-2009 [michele.bianchi@gmail.com]
+/**
+ * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
+ * Copyright(C) 1999-2011 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation

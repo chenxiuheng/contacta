@@ -1,7 +1,6 @@
-/* $Id: PolycomPutLog.java 642 2010-05-30 09:15:27Z michele.bianchi $
- *
- * Contacta, http://openinnovation.it - roberto grasso, michele bianchi
- * Copyright(C) 1998-2009 [michele.bianchi@gmail.com]
+/**
+ * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
+ * Copyright(C) 1999-2011 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation
