@@ -3,7 +3,7 @@
 <!-- :encoding=UTF-8: -->
 <html>
 <head>
- <title>${m.t("title.error")}</title>
+ <title>${m.t("label.error")}</title>
  <style>
  </style>
 </head>

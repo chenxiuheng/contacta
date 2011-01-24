@@ -343,7 +343,7 @@ dojo.declare("openinnovation.contacta.Contacta", null,
       console.log('XXXXXXXXX', begin, end, bk.day.getDate());
       var attendees = ui.attendeeListInput ? ui.attendeeListInput.attr('value') : '';
 
-      this.contactaService.book(begin.getTime(), end.getTime(), attendees, '${m.t("title.conf.detail")?js_string}', 'description').addCallbacks(
+      this.contactaService.book(begin.getTime(), end.getTime(), attendees, '${m.t("label.conf.detail")?js_string}', 'description').addCallbacks(
         function(result)
         {
           if (result == 'KO')

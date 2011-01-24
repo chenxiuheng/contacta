@@ -1,13 +1,6 @@
-<style>
-.mic table.debug { border-collapse:collapse; margin:1em;  width:600px; }
-.mic .debug tr.yellow th { border:1px solid #FB7A31; background:#FFC; }
-.mic .debug th { padding:2px; text-align:center; background-color:red; }
-.mic .debug td { border:1px solid #bbbbbb; padding:1px; background-color:#eeeeee; }
-.mic .debug td:first-child { padding-left:0.5em; padding-right:0.5em; background-color:#dddddd; text-align:right; }
-</style>
 <table class="debug">
  <thead>
-  <tr class="yellow"><th colspan="2">${m.t("title.status.jvm")}</th></tr>
+  <tr class="yellow"><th colspan="2">${m.t("label.status.jvm")}</th></tr>
  </thead>
  <tbody>
   <tr><td>OS</td><td>${systemProperties["os.name"]} ${systemProperties["os.arch"]} ${systemProperties["os.version"]}</td></tr>
@@ -23,7 +16,7 @@
 
 <table class="debug">
  <thead>
-  <tr class="yellow"><th colspan="2">${m.t("title.configuration")}</th></tr>
+  <tr class="yellow"><th colspan="2">${m.t("label.configuration")}</th></tr>
  </thead>
  <tbody>
  <tr><td>version</td><td>${configuration.version}</td></tr>

@@ -3,7 +3,7 @@
 <table class="detailTable">
 <tr><td>${m.t("label.id")}:</td><td>${model.id?string}</td></tr>
 <tr><td>${m.t("label.code")}:</td><td>${model.code?string}</td></tr>
-<tr><td>${m.t("title.pin")}:</td><td>${model.pin}</td></tr>
+<tr><td>${m.t("label.pin")}:</td><td>${model.pin}</td></tr>
 </table>
 </div>
 

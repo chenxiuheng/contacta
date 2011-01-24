@@ -7,11 +7,11 @@
 [#-- ====================================================================== --]
 
 [#-- ui.starDetailDialog --]
-<div dojoType="dijit.Dialog" jsId="ui.starDetailDialog" title="${m.t("title.asterisk.details")}" refreshOnShow="false" preventCache="true" preload="false">
+<div dojoType="dijit.Dialog" jsId="ui.starDetailDialog" title="${m.t("label.asterisk.details")}" refreshOnShow="false" preventCache="true" preload="false">
 </div>
 
 [#-- ui.coverageDialog --]
-<div dojoType="dijit.Dialog" jsId="ui.coverageDialog" title="${m.t("title.coverage.add")}">
+<div dojoType="dijit.Dialog" jsId="ui.coverageDialog" title="${m.t("label.coverage.add")}">
  <div dojoType="dijit.form.Form" jsId="ui.coverageForm">
   <table>
    <tr><td>${m.t("label.exten")}</td><td><input dojoType="dijit.form.TextBox" name="exten"/></td></tr>
@@ -36,7 +36,7 @@
 [#-- ====================================================================== --]
 
 [#-- ui.phoneAddAccountDialog --]
-<div dojoType="dijit.Dialog" id="ui.phoneAddAccountDialog" jsId="ui.phoneAddAccountDialog" title="${m.t("title.phone.addSip")}">
+<div dojoType="dijit.Dialog" id="ui.phoneAddAccountDialog" jsId="ui.phoneAddAccountDialog" title="${m.t("label.phone.addSip")}">
  <div dojoType="dijit.form.Form" jsId="ui.phoneAddAccountForm">
   <table>
    <tr><td>${m.t("label.exten")}</td><td><input dojoType="dijit.form.TextBox" name="login"/></td></tr>

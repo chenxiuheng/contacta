@@ -60,7 +60,7 @@ dojo.addOnLoad(function()
  <div jsId="ui.menubar" dojoType="dijit.layout.ContentPane" style="height:31px; border-bottom:1px solid #4E9595; border-right:1px solid #4E9595;" region="top">
   <div style="padding:2px 10px 1px 10px;" class="organicBg">
    <div style="float:right; padding:2px 4px;"><div class="ico25" title="Logout" onclick="organic.util.logout()"></div></div>
-   [#--<div style="float:right; padding-top:13px; padding-bottom:0px; padding-right:20px; color:white; font-size:9px;">${m.t("title.version")}</div>--]
+   [#--<div style="float:right; padding-top:13px; padding-bottom:0px; padding-right:20px; color:white; font-size:9px;">${m.t("label.version")}</div>--]
    <div style="float:left; margin-right:80px; width:152px; height:25px; background:transparent url('${base}/r/static/contacta.png') no-repeat left bottom;"></div>
    <div style="white-space:nowrap; color:navy; font-weight:bold;">
     [#if organicSession.admin]
@@ -83,18 +83,18 @@ dojo.addOnLoad(function()
  [#-- =================== admin =================== --]
   [#if organicSession.admin]
 
-  <div jsId="ui.adminTabContainer" dojoType="dijit.layout.TabContainer" tabStrip="true">
+  <div jsId="ui.adminTabContainer" dojoType="dijit.layout.TabContainer">
    [#-- telephony --]
    <div dojoType="dijit.layout.TabContainer" title="Telephony" nested="true">
-    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.phone")}">
+    <div dojoType="dijit.layout.ContentPane" title="${m.t("label.phone")}">
      [#include "./phone/tab.ftl"/]
     </div>
 
-    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.sip")}" selected="true">
+    <div dojoType="dijit.layout.ContentPane" title="${m.t("label.sip")}" selected="true">
      [#include "./sip/tab.ftl"/]
     </div>
 
-    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.coverage")}">
+    <div dojoType="dijit.layout.ContentPane" title="${m.t("label.coverage")}">
      [#include "./coverage/tab.ftl"/]
     </div>
 
@@ -105,13 +105,13 @@ dojo.addOnLoad(function()
 
    [#-- pbx --]
    <div dojoType="dijit.layout.TabContainer" title="PBX" nested="true">
-    <div jsId="ui.ptool.consolePane" dojoType="dijit.layout.ContentPane" title="${m.t("title.menu")}"
+    <div jsId="ui.ptool.consolePane" dojoType="dijit.layout.ContentPane" title="${m.t("label.menu")}"
          refreshOnShow="false" preventCache="true" preload="true"
          >
      [#include "./ptool/ptool.ftl"/]
     </div>
 
-    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.cdr")}">
+    <div dojoType="dijit.layout.ContentPane" title="${m.t("label.cdr")}">
      [#include "./cdr/tab.ftl"/]
     </div>
 
@@ -130,11 +130,11 @@ dojo.addOnLoad(function()
 
    [#-- advanced --]
    <div dojoType="dijit.layout.TabContainer" title="Advanced" nested="true">
-    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.advanced")}">
+    <div dojoType="dijit.layout.ContentPane" title="${m.t("label.advanced")}">
      [#include "./advanced/advanced.ftl"/]
     </div>
 
-    <div dojoType="dijit.layout.ContentPane" title="${m.t("title.audit")}">
+    <div dojoType="dijit.layout.ContentPane" title="${m.t("label.audit")}">
      ${m.t("short.disabled")}[#--include "./XXX/tab.ftl"/--]
     </div>
 
@@ -146,55 +146,59 @@ dojo.addOnLoad(function()
    [#-- administration --]
    [#if organicConfiguration.develMode]
    [/#if]
-   <div dojoType="dijit.layout.TabContainer" title="Administration" nested="true">
-    <div dojoType="dijit.layout.ContentPane" title="Account">
-     [#include "./account/tab.ftl"/]
-    </div>
-
-    <div dojoType="dijit.layout.ContentPane" title="Group">
-     [#include "./group/tab.ftl"/]
-    </div>
-
-    <div dojoType="dijit.layout.ContentPane" title="Role">
-     [#include "./role/tab.ftl"/]
-    </div>
-
+   <div dojoType="dijit.layout.TabContainer" title="Administrator" nested="true">
     <div dojoType="dijit.layout.ContentPane" title="Person">
-     [#include "./person/tab.ftl"/]
+     [#include "../s/person/tab.ftl"/]
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="Organization">
-     [#include "./organization/tab.ftl"/]
+     [#include "../s/organization/tab.ftl"/]
+    </div>
+
+    <div dojoType="dijit.layout.ContentPane" title="Account" selected="true">
+     [#include "../s/account/tab.ftl"/]
+    </div>
+
+    <div dojoType="dijit.layout.ContentPane" title="Group">
+     [#include "../s/group/tab.ftl"/]
+    </div>
+
+    <div dojoType="dijit.layout.ContentPane" title="Role">
+     [#include "../s/role/tab.ftl"/]
     </div>
 
     <div dojoType="dijit.layout.ContentPane" title="Policy">
-     [#include "./policy/tab.ftl"/]
+     [#include "../s/policy/tab.ftl"/]
+    </div>
+
+    <div dojoType="dijit.layout.ContentPane" title="Operation">
+     [#include "../s/operation/tab.ftl"/]
     </div>
    </div>
 
-   </div>
+  </div>
   [/#if]
 
   [#-- =================== user =================== --]
-  <div jsId="ui.contactaTabContainer" dojoType="dijit.layout.TabContainer" tabStrip="true">
-   <div dojoType="dijit.layout.ContentPane" title="${m.t("title.phonebar")}">
+  <div jsId="ui.contactaTabContainer" dojoType="dijit.layout.TabContainer">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.phonebar")}">
     [#include "./phonebook/tab.ftl"/]
    </div>
 
    [#if organicConfiguration.develMode]
-   <div dojoType="dijit.layout.ContentPane" title="${m.t("title.calendar")}">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.calendar")}">
     [#include "./calendar/calendar.ftl"/]
    </div>
 
-   <div dojoType="dijit.layout.ContentPane" title="${m.t("title.mybooking")}">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.mybooking")}">
     [#include "./conference/conference.ftl"/]
    </div>
 
-   <div dojoType="dijit.layout.ContentPane" title="${m.t("title.channels")}">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.channels")}">
     [#include "./channels/channels.ftl"/]
    </div>
 
-   <div dojoType="dijit.layout.ContentPane" title="${m.t("title.selfcare")}"
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.selfcare")}"
         refreshOnShow="false" preventCache="true" preload="true"
         >
     ${m.t("short.disabled")}[#--include "./XXX/tab.ftl"/--]
