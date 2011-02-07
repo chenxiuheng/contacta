@@ -34,7 +34,7 @@
  </div>
 
  <div dojoType="dijit.layout.ContentPane" splitter="true" region="right" class="detailPane">
-  <div jsId="${ui}.detailPane" dojoType="dijit.layout.ContentPane" preventCache="true"></div>
+  <div jsId="${ui}.detailPane" dojoType="dijit.layout.ContentPane" preventCache="true" class="detailPaneInner"></div>
  </div>
 </div>
 

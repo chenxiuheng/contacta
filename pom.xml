@@ -52,7 +52,7 @@
   <com.sun.management.jmxremote.ssl>false</com.sun.management.jmxremote.ssl>
   <com.sun.management.jmxremote.authenticate>false</com.sun.management.jmxremote.authenticate>
   -->
-  <mic.organic.version>0.11</mic.organic.version>
+  <mic.organic.version>0.12-SNAPSHOT</mic.organic.version>
   <mic.project.version>${project.version}</mic.project.version>
  </properties>
 
