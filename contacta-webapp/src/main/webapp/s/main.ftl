@@ -2,11 +2,18 @@
 [#include "../WEB-INF/organic/macro.ftl"/]
 <html>
 <head>
-<title>home</title>
-[#--<script type="text/javascript" src="${base}/r/organic.js"></script>--]
+<title>Main</title>
+<style>
+</style>
+<script type="text/javascript">
+</script>
+[#if organicConfiguration.firebugLite]
+<script type="text/javascript" src="http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js"></script>
+[/#if]
 <script type="text/javascript" src="${base}/r/openinnovation/organic/Organic.js"></script>
 <script type="text/javascript" src="${base}/r/openinnovation/organic/gridpad/Controller.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/organic/Aaa.js"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/organic/Mc.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/contacta/Phonebook.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/contacta/PbxContext.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/contacta/Phone.js"></script>
@@ -16,23 +23,14 @@
 <script type="text/javascript" src="${base}/js/openinnovation/contacta/Contacta.js"></script>
 
 <script type="text/javascript">
-var ApplicationState = function(){};
-dojo.extend(ApplicationState, {
- back: function()
- {
-   console.log('back');
-   /*console.log('cannot go back'); if (o_utils.logout() === false) { var appState = new ApplicationState(); dojo.back.addToHistory(appState); }*/
- },
- forward: function()
- {
-   console.log('forward');
-   /*console.log('cannot go forward');*/
- },
- showStateData: function() { },
- showBackForwardMessage: function(message) { }
-});
 
-var organic = { util:new openinnovation.organic.Organic({ baseUrl:'${base!""}' }), appName:'contacta', baseUrl:'${base!""}' };
+var organic =
+{
+  util:new openinnovation.organic.Organic({ baseUrl:'${base!""}' }),
+  appName:'contacta',
+  baseUrl:'${base!""}',
+  aaa:null
+};
 var contacta = null;
 
 dojo.addOnLoad(function()

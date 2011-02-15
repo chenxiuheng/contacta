@@ -16,20 +16,9 @@ package mic.contacta.server.spi;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import mic.contacta.asterisk.spi.ExtenHintWriter;
-import mic.contacta.asterisk.spi.ExtenProfileWriter;
-import mic.contacta.model.*;
-import mic.contacta.model.CoverageModel.CoverageType;
-import mic.contacta.server.api.ContactaException;
-import mic.contacta.server.dao.*;
-import mic.contacta.util.UpgradeTo052;
-import mic.organic.vfs.OrganicVfs;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.vfs.FileObject;
@@ -40,6 +29,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import mic.contacta.asterisk.spi.ExtenHintWriter;
+import mic.contacta.asterisk.spi.ExtenProfileWriter;
+import mic.contacta.model.CoverageModel;
+import mic.contacta.model.CoverageModel.CoverageType;
+import mic.contacta.model.PbxProfileModel;
+import mic.contacta.model.PhoneModel;
+import mic.contacta.model.SipAccountModel;
+import mic.contacta.server.api.ContactaException;
+import mic.contacta.server.dao.*;
+import mic.contacta.util.UpgradeTo052;
+import mic.organic.vfs.OrganicVfs;
 
 
 /**

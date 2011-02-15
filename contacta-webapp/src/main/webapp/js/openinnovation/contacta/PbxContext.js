@@ -26,10 +26,10 @@ dojo.declare("openinnovation.contacta.PbxContext", openinnovation.organic.gridpa
   /*
    *
    */
-  showDetailGetUrl:function(item)
+  showDetailGetUrl:function(json)
   {
-    var code = this._store.getValue(item, 'login');
-    return this.classCode+'-detail.action?code='+code;
+    //var code = this._store.getValue(item, 'login');
+    return this.classCode+'-detail.action?code='+json.login;
   },
 
 
@@ -162,10 +162,10 @@ dojo.declare("openinnovation.contacta.Cdr", openinnovation.organic.gridpad.Contr
   /*
    *
    */
-  showDetailGetUrl:function(item)
+  showDetailGetUrl:function(json)
   {
-    var uniqueid = this._store.getValue(item, 'uniqueid');
-    return this.classCode+'-detail.action?uniqueid='+uniqueid;
+    //var uniqueid = this._store.getValue(item, 'uniqueid');
+    return this.classCode+'-detail.action?uniqueid='+json.uniqueid;
   },
 
 

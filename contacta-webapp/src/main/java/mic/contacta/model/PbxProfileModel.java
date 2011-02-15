@@ -56,7 +56,6 @@ public class PbxProfileModel extends AbstractJsonModel
   /*
    * let use it only by jpa
    */
-  @Deprecated
   public PbxProfileModel()
   {
     super(null);

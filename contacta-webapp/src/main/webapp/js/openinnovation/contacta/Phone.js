@@ -295,10 +295,10 @@ dojo.declare("openinnovation.contacta.Phone", openinnovation.organic.gridpad.Con
     //{
     //  ids[i] = rows[i].id[0];
     //}
-    var phoneItem = this.currentItem;
+    var phoneItem = this.currentJson;
     //console.log('phoneItem', phoneItem);
     var form = ui.phoneAddAccountForm.getValues();
-    contacta.contactaService.phoneAddAccount(phoneItem.id[0], form.login).addCallbacks(function(result)
+    contacta.contactaService.phoneAddAccount(phoneItem.id, form.login).addCallbacks(function(result)
     {
       //ui.phoneAddAccountGrid.selection.clear();
       ui.phoneAddAccountDialog.hide();
@@ -331,9 +331,9 @@ dojo.declare("openinnovation.contacta.Phone", openinnovation.organic.gridpad.Con
     //console.log('phoneId', phoneId);
     if (phoneId)
     {
-      this.currentItem = { id:[phoneId] };
+      this.currentJson = { id:phoneId };
     }
-    if (!this.currentItem)
+    if (!this.currentJson)
     {
       organic.util.dojoAlertShow('${m.t("short.phone.select")?js_string}');
     }

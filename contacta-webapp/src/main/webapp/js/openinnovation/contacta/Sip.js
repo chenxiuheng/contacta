@@ -98,7 +98,7 @@ dojo.declare("openinnovation.contacta.Sip", openinnovation.organic.gridpad.Contr
   convertJson2Form:function(json)
   {
     var p = this.inherited(arguments);
-    //p = organic.util.normalizeStoreItem(this.currentItem);
+    //p = organic.util.normalizeStoreItem(this.currentJson);
     if (p.id == 0)
     {
       this._ui.loginInput.attr('readOnly', false);
@@ -234,7 +234,7 @@ dojo.declare("openinnovation.contacta.Sip", openinnovation.organic.gridpad.Contr
    */
   starDetail:function()
   {
-    var login = this.currentItem.login[0];
+    var login = this.currentJson.login;
     ui.starDetailDialog.show();
     ui.starDetailDialog.setHref('sip-star.action?code='+login);
   },
@@ -250,7 +250,7 @@ dojo.declare("openinnovation.contacta.Sip", openinnovation.organic.gridpad.Contr
      */
     removeAll:function()
     {
-      var login = this.currentItem.login[0];
+      var login = this.currentJson.login;
       contacta.contactaService.removeCoverage(login).addCallbacks(
         function(result)
         {
@@ -258,7 +258,7 @@ dojo.declare("openinnovation.contacta.Sip", openinnovation.organic.gridpad.Contr
           ui.sipDetail.setHref('sip-detail.action?code='+login);
           if (result)
           {
-            ui.sipGrid.store.setValue(this.currentItem, 'profileName', 'Dial');
+            ui.sipGrid.store.setValue(this.currentJson, 'profileName', 'Dial');
           }
           else
           {
@@ -282,7 +282,7 @@ dojo.declare("openinnovation.contacta.Sip", openinnovation.organic.gridpad.Contr
      */
     submit:function()
     {
-      var login = this.currentItem.login[0];
+      var login = this.currentJson.login;
       var cvg = ui.coverageForm.getValues();
       contacta.contactaService.addCoverage(login, cvg.exten, cvg.type, cvg.options, cvg.ringTimeout).addCallbacks(
         function(result)

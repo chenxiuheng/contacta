@@ -44,7 +44,6 @@ public class CoverageModel extends AbstractModel
   /*
    *
    */
-  @Deprecated
   public CoverageModel()
   {
     setExcludes(coverageExcludes);

@@ -99,14 +99,14 @@ var a =
     }
     else
     {
-      if (!this.currentItem)
+      if (!this.currentJson)
       {
         organic.util.dojoAlertShow('${m.t("short.phone.select")?js_string}');
         return;
       }
 
       var title = '${m.t("label.phone.edit")?js_string}';
-      phone = organic.util.normalizeStoreItem(this.currentItem);
+      phone = organic.util.normalizeStoreItem(this.currentJson);
       phone.config = ''+phone.hasConfig; // TODO bella roba x i checkbox, sistemare
       ui.phone.crudForm.setValues(phone);
       ui.phone.crudDialog.titleNode.innerHTML = title;

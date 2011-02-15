@@ -65,24 +65,6 @@
  <package name="contacta-smd" namespace="/smd" extends="organic-smd">
   <default-interceptor-ref name="organicSmdStack"/>
   <action name="*" class="{1}Action" method="bind"></action>
-  <!--
-  <action name="product" class="pbxcontextAction" method="bind"></action>
-  <action name="cdr" class="cdrAction" method="bind"></action>
-  <action name="pbxcontext" class="pbxcontextAction" method="bind"></action>
-  <action name="pbxprofile" class="pbxprofileAction" method="bind"></action>
-  <action name="contacta" class="contactaAction" method="bind"></action>
-  <action name="phone" class="phoneAction" method="bind"></action>
-  <action name="sip" class="sipAction" method="bind"></action>
-  <action name="coc" class="cocAction" method="bind"></action>
-  <action name="phonebook" class="phonebookAction" method="bind"></action>
-
-  <action name="person" class="personAction" method="bind"></action>
-  <action name="organization" class="organizationAction" method="bind"></action>
-  <action name="account" class="accountAction" method="bind"></action>
-  <action name="role" class="roleAction" method="bind"></action>
-  <action name="group" class="groupAction" method="bind"></action>
-  <action name="policy" class="policyAction" method="bind"></action>
-   -->
  </package>
 
  <!-- ============================================================= -->
@@ -101,7 +83,6 @@
     <param name="contentDisposition">attachment;filename="${filename}"</param>
     <!--
     <param name="contentLength">${contentLength}</param>
-    <param name="contentDisposition">attachment;filename="${filename}"</param>
     <param name="bufferSize">4096</param>
     -->
    </result>

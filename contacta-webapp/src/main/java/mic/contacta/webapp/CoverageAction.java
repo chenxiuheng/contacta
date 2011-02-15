@@ -47,7 +47,7 @@ public class CoverageAction extends AbstractDatastoreAction
   public String findAll()
   {
     List<CoverageJson> jsonList = contactaGateway.coverageList();
-    DatastoreJson<CoverageJson> datastore = new DefaultDatastoreJson<CoverageJson>(DatastoreJson.IDENTIFIER, DEFAULT_DATASTORE_TITLE, jsonList);
+    DatastoreJson<CoverageJson> datastore = new DefaultDatastoreJson<CoverageJson>(DatastoreJson.IDENTIFIER, "title", jsonList);
     setStore(datastore);
     return SUCCESS;
   }

@@ -19,11 +19,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import mic.contacta.json.SipAccountJson;
 import mic.contacta.model.CocModel;
 import mic.contacta.model.SipAccountModel;
-import mic.contacta.server.api.ContactaException;
 import mic.contacta.server.dao.PbxContextDao;
 import mic.contacta.server.spi.CocService;
 import mic.contacta.server.spi.SipService;
@@ -71,7 +69,7 @@ public class SipAdapter
   /*
    *
    */
-  public SipAccountModel accountCreate(SipAccountJson json) throws ContactaException
+  public SipAccountModel accountCreate(SipAccountJson json)
   {
     SipAccountModel model = sipAccountConverter.jsonToModel(json, null);
     model = sipService.createAccount(model);
@@ -84,7 +82,7 @@ public class SipAdapter
   /*
    *
    */
-  public void accountUpdate(SipAccountJson json, SipAccountModel model) throws ContactaException
+  public void accountUpdate(SipAccountJson json, SipAccountModel model)
   {
     sipAccountConverter.jsonToModel(json, model);
 

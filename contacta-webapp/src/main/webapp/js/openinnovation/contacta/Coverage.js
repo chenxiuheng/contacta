@@ -68,8 +68,9 @@ dojo.declare("openinnovation.contacta.Coverage", null,
    */
   showDetail:function(event)
   {
-    this.currentItem = event.grid.getItem(event.rowIndex);
-    ui.coverageDetail.setHref('${base}/s/coverage-detail.action?code='+this.currentItem.id[0]);
+  	var item = event.grid.getItem(event.rowIndex);
+    this.currentJson = organic.util.itemToJs(this._store, item);
+    ui.coverageDetail.setHref('${base}/s/coverage-detail.action?code='+this.currentJson.id);
 
     event.grid.selection.clickSelectEvent(event);
   }

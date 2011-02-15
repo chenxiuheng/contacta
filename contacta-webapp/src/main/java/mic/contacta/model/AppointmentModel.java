@@ -57,7 +57,6 @@ public class AppointmentModel extends AbstractModel
   /*
    *
    */
-  @Deprecated
   public AppointmentModel()
   {
     setExcludes(appointmentExcludes);

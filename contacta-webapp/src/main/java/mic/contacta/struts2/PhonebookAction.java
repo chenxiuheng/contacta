@@ -14,8 +14,6 @@
  */
 package mic.contacta.struts2;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.struts2.json.annotations.SMDMethod;

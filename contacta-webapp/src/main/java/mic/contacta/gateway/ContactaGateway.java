@@ -15,18 +15,17 @@
 package mic.contacta.gateway;
 
 import java.util.List;
-
 import mic.contacta.json.CoverageJson;
 import mic.contacta.json.PhoneJson;
 import mic.contacta.json.SipAccountJson;
 import mic.contacta.model.AppointmentModel;
-import mic.contacta.model.SipAccountModel;
 import mic.contacta.model.CoverageModel.CoverageType;
-import mic.contacta.server.api.ContactaException;
+import mic.contacta.model.SipAccountModel;
 import mic.organic.core.Service;
+import mic.organic.gateway.GatewayException;
+
 
 /**
- *
  * @author mic
  * @created Jun 10, 2009
  */
@@ -34,16 +33,19 @@ public interface ContactaGateway extends Service
 {
   String SERVICE_NAME = "contactaGateway";
 
+
   /*
    *
    */
   AppointmentModel book(long startTs, long endTs, String attendeeString, String subject, String description);
+
 
   /**
    * @param appointmentId
    * @return
    */
   AppointmentModel cancel(int appointmentId);
+
 
   /**
    * @param appointmentId
@@ -54,9 +56,12 @@ public interface ContactaGateway extends Service
 
   List<PhoneJson> phoneList();
 
-  PhoneJson phonePersist(PhoneJson json) throws ContactaException;
+
+  PhoneJson phonePersist(PhoneJson json) throws GatewayException;
+
 
   Boolean[] phoneDelete(int[] ids);
+
 
   /**
    * @param mac
@@ -65,20 +70,27 @@ public interface ContactaGateway extends Service
    */
   SipAccountModel phoneAddAccount(int phoneId, String login);
 
+
   List<SipAccountJson> accountList();
 
-  SipAccountJson accountCreateUpdate(SipAccountJson json) throws ContactaException;
+
+  SipAccountJson accountPersist(SipAccountJson json) throws GatewayException;
+
 
   Boolean[] accountDelete(int[] ids);
 
+
   String checkAsterisk();
 
+
   boolean restartAsterisk();
+
 
   /**
    * write asterisk extensions_profile.conf file and send reload to local asterisk
    */
   void updateExtensionProfile();
+
 
   /**
    * @param fromLogin
@@ -86,15 +98,18 @@ public interface ContactaGateway extends Service
    */
   boolean coverageRemove(String fromLogin);
 
+
   /*
    *
    */
   boolean coverageAdd(String fromLogin, String toLogin, CoverageType type, String options, int timeout);
 
+
   /**
    * @return
    */
   List<CoverageJson> coverageList();
+
 
   /**
    * @param exten

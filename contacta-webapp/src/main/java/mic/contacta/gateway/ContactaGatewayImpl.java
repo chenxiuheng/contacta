@@ -36,11 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 import mic.contacta.json.CoverageJson;
 import mic.contacta.json.PhoneJson;
 import mic.contacta.json.SipAccountJson;
-import mic.contacta.model.AppointmentModel;
-import mic.contacta.model.CoverageModel;
-import mic.contacta.model.PhoneModel;
-import mic.contacta.model.ProductModel;
-import mic.contacta.model.SipAccountModel;
+import mic.contacta.model.*;
 import mic.contacta.model.CoverageModel.CoverageType;
 import mic.contacta.server.api.ContactaException;
 import mic.contacta.server.dao.AppointmentDao;
@@ -50,6 +46,7 @@ import mic.organic.aaa.ldap.Person;
 import mic.organic.aaa.ldap.PersonDao;
 import mic.organic.aaa.model.PersonModel;
 import mic.organic.aaa.spi.AddressbookService;
+import mic.organic.gateway.GatewayException;
 
 
 /**
@@ -269,7 +266,7 @@ public class ContactaGatewayImpl implements ContactaGateway
    */
   @Transactional(propagation=Propagation.REQUIRES_NEW)
   @Override
-  public PhoneJson phonePersist(PhoneJson json) throws ContactaException
+  public PhoneJson phonePersist(PhoneJson json) throws GatewayException
   {
     PhoneModel model = null;
     if (json.getId() == 0)
@@ -283,7 +280,7 @@ public class ContactaGatewayImpl implements ContactaGateway
       model = inventoryService.findPhone(json.getId());
       if (model == null)
       {
-        throw new ContactaException("cannot find phone.id="+json.getId());
+        throw new GatewayException("cannot find phone.id="+json.getId());
       }
       phoneConverter.jsonToModel(json, model);
 
@@ -393,7 +390,7 @@ public class ContactaGatewayImpl implements ContactaGateway
    */
   @Transactional(propagation=Propagation.REQUIRES_NEW)
   @Override
-  public SipAccountJson accountCreateUpdate(SipAccountJson json) throws ContactaException
+  public SipAccountJson accountPersist(SipAccountJson json) throws GatewayException
   {
     SipAccountModel model = null;
     if(json.getId() == 0)

@@ -68,7 +68,6 @@ public class SipAccountModel extends AccountModel
   /**
    * leave this only to jpa, use the other c'tor
    */
-  @Deprecated
   public SipAccountModel()
   {
     super();

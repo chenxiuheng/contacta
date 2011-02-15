@@ -54,7 +54,6 @@ public class PhoneModel extends AbstractCodeModel
   /*
    * let use it only by jpa
    */
-  @Deprecated
   public PhoneModel()
   {
     super(null);

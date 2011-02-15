@@ -109,13 +109,6 @@ dojo.declare("openinnovation.contacta.Contacta", null,
 
     //this.addressbookService = new dojo.rpc.JsonService("${base}/smd/addressbook.action");
 
-
-    //ui.progressBar.update({ progress:50 });
-    var appState = new ApplicationState();
-    //appState.showStateData();
-    dojo.back.setInitialState(appState);
-    dojo.back.addToHistory(appState);
-
     if (this.develMode)
     {
       var now = new Date();

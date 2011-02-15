@@ -17,7 +17,6 @@ package mic.contacta.webapp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.opensymphony.xwork2.Action;
 import mic.contacta.gateway.ContactaGateway;
 import mic.organic.core.Model;
 import mic.organic.gateway.AbstractJsonSmd;
@@ -29,7 +28,7 @@ import mic.organic.gateway.Json;
  * @author mic
  * @created Apr 27, 2010
  */
-public abstract class AbstractContactaSmd<T extends Json> extends AbstractJsonSmd<T> implements Action
+public abstract class AbstractContactaSmd<T extends Json> extends AbstractJsonSmd<T>
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }

@@ -68,7 +68,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     account.setLogin("xxxlogin");
     account.setEmail("xxxemail");
 
-    account = contactaGateway.accountCreateUpdate(account);
+    account = contactaGateway.accountPersist(account);
 
     assertTrue(true);
 
@@ -82,7 +82,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     String message = "";
     try
     {
-      account = contactaGateway.accountCreateUpdate(account);
+      account = contactaGateway.accountPersist(account);
     }
     catch (Exception e)
     {
@@ -116,7 +116,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
 
     try
     {
-      account = contactaGateway.accountCreateUpdate(account);
+      account = contactaGateway.accountPersist(account);
     }
     catch (Exception e)
     {
@@ -147,7 +147,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     account.setLogin("zzzlogin");
     account.setEmail("zzzemail");
 
-    account = contactaGateway.accountCreateUpdate(account);
+    account = contactaGateway.accountPersist(account);
 
     assertTrue(true);
 
@@ -165,7 +165,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     String message = "";
     try
     {
-      account = contactaGateway.accountCreateUpdate(account);
+      account = contactaGateway.accountPersist(account);
     }
     catch (Exception e)
     {

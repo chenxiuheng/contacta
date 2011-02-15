@@ -75,7 +75,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   {
     try
     {
-      return contactaGateway.accountCreateUpdate(json);
+      return contactaGateway.accountPersist(json);
     }
     catch (Exception e)
     {

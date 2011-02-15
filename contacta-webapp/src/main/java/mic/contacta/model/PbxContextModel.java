@@ -36,7 +36,6 @@ public class PbxContextModel extends AbstractJsonModel
   /*
    * let use it only by jpa
    */
-  @Deprecated
   public PbxContextModel()
   {
     super(null);

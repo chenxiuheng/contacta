@@ -37,6 +37,7 @@ import mic.contacta.model.CoverageModel.CoverageType;
 import mic.contacta.server.api.ContactaException;
 import mic.contacta.server.spi.PhonebarService;
 import mic.organic.gateway.DatastoreJson;
+import mic.organic.gateway.GatewayException;
 import mic.organic.gateway.Json;
 
 
@@ -111,11 +112,12 @@ public class ContactaSmd extends AbstractContactaAction
   /**
    * ExtenJson person, SipAccountJson account, PhoneJson phone
    * @throws ContactaException
+   * @throws GatewayException
    */
   @SMDMethod
-  public String wizardPhonePerson(WizardJson json) throws ContactaException
+  public String wizardPhonePerson(WizardJson json) throws GatewayException
   {
-    SipAccountJson account = contactaGateway.accountCreateUpdate(json.getAccount());
+    SipAccountJson account = contactaGateway.accountPersist(json.getAccount());
     PhoneJson phone = contactaGateway.phonePersist(json.getPhone());
 
     contactaGateway.phoneAddAccount(phone.getId(), account.getLogin());
@@ -142,7 +144,7 @@ public class ContactaSmd extends AbstractContactaAction
    *
    */
   @SMDMethod
-  public PhoneJson phoneCreateUpdate(PhoneJson json) throws ContactaException
+  public PhoneJson phoneCreateUpdate(PhoneJson json) throws GatewayException
   {
     return contactaGateway.phonePersist(json);
   }
@@ -203,9 +205,9 @@ public class ContactaSmd extends AbstractContactaAction
    *
    */
   @SMDMethod
-  public SipAccountJson accountCreateUpdate(SipAccountJson json) throws ContactaException
+  public SipAccountJson accountCreateUpdate(SipAccountJson json) throws GatewayException
   {
-    return contactaGateway.accountCreateUpdate(json);
+    return contactaGateway.accountPersist(json);
   }
 
 

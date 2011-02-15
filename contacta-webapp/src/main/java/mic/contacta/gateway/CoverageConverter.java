@@ -36,7 +36,6 @@ public class CoverageConverter extends AbstractJsonConverter<CoverageModel, Cove
   /*
    *
    */
-  @Override
   public CoverageModel jsonToModel(CoverageJson from, CoverageModel to)
   {
     if (to == null)
@@ -46,8 +45,6 @@ public class CoverageConverter extends AbstractJsonConverter<CoverageModel, Cove
 
     super.jsonToModel(from, to);
     //to.setCode(from.getCode());
-
-    // TODO
 
     return to;
   }

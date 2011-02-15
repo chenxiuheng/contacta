@@ -15,11 +15,10 @@
 package mic.contacta.server.spi;
 
 import java.util.List;
-
 import mic.contacta.model.CoverageModel;
+import mic.contacta.model.CoverageModel.CoverageType;
 import mic.contacta.model.PhoneModel;
 import mic.contacta.model.SipAccountModel;
-import mic.contacta.model.CoverageModel.CoverageType;
 import mic.contacta.server.api.ContactaException;
 import mic.organic.core.Service;
 
@@ -34,6 +33,7 @@ public interface SipService extends Service
 {
   String SERVICE_NAME = "sipService";
 
+
   /**
    * Create a Sip account
    *
@@ -41,6 +41,7 @@ public interface SipService extends Service
    * @return
    */
   SipAccountModel createAccount(SipAccountModel account);
+
 
   /**
    * Update the Sip account
@@ -50,6 +51,7 @@ public interface SipService extends Service
    */
   SipAccountModel updateAccount(SipAccountModel account);
 
+
   /**
    * Delete Sip account completely
    *
@@ -57,6 +59,7 @@ public interface SipService extends Service
    * @return
    */
   boolean deleteAccount(SipAccountModel account);
+
 
   /**
    * Find a Sip account by the internel id (PK)
@@ -75,6 +78,7 @@ public interface SipService extends Service
    */
   SipAccountModel findAccountByLogin(String login);
 
+
   /**
    * Find all Sip accounts in the system
    *
@@ -82,11 +86,12 @@ public interface SipService extends Service
    */
   List<SipAccountModel> findAccountList();
 
+
   /**
-   *
    * @return
    */
   List<Object[]> findAccountBriefList();
+
 
   /**
    * Assign a phone to a SIP account
@@ -98,7 +103,6 @@ public interface SipService extends Service
 
 
   /**
-   *
    * @param fromSip
    * @param toSip
    * @param type
@@ -110,24 +114,28 @@ public interface SipService extends Service
 
 
   /**
-   *
    * @param fromSip
    */
   void removeCoverage(SipAccountModel fromSip);
+
 
   /**
    *
    */
   void upgradeCheck();
 
+
   /**
    * Write the extension macro profile to file, see CC-55
+   *
    * @throws ContactaException
    */
   void writeExtenProfile(boolean dropExtension) throws ContactaException;
 
+
   /**
    * Write the extension hint to file and reload extensions in asterisk
+   *
    * @throws ContactaException
    */
   void writeExtenHint() throws ContactaException;
