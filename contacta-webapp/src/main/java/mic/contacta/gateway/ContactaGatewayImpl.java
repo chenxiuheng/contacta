@@ -72,8 +72,6 @@ public class ContactaGatewayImpl implements ContactaGateway
   @Autowired private CocService cocService;
   @Autowired private CoverageDao coverageDao;
 
-  @Autowired private PhoneAdapter phoneAdapter;
-  @Autowired private SipAdapter sipAdapter;
   @Autowired private ContactaService contactaService;
   @Autowired private ContactaConfiguration contactaConfiguration;
 
@@ -385,6 +383,27 @@ public class ContactaGatewayImpl implements ContactaGateway
   }
 
 
+  /*
+   *
+   */
+  private void addCoc(SipAccountJson json, SipAccountModel model)
+  {
+    if (StringUtils.isNotBlank(json.getCocLogin()) /*&& StringUtils.isNotBlank(json.getCocPassword())*/)
+    {
+      if (model.getCoc() == null)
+      {
+        CocModel coc = new CocModel(json.getCocLogin(), json.getCocPin());
+        model.setCoc(coc);
+      }
+      else
+      {
+        model.getCoc().setLogin(json.getCocLogin());
+        model.getCoc().setPin(json.getCocPin());
+      }
+    }
+  }
+
+
   /**
    *
    */
@@ -395,7 +414,10 @@ public class ContactaGatewayImpl implements ContactaGateway
     SipAccountModel model = null;
     if(json.getId() == 0)
     {
-      model = sipAdapter.accountCreate(json);
+      model = sipAccountConverter.jsonToModel(json, null);
+      model = sipService.sipCreate(model);
+
+      addCoc(json, model);
     }
     else
     {
@@ -405,7 +427,24 @@ public class ContactaGatewayImpl implements ContactaGateway
         // TODO better to throw an exception?
         return null;
       }
-      sipAdapter.accountUpdate(json, model);
+      sipAccountConverter.jsonToModel(json, model);
+
+      if(StringUtils.isBlank(json.getCocLogin()))
+      {
+        CocModel coc = model.getCoc();
+
+        if(coc != null)
+        {
+          model.setCoc(null);
+          cocService.deleteCoc(coc.getId());
+        }
+      }
+      else
+      {
+        addCoc(json, model);
+      }
+
+      sipService.sipUpdate(model);
     }
     extenProfileUpdate();
     replica();
