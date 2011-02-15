@@ -26,6 +26,7 @@ import mic.contacta.json.SipAccountJson;
 import mic.contacta.model.PbxContextModel;
 import mic.contacta.model.PbxProfileModel;
 import mic.contacta.model.SipAccountModel;
+import mic.contacta.model.VoicemailModel;
 import mic.contacta.server.dao.PbxContextDao;
 import mic.contacta.server.dao.PbxProfileDao;
 import mic.organic.gateway.AbstractJsonConverter;
@@ -87,10 +88,23 @@ public class SipAccountConverter extends AbstractJsonConverter<SipAccountModel, 
     }
 
     to.setVmEnabled(from.getVmEnabled());
-    if (to.getVmBox() != null)
+    if (from.getVmEnabled())
     {
-      to.getVmBox().setPin(from.getVmPin());
-      to.getVmBox().setEmail(to.getVmSendEmail() ? to.getPerson().getEmail() : "");
+      String vmEmail = to.getVmSendEmail() ? to.getPerson().getEmail() : "";
+      if (to.getVmBox() != null)
+      {
+        to.getVmBox().setPin(from.getVmPin());
+        to.getVmBox().setEmail(vmEmail);
+      }
+      else
+      {
+        VoicemailModel vmBox = SipAccountModel.buildVmBox(to.getLogin(), from.getVmPin(), to.getLabel(), vmEmail);
+        to.setVmBox(vmBox);
+      }
+    }
+    else
+    {
+      to.setVmBox(null);
     }
     String mailbox = to.getVmEnabled() ? to.getLogin()+"@"+to.getVoicemailContext() : null;
     to.getSipUser().setMailbox(mailbox);

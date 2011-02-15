@@ -42,7 +42,7 @@ public class SipAccountModel extends AccountModel
   }
   public static final String PROFILE_OPTIONS_KEY = "PROFILE_OPTIONS";
 
-  private String voicemailContext = "utenti";
+  private static String voicemailContext = "utenti";
 
   private PhoneModel phone;
   private CocModel coc;
@@ -76,7 +76,8 @@ public class SipAccountModel extends AccountModel
     coverageList = new ArrayList<CoverageModel>();
     presence = Presence.Online;
     sipUser = new SipUserModel();
-    vmEnabled = true;
+    vmEnabled = false;
+
     //vmBox = new VoicemailModel();
     //vmBox.setContext(voicemailContext);
   }
@@ -103,12 +104,25 @@ public class SipAccountModel extends AccountModel
     }
     sipUser.setMailbox(login+"@"+voicemailContext);
 
-    vmBox = new VoicemailModel();               // FIXME move me in default ctor when it will be not null
+    vmBox = buildVmBox(login, password, getLabel(), getVmSendEmail() ? getEmail() : "");
+  }
+
+
+  /**
+   * @param login
+   * @param password
+   * @param label
+   * @param email
+   */
+  public static VoicemailModel buildVmBox(String login, String password, String label, String email)
+  {
+    VoicemailModel vmBox = new VoicemailModel();               // FIXME move me in default ctor when it will be not null
     vmBox.setContext(voicemailContext);         // FIXME move me in default ctor when it will be not null
-    vmBox.setFullname(getLabel());
+    vmBox.setFullname(label);
     vmBox.setMailbox(login);
     vmBox.setPin(password);
-    vmBox.setEmail(getVmSendEmail() ? getEmail() : "");
+    vmBox.setEmail(email);
+    return vmBox;
   }
 
 
@@ -283,12 +297,14 @@ public class SipAccountModel extends AccountModel
    *
    * @return the vmBox
    */
-  @OneToOne(optional=true,cascade=CascadeType.ALL)
-  @JoinColumn(name="vm_id",nullable=true)
+  @OneToOne(optional=true, cascade=CascadeType.ALL, orphanRemoval=true)
+  @JoinColumn(nullable=true, name="vm_id")
   public VoicemailModel getVmBox()
   {
     return vmBox;
   }
+
+
   /**
    * @param vmBox the vmBox to set
    */
