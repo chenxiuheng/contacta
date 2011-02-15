@@ -77,7 +77,7 @@ public interface ContactaGateway extends Service
   SipAccountJson sipPersist(SipAccountJson json) throws GatewayException;
 
 
-  Boolean[] sipDelete(int[] ids);
+  Boolean[] sipRemove(int[] ids);
 
 
   String asteriskCheck();

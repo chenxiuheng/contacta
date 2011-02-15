@@ -93,7 +93,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   {
     try
     {
-      return contactaGateway.sipDelete(ids);
+      return contactaGateway.sipRemove(ids);
     }
     catch (Exception e)
     {

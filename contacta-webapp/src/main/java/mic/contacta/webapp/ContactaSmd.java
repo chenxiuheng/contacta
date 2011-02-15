@@ -220,7 +220,7 @@ public class ContactaSmd extends AbstractContactaAction
   {
     try
     {
-      contactaGateway.sipDelete(ids);
+      contactaGateway.sipRemove(ids);
     }
     catch(Exception e)
     {

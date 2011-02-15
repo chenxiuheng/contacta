@@ -41,6 +41,8 @@ import mic.contacta.model.CoverageModel.CoverageType;
 import mic.contacta.server.api.ContactaException;
 import mic.contacta.server.dao.AppointmentDao;
 import mic.contacta.server.dao.CoverageDao;
+import mic.contacta.server.dao.PbxContextDao;
+import mic.contacta.server.dao.PbxProfileDao;
 import mic.contacta.server.spi.*;
 import mic.organic.aaa.ldap.Person;
 import mic.organic.aaa.ldap.PersonDao;
@@ -412,27 +414,26 @@ public class ContactaGatewayImpl implements ContactaGateway
   public SipAccountJson sipPersist(SipAccountJson json) throws GatewayException
   {
     SipAccountModel model = null;
-    if(json.getId() == 0)
-    {
-      model = sipAccountConverter.jsonToModel(json, null);
-      model = sipService.sipCreate(model);
-
-      addCoc(json, model);
-    }
-    else
+    if (json.getId() != 0)
     {
       model = sipService.sipFind(json.getId());
       if (model == null)
       {
-        // TODO better to throw an exception?
-        return null;
+        throw new GatewayException("cannot update model, doesnt exist anymore the id="+json.getId());
       }
-      sipAccountConverter.jsonToModel(json, model);
+    }
+    model = sipAccountConverter.jsonToModel(json, model);
 
+    if (json.getId() == 0)
+    {
+      sipService.sipCreate(model);
+      addCoc(json, model);
+    }
+    else
+    {
       if(StringUtils.isBlank(json.getCocLogin()))
       {
         CocModel coc = model.getCoc();
-
         if(coc != null)
         {
           model.setCoc(null);
@@ -443,14 +444,13 @@ public class ContactaGatewayImpl implements ContactaGateway
       {
         addCoc(json, model);
       }
-
       sipService.sipUpdate(model);
     }
+
     extenProfileUpdate();
     replica();
 
-    json = sipAccountConverter.modelToJson(model, null);
-    return json;
+    return sipAccountConverter.modelToJson(model);
   }
 
 
@@ -460,7 +460,7 @@ public class ContactaGatewayImpl implements ContactaGateway
    */
   @Transactional(propagation=Propagation.REQUIRES_NEW)
   @Override
-  public Boolean[] sipDelete(int[] ids)
+  public Boolean[] sipRemove(int[] ids)
   {
     Boolean[] rs = new Boolean[ids.length];
     for (int i = 0; i < ids.length; i++)
