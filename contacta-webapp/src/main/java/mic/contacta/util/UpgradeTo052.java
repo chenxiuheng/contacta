@@ -78,7 +78,7 @@ public class UpgradeTo052
     {
       log().warn("some VoicemailModel is missing, trying to fix it");
 
-      List<SipAccountModel> accountList = sipService.findAccountList();
+      List<SipAccountModel> accountList = sipService.sipList();
       for (SipAccountModel account : accountList)
       {
         if (account.getVmBox() == null)
@@ -124,7 +124,7 @@ public class UpgradeTo052
     {
       log().warn("some SipUser is dangling, trying to fix it");
 
-      List<SipAccountModel> accountList = sipService.findAccountList();
+      List<SipAccountModel> accountList = sipService.sipList();
       Map<String,SipAccountModel> accountMap = new HashMap<String,SipAccountModel>();
       for (SipAccountModel account : accountList)
       {

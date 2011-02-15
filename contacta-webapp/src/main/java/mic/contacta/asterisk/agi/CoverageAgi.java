@@ -79,7 +79,7 @@ public class CoverageAgi extends AbstractContactaAgi
       return;
     }
 
-    SipAccountModel callee = sipService.findAccountByLogin(calleeExten);
+    SipAccountModel callee = sipService.sipByLogin(calleeExten);
     if (callee == null)
     {
       log().warn("{}: who are you?!?!?", calleeExten);

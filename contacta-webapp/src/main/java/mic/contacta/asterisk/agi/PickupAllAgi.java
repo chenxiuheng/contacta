@@ -65,7 +65,7 @@ public class PickupAllAgi extends AbstractContactaAgi
   public void service(AgiRequest request, AgiChannel channel) throws AgiException
   {
     String pickerExten = request.getCallerIdNumber();
-    SipAccountModel pickerSip = sipService.findAccountByLogin(pickerExten);
+    SipAccountModel pickerSip = sipService.sipByLogin(pickerExten);
     if (pickerSip == null)
     {
       log().warn("{}: who are you?!?!?", pickerExten);

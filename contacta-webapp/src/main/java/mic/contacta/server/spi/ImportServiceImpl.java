@@ -164,7 +164,7 @@ public class ImportServiceImpl implements ImportService
 
       account.setProfile(pbxProfileDao.findByCode(profile));
       account.setProfileOptions(profileOptions);
-      account = sipService.createAccount(account);
+      account = sipService.sipCreate(account);
 
       /*URGENT if(voicemail)
       {
@@ -239,7 +239,7 @@ public class ImportServiceImpl implements ImportService
   @Override
   public FileObject exportToCsv(FileObject csvFile) throws OrganicException, IOException
   {
-    List<Object[]> accountList = sipService.findAccountBriefList();
+    List<Object[]> accountList = sipService.sipBriefList();
 
 
     List<String[]> lineList = new ArrayList<String[]>();

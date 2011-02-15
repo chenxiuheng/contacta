@@ -118,7 +118,7 @@ public abstract class AbstractProvisioningTests extends AbstractTransactionalTes
     SipAccountModel account = buildContactaAccount(suffix);
     //account.setPerson(person);
 
-    account = sipService.createAccount(account);
+    account = sipService.sipCreate(account);
     //URGENT sipService.assignUpdateVoicemailToAccount(account, "pin" + suffix);
 
     addSampleProducts();

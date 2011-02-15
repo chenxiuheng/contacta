@@ -96,7 +96,7 @@ public class ContactaSmd extends AbstractContactaAction
     }
     else*/ if (StringUtils.equalsIgnoreCase(key, "account"))
     {
-      List<SipAccountJson> jsonList = contactaGateway.accountList();
+      List<SipAccountJson> jsonList = contactaGateway.sipList();
       store = new mic.organic.gateway.DefaultDatastoreJson<SipAccountJson>(DatastoreJson.IDENTIFIER, "login", jsonList);
     }
     else if (StringUtils.equalsIgnoreCase(key, "phone"))
@@ -117,7 +117,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public String wizardPhonePerson(WizardJson json) throws GatewayException
   {
-    SipAccountJson account = contactaGateway.accountPersist(json.getAccount());
+    SipAccountJson account = contactaGateway.sipPersist(json.getAccount());
     PhoneJson phone = contactaGateway.phonePersist(json.getPhone());
 
     contactaGateway.phoneAddAccount(phone.getId(), account.getLogin());
@@ -196,7 +196,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public List<SipAccountJson> accountLoad()
   {
-    return contactaGateway.accountList();
+    return contactaGateway.sipList();
   }
 
 
@@ -207,7 +207,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public SipAccountJson accountCreateUpdate(SipAccountJson json) throws GatewayException
   {
-    return contactaGateway.accountPersist(json);
+    return contactaGateway.sipPersist(json);
   }
 
 
@@ -220,7 +220,7 @@ public class ContactaSmd extends AbstractContactaAction
   {
     try
     {
-      contactaGateway.accountDelete(ids);
+      contactaGateway.sipDelete(ids);
     }
     catch(Exception e)
     {
@@ -239,7 +239,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public String checkAsterisk()
   {
-    return contactaGateway.checkAsterisk();
+    return contactaGateway.asteriskCheck();
   }
 
 
@@ -249,7 +249,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public boolean restartAsterisk()
   {
-    return contactaGateway.restartAsterisk();
+    return contactaGateway.asteriskRestart();
   }
 
 
@@ -259,7 +259,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public boolean updateExtensionProfile()
   {
-    contactaGateway.updateExtensionProfile();
+    contactaGateway.extenProfileUpdate();
     return true;
   }
 
@@ -273,7 +273,7 @@ public class ContactaSmd extends AbstractContactaAction
     boolean r = contactaGateway.coverageAdd(fromLogin, toLogin, type, options, timeout);
     if (r)
     {
-      contactaGateway.updateExtensionProfile();
+      contactaGateway.extenProfileUpdate();
     }
     return r;
   }
@@ -288,7 +288,7 @@ public class ContactaSmd extends AbstractContactaAction
     boolean r = contactaGateway.coverageRemove(fromLogin);
     if (r)
     {
-      contactaGateway.updateExtensionProfile();
+      contactaGateway.extenProfileUpdate();
     }
     return r;
   }
@@ -392,7 +392,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public void notifyCheckCfg(String exten)
   {
-    contactaGateway.notifyCheckCfg(exten);
+    contactaGateway.asteriskSipNotifyCheckCfg(exten);
   }
 
 }

@@ -190,11 +190,11 @@ public class ContactaServiceImpl implements ContactaService
     if (StringUtils.isNotBlank(automaticUpgrade))
     {
       log().warn("======= attention: executing automaticUpgrade:{} =======", automaticUpgrade);
-      List<SipAccountModel> accountList = sipService.findAccountList();
+      List<SipAccountModel> accountList = sipService.sipList();
       for (SipAccountModel account : accountList)
       {
         account.getVmBox().setEmail(account.getVmSendEmail() ? account.getEmail() : "");
-        sipService.updateAccount(account);
+        sipService.sipUpdate(account);
       }
 
       sipService.upgradeCheck();
@@ -209,9 +209,9 @@ public class ContactaServiceImpl implements ContactaService
   {
     log().info("dropping everything before import...");
 
-    for (SipAccountModel sipAccount : sipService.findAccountList())
+    for (SipAccountModel sipAccount : sipService.sipList())
     {
-      sipService.deleteAccount(sipAccount);
+      sipService.sipDelete(sipAccount);
     }
     for (PhoneModel phone : inventoryService.findPhoneList())
     {

@@ -69,7 +69,7 @@ public class CocResetAgi extends AbstractContactaAgi
   {
     //printDebug(request, channel);
     String callerExten = request.getCallerIdNumber();
-    SipAccountModel callerSip = sipService.findAccountByLogin(callerExten);
+    SipAccountModel callerSip = sipService.sipByLogin(callerExten);
     if (callerSip == null)
     {
       log().warn("{}: who are you?!?!?", callerExten);
@@ -78,7 +78,7 @@ public class CocResetAgi extends AbstractContactaAgi
       return;
     }
     callerSip.getSipUser().setContext(callerSip.getContext().getCode());
-    sipService.updateAccount(callerSip);
+    sipService.sipUpdate(callerSip);
     channel.exec("Wait", "1");
     channel.exec("Playback", "beep");
 

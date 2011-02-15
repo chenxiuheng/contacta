@@ -68,7 +68,7 @@ public class PresenceAgi extends AbstractContactaAgi
     String callerExten = request.getCallerIdNumber();
     log().info("callerExten={}", callerExten);
 
-    SipAccountModel callerSip = sipService.findAccountByLogin(callerExten);
+    SipAccountModel callerSip = sipService.sipByLogin(callerExten);
     if (callerSip == null)
     {
       log().warn("{}: who are you?!?!?", callerExten);
@@ -92,7 +92,7 @@ public class PresenceAgi extends AbstractContactaAgi
         presence = (presence == Presence.Online) ? Presence.Dnd : Presence.Online;
         log().info("callerExten={}, setting presence={}", callerExten, presence.toString());
         callerSip.setPresence(presence);
-        sipService.updateAccount(callerSip);
+        sipService.sipUpdate(callerSip);
         channel.exec("Wait", "1");
         switch (presence)
          {

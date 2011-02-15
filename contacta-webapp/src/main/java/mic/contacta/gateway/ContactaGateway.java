@@ -71,25 +71,25 @@ public interface ContactaGateway extends Service
   SipAccountModel phoneAddAccount(int phoneId, String login);
 
 
-  List<SipAccountJson> accountList();
+  List<SipAccountJson> sipList();
 
 
-  SipAccountJson accountPersist(SipAccountJson json) throws GatewayException;
+  SipAccountJson sipPersist(SipAccountJson json) throws GatewayException;
 
 
-  Boolean[] accountDelete(int[] ids);
+  Boolean[] sipDelete(int[] ids);
 
 
-  String checkAsterisk();
+  String asteriskCheck();
 
 
-  boolean restartAsterisk();
+  boolean asteriskRestart();
 
 
   /**
    * write asterisk extensions_profile.conf file and send reload to local asterisk
    */
-  void updateExtensionProfile();
+  void extenProfileUpdate();
 
 
   /**
@@ -115,6 +115,6 @@ public interface ContactaGateway extends Service
    * @param exten
    * @return
    */
-  boolean notifyCheckCfg(String exten);
+  boolean asteriskSipNotifyCheckCfg(String exten);
 
 }

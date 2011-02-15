@@ -81,7 +81,7 @@ public class PickupAgi extends AbstractContactaAgi
   public void service(AgiRequest request, AgiChannel channel) throws AgiException
   {
     String pickerExten = request.getCallerIdNumber();
-    SipAccountModel pickerSip = sipService.findAccountByLogin(pickerExten);
+    SipAccountModel pickerSip = sipService.sipByLogin(pickerExten);
     if (pickerSip == null)
     {
       log().warn("{}: who are you?!?!?", pickerExten);
@@ -90,7 +90,7 @@ public class PickupAgi extends AbstractContactaAgi
     }
     /* recognize the callee in the sip db */
     String calleeExten = request.getExtension().substring(prefix.length());
-    SipAccountModel calleeSip = sipService.findAccountByLogin(calleeExten);
+    SipAccountModel calleeSip = sipService.sipByLogin(calleeExten);
     if (calleeSip == null)
     {
       log().warn("{}: who is she?!?!?", calleeExten);

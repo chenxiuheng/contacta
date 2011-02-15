@@ -203,7 +203,7 @@ public class ContactaGatewayImpl implements ContactaGateway
    */
   @Transactional(readOnly=true)
   @Override
-  public void updateExtensionProfile()
+  public void extenProfileUpdate()
   {
     try
     {
@@ -312,7 +312,7 @@ public class ContactaGatewayImpl implements ContactaGateway
         for (SipAccountModel account : phone.getSipAccountList())
         {
           account.setPhone(null);
-          sipService.updateAccount(account);
+          sipService.sipUpdate(account);
         }
         rs[i] = inventoryService.deletePhone(phone);
         if (rs[i] == false)
@@ -325,7 +325,7 @@ public class ContactaGatewayImpl implements ContactaGateway
         log().warn(e.getMessage());
       }
     }
-    updateExtensionProfile();
+    extenProfileUpdate();
     replica();
     return rs;
   }
@@ -339,7 +339,7 @@ public class ContactaGatewayImpl implements ContactaGateway
   public SipAccountModel phoneAddAccount(int phoneId, String login)
   {
     PhoneModel phone = inventoryService.findPhone(phoneId);
-    SipAccountModel sip = sipService.findAccountByLogin(login);
+    SipAccountModel sip = sipService.sipByLogin(login);
     if (phone != null && sip != null)
     {
       sipService.assignPhoneToAccount(phone, sip);
@@ -364,7 +364,7 @@ public class ContactaGatewayImpl implements ContactaGateway
    */
   @Transactional(readOnly=true)
   @Override
-  public List<SipAccountJson> accountList()
+  public List<SipAccountJson> sipList()
   {
     List<SipAccountJson> jsonList = new ArrayList<SipAccountJson>();
     /*
@@ -375,7 +375,7 @@ public class ContactaGatewayImpl implements ContactaGateway
       jsonList.add(json);
     }
     */
-    List<SipAccountModel> oList = sipService.findAccountList();
+    List<SipAccountModel> oList = sipService.sipList();
     for(SipAccountModel model : oList)
     {
       SipAccountJson json = sipAccountConverter.modelToJson(model, null);
@@ -390,7 +390,7 @@ public class ContactaGatewayImpl implements ContactaGateway
    */
   @Transactional(propagation=Propagation.REQUIRES_NEW)
   @Override
-  public SipAccountJson accountPersist(SipAccountJson json) throws GatewayException
+  public SipAccountJson sipPersist(SipAccountJson json) throws GatewayException
   {
     SipAccountModel model = null;
     if(json.getId() == 0)
@@ -399,7 +399,7 @@ public class ContactaGatewayImpl implements ContactaGateway
     }
     else
     {
-      model = sipService.findAccount(json.getId());
+      model = sipService.sipFind(json.getId());
       if (model == null)
       {
         // TODO better to throw an exception?
@@ -407,7 +407,7 @@ public class ContactaGatewayImpl implements ContactaGateway
       }
       sipAdapter.accountUpdate(json, model);
     }
-    updateExtensionProfile();
+    extenProfileUpdate();
     replica();
 
     json = sipAccountConverter.modelToJson(model, null);
@@ -421,21 +421,21 @@ public class ContactaGatewayImpl implements ContactaGateway
    */
   @Transactional(propagation=Propagation.REQUIRES_NEW)
   @Override
-  public Boolean[] accountDelete(int[] ids)
+  public Boolean[] sipDelete(int[] ids)
   {
     Boolean[] rs = new Boolean[ids.length];
     for (int i = 0; i < ids.length; i++)
     {
       try
       {
-        SipAccountModel account = sipService.findAccount(ids[i]);
+        SipAccountModel account = sipService.sipFind(ids[i]);
         PhoneModel phone = account.getPhone();
         if (phone != null)
         {
           phone.getSipAccountList().clear();
           inventoryService.updatePhone(phone);
         }
-        rs[i] = sipService.deleteAccount(account);
+        rs[i] = sipService.sipDelete(account);
         if (rs[i] == false)
         {
           log().info("the object does not exist");  // FIXME throw an exception?
@@ -452,7 +452,7 @@ public class ContactaGatewayImpl implements ContactaGateway
         log().warn(e.getMessage(), e);
       }
     }
-    updateExtensionProfile();
+    extenProfileUpdate();
     replica();
     return rs;
   }
@@ -462,7 +462,7 @@ public class ContactaGatewayImpl implements ContactaGateway
    * @see mic.contacta.ptool.webapp.PtoolWebappGateway#checkAsterisk()
    */
   @Override
-  public String checkAsterisk()
+  public String asteriskCheck()
   {
     Object result = contactaService.asteriskCommand("core show uptime");
     if (result != null)
@@ -487,7 +487,7 @@ public class ContactaGatewayImpl implements ContactaGateway
    * @see mic.contacta.ptool.webapp.PtoolWebappGateway#restartAsterisk()
    */
   @Override
-  public boolean restartAsterisk()
+  public boolean asteriskRestart()
   {
     Object result = contactaService.asteriskCommand(ContactaService.RELOAD);  // was SIP_RELOAD
     return result != null;
@@ -498,7 +498,7 @@ public class ContactaGatewayImpl implements ContactaGateway
    * @see mic.contacta.ptool.webapp.PtoolWebappGateway#restartAsterisk()
    */
   @Override
-  public boolean notifyCheckCfg(String exten)
+  public boolean asteriskSipNotifyCheckCfg(String exten)
   {
     Object result = contactaService.asteriskCommand("sip notify thomson-check-cfg "+exten);
     return result != null;
@@ -528,12 +528,12 @@ public class ContactaGatewayImpl implements ContactaGateway
   @Override
   public boolean coverageAdd(String fromLogin, String toLogin, CoverageType type, String options, int timeout)
   {
-    SipAccountModel fromSip = sipService.findAccountByLogin(fromLogin);
-    SipAccountModel toSip = sipService.findAccountByLogin(toLogin);
+    SipAccountModel fromSip = sipService.sipByLogin(fromLogin);
+    SipAccountModel toSip = sipService.sipByLogin(toLogin);
     if (fromSip != null && toSip != null)
     {
-      CoverageModel coverageRev = sipService.addCoverage(toSip, fromSip, CoverageType.Presence, null, 0);
-      CoverageModel coverage = sipService.addCoverage(fromSip, toSip, type, options, timeout);
+      CoverageModel coverageRev = sipService.coverageAdd(toSip, fromSip, CoverageType.Presence, null, 0);
+      CoverageModel coverage = sipService.coverageAdd(fromSip, toSip, type, options, timeout);
       return coverage != null;
     }
     else
@@ -552,10 +552,10 @@ public class ContactaGatewayImpl implements ContactaGateway
   @Override
   public boolean coverageRemove(String fromLogin)
   {
-    SipAccountModel fromSip = sipService.findAccountByLogin(fromLogin);
+    SipAccountModel fromSip = sipService.sipByLogin(fromLogin);
     if (fromSip != null)
     {
-      sipService.removeCoverage(fromSip);
+      sipService.coverageRemove(fromSip);
       return true;
     }
     else

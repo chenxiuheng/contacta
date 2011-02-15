@@ -96,7 +96,7 @@ public class PerfItest extends AbstractTransactionalTestNGSpringContextTests
     }
     else*/ if (StringUtils.equalsIgnoreCase(key, "account"))
     {
-      List<SipAccountJson> jsonList = contactaGateway.accountList();
+      List<SipAccountJson> jsonList = contactaGateway.sipList();
       store = new mic.organic.gateway.DefaultDatastoreJson<SipAccountJson>(DatastoreJson.IDENTIFIER, "login", jsonList);
     }
     else if (StringUtils.equalsIgnoreCase(key, "phone"))

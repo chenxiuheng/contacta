@@ -60,7 +60,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
   {
     createAccountAndPhone("");
 
-    SipAccountModel accountModel = sipService.findAccountByLogin("login");
+    SipAccountModel accountModel = sipService.sipByLogin("login");
 
     // Create a different one
     SipAccountJson account = sipAccountConverter.modelToJson(accountModel, null);
@@ -68,7 +68,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     account.setLogin("xxxlogin");
     account.setEmail("xxxemail");
 
-    account = contactaGateway.accountPersist(account);
+    account = contactaGateway.sipPersist(account);
 
     assertTrue(true);
 
@@ -82,7 +82,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     String message = "";
     try
     {
-      account = contactaGateway.accountPersist(account);
+      account = contactaGateway.sipPersist(account);
     }
     catch (Exception e)
     {
@@ -116,7 +116,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
 
     try
     {
-      account = contactaGateway.accountPersist(account);
+      account = contactaGateway.sipPersist(account);
     }
     catch (Exception e)
     {
@@ -139,7 +139,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
   {
     createAccountAndPhone("");
 
-    SipAccountModel accountModel = sipService.findAccountByLogin("login");
+    SipAccountModel accountModel = sipService.sipByLogin("login");
 
     // Create a different one
     SipAccountJson account = sipAccountConverter.modelToJson(accountModel, null);
@@ -147,7 +147,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     account.setLogin("zzzlogin");
     account.setEmail("zzzemail");
 
-    account = contactaGateway.accountPersist(account);
+    account = contactaGateway.sipPersist(account);
 
     assertTrue(true);
 
@@ -165,7 +165,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     String message = "";
     try
     {
-      account = contactaGateway.accountPersist(account);
+      account = contactaGateway.sipPersist(account);
     }
     catch (Exception e)
     {

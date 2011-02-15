@@ -64,7 +64,7 @@ public class CoveragePickupAgi extends AbstractContactaAgi
     String callerExten = request.getExtension();
     //String exten = channel.getVariable("ARG1");
 
-    SipAccountModel sip = sipService.findAccountByLogin(callerExten);
+    SipAccountModel sip = sipService.sipByLogin(callerExten);
     if (sip == null)
     {
       log().warn("{}: who are you?!?!?", callerExten);

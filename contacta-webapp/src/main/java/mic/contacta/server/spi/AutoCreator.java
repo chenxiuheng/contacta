@@ -57,8 +57,8 @@ public class AutoCreator
     account.setPickupgroup("");
     account.setProfile(null); // URGENT use the ''new unregistered phone profile''
     account.setProfileOptions("");
-    account = sipService.createAccount(account);
-    sipService.createAccount(account);
+    account = sipService.sipCreate(account);
+    sipService.sipCreate(account);
 
     sipService.assignPhoneToAccount(phone, account);
 

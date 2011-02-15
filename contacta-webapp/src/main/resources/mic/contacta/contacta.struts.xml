@@ -42,10 +42,10 @@
 
   <!-- *-* -->
   <action name="*-*" class="{1}Action" method="{2}">
-   <result name="success" type="freemarker">/s/{1}/{2}-success.ftl</result>
+   <result name="success" type="freemarker">/s/{1}/{2}.ftl</result>
   </action>
 
-  <!-- upload-* -->
+  <!-- upload-*
   <action name="upload-*" class="uploadAction" method="{1}">
    <interceptor-ref name="uploadStack"/>
    <result name="success" type="freemarker">
@@ -56,7 +56,7 @@
     <param name="location">results/upload-{1}-error.ftl</param>
     <param name="contentType">text/html</param>
    </result>
-  </action>
+  </action>-->
  </package>
 
  <!-- ============================================================= -->
@@ -118,13 +118,13 @@
     </interceptor-ref>
    </interceptor-stack>
 
-   <!-- uploadStack  -->
+   <!-- uploadStack
    <interceptor-stack name="uploadStack">
     <interceptor-ref name="beforeStack"/>
     <interceptor-ref name="organic-auth"/>
     <interceptor-ref name="organic-fileUpload"/>
     <interceptor-ref name="afterStack"/>
-   </interceptor-stack>
+   </interceptor-stack> -->
   </interceptors>
 
   <!-- ========================= actions ========================= -->

@@ -72,7 +72,7 @@ public class SipAdapter
   public SipAccountModel accountCreate(SipAccountJson json)
   {
     SipAccountModel model = sipAccountConverter.jsonToModel(json, null);
-    model = sipService.createAccount(model);
+    model = sipService.sipCreate(model);
 
     addCoc(json, model);
     return model;
@@ -101,7 +101,7 @@ public class SipAdapter
       addCoc(json, model);
     }
 
-    sipService.updateAccount(model);
+    sipService.sipUpdate(model);
   }
 
 

@@ -40,7 +40,7 @@ public interface SipService extends Service
    * @param model
    * @return
    */
-  SipAccountModel createAccount(SipAccountModel account);
+  SipAccountModel sipCreate(SipAccountModel account);
 
 
   /**
@@ -49,7 +49,7 @@ public interface SipService extends Service
    * @param model
    * @return
    */
-  SipAccountModel updateAccount(SipAccountModel account);
+  SipAccountModel sipUpdate(SipAccountModel account);
 
 
   /**
@@ -58,7 +58,7 @@ public interface SipService extends Service
    * @param id
    * @return
    */
-  boolean deleteAccount(SipAccountModel account);
+  boolean sipDelete(SipAccountModel account);
 
 
   /**
@@ -67,7 +67,7 @@ public interface SipService extends Service
    * @param id
    * @return
    */
-  SipAccountModel findAccount(int id);
+  SipAccountModel sipFind(int id);
 
 
   /**
@@ -76,7 +76,7 @@ public interface SipService extends Service
    * @param login
    * @return
    */
-  SipAccountModel findAccountByLogin(String login);
+  SipAccountModel sipByLogin(String login);
 
 
   /**
@@ -84,13 +84,13 @@ public interface SipService extends Service
    *
    * @return
    */
-  List<SipAccountModel> findAccountList();
+  List<SipAccountModel> sipList();
 
 
   /**
    * @return
    */
-  List<Object[]> findAccountBriefList();
+  List<Object[]> sipBriefList();
 
 
   /**
@@ -110,13 +110,13 @@ public interface SipService extends Service
    * @param timeout TODO
    * @return
    */
-  CoverageModel addCoverage(SipAccountModel fromSip, SipAccountModel toSip, CoverageType type, String options, int timeout);
+  CoverageModel coverageAdd(SipAccountModel fromSip, SipAccountModel toSip, CoverageType type, String options, int timeout);
 
 
   /**
    * @param fromSip
    */
-  void removeCoverage(SipAccountModel fromSip);
+  void coverageRemove(SipAccountModel fromSip);
 
 
   /**

@@ -14,7 +14,6 @@
  */
 package mic.contacta.server.spi;
 
-import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import mic.contacta.model.SipAccountModel;
@@ -40,8 +39,6 @@ public class ContactaSession extends OrganicSessionImpl<SipAccountModel>
   public ContactaSession()
   {
     super();
-    log().info("=================================================");
-    log().info("sessionId={}, creationTime={}", getSessionId(), new Date(getCreationTime()));
 
     refreshAuthenticationContext();
   }

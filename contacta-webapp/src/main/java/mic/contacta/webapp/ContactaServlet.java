@@ -199,7 +199,7 @@ public class ContactaServlet extends HttpServlet
         response.setContentType(ContactaConstants.MIMETYPE_TEXT_PLAIN);
         try
         {
-          contactaGateway.updateExtensionProfile();
+          contactaGateway.extenProfileUpdate();
           writer.println("OK");
         }
         catch(Exception e)

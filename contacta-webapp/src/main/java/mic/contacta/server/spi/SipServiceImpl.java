@@ -164,7 +164,7 @@ public class SipServiceImpl implements SipService
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
-  public SipAccountModel createAccount(SipAccountModel account)
+  public SipAccountModel sipCreate(SipAccountModel account)
   {
     //validateProfile(account);
     return sipAccountDao.create(account);
@@ -176,7 +176,7 @@ public class SipServiceImpl implements SipService
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
-  public SipAccountModel updateAccount(SipAccountModel model)
+  public SipAccountModel sipUpdate(SipAccountModel model)
   {
     //validateProfile(model);
     String callerId = '"'+model.getLabel()+"\" <"+model.getLogin()+">";
@@ -190,7 +190,7 @@ public class SipServiceImpl implements SipService
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
-  public boolean deleteAccount(SipAccountModel account)
+  public boolean sipDelete(SipAccountModel account)
   {
      if (account.getPhone() != null)
     {
@@ -207,7 +207,7 @@ public class SipServiceImpl implements SipService
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
-  public List<SipAccountModel> findAccountList()
+  public List<SipAccountModel> sipList()
   {
     return sipAccountDao.findAll();
   }
@@ -218,7 +218,7 @@ public class SipServiceImpl implements SipService
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
-  public SipAccountModel findAccount(int id)
+  public SipAccountModel sipFind(int id)
   {
     return sipAccountDao.find(id);
   }
@@ -229,7 +229,7 @@ public class SipServiceImpl implements SipService
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
-  public SipAccountModel findAccountByLogin(String login)
+  public SipAccountModel sipByLogin(String login)
   {
     return sipAccountDao.findByLogin(login);
   }
@@ -256,7 +256,7 @@ public class SipServiceImpl implements SipService
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
-  public List<Object[]> findAccountBriefList()
+  public List<Object[]> sipBriefList()
   {
     return sipAccountDao.findAccountBriefList();
   }
@@ -267,7 +267,7 @@ public class SipServiceImpl implements SipService
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
-  public CoverageModel addCoverage(SipAccountModel fromSip, SipAccountModel toSip, CoverageType type, String options, int timeout)
+  public CoverageModel coverageAdd(SipAccountModel fromSip, SipAccountModel toSip, CoverageType type, String options, int timeout)
   {
     CoverageModel coverage = new CoverageModel(fromSip, toSip, type, options, timeout);
     coverage.setRank(fromSip.getCoverageList().size());
@@ -289,7 +289,7 @@ public class SipServiceImpl implements SipService
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
-  public void removeCoverage(SipAccountModel fromSip)
+  public void coverageRemove(SipAccountModel fromSip)
   {
     for (CoverageModel coverage : fromSip.getCoverageList())
     {
@@ -316,7 +316,7 @@ public class SipServiceImpl implements SipService
   public void writeExtenProfile(boolean drop612) throws ContactaException
   {
     log().info("writing profileExtensionUrl: {}", profileExtensionUrl);
-    StringBuilder sb = extenProfileWriter.generate(findAccountList(), drop612);
+    StringBuilder sb = extenProfileWriter.generate(sipList(), drop612);
 
     if (generateAutoanswer)
     {
@@ -357,7 +357,7 @@ public class SipServiceImpl implements SipService
   public void writeExtenHint() throws ContactaException
   {
     log().info("writing extenHintUrl: {}", extenHintUrl);
-    StringBuilder sb = extenHintWriter.generate(findAccountList());
+    StringBuilder sb = extenHintWriter.generate(sipList());
 
     try
     {

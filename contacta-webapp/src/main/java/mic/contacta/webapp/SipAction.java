@@ -75,7 +75,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   {
     try
     {
-      return contactaGateway.accountPersist(json);
+      return contactaGateway.sipPersist(json);
     }
     catch (Exception e)
     {
@@ -93,7 +93,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   {
     try
     {
-      return contactaGateway.accountDelete(ids);
+      return contactaGateway.sipDelete(ids);
     }
     catch (Exception e)
     {
@@ -120,7 +120,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   @SMDMethod
   public DatastoreJson<SipAccountJson> findAll()
   {
-    List<SipAccountJson> jsonList = contactaGateway.accountList();
+    List<SipAccountJson> jsonList = contactaGateway.sipList();
     DefaultDatastoreJson<SipAccountJson> store = new DefaultDatastoreJson<SipAccountJson>(DatastoreJson.IDENTIFIER, "login", jsonList);
     return store;
   }
@@ -132,7 +132,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   @Override
   public Model findModel(Integer oid)
   {
-    return sipService.findAccount(oid);
+    return sipService.sipFind(oid);
   }
 
 }
