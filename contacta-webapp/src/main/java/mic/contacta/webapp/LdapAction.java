@@ -33,7 +33,7 @@ import static mic.organic.core.OrganicConstants.*;
  * @created Jan 24, 2009
  */
 @Service("ldapAction")
-@Scope("prototype")
+@Scope("request")
 public class LdapAction implements Preparable
 {
   static private Logger logger; @SuppressWarnings("static-access")

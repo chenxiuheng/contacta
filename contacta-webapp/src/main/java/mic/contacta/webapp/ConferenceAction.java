@@ -40,7 +40,7 @@ import mic.organic.aaa.ldap.PersonDao;
  * @created Apr 16, 2008
  */
 @Service("conferenceAction")
-@Scope("prototype")
+@Scope("request")
 public class ConferenceAction extends AbstractContactaAction
 {
   static private Logger logger; @SuppressWarnings("static-access")

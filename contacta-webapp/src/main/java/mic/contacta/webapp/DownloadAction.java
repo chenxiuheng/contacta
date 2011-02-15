@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
  * @created Dec 30, 2008
  */
 @Service("downloadAction")
-@Scope("prototype")
+@Scope("request")
 public class DownloadAction extends AbstractContactaAction
 {
   static private Logger logger; @SuppressWarnings("static-access")

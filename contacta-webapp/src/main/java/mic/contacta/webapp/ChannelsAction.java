@@ -32,7 +32,7 @@ import mic.contacta.server.spi.ContactaService;
  * @created Apr 16, 2008
  */
 @Service("channelsAction")
-@Scope("prototype")
+@Scope("request")
 public class ChannelsAction extends AbstractContactaAction
 {
   static private Logger logger; @SuppressWarnings("static-access")

@@ -36,7 +36,7 @@ import mic.organic.gateway.JsonException;
  * @created May 14, 2009
  */
 @Service("sipAction")
-@Scope("prototype")
+@Scope("request")
 public class SipAction extends AbstractContactaSmd<SipAccountJson>
 {
   static private Logger logger; @SuppressWarnings("static-access")

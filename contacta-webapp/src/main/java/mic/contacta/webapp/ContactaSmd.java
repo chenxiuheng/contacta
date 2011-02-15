@@ -47,7 +47,7 @@ import mic.organic.gateway.Json;
  * @created Apr 16, 2008
  */
 @Service("contactaAction")
-@Scope("prototype")
+@Scope("request")
 public class ContactaSmd extends AbstractContactaAction
 {
   static private Logger logger; @SuppressWarnings("static-access")

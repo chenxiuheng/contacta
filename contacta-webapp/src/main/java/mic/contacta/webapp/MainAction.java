@@ -39,7 +39,7 @@ import mic.organic.aaa.spi.AccountService;
  * @created Apr 16, 2008
  */
 @Service("mainAction")
-@Scope("prototype")
+@Scope("request")
 public class MainAction extends AbstractContactaAction
 {
   static private Logger logger; @SuppressWarnings("static-access")

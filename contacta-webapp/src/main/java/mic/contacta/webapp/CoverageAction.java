@@ -32,7 +32,7 @@ import mic.organic.web.struts2.AbstractDatastoreAction;
  * @created Jun 13, 2010
  */
 @Service("coverageAction")
-@Scope("prototype")
+@Scope("request")
 public class CoverageAction extends AbstractDatastoreAction
 {
   static private Logger logger; @SuppressWarnings("static-access")

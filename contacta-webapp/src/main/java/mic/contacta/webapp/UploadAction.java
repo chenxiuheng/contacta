@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service("uploadAction")
-@Scope("prototype")
+@Scope("request")
 public class UploadAction extends AbstractContactaAction
 {
   static private Logger logger; @SuppressWarnings("static-access")

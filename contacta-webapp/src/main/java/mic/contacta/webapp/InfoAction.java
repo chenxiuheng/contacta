@@ -40,7 +40,7 @@ import mic.organic.util.Stats;
  * @created Apr 16, 2008
  */
 @Service("infoAction")
-@Scope("prototype")
+@Scope("request")
 public class InfoAction implements Preparable
 {
   static private Logger logger; @SuppressWarnings("static-access")
