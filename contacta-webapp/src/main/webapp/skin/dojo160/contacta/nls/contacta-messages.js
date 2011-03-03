@@ -9,7 +9,5 @@
 
   titleId:"Id",
   titleCode:"Code",
-  titleName:"Name",
-
-  endOfLib:null
+  titleName:"Name"
 })

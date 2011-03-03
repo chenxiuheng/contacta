@@ -977,8 +977,7 @@
    <dependency><groupId>org.codehaus.castor</groupId><artifactId>castor-xml</artifactId><version>1.3.1</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>org.codehaus.castor</groupId><artifactId>castor-xml-schema</artifactId><version>1.3.1</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
 
-   <dependency><groupId>org.dojotoolkit</groupId><artifactId>dojo</artifactId><version>1.5.0</version><classifier>struts2</classifier></dependency>
-   <dependency><groupId>org.dojotoolkit</groupId><artifactId>dojo</artifactId><version>1.5.0</version><classifier>mic</classifier></dependency>
+   <dependency><groupId>org.dojotoolkit</groupId><artifactId>dojo</artifactId><version>1.6.0</version><classifier>mic</classifier></dependency>
    <dependency><groupId>com.google.code</groupId><artifactId>kaptcha</artifactId><version>2.3</version></dependency>
 
    <dependency><groupId>org.hibernate</groupId><artifactId>jtidy</artifactId><version>r8-20060801</version></dependency>

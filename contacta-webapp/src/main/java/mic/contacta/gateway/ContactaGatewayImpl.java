@@ -41,8 +41,6 @@ import mic.contacta.model.CoverageModel.CoverageType;
 import mic.contacta.server.api.ContactaException;
 import mic.contacta.server.dao.AppointmentDao;
 import mic.contacta.server.dao.CoverageDao;
-import mic.contacta.server.dao.PbxContextDao;
-import mic.contacta.server.dao.PbxProfileDao;
 import mic.contacta.server.spi.*;
 import mic.organic.aaa.ldap.Person;
 import mic.organic.aaa.ldap.PersonDao;
