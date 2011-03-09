@@ -59,4 +59,28 @@
        p:password="organic"
        />
 
+ <!--================================================================-->
+ <!--    jasypt/organicEncryptor                                     -->
+ <!--================================================================-->
+ <bean id="organicEncryptor" class="org.jasypt.encryption.pbe.PooledPBEStringEncryptor">
+  <property name="algorithm">
+   <value>PBEWithMD5AndDES</value>  <!-- PBEWithMD5AndTripleDES -->
+  </property>
+  <property name="password">
+   <value>organic</value>
+  </property>
+  <property name="poolSize">
+   <value>4</value>
+  </property>
+ </bean>
+
+ <bean id="organicHibernateStringEncryptor" class="org.jasypt.hibernate.encryptor.HibernatePBEStringEncryptor">
+  <property name="registeredName">
+   <value>organicHibernateStringEncryptor</value>
+  </property>
+  <property name="encryptor">
+   <ref bean="organicEncryptor"/>
+  </property>
+ </bean>
+
 </beans>
