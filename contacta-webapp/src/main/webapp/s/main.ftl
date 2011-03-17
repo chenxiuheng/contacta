@@ -4,14 +4,10 @@
 <head>
 <title>Main</title>
 <style>
+@import url('${base}/skin/contacta.css');
 </style>
-<script type="text/javascript">
-</script>
-[#if organicConfiguration.firebugLite]
-<script type="text/javascript" src="http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js"></script>
-[/#if]
-<script type="text/javascript" src="${base}/r/openinnovation/organic/Organic.js"></script>
-<script type="text/javascript" src="${base}/r/openinnovation/organic/gridpad/Controller.js"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/organic/Organic.js"></script>
+<script type="text/javascript" src="${base}/js/openinnovation/organic/gridpad/Controller.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/organic/Aaa.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/organic/Mc.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/contacta/Phonebook.js"></script>
@@ -21,15 +17,20 @@
 <script type="text/javascript" src="${base}/js/openinnovation/contacta/Sip.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/contacta/Coverage.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/contacta/Contacta.js"></script>
-
 <script type="text/javascript">
-
 var organic =
 {
-  util:new openinnovation.organic.Organic({ baseUrl:'${base!""}' }),
   appName:'contacta',
   baseUrl:'${base!""}',
-  aaa:null
+  [#if organicSession??]
+  jsessionid:'${organicSession.sessionId!""}',
+  account:{id:'${organicSession.account.id}',login:'${organicSession.account.code}',displayName:'${organicSession.account.label}',},
+  [#else]
+  jsessionid:null,
+  account:null,
+  [/#if]
+  aaa:null,
+  util:new openinnovation.organic.Organic({ baseUrl:'${base!""}' })
 };
 var contacta = null;
 
@@ -59,7 +60,7 @@ dojo.addOnLoad(function()
   <div style="padding:2px 10px 1px 10px;" class="organicBg">
    <div style="float:right; padding:2px 4px;"><div class="ico25" title="Logout" onclick="organic.util.logout()"></div></div>
    [#--<div style="float:right; padding-top:13px; padding-bottom:0px; padding-right:20px; color:white; font-size:9px;">${m.t("label.version")}</div>--]
-   <div style="float:left; margin-right:80px; width:152px; height:25px; background:transparent url('${base}/r/static/contacta.png') no-repeat left bottom;"></div>
+   <div style="float:left; margin-right:80px; width:152px; height:25px; background:transparent url('${base}/skin/static/logo.png') no-repeat left bottom;"></div>
    <div style="white-space:nowrap; color:navy; font-weight:bold;">
     [#if organicSession.admin]
     <div dojoType="dijit.form.Button" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.contactaTabContainer)"><span>${m.t("label.user")}</span></div>

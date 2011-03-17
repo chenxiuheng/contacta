@@ -140,6 +140,7 @@
  <servlet-mapping>
   <servlet-name>skin</servlet-name>
   <url-pattern>/r/*</url-pattern>
+  <url-pattern>/dojo/*</url-pattern>
  </servlet-mapping>
 
  <!-- ====================================================================== -->

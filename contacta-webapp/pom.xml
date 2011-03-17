@@ -133,7 +133,7 @@
   <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-spring-plugin</artifactId><scope>runtime</scope></dependency>
   <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-sitemesh-plugin</artifactId><scope>runtime</scope></dependency>
   <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-json-plugin</artifactId></dependency>
-  <dependency><groupId>org.dojotoolkit</groupId><artifactId>dojo</artifactId><classifier>mic</classifier><scope>runtime</scope></dependency>
+  <dependency><groupId>org.dojotoolkit</groupId><artifactId>dojo</artifactId><classifier>mic_1</classifier><scope>runtime</scope></dependency>
 
   <dependency><groupId>com.sun.script</groupId><artifactId>freemarker-engine</artifactId></dependency>
   <dependency><groupId>org.asteriskjava</groupId><artifactId>asterisk-java</artifactId></dependency>

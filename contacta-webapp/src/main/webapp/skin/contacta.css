@@ -1,24 +1,16 @@
-/* $Revision:121 $
- * :encoding=UTF-8:
- *
- * FIXME css ${base}r
- */
-@import url('${base}${dojoBase}/dijit/themes/${dojoTheme}/${dojoTheme}.css');
-@import url('${base}${dojoBase}/dojox/grid/resources/${dojoTheme}Grid.css');
-@import url('${base}${dojoBase}/dojox/form/resources/FileInput.css');
-
-/*
-@import url('${base}${dojoBase}/dojox/layout/resources/ExpandoPane.css');
-@import url('${base}${dojoBase}/dojox/grid/enhanced/resources/${dojoTheme}EnhancedGrid.css');
-.dojoxGrid table { padding:10px; }
-*/
+/* $Revision:121 $ :encoding=UTF-8: */
 
 /*** MERGE ME IN ORGANIC CSS  [BEGIN]  ***/
-@import url('../r/organic.css');
+@import url('organic.css');
 /*** MERGE ME IN ORGANIC CSS  [END]  ***/
 
 .contacta {  }
-.contactaDisabledTextBox { border:1px solid #b3b3b3; background: url("${base}/r/buttons/background/validationInputDisabledBg.png") repeat-x top left; }
+
+.contactaDisabledTextBox { border:1px solid #b3b3b3; background: url("./buttons/background/validationInputDisabledBg.png") repeat-x top left; }
+.ico10 { width:120px; height:120px; background:transparent url('./buttons/120/phone.png') no-repeat top left; }
+.ico11 { width:120px; height:120px; background:transparent url('./buttons/120/person.png') no-repeat top left; }
+.ico12 { width:120px; height:120px; background:transparent url('./buttons/120/person-n-phone.png') no-repeat top left; }
+.ico13 { width:120px; height:120px; background:transparent url('./buttons/120/assign-phone.png') no-repeat top left; }
 
 .adminTab { margin:auto; width:1000px; height:700px; }
 .adminTabContent {  border:1px solid silver; width:1000px; height:700px; }
@@ -26,11 +18,6 @@
 .statusPane {  border:1px solid silver; margin:2px 2px 2px 2px; padding:5px; }
 
 .toolbar { height:34px; margin:0px; padding:2px 5px 2px 5px; background-color:#efefef; border-bottom:1px solid silver;}
-
-.ico10 { width:120px; height:120px; background:transparent url('${base}/r/buttons/120/phone.png') no-repeat top left; }
-.ico11 { width:120px; height:120px; background:transparent url('${base}/r/buttons/120/person.png') no-repeat top left; }
-.ico12 { width:120px; height:120px; background:transparent url('${base}/r/buttons/120/person-n-phone.png') no-repeat top left; }
-.ico13 { width:120px; height:120px; background:transparent url('${base}/r/buttons/120/assign-phone.png') no-repeat top left; }
 
 .cal { display:block; margin:0px; width:70px; height:14px; background-color:#e0f6ed; border-bottom:1px dotted #ccc; border-right:1px dotted #ccc; text-align:center; vertical-align:middle; }
 .cal_free  { background-color:#fbfbfb; border:1px solid silver; }
