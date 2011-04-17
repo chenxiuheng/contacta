@@ -26,7 +26,7 @@ drop table ac_j_rol_grp       cascade;
 drop table acacc              cascade;
 drop table acgrp              cascade;
 drop table acrol              cascade;
-drop table azope              cascade;
-drop table azpol              cascade;
+-- drop table azope              cascade;
+-- drop table azpol              cascade;
 
 drop sequence hibernate_sequence cascade;

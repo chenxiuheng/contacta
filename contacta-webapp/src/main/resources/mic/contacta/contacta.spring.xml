@@ -103,8 +103,7 @@
  <context:component-scan base-package="mic.organic.aaa.spi"/>
  <context:component-scan base-package="mic.organic.aaa.web"/>
  <context:component-scan base-package="mic.organic.json"/>
- <context:component-scan base-package="mic.organic.web.spi"/>
- <context:component-scan base-package="mic.organic.web.struts2"/>
+ <context:component-scan base-package="mic.organic.web"/>
 
  <context:component-scan base-package="mic.organic.gateway"/>
 

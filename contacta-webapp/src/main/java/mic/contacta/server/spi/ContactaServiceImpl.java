@@ -40,15 +40,11 @@ import mic.contacta.server.api.Call;
 import mic.contacta.server.api.ContactaException;
 import mic.contacta.server.api.Line;
 import mic.contacta.server.api.LineComparator;
-import mic.contacta.server.dao.PbxContextDao;
-import mic.contacta.server.dao.PbxProfileDao;
 import mic.contacta.server.dao.SipAccountDao;
-import mic.contacta.util.ContactaUserDetailsService;
 import mic.organic.aaa.model.PersonModel;
 import mic.organic.aaa.spi.AddressbookService;
 import mic.organic.core.OrganicException;
 import mic.organic.util.Banner;
-import mic.organic.vfs.OrganicVfs;
 
 
 /**
@@ -67,13 +63,11 @@ public class ContactaServiceImpl implements ContactaService
 
   @PersistenceContext EntityManager entityManager;
 
-  @Autowired protected OrganicVfs organicVfs;
   @Autowired private ContactaConfiguration configuration;
-  @Autowired private ContactaUserDetailsService contactaUserDetailsService;
+  @Autowired private ContactaInitialData initialData;
 
   @Autowired private ImportService importService;
   @Autowired private AddressbookService addressbookService;
-  @Autowired private ProvisioningService provisioningService;
   @Autowired private InventoryService inventoryService;
   @Autowired private SipService sipService;
 //  @Autowired private CocService cocService;
@@ -81,12 +75,8 @@ public class ContactaServiceImpl implements ContactaService
 //  @Autowired private PhonebarService phonebarService;
   @Autowired private SipAccountDao sipAccountDao;
   @Autowired(required=false) private AsteriskService asteriskService;
-  @Autowired private ContactaBuilder sampleBuilder;
-  @Autowired private PbxContextDao pbxContextDao;
-  @Autowired private PbxProfileDao pbxProfileDao;
 
   private String automaticUpgrade;
-  private List<Configurer> configurerList;
 
 
   /*
@@ -95,8 +85,6 @@ public class ContactaServiceImpl implements ContactaService
   public ContactaServiceImpl()
   {
     super();
-
-    configurerList = new ArrayList<Configurer>();
   }
 
 
@@ -119,41 +107,7 @@ public class ContactaServiceImpl implements ContactaService
     Banner.setApplicationName("Contacta");
     Banner.printBanner(log());
 
-    SipAccountModel root = sipAccountDao.findByCode(contactaUserDetailsService.getAdminLogin());
-    if (root == null)
-    {
-      root = sampleBuilder.buildSipAccount(contactaUserDetailsService.getAdminLogin(), contactaUserDetailsService.getAdminPassword());
-      sipAccountDao.create(root);
-    }
-
-    for (Configurer configurer : configurerList)
-    {
-      provisioningService.registerPmod(configurer);
-    }
-
-
-    Long count = (Long)(entityManager.createQuery("select count(*) from PbxContextModel").getSingleResult());
-    if (count == 0)
-    {
-      pbxContextDao.create(sampleBuilder.buildPbxContext("sipphones", "sipphones"));
-      pbxContextDao.create(sampleBuilder.buildPbxContext("international", "international"));
-      pbxContextDao.create(sampleBuilder.buildPbxContext("national-cell", "national-cell"));
-      pbxContextDao.create(sampleBuilder.buildPbxContext("national", "national"));
-      pbxContextDao.create(sampleBuilder.buildPbxContext("numspecial", "numspecial"));
-      pbxContextDao.create(sampleBuilder.buildPbxContext("fromremote", "fromremote"));
-      pbxContextDao.create(sampleBuilder.buildPbxContext("co_inbound", "Inbound"));
-      pbxContextDao.create(sampleBuilder.buildPbxContext("co_outbound", "Outbound"));
-    }
-
-    count = (Long)(entityManager.createQuery("select count(*) from PbxProfileModel").getSingleResult());
-    if (count == 0)
-    {
-      pbxProfileDao.create(sampleBuilder.buildPbxProfile(organicVfs, "dial", "Dial", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/stdexten_nos.conf"));
-      pbxProfileDao.create(sampleBuilder.buildPbxProfile(organicVfs, "dial-vm", "Dial + segreteria", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/stdexten.conf"));
-      pbxProfileDao.create(sampleBuilder.buildPbxProfile(organicVfs, "dial-hunt", "Dial a cascata", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/stdextentwo.conf"));
-      pbxProfileDao.create(sampleBuilder.buildPbxProfile(organicVfs, "dial-hunt-vm", "Dial a cascata + segreteria", "macro(co_stdexten,${EXTEN},SIP/,30)", "res:conf/asterisk/macro/outisbusy.conf"));
-      pbxProfileDao.create(sampleBuilder.buildPbxProfile(organicVfs, "coverage", "Coverage", "macro(boss_assistant,${EXTEN},SIP/,${RINGTIMEOUT})", "res:conf/asterisk/macro/boss_assistant.conf"));
-    }
+    initialData.initialData();
   }
 
 
@@ -177,7 +131,7 @@ public class ContactaServiceImpl implements ContactaService
    */
   public void setConfigurerList(List<Configurer> configurerList)
   {
-    this.configurerList = configurerList;
+    initialData.setConfigurerList(configurerList);
   }
 
 

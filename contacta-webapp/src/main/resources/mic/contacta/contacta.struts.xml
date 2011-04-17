@@ -2,36 +2,13 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <!-- $Revision: 680 $ -->
 <struts>
- <!--
- <constant name="struts.convention.result.path" value="s"/>
- <constant name="struts.codebehind.defaultPackage" value="mic.contacta.webapp"/>
- <constant name="struts.configuration.classpath.disableActionScanning" value="true"/>
- -->
  <constant name="actionPackages" value="mic.contacta.webapp"/>
 
- <!-- ============================================================= -->
- <!--   OPEN/o                                                      -->
- <!-- ============================================================= -->
- <package name="contacta-open" extends="organic-open" namespace="/o">
-  <action name="channels" class="channelsAction">
-  </action>
-
-  <action name="ldap-*" class="ldapAction" method="{1}">
-  </action>
-
-  <action name="phonebook-*" class="phonebookAction" method="{1}">
-  </action>
- </package>
-
- <!-- ============================================================= -->
- <!--   SECURE/s                                                    -->
- <!-- ============================================================= -->
+ <!--================================================================-->
+ <!--   secure                                                       -->
+ <!--================================================================-->
  <package name="contacta-secure" extends="contacta-default" namespace="/s">
   <default-interceptor-ref name="organicAuthStack"/>
-
-  <action name="main" class="mainAction">
-   <interceptor-ref name="i18n"/>
-  </action>
 
   <action name="info" class="infoAction">
   </action>
@@ -40,58 +17,35 @@
   <action name="booking-*" class="conferenceAction" method="{1}">
   </action>
 
-  <!-- *-* -->
+  <!-- ========================= boh ========================= -->
+  <action name="main" class="mainAction">
+   <interceptor-ref name="i18n"/>
+   <result name="expired" type="redirect"><param name="location">/o/password.action</param><param name="parse">false</param></result>
+   <result name="passwordWeak" type="redirect"><param name="location">/o/password.action</param><param name="parse">false</param></result>
+   <result name="passwordExpired" type="redirect"><param name="location">/o/password.action</param><param name="parse">false</param></result>
+   <result name="accountExpired" type="redirect"><param name="location">/o/password.action</param><param name="parse">false</param></result>
+   <result name="accountNotFound" type="redirect"><param name="location">/o/password.action</param><param name="parse">false</param></result>
+  </action>
+
+  <!-- TODO moved to organic detail -->
   <action name="*-*" class="{1}Action" method="{2}">
    <result name="success" type="freemarker">/s/{1}/{2}.ftl</result>
   </action>
 
-  <!-- upload-*
-  <action name="upload-*" class="uploadAction" method="{1}">
-   <interceptor-ref name="uploadStack"/>
-   <result name="success" type="freemarker">
-    <param name="location">results/upload-{1}-success.ftl</param>
-    <param name="contentType">text/html</param>
-   </result>
-   <result name="error" type="freemarker">
-    <param name="location">results/upload-{1}-error.ftl</param>
-    <param name="contentType">text/html</param>
-   </result>
-  </action>-->
  </package>
 
- <!-- ============================================================= -->
- <!--   RPC/smd                                                     -->
- <!-- ============================================================= -->
+ <!--================================================================-->
+ <!--   package RPC                                                  -->
+ <!--================================================================-->
+ <!-- RPC/smd -->
  <package name="contacta-smd" namespace="/smd" extends="organic-smd">
   <default-interceptor-ref name="organicSmdStack"/>
   <action name="*" class="{1}Action" method="bind"></action>
  </package>
 
- <!-- ============================================================= -->
- <!--   download filezzz, only action here, switched to servlet     -->
- <!-- ============================================================= -->
- <!-- contacta-download -->
- <package name="contacta-download" extends="contacta-default" namespace="/d">
-  <default-interceptor-ref name="organicGuestStack"/>
-
-  <!-- download -->
-  <action name="download-*" class="mic.contacta.webapp.DownloadAction" method="{1}">
-   <!--param name="inputPath">/images/struts.gif</param-->
-   <result name="success" type="stream">
-    <param name="inputName">inputStream</param>
-    <param name="contentType">${contentType}</param>
-    <param name="contentDisposition">attachment;filename="${filename}"</param>
-    <!--
-    <param name="contentLength">${contentLength}</param>
-    <param name="bufferSize">4096</param>
-    -->
-   </result>
-  </action>
- </package>
-
- <!-- ============================================================= -->
- <!--   package default                                            -->
- <!-- ============================================================= -->
+ <!--================================================================-->
+ <!--   package default                                              -->
+ <!--================================================================-->
  <package name="contacta-default" extends="organic-default">
   <!-- ========================= interceptors ========================= -->
   <!-- interceptors -->
@@ -144,5 +98,43 @@
    </result>
   </action>
  </package>
+
+
+ <!-- ============================================================= -->
+ <!--   download filezzz, only action here, switched to servlet     -->
+ <!-- ============================================================= -->
+ <!-- contacta-download -->
+ <package name="contacta-download" extends="contacta-default" namespace="/d">
+  <default-interceptor-ref name="organicGuestStack"/>
+
+  <!-- download -->
+  <action name="download-*" class="mic.contacta.webapp.DownloadAction" method="{1}">
+   <!--param name="inputPath">/images/struts.gif</param-->
+   <result name="success" type="stream">
+    <param name="inputName">inputStream</param>
+    <param name="contentType">${contentType}</param>
+    <param name="contentDisposition">attachment;filename="${filename}"</param>
+    <!--
+    <param name="contentLength">${contentLength}</param>
+    <param name="bufferSize">4096</param>
+    -->
+   </result>
+  </action>
+ </package>
+
+ <!-- ============================================================= -->
+ <!--   OPEN/o                                                      -->
+ <!-- ============================================================= -->
+ <package name="contacta-open" extends="organic-open" namespace="/o">
+  <action name="channels" class="channelsAction">
+  </action>
+
+  <action name="ldap-*" class="ldapAction" method="{1}">
+  </action>
+
+  <action name="phonebook-*" class="phonebookAction" method="{1}">
+  </action>
+ </package>
+
 
 </struts>

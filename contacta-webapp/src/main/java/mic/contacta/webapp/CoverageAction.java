@@ -24,7 +24,7 @@ import mic.contacta.gateway.ContactaGateway;
 import mic.contacta.json.CoverageJson;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
-import mic.organic.web.struts2.AbstractDatastoreAction;
+import mic.organic.web.AbstractDatastoreAction;
 
 /**
  *

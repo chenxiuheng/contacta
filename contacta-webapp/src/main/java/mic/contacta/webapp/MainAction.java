@@ -15,7 +15,6 @@
 package mic.contacta.webapp;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -24,13 +23,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import com.opensymphony.xwork2.ActionContext;
 import mic.contacta.model.PbxContextModel;
 import mic.contacta.model.PbxProfileModel;
 import mic.contacta.server.dao.PbxContextDao;
 import mic.contacta.server.dao.PbxProfileDao;
 import mic.contacta.server.spi.ContactaConfiguration;
-import mic.organic.aaa.spi.AccountService;
+import mic.contacta.server.spi.ContactaSession;
+import mic.organic.web.OrganicLoginAction;
 
 
 /**
@@ -40,10 +39,12 @@ import mic.organic.aaa.spi.AccountService;
  */
 @Service("mainAction")
 @Scope("request")
-public class MainAction extends AbstractContactaAction
+public class MainAction extends OrganicLoginAction
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
+
+  @Autowired protected ContactaSession contactaSession;
 
   //@Autowired private mic.organic.aaa.ldap.PersonDao personDao;
   @Autowired private ContactaConfiguration contactaConfiguration;
@@ -51,7 +52,7 @@ public class MainAction extends AbstractContactaAction
   @Autowired private PbxProfileDao pbxProfileDao;
 //  private List<PbxContextModel> contextList;
 //  private List<PbxProfileModel> profileList;
-  @Autowired private AccountService accountService;
+  //@Autowired private AccountService accountService;
 
 
   /**
@@ -96,32 +97,42 @@ public class MainAction extends AbstractContactaAction
     return pbxProfileDao.findAll();
   }
 
-
-  /**
-   * just the default method, doing nothing
-   */
-  @Override
-  public String execute()
-  {
-    return login();
-  }
-
-
-  /**
-   *
-   */
-  public String login()
-  {
-    ActionContext context = ActionContext.getContext();
-    Locale locale = context.getLocale();
-    contactaSession.setLocale(locale);
-
-    log().info("ActionContext: locale={}", locale);
-    log().info("ActionContext: name={}", context.getName());
-
-    accountService.login(contactaSession);
-
-    return SUCCESS;
-  }
+//
+//  /**
+//   * just the default method, doing nothing
+//   */
+//  @Override
+//  public String execute()
+//  {
+//    return login();
+//  }
+//
+//
+//  /**
+//   *
+//   */
+//  @Override
+//  public String login()
+//  {
+//    ActionContext context = ActionContext.getContext();
+//    Locale locale = context.getLocale();
+//    contactaSession.setLocale(locale);
+//
+//    log().info("ActionContext: locale={}", locale);
+//    log().info("ActionContext: name={}", context.getName());
+//
+//    String result = SUCCESS;
+//    try
+//    {
+//      accountService.login(contactaSession);
+//    }
+//    catch (AccountExpiredException e)
+//    {
+//      log().info("account expired: {}", e.getLoginState());
+//      result = e.getLoginState().toString();
+//    }
+//
+//    return result;
+//  }
 
 }

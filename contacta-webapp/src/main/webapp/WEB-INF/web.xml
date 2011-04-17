@@ -27,8 +27,15 @@
   <param-value>classpath:/mic/contacta/contacta.spring.xml</param-value>
  </context-param>
 
+ <!-- or application/x-javascript
+ <mime-mapping>
+  <extension>js</extension>
+  <mime-type>application/javascript</mime-type>
+ </mime-mapping>
+  -->
+
  <!--================================================================-->
- <!--                                                                -->
+ <!--   filters'n'mappings                                           -->
  <!--================================================================-->
  <filter>
   <filter-name>springSecurityFilterChain</filter-name>
@@ -49,10 +56,7 @@
   <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
  </filter>
 
- <!--================================================================-->
- <!--                                                                -->
- <!--================================================================-->
- <!-- security -->
+ <!-- security
  <filter-mapping>
   <filter-name>springSecurityFilterChain</filter-name>
   <url-pattern>/o/j_spring_security_check*</url-pattern>
@@ -72,6 +76,10 @@
  <filter-mapping>
   <filter-name>springSecurityFilterChain</filter-name>
   <url-pattern>/struts/*</url-pattern>
+ </filter-mapping>-->
+ <filter-mapping>
+  <filter-name>springSecurityFilterChain</filter-name>
+  <url-pattern>/*</url-pattern>
  </filter-mapping>
 
  <!--struts2 w/ sitemesh -->
@@ -92,8 +100,27 @@
   <url-pattern>/struts/*</url-pattern>
  </filter-mapping>
 
- <!-- freemarker -->
- <!--
+ <!--================================================================-->
+ <!--   servlets'n'mappings                                           -->
+ <!--================================================================-->
+ <servlet>
+  <servlet-name>sitemesh-freemarker</servlet-name>
+  <servlet-class>org.apache.struts2.sitemesh.FreemarkerDecoratorServlet</servlet-class>
+  <init-param>
+   <param-name>default_encoding</param-name>
+   <param-value>UTF-8</param-value>
+  </init-param>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+
+ <!-- Skin Servlet -->
+ <servlet>
+  <display-name>Skin Servlet</display-name>
+  <servlet-name>skin</servlet-name>
+  <servlet-class>mic.organic.web.SkinServlet</servlet-class>
+  <load-on-startup>8</load-on-startup>
+ </servlet>
+ <!-- freemarker
  <servlet>
   <servlet-name>freemarker</servlet-name>
   <servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
@@ -116,23 +143,16 @@
   <url-pattern>*.ftl</url-pattern>
  </servlet-mapping>
  -->
+ <!-- Upload Servlet
  <servlet>
-  <servlet-name>sitemesh-freemarker</servlet-name>
-  <servlet-class>org.apache.struts2.sitemesh.FreemarkerDecoratorServlet</servlet-class>
-  <init-param>
-   <param-name>default_encoding</param-name>
-   <param-value>UTF-8</param-value>
-  </init-param>
-  <load-on-startup>1</load-on-startup>
+  <display-name>Upload Servlet</display-name>
+  <servlet-name>upload</servlet-name>
+  <servlet-class>mic.organic.web.UploadServlet</servlet-class>
+  <load-on-startup>50</load-on-startup>
  </servlet>
+ -->
 
- <!-- Skin Servlet -->
- <servlet>
-  <display-name>Skin Servlet</display-name>
-  <servlet-name>skin</servlet-name>
-  <servlet-class>mic.organic.web.jee.SkinServlet</servlet-class>
-  <load-on-startup>8</load-on-startup>
- </servlet>
+ <!-- mappings -->
  <servlet-mapping>
   <servlet-name>sitemesh-freemarker</servlet-name>
   <url-pattern>*.ftl</url-pattern>
@@ -142,6 +162,12 @@
   <url-pattern>/r/*</url-pattern>
   <url-pattern>/dojo/*</url-pattern>
  </servlet-mapping>
+ <!--
+ <servlet-mapping>
+  <servlet-name>upload</servlet-name>
+  <url-pattern>/upload</url-pattern>
+ </servlet-mapping>
+ -->
 
  <!-- ====================================================================== -->
  <!--                                                                        -->

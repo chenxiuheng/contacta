@@ -6,6 +6,11 @@
 <style>
 @import url('${base}/skin/contacta.css');
 </style>
+<script type="text/javascript">
+passthrough = function(msg) { if (window.console) { console.log('flash', msg); } };  // for catching messages from Flash
+dojo.require("dojo.i18n");
+dojo.requireLocalization('contacta', 'contacta'+"-messages");
+</script>
 <script type="text/javascript" src="${base}/js/openinnovation/organic/Organic.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/organic/gridpad/Controller.js"></script>
 <script type="text/javascript" src="${base}/js/openinnovation/organic/Aaa.js"></script>
@@ -36,6 +41,8 @@ var contacta = null;
 
 dojo.addOnLoad(function()
 {
+ organic.i18n = dojo.i18n.getLocalization(organic.appName, organic.appName+"-messages");
+
  contacta = new openinnovation.contacta.Contacta({
      develMode:${organicConfiguration.develMode?string},
      session:
