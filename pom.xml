@@ -964,7 +964,7 @@
    </dependency>
 
    <!-- asterisk-->
-   <dependency><groupId>org.asteriskjava</groupId><artifactId>asterisk-java</artifactId><version>1.0.0.M3</version></dependency>
+   <dependency><groupId>org.asteriskjava</groupId><artifactId>asterisk-java</artifactId><version>1.0.0_20110427</version></dependency>
 
    <dependency><groupId>org.aspectj</groupId><artifactId>aspectjrt</artifactId><version>1.6.10</version></dependency>
    <dependency><groupId>org.aspectj</groupId><artifactId>aspectjweaver</artifactId><version>1.6.10</version></dependency>
