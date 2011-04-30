@@ -11,20 +11,22 @@
    </div>
    <input dojoType="dijit.form.TextBox" name="id" style="display:none;"/>
    <table>
-    <tr><td>Nome</td><td><input jsId="${ui}.firstNameInput" dojoType="dijit.form.ValidationTextBox" name="firstName" required="true"/></td></tr>
-    <tr><td>Cognome</td><td><input jsId="${ui}.lastNameInput" dojoType="dijit.form.ValidationTextBox" name="lastName" required="true"/></td></tr>
-    <tr><td>Nome Completo</td><td><input jsId="${ui}.displayNameInput" dojoType="dijit.form.ValidationTextBox" name="displayName" required="true"/><div dojoType="dijit.form.Button" onclick="${ui}.displayNameInput.attr('value', ${ui}.firstNameInput.attr('value')+' '+${ui}.lastNameInput.attr('value'));"><span>Auto</span></div></td></tr>
-    <tr><td>Email</td><td><input dojoType="dijit.form.ValidationTextBox" name="email"/></td></tr>
-    <tr><td>Telefono</td><td><input dojoType="dijit.form.TextBox" name="phone"/></td></tr>
-    <tr><td>Estensione</td><td><input dojoType="dijit.form.TextBox" name="extension"/></td></tr>
+    <tr><td>${m.t("label.firstName")}</td><td><input jsId="${ui}.firstName" dojoType="dijit.form.ValidationTextBox" name="firstName" required="true"/></td></tr>
+    <tr><td>${m.t("label.lastName")}</td><td><input jsId="${ui}.lastName" dojoType="dijit.form.ValidationTextBox" name="lastName" required="true"/></td></tr>
+    <tr><td>${m.t("label.displayName")}</td><td><input jsId="${ui}.displayName" dojoType="dijit.form.ValidationTextBox" name="displayName" required="true"/><div dojoType="dijit.form.Button" onclick="${ui}.displayName.attr('value', ${ui}.firstName.attr('value')+' '+${ui}.lastName.attr('value'));return false;"><span>Auto</span></div></td></tr>
+    <tr><td>${m.t("label.email")}</td><td><input dojoType="dijit.form.ValidationTextBox" name="email"/></td></tr>
+    <tr><td>${m.t("label.phone")}</td><td><input dojoType="dijit.form.TextBox" name="phone"/></td></tr>
+    <tr><td>${m.t("label.extension")}</td><td><input dojoType="dijit.form.TextBox" name="extension"/></td></tr>
     <tr><td>Titolo</td><td><input dojoType="dijit.form.TextBox" name="title"/></td></tr>
-    <tr><td>Indirizzo</td><td><input dojoType="dijit.form.TextBox" name="address"/></td></tr>
-    <tr><td>Citta</td><td><input dojoType="dijit.form.TextBox" name="city"/></td></tr>
-    <tr><td>CAP</td><td><input dojoType="dijit.form.TextBox" name="zip"/></td></tr>
-    <tr><td>Nazione</td><td><input dojoType="dijit.form.TextBox" name="country"/></td></tr>
+    <tr><td>${m.t("label.address")}</td><td><input dojoType="dijit.form.TextBox" name="address"/></td></tr>
+    <tr><td>${m.t("label.city")}</td><td><input dojoType="dijit.form.TextBox" name="city"/></td></tr>
+    <tr><td>${m.t("label.zip")}</td><td><input dojoType="dijit.form.TextBox" name="zip"/></td></tr>
+    <tr><td>${m.t("label.country")}</td><td><input dojoType="dijit.form.TextBox" name="country"/></td></tr>
     <tr><td>Codice fiscale</td><td><input dojoType="dijit.form.TextBox" name="code"/></td></tr>
-    <tr><td>Nato il</td><td><input dojoType="dijit.form.DateTextBox" name="bornDate" constraints="{formatLength:'short'}"/></td></tr>
-    <tr><td>Nato in</td><td><input dojoType="dijit.form.TextBox" name="bornIn"/></td></tr>
+    <tr><td>${m.t("label.bornDate")}</td><td><input dojoType="dijit.form.DateTextBox" name="bornDate" constraints="{formatLength:'short'}"/></td></tr>
+    <tr><td>${m.t("label.bornIn")}</td><td><input dojoType="dijit.form.TextBox" name="bornIn"/></td></tr>
+    <tr><td>${m.t("label.uri")}</td><td><input dojoType="dijit.form.TextBox" name="uri"/></td></tr>
+    <tr><td>${m.t("label.status")}</td><td><input dojoType="dijit.form.TextBox" name="status" readOnly="true"/></td></tr>
     <tr><td>Note</td><td><textarea dojoType="dijit.form.Textarea" name="info"></textarea></td></tr>
    </table>
   </div>

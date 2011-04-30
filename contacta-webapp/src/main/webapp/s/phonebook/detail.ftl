@@ -18,6 +18,8 @@
 <tr><td>${m.t("label.city")}:</td><td><div>${model.city!""}</div></td></tr>
 <tr><td>${m.t("label.zip")}:</td><td><div>${model.zip!""}</div></td></tr>
 <tr><td>${m.t("label.country")}:</td><td><div>${model.country!""}</div></td></tr>
+<tr><td>${m.t("label.uri")}</td><td><div>${model.uri!"N/A"}</div></td></tr>
+<tr><td>${m.t("label.status")}</td><td><div>${model.status!"N/A"}</div></td></tr>
 [#----]
 <tr><td>${m.t("label.info")}:</td></tr>
 <tr><td colspan="2"><pre>${model.info!""}</pre></td></tr>
