@@ -2,7 +2,7 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <!-- $Revision: 680 $ -->
 <struts>
- <constant name="actionPackages" value="mic.contacta.webapp"/>
+ <constant name="actionPackages" value="mic.contacta.web"/>
 
  <!--================================================================-->
  <!--   secure                                                       -->
@@ -108,7 +108,7 @@
   <default-interceptor-ref name="organicGuestStack"/>
 
   <!-- download -->
-  <action name="download-*" class="mic.contacta.webapp.DownloadAction" method="{1}">
+  <action name="download-*" class="mic.contacta.web.DownloadAction" method="{1}">
    <!--param name="inputPath">/images/struts.gif</param-->
    <result name="success" type="stream">
     <param name="inputName">inputStream</param>

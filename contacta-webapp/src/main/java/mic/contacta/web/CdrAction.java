@@ -12,7 +12,7 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-package mic.contacta.struts2;
+package mic.contacta.web;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,6 @@ import mic.contacta.model.CdrModel;
 import mic.contacta.model.CdrQueryModel;
 import mic.contacta.server.api.ContactaConstants;
 import mic.contacta.server.dao.CdrDao;
-import mic.contacta.webapp.AbstractContactaSmd;
 import mic.organic.core.Model;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -143,7 +142,7 @@ public class CdrAction extends AbstractContactaSmd<CdrModel>
 
 
   /*
-   * @see mic.contacta.webapp.AbstractContactaSmd#findModel(java.lang.Integer)
+   * @see mic.contacta.web.AbstractContactaSmd#findModel(java.lang.Integer)
    */
   @Override
   public Model findModel(Integer oid)

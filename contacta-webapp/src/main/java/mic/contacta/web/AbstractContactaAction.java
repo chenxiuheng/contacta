@@ -12,64 +12,35 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-package mic.contacta.webapp;
+package mic.contacta.web;
 
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
 
-import mic.contacta.server.api.ContactaException;
-import mic.contacta.server.api.Line;
-import mic.contacta.server.spi.ContactaService;
+import com.opensymphony.xwork2.Action;
+import mic.contacta.server.spi.ContactaSession;
+import mic.contacta.server.spi.InventoryService;
+import mic.contacta.server.spi.ProvisioningService;
+import mic.contacta.server.spi.SipService;
+
 
 
 /**
  *
  * @author mic
- * @created Apr 16, 2008
+ * @created Nov 15, 2008
  */
-@Service("channelsAction")
-@Scope("request")
-public class ChannelsAction extends AbstractContactaAction
+public abstract class AbstractContactaAction implements Action
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private ContactaService contactaService;
+  @Autowired protected ProvisioningService provisioningService;
+  @Autowired protected ContactaSession contactaSession;
 
-  private List<Line> lineList;
-  //private List<Call> callList;
-  private String result;
-
-
-  /**
-   * @return the result
-   */
-  public String getResult()
-  {
-    return result;
-  }
-
-
-  /**
-   * @return the callList
-   */
-  public List<Line> getLineList()
-  {
-    return lineList;
-  }
-
-
-  /**
-   * @return the callList
-   *
-  public List<Call> getCallList()
-  {
-    return callList;
-  }*/
+  @Autowired protected InventoryService inventoryService;
+  @Autowired protected SipService sipService;
 
 
   /**
@@ -78,17 +49,7 @@ public class ChannelsAction extends AbstractContactaAction
   @Override
   public String execute()
   {
-    try
-    {
-      lineList = contactaService.lineStatus();
-    }
-    catch (ContactaException e)
-    {
-      log().warn(e.getMessage());
-      result = "non riesco a comunicare col centralino: "+e.getMessage();
-      return ERROR;
-    }
-    return SUCCESS;
+    return Action.SUCCESS;
   }
 
 }

@@ -12,7 +12,7 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-package mic.contacta.webapp;
+package mic.contacta.web;
 
 import java.util.List;
 import org.slf4j.Logger;
@@ -20,37 +20,75 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import mic.contacta.gateway.ContactaGateway;
-import mic.contacta.json.CoverageJson;
-import mic.organic.gateway.DatastoreJson;
-import mic.organic.gateway.DefaultDatastoreJson;
-import mic.organic.web.AbstractDatastoreAction;
+
+import mic.contacta.server.api.ContactaException;
+import mic.contacta.server.api.Line;
+import mic.contacta.server.spi.ContactaService;
+
 
 /**
  *
  * @author mic
- * @created Jun 13, 2010
+ * @created Apr 16, 2008
  */
-@Service("coverageAction")
+@Service("channelsAction")
 @Scope("request")
-public class CoverageAction extends AbstractDatastoreAction
+public class ChannelsAction extends AbstractContactaAction
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private ContactaGateway contactaGateway;
+  @Autowired private ContactaService contactaService;
+
+  private List<Line> lineList;
+  //private List<Call> callList;
+  private String result;
 
 
-  /*
-   *
+  /**
+   * @return the result
    */
-  public String findAll()
+  public String getResult()
   {
-    List<CoverageJson> jsonList = contactaGateway.coverageList();
-    DatastoreJson<CoverageJson> datastore = new DefaultDatastoreJson<CoverageJson>(DatastoreJson.IDENTIFIER, "title", jsonList);
-    setStore(datastore);
-    return SUCCESS;
+    return result;
   }
 
+
+  /**
+   * @return the callList
+   */
+  public List<Line> getLineList()
+  {
+    return lineList;
+  }
+
+
+  /**
+   * @return the callList
+   *
+  public List<Call> getCallList()
+  {
+    return callList;
+  }*/
+
+
+  /**
+   * just the default method, doing nothing
+   */
+  @Override
+  public String execute()
+  {
+    try
+    {
+      lineList = contactaService.lineStatus();
+    }
+    catch (ContactaException e)
+    {
+      log().warn(e.getMessage());
+      result = "non riesco a comunicare col centralino: "+e.getMessage();
+      return ERROR;
+    }
+    return SUCCESS;
+  }
 
 }

@@ -12,18 +12,19 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-package mic.contacta.struts2;
+package mic.contacta.web;
 
 import java.util.List;
+
 import org.apache.struts2.json.annotations.SMDMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import mic.contacta.model.ProductModel;
-import mic.contacta.server.dao.ProductDao;
-import mic.contacta.webapp.AbstractContactaSmd;
+
+import mic.contacta.json.PhoneJson;
+import mic.contacta.server.spi.InventoryService;
 import mic.organic.core.Model;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -35,20 +36,20 @@ import mic.organic.gateway.JsonException;
  * @author mic
  * @created Apr 16, 2008
  */
-@Service("productAction")
-@Scope("session")
-public class ProductAction extends AbstractContactaSmd<ProductModel>
+@Service("phoneAction")
+@Scope("request")
+public class PhoneAction extends AbstractContactaSmd<PhoneJson>
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private ProductDao productDao;
+  @Autowired private InventoryService inventoryService;
 
 
   /*
    *
    */
-  public ProductAction()
+  public PhoneAction()
   {
     super();
   }
@@ -59,15 +60,15 @@ public class ProductAction extends AbstractContactaSmd<ProductModel>
    */
   @SMDMethod
   @Override
-  public ProductModel persist(ProductModel json) throws JsonException
+  public PhoneJson persist(PhoneJson json) throws JsonException
   {
     try
     {
-      return productDao.update(json);
+      return contactaGateway.phonePersist(json);
     }
     catch (Exception e)
     {
-      throw new JsonException(e, json);
+      throw new JsonException(e);
     }
   }
 
@@ -81,7 +82,7 @@ public class ProductAction extends AbstractContactaSmd<ProductModel>
   {
     try
     {
-      return new Boolean[] { productDao.delete(ids[0]) };
+      return contactaGateway.phoneDelete(ids);
     }
     catch (Exception e)
     {
@@ -95,9 +96,19 @@ public class ProductAction extends AbstractContactaSmd<ProductModel>
    */
   @SMDMethod
   @Override
-  public ProductModel find(int id)
+  public PhoneJson find(int id)
   {
-    return productDao.find(id);
+    return null; //FIXME uncomment contactaGateway.phoneFind(id);
+  }
+
+
+  /*
+   * @see mic.contacta.web.AbstractContactaSmd#findModel(java.lang.Integer)
+   */
+  @Override
+  public Model findModel(Integer oid)
+  {
+    return inventoryService.findPhone(oid);
   }
 
 
@@ -106,21 +117,11 @@ public class ProductAction extends AbstractContactaSmd<ProductModel>
    */
   @SMDMethod
   @Override
-  public DatastoreJson<ProductModel> findAll()
+  public DatastoreJson<PhoneJson> findAll()
   {
-    List<ProductModel> jsonList = productDao.findAll();
-    DatastoreJson<ProductModel> store = new DefaultDatastoreJson<ProductModel>(DatastoreJson.IDENTIFIER, DatastoreJson.LABEL, jsonList);
+    List<PhoneJson> jsonList = contactaGateway.phoneList();
+    DatastoreJson<PhoneJson> store = new DefaultDatastoreJson<PhoneJson>(DatastoreJson.IDENTIFIER, "macAddress", jsonList);
     return store;
-  }
-
-
-  /*
-   * @see mic.contacta.webapp.AbstractContactaSmd#findModel(java.lang.Integer)
-   */
-  @Override
-  public Model findModel(Integer oid)
-  {
-    return find(oid);
   }
 
 }

@@ -98,7 +98,7 @@ public class PhonebarServiceImpl implements PhonebarService
 
 
   /*
-   * @see mic.contacta.webapp.PhonebarService#answer()
+   * @see mic.contacta.web.PhonebarService#answer()
    */
   @Override
   public String answer(String exten)
@@ -162,7 +162,7 @@ public class PhonebarServiceImpl implements PhonebarService
 
 
   /*
-   * @see mic.contacta.webapp.PhonebarService#dial(java.lang.String)
+   * @see mic.contacta.web.PhonebarService#dial(java.lang.String)
    */
   @Transactional(readOnly=true)
   @Override
@@ -222,7 +222,7 @@ public class PhonebarServiceImpl implements PhonebarService
 
 
   /*
-   * @see mic.contacta.webapp.PhonebarService#dial(java.lang.String)
+   * @see mic.contacta.web.PhonebarService#dial(java.lang.String)
    */
   @Transactional(readOnly=true)
   @Override
@@ -263,7 +263,7 @@ public class PhonebarServiceImpl implements PhonebarService
 
 
   /*
-   * @see mic.contacta.webapp.PhonebarService#transfer()
+   * @see mic.contacta.web.PhonebarService#transfer()
    */
   @Transactional(readOnly=true)
   @Override
@@ -282,7 +282,7 @@ public class PhonebarServiceImpl implements PhonebarService
 
 
   /*
-   * @see mic.contacta.webapp.PhonebarService#hold()
+   * @see mic.contacta.web.PhonebarService#hold()
    */
   @Override
   public String hold(String exten)
@@ -312,7 +312,7 @@ public class PhonebarServiceImpl implements PhonebarService
 
 
   /*
-   * @see mic.contacta.webapp.PhonebarService#unhold()
+   * @see mic.contacta.web.PhonebarService#unhold()
    */
   @Override
   public String unhold(String exten)

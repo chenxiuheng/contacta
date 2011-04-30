@@ -12,7 +12,7 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-package mic.contacta.webapp;
+package mic.contacta.web;
 
 import java.util.List;
 import org.apache.struts2.json.annotations.SMDMethod;
@@ -21,8 +21,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import mic.contacta.json.SipAccountJson;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.model.CocModel;
+import mic.contacta.server.dao.CocDao;
 import mic.organic.core.Model;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -31,51 +31,63 @@ import mic.organic.gateway.JsonException;
 
 /**
  *
- *
  * @author mic
- * @created May 14, 2009
+ * @created Apr 16, 2008
  */
-@Service("sipAction")
+@Service("cocAction")
 @Scope("request")
-public class SipAction extends AbstractContactaSmd<SipAccountJson>
+public class CocAction extends AbstractContactaSmd<CocModel>
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private SipService sipService;
-
-
-  /**
-   * @return the sipAccount
-   */
-  public Model getSipAccount()
-  {
-    return getModel();
-  }
+  @Autowired private CocDao cocDao;
 
 
   /*
    *
    */
-  public String star()
+  public CocAction()
   {
-    return detail();
+    super();
   }
 
 
-
-
-
   /*
-   * @see mic.organic.gateway.JsonSmd#persist(mic.organic.gateway.Json)
+   * @see mic.miirc.webapp.JsonSmd#persist(mic.miirc.json.PhoneJson)
    */
-  @Override
   @SMDMethod
-  public SipAccountJson persist(SipAccountJson json) throws JsonException
+  @Override
+  public CocModel persist(CocModel json) throws JsonException
   {
     try
     {
-      return contactaGateway.sipPersist(json);
+      if (json.getId() == 0)
+      {
+        return cocDao.create(json);
+      }
+      else
+      {
+        return cocDao.update(json);
+      }
+    }
+    catch (Exception e)
+    {
+      throw new JsonException(e, json);
+    }
+  }
+
+
+  /*
+   * @see mic.miirc.webapp.JsonSmd#remove(int[])
+   */
+  @SMDMethod
+  @Override
+  public Boolean[] remove(int[] ids) throws JsonException
+  {
+    try
+    {
+      return new Boolean[] { cocDao.delete(ids[0]) };
     }
     catch (Exception e)
     {
@@ -85,54 +97,36 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
 
 
   /*
-   * @see mic.organic.gateway.JsonSmd#remove(int[])
+   * @see mic.miirc.webapp.JsonSmd#find(int)
    */
-  @Override
   @SMDMethod
-  public Boolean[] remove(int[] ids) throws JsonException
+  @Override
+  public CocModel find(int id)
   {
-    try
-    {
-      return contactaGateway.sipRemove(ids);
-    }
-    catch (Exception e)
-    {
-      throw new JsonException("Cannot delete sip: already in use");
-    }
+    return cocDao.find(id);
   }
 
 
   /*
-   * @see mic.organic.gateway.JsonSmd#find(int)
+   * @see mic.miirc.webapp.JsonSmd#findAll()
    */
-  @Override
   @SMDMethod
-  public SipAccountJson find(int id)
-  {
-    return null; //FIXME uncomment contactaGateway.sipFind(id);
-  }
-
-
-  /*
-   * @see mic.organic.gateway.JsonSmd#findAll()
-   */
   @Override
-  @SMDMethod
-  public DatastoreJson<SipAccountJson> findAll()
+  public DatastoreJson<CocModel> findAll()
   {
-    List<SipAccountJson> jsonList = contactaGateway.sipList();
-    DefaultDatastoreJson<SipAccountJson> store = new DefaultDatastoreJson<SipAccountJson>(DatastoreJson.IDENTIFIER, "login", jsonList);
+    List<CocModel> jsonList = cocDao.findAll();
+    DatastoreJson<CocModel> store = new DefaultDatastoreJson<CocModel>(DatastoreJson.IDENTIFIER, DatastoreJson.LABEL, jsonList);
     return store;
   }
 
 
   /*
-   * @see mic.contacta.webapp.AbstractContactaSmd#findModel(java.lang.Integer)
+   * @see mic.contacta.web.AbstractContactaSmd#findModel(java.lang.Integer)
    */
   @Override
   public Model findModel(Integer oid)
   {
-    return sipService.sipFind(oid);
+    return find(oid);
   }
 
 }

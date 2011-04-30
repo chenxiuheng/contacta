@@ -46,8 +46,8 @@
   <property name="cacheSeconds" value="-1"/>
   <property name="basenames">
    <list>
-    <value>classpath:/mic/organic/organic-messages</value>
     <value>classpath:/mic/contacta/contacta-messages</value>
+    <value>classpath:/mic/organic/organic-messages</value>
    </list>
   </property>
  </bean>
@@ -115,8 +115,7 @@
  <context:component-scan base-package="mic.contacta.server.dao"/>
  <context:component-scan base-package="mic.contacta.server.spi"/>
  <context:component-scan base-package="mic.contacta.gateway"/>
- <context:component-scan base-package="mic.contacta.webapp"/>
- <context:component-scan base-package="mic.contacta.struts2"/>
+ <context:component-scan base-package="mic.contacta.web"/>
 
  <context:component-scan base-package="mic.contacta.asterisk.agi"/>
  <context:component-scan base-package="mic.contacta.asterisk.spi"/>

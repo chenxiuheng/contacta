@@ -12,7 +12,7 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-package mic.contacta.struts2;
+package mic.contacta.web;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import mic.contacta.pmod.thomson.MenuItem;
 import mic.contacta.server.spi.ContactaConfiguration;
-import mic.contacta.webapp.AbstractContactaSmd;
 import mic.organic.aaa.model.PersonModel;
 import mic.organic.aaa.spi.AddressbookService;
 import mic.organic.aaa.web.AaaGateway;
@@ -267,7 +266,7 @@ public class PhonebookAction extends AbstractContactaSmd<PersonJson>
 
 
   /*
-   * @see mic.contacta.webapp.AbstractContactaSmd#findModel(java.lang.Integer)
+   * @see mic.contacta.web.AbstractContactaSmd#findModel(java.lang.Integer)
    */
   @Override
   public Model findModel(Integer oid)

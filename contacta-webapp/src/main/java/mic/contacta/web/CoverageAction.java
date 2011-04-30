@@ -12,85 +12,44 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-package mic.contacta.webapp;
+package mic.contacta.web;
 
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import mic.contacta.gateway.ContactaGateway;
-import mic.organic.core.Model;
-import mic.organic.gateway.AbstractJsonSmd;
-import mic.organic.gateway.Json;
-
+import mic.contacta.json.CoverageJson;
+import mic.organic.gateway.DatastoreJson;
+import mic.organic.gateway.DefaultDatastoreJson;
+import mic.organic.web.AbstractDatastoreAction;
 
 /**
  *
  * @author mic
- * @created Apr 27, 2010
+ * @created Jun 13, 2010
  */
-public abstract class AbstractContactaSmd<T extends Json> extends AbstractJsonSmd<T>
+@Service("coverageAction")
+@Scope("request")
+public class CoverageAction extends AbstractDatastoreAction
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired protected ContactaGateway contactaGateway;
+  @Autowired private ContactaGateway contactaGateway;
 
 
   /*
    *
    */
-  public AbstractContactaSmd()
+  public String findAll()
   {
-    super();
-  }
-
-
-  /**
-   * just the default method, doing nothing
-   */
-  @Override
-  public String execute()
-  {
+    List<CoverageJson> jsonList = contactaGateway.coverageList();
+    DatastoreJson<CoverageJson> datastore = new DefaultDatastoreJson<CoverageJson>(DatastoreJson.IDENTIFIER, "title", jsonList);
+    setStore(datastore);
     return SUCCESS;
-  }
-
-
-  /**
-   *
-   */
-  public String bind()
-  {
-    return SUCCESS;
-  }
-
-
-  /**
-   * @param oid
-   * @return
-   */
-  public abstract Model findModel(Integer oid);
-
-
-  /*
-   * @see mic.organic.gateway.AbstractJsonSmd#detail()
-   */
-  @Override
-  public String detail()
-  {
-    if (getOid() == null) //StringUtils.isBlank(code))
-    {
-      return ERROR;
-    }
-    model = this.findModel(getOid());
-    if (model != null)
-    {
-      return SUCCESS;
-    }
-    else
-    {
-      log().info("cannot find model.code='{}'", code);
-      return ERROR;
-    }
   }
 
 

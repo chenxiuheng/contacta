@@ -176,7 +176,7 @@
  <servlet>
   <display-name>Contacta Servlet</display-name>
   <servlet-name>contacta</servlet-name>
-  <servlet-class>mic.contacta.webapp.ContactaServlet</servlet-class>
+  <servlet-class>mic.contacta.web.ContactaServlet</servlet-class>
   <load-on-startup>8</load-on-startup>
  </servlet>
  <servlet-mapping>
@@ -204,7 +204,7 @@
  <servlet>
   <display-name>Provisioning Servlet</display-name>
   <servlet-name>provisioning</servlet-name>
-  <servlet-class>mic.contacta.webapp.ProvisioningServlet</servlet-class>
+  <servlet-class>mic.contacta.web.ProvisioningServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>provisioning</servlet-name>

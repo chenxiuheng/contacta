@@ -365,7 +365,7 @@ public class CalendarServiceImpl implements CalendarService
 
 
   /*
-   * @see mic.contacta.webapp.CalendarService#cancel(mic.contacta.model.AppointmentModel)
+   * @see mic.contacta.web.CalendarService#cancel(mic.contacta.model.AppointmentModel)
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
@@ -380,7 +380,7 @@ public class CalendarServiceImpl implements CalendarService
 
 
   /*
-   * @see mic.contacta.webapp.CalendarService#remail(mic.contacta.model.AppointmentModel)
+   * @see mic.contacta.web.CalendarService#remail(mic.contacta.model.AppointmentModel)
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
@@ -391,7 +391,7 @@ public class CalendarServiceImpl implements CalendarService
 
 
   /*
-   * @see mic.contacta.webapp.CalendarService#activateConferences(mic.contacta.model.AppointmentModel)
+   * @see mic.contacta.web.CalendarService#activateConferences(mic.contacta.model.AppointmentModel)
    */
   @Transactional(propagation=Propagation.REQUIRED)
   @Override

@@ -12,7 +12,7 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-package mic.contacta.struts2;
+package mic.contacta.web;
 
 import java.util.List;
 import org.apache.struts2.json.annotations.SMDMethod;
@@ -21,9 +21,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import mic.contacta.model.CocModel;
-import mic.contacta.server.dao.CocDao;
-import mic.contacta.webapp.AbstractContactaSmd;
+import mic.contacta.model.PbxProfileModel;
+import mic.contacta.server.dao.PbxProfileDao;
 import mic.organic.core.Model;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -35,20 +34,20 @@ import mic.organic.gateway.JsonException;
  * @author mic
  * @created Apr 16, 2008
  */
-@Service("cocAction")
-@Scope("request")
-public class CocAction extends AbstractContactaSmd<CocModel>
+@Service("pbxprofileAction")
+@Scope("session")
+public class PbxProfileAction extends AbstractContactaSmd<PbxProfileModel>
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private CocDao cocDao;
+  @Autowired private PbxProfileDao pbxProfileDao;
 
 
   /*
    *
    */
-  public CocAction()
+  public PbxProfileAction()
   {
     super();
   }
@@ -59,17 +58,17 @@ public class CocAction extends AbstractContactaSmd<CocModel>
    */
   @SMDMethod
   @Override
-  public CocModel persist(CocModel json) throws JsonException
+  public PbxProfileModel persist(PbxProfileModel json) throws JsonException
   {
     try
     {
       if (json.getId() == 0)
       {
-        return cocDao.create(json);
+        return pbxProfileDao.create(json);
       }
       else
       {
-        return cocDao.update(json);
+        return pbxProfileDao.update(json);
       }
     }
     catch (Exception e)
@@ -88,7 +87,7 @@ public class CocAction extends AbstractContactaSmd<CocModel>
   {
     try
     {
-      return new Boolean[] { cocDao.delete(ids[0]) };
+      return new Boolean[] { pbxProfileDao.delete(ids[0]) };
     }
     catch (Exception e)
     {
@@ -102,9 +101,9 @@ public class CocAction extends AbstractContactaSmd<CocModel>
    */
   @SMDMethod
   @Override
-  public CocModel find(int id)
+  public PbxProfileModel find(int id)
   {
-    return cocDao.find(id);
+    return pbxProfileDao.find(id);
   }
 
 
@@ -113,16 +112,16 @@ public class CocAction extends AbstractContactaSmd<CocModel>
    */
   @SMDMethod
   @Override
-  public DatastoreJson<CocModel> findAll()
+  public DatastoreJson<PbxProfileModel> findAll()
   {
-    List<CocModel> jsonList = cocDao.findAll();
-    DatastoreJson<CocModel> store = new DefaultDatastoreJson<CocModel>(DatastoreJson.IDENTIFIER, DatastoreJson.LABEL, jsonList);
+    List<PbxProfileModel> jsonList = pbxProfileDao.findAll();
+    DatastoreJson<PbxProfileModel> store = new DefaultDatastoreJson<PbxProfileModel>(DatastoreJson.IDENTIFIER, DatastoreJson.LABEL, jsonList);
     return store;
   }
 
 
   /*
-   * @see mic.contacta.webapp.AbstractContactaSmd#findModel(java.lang.Integer)
+   * @see mic.contacta.web.AbstractContactaSmd#findModel(java.lang.Integer)
    */
   @Override
   public Model findModel(Integer oid)

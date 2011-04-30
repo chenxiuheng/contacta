@@ -12,7 +12,7 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-package mic.contacta.struts2;
+package mic.contacta.web;
 
 import java.util.List;
 import org.apache.struts2.json.annotations.SMDMethod;
@@ -21,9 +21,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import mic.contacta.model.PbxProfileModel;
-import mic.contacta.server.dao.PbxProfileDao;
-import mic.contacta.webapp.AbstractContactaSmd;
+import mic.contacta.json.SipAccountJson;
+import mic.contacta.server.spi.SipService;
 import mic.organic.core.Model;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -32,63 +31,51 @@ import mic.organic.gateway.JsonException;
 
 /**
  *
+ *
  * @author mic
- * @created Apr 16, 2008
+ * @created May 14, 2009
  */
-@Service("pbxprofileAction")
-@Scope("session")
-public class PbxProfileAction extends AbstractContactaSmd<PbxProfileModel>
+@Service("sipAction")
+@Scope("request")
+public class SipAction extends AbstractContactaSmd<SipAccountJson>
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private PbxProfileDao pbxProfileDao;
+  @Autowired private SipService sipService;
+
+
+  /**
+   * @return the sipAccount
+   */
+  public Model getSipAccount()
+  {
+    return getModel();
+  }
 
 
   /*
    *
    */
-  public PbxProfileAction()
+  public String star()
   {
-    super();
+    return detail();
   }
 
 
-  /*
-   * @see mic.miirc.webapp.JsonSmd#persist(mic.miirc.json.PhoneJson)
-   */
-  @SMDMethod
-  @Override
-  public PbxProfileModel persist(PbxProfileModel json) throws JsonException
-  {
-    try
-    {
-      if (json.getId() == 0)
-      {
-        return pbxProfileDao.create(json);
-      }
-      else
-      {
-        return pbxProfileDao.update(json);
-      }
-    }
-    catch (Exception e)
-    {
-      throw new JsonException(e, json);
-    }
-  }
+
 
 
   /*
-   * @see mic.miirc.webapp.JsonSmd#remove(int[])
+   * @see mic.organic.gateway.JsonSmd#persist(mic.organic.gateway.Json)
    */
-  @SMDMethod
   @Override
-  public Boolean[] remove(int[] ids) throws JsonException
+  @SMDMethod
+  public SipAccountJson persist(SipAccountJson json) throws JsonException
   {
     try
     {
-      return new Boolean[] { pbxProfileDao.delete(ids[0]) };
+      return contactaGateway.sipPersist(json);
     }
     catch (Exception e)
     {
@@ -98,36 +85,54 @@ public class PbxProfileAction extends AbstractContactaSmd<PbxProfileModel>
 
 
   /*
-   * @see mic.miirc.webapp.JsonSmd#find(int)
+   * @see mic.organic.gateway.JsonSmd#remove(int[])
    */
-  @SMDMethod
   @Override
-  public PbxProfileModel find(int id)
+  @SMDMethod
+  public Boolean[] remove(int[] ids) throws JsonException
   {
-    return pbxProfileDao.find(id);
+    try
+    {
+      return contactaGateway.sipRemove(ids);
+    }
+    catch (Exception e)
+    {
+      throw new JsonException("Cannot delete sip: already in use");
+    }
   }
 
 
   /*
-   * @see mic.miirc.webapp.JsonSmd#findAll()
+   * @see mic.organic.gateway.JsonSmd#find(int)
    */
-  @SMDMethod
   @Override
-  public DatastoreJson<PbxProfileModel> findAll()
+  @SMDMethod
+  public SipAccountJson find(int id)
   {
-    List<PbxProfileModel> jsonList = pbxProfileDao.findAll();
-    DatastoreJson<PbxProfileModel> store = new DefaultDatastoreJson<PbxProfileModel>(DatastoreJson.IDENTIFIER, DatastoreJson.LABEL, jsonList);
+    return null; //FIXME uncomment contactaGateway.sipFind(id);
+  }
+
+
+  /*
+   * @see mic.organic.gateway.JsonSmd#findAll()
+   */
+  @Override
+  @SMDMethod
+  public DatastoreJson<SipAccountJson> findAll()
+  {
+    List<SipAccountJson> jsonList = contactaGateway.sipList();
+    DefaultDatastoreJson<SipAccountJson> store = new DefaultDatastoreJson<SipAccountJson>(DatastoreJson.IDENTIFIER, "login", jsonList);
     return store;
   }
 
 
   /*
-   * @see mic.contacta.webapp.AbstractContactaSmd#findModel(java.lang.Integer)
+   * @see mic.contacta.web.AbstractContactaSmd#findModel(java.lang.Integer)
    */
   @Override
   public Model findModel(Integer oid)
   {
-    return find(oid);
+    return sipService.sipFind(oid);
   }
 
 }

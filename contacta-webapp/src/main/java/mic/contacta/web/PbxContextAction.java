@@ -12,19 +12,17 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-package mic.contacta.webapp;
+package mic.contacta.web;
 
 import java.util.List;
-
 import org.apache.struts2.json.annotations.SMDMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-
-import mic.contacta.json.PhoneJson;
-import mic.contacta.server.spi.InventoryService;
+import mic.contacta.model.PbxContextModel;
+import mic.contacta.server.dao.PbxContextDao;
 import mic.organic.core.Model;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -36,20 +34,20 @@ import mic.organic.gateway.JsonException;
  * @author mic
  * @created Apr 16, 2008
  */
-@Service("phoneAction")
-@Scope("request")
-public class PhoneAction extends AbstractContactaSmd<PhoneJson>
+@Service("pbxcontextAction")
+@Scope("session")
+public class PbxContextAction extends AbstractContactaSmd<PbxContextModel>
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private InventoryService inventoryService;
+  @Autowired private PbxContextDao pbxContextDao;
 
 
   /*
    *
    */
-  public PhoneAction()
+  public PbxContextAction()
   {
     super();
   }
@@ -60,15 +58,15 @@ public class PhoneAction extends AbstractContactaSmd<PhoneJson>
    */
   @SMDMethod
   @Override
-  public PhoneJson persist(PhoneJson json) throws JsonException
+  public PbxContextModel persist(PbxContextModel json) throws JsonException
   {
     try
     {
-      return contactaGateway.phonePersist(json);
+      return pbxContextDao.update(json);
     }
     catch (Exception e)
     {
-      throw new JsonException(e);
+      throw new JsonException(e, json);
     }
   }
 
@@ -82,7 +80,7 @@ public class PhoneAction extends AbstractContactaSmd<PhoneJson>
   {
     try
     {
-      return contactaGateway.phoneDelete(ids);
+      return new Boolean[] { pbxContextDao.delete(ids[0]) };
     }
     catch (Exception e)
     {
@@ -96,19 +94,9 @@ public class PhoneAction extends AbstractContactaSmd<PhoneJson>
    */
   @SMDMethod
   @Override
-  public PhoneJson find(int id)
+  public PbxContextModel find(int id)
   {
-    return null; //FIXME uncomment contactaGateway.phoneFind(id);
-  }
-
-
-  /*
-   * @see mic.contacta.webapp.AbstractContactaSmd#findModel(java.lang.Integer)
-   */
-  @Override
-  public Model findModel(Integer oid)
-  {
-    return inventoryService.findPhone(oid);
+    return pbxContextDao.find(id);
   }
 
 
@@ -117,11 +105,21 @@ public class PhoneAction extends AbstractContactaSmd<PhoneJson>
    */
   @SMDMethod
   @Override
-  public DatastoreJson<PhoneJson> findAll()
+  public DatastoreJson<PbxContextModel> findAll()
   {
-    List<PhoneJson> jsonList = contactaGateway.phoneList();
-    DatastoreJson<PhoneJson> store = new DefaultDatastoreJson<PhoneJson>(DatastoreJson.IDENTIFIER, "macAddress", jsonList);
+    List<PbxContextModel> jsonList = pbxContextDao.findAll();
+    DatastoreJson<PbxContextModel> store = new DefaultDatastoreJson<PbxContextModel>(DatastoreJson.IDENTIFIER, DatastoreJson.LABEL, jsonList);
     return store;
+  }
+
+
+  /*
+   * @see mic.contacta.web.AbstractContactaSmd#findModel(java.lang.Integer)
+   */
+  @Override
+  public Model findModel(Integer oid)
+  {
+    return find(oid);
   }
 
 }
