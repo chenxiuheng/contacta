@@ -52,10 +52,7 @@
    [/#if]
   </div>
   <div dojoType="dijit.Toolbar" class="toolbarToolbar">
-   <div dojoType="dijit.form.Button" iconClass="ico50" showLabel="false" onclick="${pad}.showCreate()"><span>${m.t("label.create")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="ico51" showLabel="false" onclick="${pad}.showDeleteGridSelected()"><span>${m.t("label.delete")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoEdit" showLabel="false" onclick="${pad}.showUpdateGridSelected()"><span>${m.t("label.edit")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoRefresh" showLabel="false" onclick="${pad}.refresh()"><span>${m.t("label.reload")}</span></div>
+   [@organicPadButtons pad ui/]
    <span class="dijit dijitReset dijitLeft dijitInline dijitButton" style="margin-top:0px; font-size:11px;">
     <label for="${ui}.quickSelect" style="font-size:9px;">${m.t("label.quickSearch")}</label><br/>
     <select jsId="${ui}.quickSelect" dojoType="dijit.form.ComboBox" style="width:80px;">

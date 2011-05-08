@@ -21,7 +21,8 @@ dojo.declare("openinnovation.contacta.Phonebook", openinnovation.organic.gridpad
      { name:'Cognome', field:'lastName', width:'6em' },
      { name:'Telefono', field:'phone', width:'6em' },
      { name:'Interno', field:'extension', width:'4em' },
-     { name:'Azienda', field:'company', width:'6em' }
+     { name:'Azienda', field:'company', width:'6em' },
+     { name:'Skype', field:'uri', width:'4em' }
     ]] } ];
   },
 

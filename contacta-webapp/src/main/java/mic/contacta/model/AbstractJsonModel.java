@@ -23,7 +23,7 @@ import mic.organic.gateway.Json;
  * @author mic
  * @created Jun 13, 2010
  */
-public class AbstractJsonModel extends AbstractCodeModel implements Json
+public abstract class AbstractJsonModel extends AbstractCodeModel implements Json
 {
 
   /**

@@ -16,7 +16,9 @@
     <tr><td>${m.t("label.command")}</td><td><input dojoType="dijit.form.TextBox" name="command"/></td></tr>
     <tr><td>${m.t("label.macro")}</td><td></td></tr>
    </table>
-   <textarea dojoType="dijit.form.Textarea" jsId="${ui}.macroEditor" name="macro"></textarea>
+   <div style="width:600px; height:300px;"> [#--style:{width:'90%', height:'90%'} dojoType="dijit.form.Textarea" jsId="${ui}.macroEditor" name="macro" cols="120" rows="20" maxLength:'50',  --]
+    <textarea data-dojo-type="dijit.form.Textarea" data-dojo-props="id:'${ui}.macroEditor', name:'macro', style:{width:'550px', height:'100px'}"></textarea>
+   </div>
    [@oko6 pad/]
   </form>
  </div>
@@ -28,10 +30,7 @@
 <div dojoType="dijit.layout.BorderContainer" gutters="false" liveSplitters="false" class="gridpad">
  <div dojoType="dijit.layout.ContentPane" region="top" class="toolbarContainer">
   <div dojoType="dijit.Toolbar" class="toolbarToolbar">
-   <div dojoType="dijit.form.Button" iconClass="icoNew" showLabel="false" onclick="${pad}.showCreate()"><span>${m.t("label.create")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoRemove" showLabel="false" onclick="${pad}.showDeleteGridSelected()"><span>${m.t("label.delete")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoEdit" showLabel="false" onclick="${pad}.showUpdateGridSelected()"><span>${m.t("label.edit")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoRefresh" showLabel="false" onclick="${pad}.refresh()"><span>${m.t("label.reload")}</span></div>
+   [@organicPadButtons pad ui/]
   </div>
  </div>
 

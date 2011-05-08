@@ -28,10 +28,7 @@
 <div dojoType="dijit.layout.BorderContainer" gutters="false" liveSplitters="false" class="gridpad">
  <div dojoType="dijit.layout.ContentPane" region="top" class="toolbarContainer">
   <div dojoType="dijit.Toolbar" class="toolbarToolbar">
-   <div dojoType="dijit.form.Button" iconClass="icoNew" showLabel="false" onclick="${pad}.showCreate()"><span>${m.t("label.product.create")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoRemove" showLabel="false" onclick="${pad}.showDeleteGridSelected()"><span>${m.t("label.product.delete")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoEdit" showLabel="false" onclick="${pad}.showUpdateGridSelected()"><span>${m.t("label.product.edit")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoRefresh" showLabel="false" onclick="${pad}.refresh()"><span>${m.t("label.reload")}</span></div>
+   [@organicPadButtons pad ui/]
   </div>
  </div>
 

@@ -4,7 +4,7 @@
 [#-- ====================================================================== --]
 [#--                                                                        --]
 [#-- ====================================================================== --]
-<div jsId="${ui}.crudDialog" dojoType="dijit.Dialog" style="width:600px;">
+<div jsId="${ui}.crudDialog" dojoType="dijit.Dialog">
  <form jsId="${ui}.crudForm" dojoType="dijit.form.Form">
   <div class="dijitDialogPaneContentArea">
    <div jsId="${ui}.crudMessage" dojoType="dijit.layout.ContentPane">
@@ -25,10 +25,7 @@
 <div dojoType="dijit.layout.BorderContainer" gutters="false" liveSplitters="false" class="gridpad">
  <div dojoType="dijit.layout.ContentPane" region="top" class="toolbarContainer">
   <div dojoType="dijit.Toolbar" class="toolbarToolbar">
-   <div dojoType="dijit.form.Button" iconClass="icoNew" showLabel="false" onclick="${pad}.showCreate()"><span>${m.t("label.create")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoRemove" showLabel="false" onclick="${pad}.showDeleteGridSelected()"><span>${m.t("label.delete")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoEdit" showLabel="false" onclick="${pad}.showUpdateGridSelected()"><span>${m.t("label.edit")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoRefresh" showLabel="false" onclick="${pad}.refresh()"><span>${m.t("label.reload")}</span></div>
+   [@organicPadButtons pad ui/]
   </div>
  </div>
 

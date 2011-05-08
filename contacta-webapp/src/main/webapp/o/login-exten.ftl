@@ -9,7 +9,7 @@ input, select { background-color:#dedede; color:#000; border:1px solid #737373; 
 </head>
 <body style="">
 <!--  -->
-<div class="bg00" style="width:400px;">
+<div class="bg00">
  <div class="ico00" style="margin-left:2px; margin-bottom:2em;"><!--</div>--><div style="margin-left:220px; margin-bottom:2em;">
  <div style="margin-left:auto; margin-right:auto; margin-top:0.2em; margin-bottom:.2em; width:8em; font-weight:bold; color:#8a8f9c;">Contacta login</div>
  <@s.form name="login" method="GET" action="j_spring_security_check">

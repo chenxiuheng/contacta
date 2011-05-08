@@ -102,6 +102,17 @@ dojo.declare("openinnovation.contacta.Phone", openinnovation.organic.gridpad.Con
   },
 
 
+  /*
+   *
+   */
+  convertJson2Form:function(formValue)
+  {
+    var phone = this.inherited(arguments);
+    this._ui.productSelect.set('store', contacta.product._store);
+    return phone;
+  },
+
+
 
 
 

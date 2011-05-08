@@ -2,13 +2,16 @@
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="2.0">
 
  <!-- real jpa entities -->
- <entity class="mic.organic.aaa.model.PersonModel"><table name="abper"/></entity>
- <entity class="mic.organic.aaa.model.AddressModel"><table name="abadr"/></entity>
- <entity class="mic.organic.aaa.model.OrganizationModel"><table name="aborg"/></entity>
- <entity class="mic.organic.aaa.model.GroupModel"><table name="acgrp"/></entity>
- <entity class="mic.organic.aaa.model.RoleModel"><table name="acrol"/></entity>
- <entity class="mic.organic.aaa.model.AccountModel"><table name="acacc"/></entity>
+ <entity class="mic.organic.aaa.model.AccountModel"></entity>
+ <entity class="mic.organic.aaa.model.GroupModel"></entity>
+ <entity class="mic.organic.aaa.model.RoleModel"></entity>
+ <entity class="mic.organic.aaa.model.AddressModel"></entity>
+ <entity class="mic.organic.aaa.model.OrganizationModel"></entity>
+ <entity class="mic.organic.aaa.model.PersonModel"></entity>
+ <entity class="mic.organic.aaa.model.OperationModel"></entity>
+ <entity class="mic.organic.aaa.model.PolicyModel"></entity>
 
+ <entity class="mic.contacta.model.ProductModel"></entity>
  <entity class="mic.contacta.model.PhoneModel"></entity>
  <entity class="mic.contacta.model.SipAccountModel"></entity>
  <entity class="mic.contacta.model.CoverageModel"></entity>

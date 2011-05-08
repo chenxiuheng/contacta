@@ -4,7 +4,7 @@
 [#-- ====================================================================== --]
 [#--                                                                        --]
 [#-- ====================================================================== --]
-<div jsId="${ui}.crudDialog" dojoType="dijit.Dialog" style="width:400px;">
+<div jsId="${ui}.crudDialog" dojoType="dijit.Dialog">
  <form jsId="${ui}.crudForm" dojoType="dijit.form.Form">
   <div class="dijitDialogPaneContentArea">
    <div jsId="${ui}.crudMessage" dojoType="dijit.layout.ContentPane">
@@ -37,9 +37,9 @@
   </div>
   [#--@oko6/--]
   <div class="dijitDialogPaneActionBar">
-   <button dojoType="dijit.form.Button" iconClass="icoApply" onclick="contacta.contactaService.notifyCheckCfg(${ui}.loginInput.get('value'));">Reboot</button>
-   <button dojoType="dijit.form.Button" iconClass="icoApply"  type="submit">${m.t("label.ok")}</button>
-   <button dojoType="dijit.form.Button" iconClass="icoCancel" onclick="dojo.hitch(${pad}, ${pad}._crudHide());return false;">${m.t("label.ko")}</button>
+   <button                 dojoType="dijit.form.Button" iconClass="icoApply" onclick="contacta.contactaService.notifyCheckCfg(${ui}.loginInput.get('value'));">Reboot</button>
+   <button jsId="${ui}.ok" dojoType="dijit.form.Button" iconClass="icoApply" onclick="dojo.hitch(${pad}, ${pad}.submitPersist)();return false;">${m.t("label.ok")}</button>
+   <button jsId="${ui}.ko" dojoType="dijit.form.Button" iconClass="icoCancel" onclick="dojo.hitch(${pad}, ${pad}._crudHide)();return false;">${m.t("label.ko")}</button>
   </div>
  </form>
 </div>
@@ -51,9 +51,7 @@
 <div dojoType="dijit.layout.BorderContainer"gutters="false" liveSplitters="false" class="gridpad">
  <div dojoType="dijit.layout.ContentPane" region="top" class="toolbarContainer">
   <div dojoType="dijit.Toolbar" class="toolbarToolbar">
-   <div dojoType="dijit.form.Button" iconClass="icoNew" showLabel="false" onclick="${pad}.showCreate()"><span>${m.t("label.sip.create")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoEdit" showLabel="false" onclick="${pad}.showUpdateGridSelected()"><span>${m.t("label.sip.edit")}</span></div>
-   <div dojoType="dijit.form.Button" iconClass="icoRemove" showLabel="false" onclick="${pad}.showDeleteGridSelected()"><span>${m.t("label.sip.delete")}</span></div>
+   [@organicPadButtons pad ui/]
    <button dojoType="dijit.form.DropDownButton" iconClass="ico50" label="${m.t("label.sip.coverage")}">
     <div dojoType="dijit.Menu">
      <div dojoType="dijit.MenuItem" iconClass="ico50" label="${m.t("label.sip.coverage.add")}" onclick="${pad}.coverage.show()"></div>
@@ -61,7 +59,6 @@
     </div>
    </button>
    <button dojoType="dijit.form.Button" iconClass="ico46" showLabel="false" onclick="${pad}.starDetail()"><span>${m.t("label.sip.asterisk.detail")}</span></button>
-   <div dojoType="dijit.form.Button" iconClass="icoRefresh" showLabel="false" onclick="${pad}.refresh()"><span>${m.t("label.reload")}</span></div>
    <span class="dijit dijitReset dijitLeft dijitInline dijitButton" style="margin-top:0px; font-size:11px;">
     <label for="${ui}.quickSelect" style="font-size:9px;;">${m.t("label.quickSearch")}</label><br/>
     <select jsId="${ui}.quickSelect" dojoType="dijit.form.ComboBox" style="width:80px;">

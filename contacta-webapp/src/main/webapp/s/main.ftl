@@ -35,6 +35,7 @@ var organic =
   account:null,
   [/#if]
   aaa:null,
+  defaultTsDate:'dd-MM-yyyy',
   util:new openinnovation.organic.Organic({ baseUrl:'${base!""}' })
 };
 var contacta = null;
@@ -53,6 +54,12 @@ dojo.addOnLoad(function()
      }
    });
   contacta.init();
+});
+
+dojo.addOnUnload(function()
+{
+  console.log("You're leaving the page");
+  //alert("You're leaving the page");
 });
 </script>
 </head>
@@ -149,38 +156,38 @@ dojo.addOnLoad(function()
     </div>
    </div>
 
-   [#-- administration --]
-   [#if organicConfiguration.develMode]
-   [/#if]
-   <div dojoType="dijit.layout.TabContainer" title="Administrator" nested="true">
+  [#-- =================== admin =================== --]
+  [#--if authz.canDo("ADMIN")--]
+  <div dojoType="dijit.layout.TabContainer" title="${m.t("label.administrator")}" nested="true">
     <div dojoType="dijit.layout.ContentPane" title="Person">
      [#include "../s/person/tab.ftl"/]
     </div>
 
-    <div dojoType="dijit.layout.ContentPane" title="Organization">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.organization")}">
      [#include "../s/organization/tab.ftl"/]
     </div>
 
-    <div dojoType="dijit.layout.ContentPane" title="Account" selected="true">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.account")}" selected="true">
      [#include "../s/account/tab.ftl"/]
     </div>
 
-    <div dojoType="dijit.layout.ContentPane" title="Group">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.group")}">
      [#include "../s/group/tab.ftl"/]
     </div>
 
-    <div dojoType="dijit.layout.ContentPane" title="Role">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.role")}">
      [#include "../s/role/tab.ftl"/]
     </div>
 
-    <div dojoType="dijit.layout.ContentPane" title="Policy">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.policy")}">
      [#include "../s/policy/tab.ftl"/]
     </div>
 
-    <div dojoType="dijit.layout.ContentPane" title="Operation">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.operation")}">
      [#include "../s/operation/tab.ftl"/]
     </div>
    </div>
+  [#--/#if--]
 
   </div>
   [/#if]
