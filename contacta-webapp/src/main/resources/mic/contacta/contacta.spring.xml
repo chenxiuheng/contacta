@@ -174,7 +174,8 @@
       <entry key="coverage" value-ref="coverageAgi"/>
       <entry key="coveragePickup" value-ref="coveragePickupAgi"/>
       <entry key="presence" value-ref="presenceAgi"/>
-      <entry key="skype" value-ref="skypeAgi"/>
+      <entry key="skypeIn" value-ref="skypeInAgi"/>
+      <entry key="skypeOut" value-ref="skypeOutAgi"/>
       <!--
       <entry key="drop612" value-ref="drop612Agi"/>
        -->

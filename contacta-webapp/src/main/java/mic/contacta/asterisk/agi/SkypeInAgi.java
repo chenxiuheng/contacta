@@ -14,7 +14,6 @@
  */
 package mic.contacta.asterisk.agi;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.asteriskjava.fastagi.AgiChannel;
@@ -25,8 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import mic.contacta.asterisk.agi.AbstractContactaAgi;
 import mic.contacta.model.SipAccountModel;
 import mic.contacta.server.spi.SipService;
 import mic.organic.aaa.model.PersonModel;
@@ -40,20 +37,21 @@ import mic.organic.aaa.spi.AddressbookService;
  * @author mic
  * @created May 1, 2011
  */
-@Service("skypeAgi")
-public class SkypeAgi extends AbstractContactaAgi
+@Service("skypeInAgi")
+public class SkypeInAgi extends AbstractContactaAgi
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
   @Autowired private SipService sipService;
   @Autowired private AddressbookService addressbookService;
+  @Autowired private AccountService accountService;
 
 
   /*
    *
    */
-  public SkypeAgi()
+  public SkypeInAgi()
   {
     super("#42");
   }
@@ -67,26 +65,31 @@ public class SkypeAgi extends AbstractContactaAgi
   public void service(AgiRequest request, AgiChannel channel) throws AgiException
   {
     String[] excludes = new String[] { "logger" };
-
     ReflectionToStringBuilder builder = new ReflectionToStringBuilder(request, ToStringStyle.MULTI_LINE_STYLE).setExcludeFieldNames(excludes);
     log().info("request:\n{}", builder.toString());
 
     String callerIdNumber = request.getCallerIdNumber();
     //SipAccountModel pickerSip = sipService.sipByLogin(callerIdNumber);
-    PersonModel person = addressbookService.personByUri(callerIdNumber);
+    String calleeIdNumber = request.getExtension();  // callee
+    PersonModel person = addressbookService.personByUri(calleeIdNumber);
+    String skype2exten = null;
     if (person == null)
     {
       log().warn("{}: who are you?!?!?", callerIdNumber);
     }
-    String extension = request.getExtension();  // callee
-    SipAccountModel calleeSip = sipService.sipByLogin(extension);
-    if (calleeSip == null)
+    else
     {
-      log().warn("{}: who is she?!?!?", extension);
-      return;
+      skype2exten = person.getExtension();
+      log().info("skype2exten={}", skype2exten);
     }
+//    SipAccountModel calleeSip = sipService.sipByLogin(calleeIdNumber);
+//    if (calleeSip == null)
+//    {
+//      log().warn("{}: who is she?!?!?", calleeIdNumber);
+//    }
 
-    //channel.setVariable(VARNAME_PICKUP, Boolean.FALSE.toString());
+    channel.setVariable("SKYPE_2_EXTEN", skype2exten);
+    //channel.setContext("sipphones");
     //log().info("permission denied");
     //Boolean b = StringUtils.equals(calleeSip.getPickupgroup(), pickerSip.getPickupgroup());
     //postDecision(b);
