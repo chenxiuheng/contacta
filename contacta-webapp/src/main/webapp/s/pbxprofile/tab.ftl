@@ -35,7 +35,7 @@
  </div>
 
  <div dojoType="dijit.layout.ContentPane" region="center" class="gridPane">
-  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid">
+  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid" sortInfo="1">
   </table>
  </div>
 

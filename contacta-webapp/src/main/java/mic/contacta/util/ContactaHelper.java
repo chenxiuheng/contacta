@@ -17,8 +17,8 @@ package mic.contacta.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import mic.contacta.server.spi.ContactaService;
-import mic.contacta.server.spi.ProvisioningService;
+import mic.contacta.server.ContactaService;
+import mic.contacta.server.ProvisioningService;
 import mic.organic.core.*;
 
 

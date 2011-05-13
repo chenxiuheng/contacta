@@ -74,7 +74,7 @@ public class HangupHandler extends AbstractHandler<HangupEvent>
 
 
   /*
-   * @see mic.contacta.server.spi.Handler#handleEvent()
+   * @see mic.contacta.server.Handler#handleEvent()
    */
   @Override
   public void handleEvent(HangupEvent event)

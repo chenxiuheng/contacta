@@ -24,13 +24,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mic.contacta.asterisk.agi.AbstractContactaAgi;
-import mic.contacta.model.CoverageModel;
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.model.CoverageModel.CoverageType;
-import mic.contacta.model.SipAccountModel.Presence;
-import mic.contacta.server.api.ContactaException;
-import mic.contacta.server.spi.ContactaService;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.domain.CoverageModel;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.domain.CoverageModel.CoverageType;
+import mic.contacta.domain.SipAccountModel.Presence;
+import mic.contacta.server.ContactaException;
+import mic.contacta.server.ContactaService;
+import mic.contacta.server.PbxService;
 
 
 /**
@@ -45,7 +45,7 @@ public class PresenceAgi extends AbstractContactaAgi
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private SipService sipService;
+  @Autowired private PbxService pbxService;
   @Autowired private ContactaService contactaService;
 
 
@@ -68,7 +68,7 @@ public class PresenceAgi extends AbstractContactaAgi
     String callerExten = request.getCallerIdNumber();
     log().info("callerExten={}", callerExten);
 
-    SipAccountModel callerSip = sipService.sipByLogin(callerExten);
+    SipAccountModel callerSip = pbxService.sipByLogin(callerExten);
     if (callerSip == null)
     {
       log().warn("{}: who are you?!?!?", callerExten);
@@ -92,7 +92,7 @@ public class PresenceAgi extends AbstractContactaAgi
         presence = (presence == Presence.Online) ? Presence.Dnd : Presence.Online;
         log().info("callerExten={}, setting presence={}", callerExten, presence.toString());
         callerSip.setPresence(presence);
-        sipService.sipUpdate(callerSip);
+        pbxService.sipUpdate(callerSip);
         channel.exec("Wait", "1");
         switch (presence)
          {
@@ -110,7 +110,7 @@ public class PresenceAgi extends AbstractContactaAgi
 
         try
         {
-          sipService.writeExtenHint();
+          pbxService.writeExtenHint();
           contactaService.asteriskCommand(ContactaService.EXTENSIONS_RELOAD);
         }
         catch (ContactaException e)

@@ -19,9 +19,9 @@ import java.util.*;
 import org.asteriskjava.manager.action.OriginateAction;
 
 import mic.organic.core.Service;
-import mic.contacta.server.api.Call;
-import mic.contacta.server.api.ChannelStatusLine;
-import mic.contacta.server.api.ContactaException;
+import mic.contacta.domain.Call;
+import mic.contacta.domain.ChannelStatusLine;
+import mic.contacta.server.ContactaException;
 import mic.contacta.util.StatisticsBean;
 
 

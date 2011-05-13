@@ -31,44 +31,10 @@
    <property name="hibernate.id.new_generator_mappings" value="true"/>
    <property name="hibernate.hbm2ddl.auto" value="update"/>
    <property name="hibernate.bytecode.provider" value="javassist"/>
-   <!--
-   <property name="hibernate.ejb.event.post-insert" value="org.hibernate.ejb.event.EJB3PostInsertEventListener,org.hibernate.envers.event.AuditEventListener"/>
-   <property name="hibernate.ejb.event.post-update" value="org.hibernate.ejb.event.EJB3PostUpdateEventListener,org.hibernate.envers.event.AuditEventListener"/>
-   <property name="hibernate.ejb.event.post-delete" value="org.hibernate.ejb.event.EJB3PostDeleteEventListener,org.hibernate.envers.event.AuditEventListener"/>
-   <property name="hibernate.ejb.event.pre-collection-update" value="org.hibernate.envers.event.AuditEventListener"/>
-   <property name="hibernate.ejb.event.pre-collection-remove" value="org.hibernate.envers.event.AuditEventListener"/>
-   <property name="hibernate.ejb.event.post-collection-recreate" value="org.hibernate.envers.event.AuditEventListener"/>
-    -->
-   <!--
-     http://stackoverflow.com/questions/3561235/how-can-i-force-maven-to-use-ehcache-2-2-0-with-hibernate-3-3-2ga
-     http://www.ehcache.org/documentation/hibernate.html#Hibernate_3.3_and_higher
-
-   <property name="hibernate.cache.provider_class">net.sf.ehcache.hibernate.SingletonEhCacheProvider</property>
-   <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
-    -->
-   <property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
-   <property name="hibernate.cache.use_query_cache" value="true"/>
-   <property name="hibernate.cache.use_second_level_cache" value="true"/>
-   <!--
-   @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-
-   <property name="hibernate.cache.region.factory_class" value="net.sf.ehcache.hibernate.EhCacheRegionFactory"/>
-    -->
    <property name="hibernate.show_sql" value="false"/>
    <property name="hibernate.format_sql" value="false"/>
+   <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
   </properties>
  </persistence-unit>
 
- <!-- intport-persistence-unit
- <persistence-unit name="intport-persistence-unit" transaction-type="RESOURCE_LOCAL">
-  <provider>org.hibernate.ejb.HibernatePersistence</provider>
-  <mapping-file>META-INF/contacta-intport-orm-mapping.xml</mapping-file>
-  <exclude-unlisted-classes/>
-  <properties>
-   <property name="hibernate.id.new_generator_mappings" value="true"/>
-   <property name="hibernate.hbm2ddl.auto" value="validate"/>
-   <property name="hibernate.show_sql" value="false"/>
-  </properties>
- </persistence-unit>-->
 </persistence>
-

@@ -23,11 +23,11 @@ import javax.persistence.EntityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.model.SipUserModel;
-import mic.contacta.model.VoicemailModel;
-import mic.contacta.server.dao.SipUserDao;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.dao.SipUserDao;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.domain.SipUserModel;
+import mic.contacta.domain.VoicemailModel;
+import mic.contacta.server.PbxService;
 
 /**
  *
@@ -41,17 +41,17 @@ public class UpgradeTo052
 
   private EntityManager entityManager;
   private SipUserDao sipUserDao;
-  private SipService sipService;
+  private PbxService pbxService;
   private String voicemailContext;
 
 
   /*
    *
    */
-  public UpgradeTo052(SipService sipService, SipUserDao sipUserDao, EntityManager entityManager, String voicemailContext)
+  public UpgradeTo052(PbxService pbxService, SipUserDao sipUserDao, EntityManager entityManager, String voicemailContext)
   {
     super();
-    this.sipService = sipService;
+    this.pbxService = pbxService;
     this.sipUserDao = sipUserDao;
     this.entityManager = entityManager;
     this.voicemailContext = voicemailContext;
@@ -78,7 +78,7 @@ public class UpgradeTo052
     {
       log().warn("some VoicemailModel is missing, trying to fix it");
 
-      List<SipAccountModel> accountList = sipService.sipList();
+      List<SipAccountModel> accountList = pbxService.sipList();
       for (SipAccountModel account : accountList)
       {
         if (account.getVmBox() == null)
@@ -124,7 +124,7 @@ public class UpgradeTo052
     {
       log().warn("some SipUser is dangling, trying to fix it");
 
-      List<SipAccountModel> accountList = sipService.sipList();
+      List<SipAccountModel> accountList = pbxService.sipList();
       Map<String,SipAccountModel> accountMap = new HashMap<String,SipAccountModel>();
       for (SipAccountModel account : accountList)
       {

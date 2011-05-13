@@ -11,14 +11,14 @@
  <entity class="mic.organic.aaa.model.OperationModel"></entity>
  <entity class="mic.organic.aaa.model.PolicyModel"></entity>
 
- <entity class="mic.contacta.model.ProductModel"></entity>
- <entity class="mic.contacta.model.PhoneModel"></entity>
- <entity class="mic.contacta.model.SipAccountModel"></entity>
- <entity class="mic.contacta.model.CoverageModel"></entity>
- <entity class="mic.contacta.model.CocModel"></entity>
+ <entity class="mic.contacta.domain.ProductModel"></entity>
+ <entity class="mic.contacta.domain.PhoneModel"></entity>
+ <entity class="mic.contacta.domain.SipAccountModel"></entity>
+ <entity class="mic.contacta.domain.CoverageModel"></entity>
+ <entity class="mic.contacta.domain.CocModel"></entity>
 
  <!-- asterisk entities -->
- <entity class="mic.contacta.model.SipUserModel">
+ <entity class="mic.contacta.domain.SipUserModel">
   <attribute-override name="cancallforward"><column column-definition="bpchar"/></attribute-override>
   <attribute-override name="canreinvite"><column column-definition="bpchar"/></attribute-override>
   <attribute-override name="language"><column column-definition="bpchar"/></attribute-override>
@@ -28,12 +28,12 @@
   <attribute-override name="rtpholdtimeout"><column column-definition="bpchar"/></attribute-override>
   <attribute-override name="port"><column column-definition="int2"/></attribute-override>
  </entity>
- <entity class="mic.contacta.model.VoicemailModel">
+ <entity class="mic.contacta.domain.VoicemailModel">
   <attribute-override name="saydurationm"><column column-definition="int2"/></attribute-override>
  </entity>
- <entity class="mic.contacta.model.ExtenModel"/>
- <entity class="mic.contacta.model.ConferenceModel"/>
+ <entity class="mic.contacta.domain.ExtenModel"/>
+ <entity class="mic.contacta.domain.ConferenceModel"/>
  <!--  -->
- <entity class="mic.contacta.model.AppointmentModel"/>
+ <entity class="mic.contacta.domain.AppointmentModel"/>
 
 </entity-mappings>

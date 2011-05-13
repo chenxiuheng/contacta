@@ -17,7 +17,7 @@ package mic.contacta.pmod.common;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import mic.contacta.model.SipAccountModel;
+import mic.contacta.domain.SipAccountModel;
 import mic.contacta.pmod.common.Configurer;
 import mic.contacta.pmod.common.ProvisioningSession;
 

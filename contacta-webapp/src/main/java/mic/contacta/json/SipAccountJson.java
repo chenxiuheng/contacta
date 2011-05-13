@@ -17,7 +17,7 @@ package mic.contacta.json;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-import mic.contacta.model.SipAccountModel.Presence;
+import mic.contacta.domain.SipAccountModel.Presence;
 import mic.organic.gateway.AbstractJson;
 
 

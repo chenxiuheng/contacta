@@ -20,10 +20,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mic.contacta.model.PbxProfileModel;
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.server.api.ContactaConstants;
-import mic.contacta.server.dao.PbxProfileDao;
+import mic.contacta.dao.PbxProfileDao;
+import mic.contacta.domain.PbxProfileModel;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.server.ContactaConstants;
 
 /**
  *

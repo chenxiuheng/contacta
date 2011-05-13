@@ -47,7 +47,7 @@
  <div dojoType="dijit.layout.ContentPane" id="phoneAddAccountPane" jsId="phoneAddAccountPane">
   <div dojoType="dijit.layout.ContentPane" style="margin-bottom:10px;">${m.t("label.phone.addSip")}</div>
   <div style="height:400px;">
-  <div id="ui.phoneAddAccountGrid" jsId="ui.phoneAddAccountGrid" dojoType="dojox.grid.DataGrid" autoWidth="true"
+  <div id="ui.phoneAddAccountGrid" jsId="ui.phoneAddAccountGrid" dojoType="dojox.grid.DataGrid" sortInfo="1" autoWidth="true"
       noDataMessage="${m.t("label.detailPaneEmpty")}" structure="contacta.sip.structure" selectionMode="single"
       >
   </div>

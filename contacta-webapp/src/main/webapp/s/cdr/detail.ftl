@@ -13,9 +13,9 @@
 <tr><td>${m.t("label.dst")}:</td><td>${model.dst}</td></tr>
 <tr><td>${m.t("label.dcontext")}:</td><td>${model.dcontext}</td></tr>
 <tr><td>${m.t("label.channel")}:</td><td>${model.channel}</td></tr>
-<tr><td>${m.t("label.dstchannel")}:</td><td>${model.dstchannel}</td></tr>
+<tr><td>${m.t("label.dstchannel")}:</td><td>${model.dstchannel!"N/A"}</td></tr>
 <tr><td>${m.t("label.lastapp")}:</td><td>${model.lastapp}</td></tr>
-<tr><td>${m.t("label.lastdata")}:</td><td>${model.lastdata}</td></tr>
+<tr><td>${m.t("label.lastdata")}:</td><td>${model.lastdata!"N/A"}</td></tr>
 <tr><td>${m.t("label.duration")}:</td><td>${model.duration}</td></tr>
 <tr><td>${m.t("label.billsec")}:</td><td>${model.billsec}</td></tr>
 <tr><td>${m.t("label.disposition")}:</td><td>${model.disposition}</td></tr>

@@ -16,13 +16,13 @@ dojo.declare("openinnovation.contacta.Phonebook", openinnovation.organic.gridpad
   constructor: function(args)
   {
     this.structure = [{ cells: [[
-     { name:'Nome completo', field:'displayName', width:'16em' },
+     { name:'Nome completo', field:'displayName', width:'14em' },
      { name:'Nome', field:'firstName', width:'6em' },
      { name:'Cognome', field:'lastName', width:'6em' },
      { name:'Telefono', field:'phone', width:'6em' },
      { name:'Interno', field:'extension', width:'4em' },
      { name:'Azienda', field:'company', width:'6em' },
-     { name:'Skype', field:'uri', width:'4em' }
+     { name:'Skype', field:'uri', width:'12em' }
     ]] } ];
   },
 
@@ -49,6 +49,49 @@ dojo.declare("openinnovation.contacta.Phonebook", openinnovation.organic.gridpad
     json.bornDate = dojo.date.stamp.fromISOString(json.bornDate);
     //json.bornDate = new Date(json.bornDate);
     console.log('OOOOOOOOOOOOO', form);
+    return form;
+  },
+
+
+  endOfLib:null
+});
+
+
+// ==============================================================================================
+//  Calls
+// ==============================================================================================
+dojo.provide("openinnovation.contacta.Calls");
+dojo.declare("openinnovation.contacta.Calls", openinnovation.organic.gridpad.Controller,
+{
+  classCode:'calls',
+
+  constructor: function(args)
+  {
+    this.structure = [{ cells: [[
+     { name:'Nome completo', field:'displayName', width:'14em' },
+     { name:'Telefono', field:'phone', width:'6em' },
+     { name:'Interno', field:'extension', width:'4em' },
+     { name:'Skype', field:'uri', width:'12em' }
+    ]] } ];
+  },
+
+
+  /*
+   *
+   */
+  convertForm2Json:function(formValue)
+  {
+    var json = this.inherited(arguments);
+    return json;
+  },
+
+
+  /*
+   *
+   */
+  convertJson2Form:function(json)
+  {
+    var form = this.inherited(arguments);
     return form;
   },
 

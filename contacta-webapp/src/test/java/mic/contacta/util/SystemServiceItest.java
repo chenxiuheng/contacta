@@ -23,7 +23,7 @@ import org.springframework.test.context.testng.AbstractTransactionalTestNGSpring
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import mic.contacta.server.api.ContactaConstants;
+import mic.contacta.server.ContactaConstants;
 
 
 /**

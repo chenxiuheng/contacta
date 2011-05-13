@@ -19,10 +19,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.Action;
-import mic.contacta.server.spi.ContactaSession;
-import mic.contacta.server.spi.InventoryService;
-import mic.contacta.server.spi.ProvisioningService;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.server.ContactaSession;
+import mic.contacta.server.InventoryService;
+import mic.contacta.server.PbxService;
+import mic.contacta.server.ProvisioningService;
 
 
 
@@ -40,7 +40,7 @@ public abstract class AbstractContactaAction implements Action
   @Autowired protected ContactaSession contactaSession;
 
   @Autowired protected InventoryService inventoryService;
-  @Autowired protected SipService sipService;
+  @Autowired protected PbxService pbxService;
 
 
   /**

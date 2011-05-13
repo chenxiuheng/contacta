@@ -57,7 +57,7 @@ public class EventDispatcherImpl implements EventDispatcher
 
 
   /*
-   * @see mic.contacta.server.spi.EventDispatcher#getDisabled()
+   * @see mic.contacta.server.EventDispatcher#getDisabled()
    */
   public boolean getDisabled()
   {
@@ -112,7 +112,7 @@ public class EventDispatcherImpl implements EventDispatcher
 
 
   /*
-   * @see mic.contacta.server.spi.EventDispatcher#onManagerEvent(org.asteriskjava.manager.event.ManagerEvent)
+   * @see mic.contacta.server.EventDispatcher#onManagerEvent(org.asteriskjava.manager.event.ManagerEvent)
    */
   public void onManagerEvent(ManagerEvent managerEvent)
   {

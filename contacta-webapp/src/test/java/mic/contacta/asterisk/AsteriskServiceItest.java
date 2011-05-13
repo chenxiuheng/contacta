@@ -18,7 +18,7 @@ import java.util.List;
 
 import mic.contacta.asterisk.spi.AsteriskService;
 import mic.contacta.asterisk.spi.SipStatus;
-import mic.contacta.server.api.ChannelStatusLine;
+import mic.contacta.domain.ChannelStatusLine;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

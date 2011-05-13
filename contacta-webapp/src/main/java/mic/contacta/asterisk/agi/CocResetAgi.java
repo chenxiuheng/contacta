@@ -24,9 +24,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mic.contacta.asterisk.agi.AbstractContactaAgi;
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.server.spi.ContactaService;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.server.ContactaService;
+import mic.contacta.server.PbxService;
 
 
 /**
@@ -48,7 +48,7 @@ public class CocResetAgi extends AbstractContactaAgi
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private SipService sipService;
+  @Autowired private PbxService pbxService;
   @Autowired private ContactaService contactaService;
 
   /*
@@ -69,7 +69,7 @@ public class CocResetAgi extends AbstractContactaAgi
   {
     //printDebug(request, channel);
     String callerExten = request.getCallerIdNumber();
-    SipAccountModel callerSip = sipService.sipByLogin(callerExten);
+    SipAccountModel callerSip = pbxService.sipByLogin(callerExten);
     if (callerSip == null)
     {
       log().warn("{}: who are you?!?!?", callerExten);
@@ -78,7 +78,7 @@ public class CocResetAgi extends AbstractContactaAgi
       return;
     }
     callerSip.getSipUser().setContext(callerSip.getContext().getCode());
-    sipService.sipUpdate(callerSip);
+    pbxService.sipUpdate(callerSip);
     channel.exec("Wait", "1");
     channel.exec("Playback", "beep");
 

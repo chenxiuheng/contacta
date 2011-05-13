@@ -64,7 +64,7 @@ public abstract class AbstractHandler<T extends ManagerEvent> implements Handler
 
 
   /*
-   * @see mic.contacta.server.spi.Handler#setEvent(org.asteriskjava.manager.event.ManagerEvent)
+   * @see mic.contacta.server.Handler#setEvent(org.asteriskjava.manager.event.ManagerEvent)
    */
   @Override
   public void setEvent(ManagerEvent managerEvent)

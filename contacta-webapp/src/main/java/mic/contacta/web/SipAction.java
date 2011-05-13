@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import mic.contacta.json.SipAccountJson;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.server.PbxService;
 import mic.organic.core.Model;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -42,7 +42,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private SipService sipService;
+  @Autowired private PbxService pbxService;
 
 
   /**
@@ -75,7 +75,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   {
     try
     {
-      return contactaGateway.sipPersist(json);
+      return pbxGateway.sipPersist(json);
     }
     catch (Exception e)
     {
@@ -93,7 +93,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   {
     try
     {
-      return contactaGateway.sipRemove(ids);
+      return pbxGateway.sipRemove(ids);
     }
     catch (Exception e)
     {
@@ -109,7 +109,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   @SMDMethod
   public SipAccountJson find(int id)
   {
-    return null; //FIXME uncomment contactaGateway.sipFind(id);
+    return null; //FIXME uncomment pbxGateway.sipFind(id);
   }
 
 
@@ -120,7 +120,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   @SMDMethod
   public DatastoreJson<SipAccountJson> findAll()
   {
-    List<SipAccountJson> jsonList = contactaGateway.sipList();
+    List<SipAccountJson> jsonList = pbxGateway.sipList();
     DefaultDatastoreJson<SipAccountJson> store = new DefaultDatastoreJson<SipAccountJson>(DatastoreJson.IDENTIFIER, "login", jsonList);
     return store;
   }
@@ -132,7 +132,7 @@ public class SipAction extends AbstractContactaSmd<SipAccountJson>
   @Override
   public Model findModel(Integer oid)
   {
-    return sipService.sipFind(oid);
+    return pbxService.sipFind(oid);
   }
 
 }

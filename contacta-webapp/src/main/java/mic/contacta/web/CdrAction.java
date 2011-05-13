@@ -25,10 +25,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import mic.contacta.asterisk.spi.AsteriskService;
-import mic.contacta.model.CdrModel;
-import mic.contacta.model.CdrQueryModel;
-import mic.contacta.server.api.ContactaConstants;
-import mic.contacta.server.dao.CdrDao;
+import mic.contacta.dao.CdrDao;
+import mic.contacta.domain.CdrModel;
+import mic.contacta.domain.CdrQueryModel;
+import mic.contacta.server.ContactaConstants;
 import mic.organic.core.Model;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -136,7 +136,7 @@ public class CdrAction extends AbstractContactaSmd<CdrModel>
   public DatastoreJson<CdrModel> findAll()
   {
     List<CdrModel> jsonList = cdrDao.findAll();
-    DatastoreJson<CdrModel> store = new DefaultDatastoreJson<CdrModel>(DatastoreJson.IDENTIFIER, DatastoreJson.IDENTIFIER, jsonList);
+    DatastoreJson<CdrModel> store = new DefaultDatastoreJson<CdrModel>(CdrDao.UNIQUEID, CdrDao.UNIQUEID, jsonList);
     return store;
   }
 

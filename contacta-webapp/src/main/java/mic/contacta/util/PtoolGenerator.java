@@ -25,8 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import mic.contacta.server.api.ContactaConstants;
-import mic.contacta.server.spi.ContactaService;
+import mic.contacta.server.ContactaConstants;
+import mic.contacta.server.ContactaService;
 import mic.organic.core.OrganicSpringHelper;
 
 

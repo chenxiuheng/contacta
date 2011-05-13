@@ -29,7 +29,8 @@
 <div dojoType="dijit.layout.BorderContainer" gutters="false" liveSplitters="false" class="gridpad">
  <div dojoType="dijit.layout.ContentPane" region="top" class="toolbarContainer">
   <div dojoType="dijit.Toolbar" class="toolbarToolbar">
-   [@organicPadButtons pad ui/]
+   [#assign hide = ["filter"] /]
+   [@organicPadButtons2 pad ui hide /]
    <div dojoType="dijit.form.Button" iconClass="ico50" showLabel="true" onclick="${pad}.addAccountShow()"><span>${m.t("label.phone.addSip")}</span></div>
    <span class="dijit dijitReset dijitLeft dijitInline dijitButton" style="margin-top:0px; font-size:11px;">
     <label for="ui.phonePagination" style="font-size:9px;">${m.t("label.callerid")}</label><br/>

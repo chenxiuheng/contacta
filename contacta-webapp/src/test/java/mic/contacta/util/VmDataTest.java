@@ -21,9 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 
-import mic.contacta.server.api.ContactaConstants;
-import mic.contacta.server.api.ContactaException;
-import mic.contacta.server.api.VmData;
+import mic.contacta.server.ContactaConstants;
+import mic.contacta.server.ContactaException;
 
 
 import static org.testng.Assert.*;

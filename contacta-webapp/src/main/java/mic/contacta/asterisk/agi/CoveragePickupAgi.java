@@ -25,8 +25,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mic.contacta.asterisk.agi.AbstractContactaAgi;
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.server.PbxService;
 
 
 /**
@@ -42,7 +42,7 @@ public class CoveragePickupAgi extends AbstractContactaAgi
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private SipService sipService;
+  @Autowired private PbxService pbxService;
 
 
   /*
@@ -64,7 +64,7 @@ public class CoveragePickupAgi extends AbstractContactaAgi
     String callerExten = request.getExtension();
     //String exten = channel.getVariable("ARG1");
 
-    SipAccountModel sip = sipService.sipByLogin(callerExten);
+    SipAccountModel sip = pbxService.sipByLogin(callerExten);
     if (sip == null)
     {
       log().warn("{}: who are you?!?!?", callerExten);

@@ -6,7 +6,7 @@
   <div dojoType="dijit.form.Button" iconClass="ico53" showLabel="true" onclick="contacta.coverage.load()"><span>${m.t("label.reload")}</span></div>
  </div>
  <div dojoType="dijit.layout.ContentPane" region="center">
-  <table jsId="ui.coverageGrid" dojoType="dojox.grid.DataGrid" noDataMessage="${m.t("label.detailPaneEmpty")}" rowsPerPage="20">
+  <table jsId="ui.coverageGrid" dojoType="dojox.grid.DataGrid" sortInfo="1" noDataMessage="${m.t("label.detailPaneEmpty")}" rowsPerPage="20">
   </table>
  </div>
  <div dojoType="dijit.layout.ContentPane" region="right" style="background-color: #eeeeee; width:280px; margin:4px; border:1px dotted black;">

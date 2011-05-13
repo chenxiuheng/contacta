@@ -68,6 +68,8 @@ dojo.declare("openinnovation.contacta.Contacta", null,
       this.pbxcontext.refresh();
       this.pbxprofile.refresh();
       this.product.refresh();
+      this.calls = new openinnovation.contacta.Calls();
+      this.calls.refresh();
 
       this.phone = new openinnovation.contacta.Phone();
       this.sip = new openinnovation.contacta.Sip();

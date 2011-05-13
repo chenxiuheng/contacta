@@ -32,15 +32,15 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.Test;
 
-import mic.contacta.model.PhoneModel;
-import mic.contacta.model.SipAccountModel;
+import mic.contacta.domain.PhoneModel;
+import mic.contacta.domain.SipAccountModel;
 import mic.contacta.pmod.common.AbstractPmodTests;
 import mic.contacta.pmod.common.ProvisioningResource;
 import mic.contacta.pmod.common.Configurer;
 import mic.contacta.pmod.common.ProvisioningContext;
 import mic.contacta.pmod.common.ProvisioningSession;
-import mic.contacta.server.spi.ContactaConfiguration;
-import mic.contacta.server.spi.SampleBuilder;
+import mic.contacta.server.ContactaConfiguration;
+import mic.contacta.server.SampleBuilder;
 import mic.contacta.util.ContactaUtils;
 
 

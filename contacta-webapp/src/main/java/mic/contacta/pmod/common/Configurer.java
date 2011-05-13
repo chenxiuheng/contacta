@@ -16,7 +16,7 @@ package mic.contacta.pmod.common;
 
 import java.io.IOException;
 import java.util.List;
-import mic.contacta.model.ProductModel;
+import mic.contacta.domain.ProductModel;
 import mic.organic.core.Service;
 
 

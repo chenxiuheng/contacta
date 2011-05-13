@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mic.contacta.pmod.common.ProvisioningContext;
-import mic.contacta.server.spi.ProvisioningService;
+import mic.contacta.server.ProvisioningService;
 import mic.contacta.util.ContactaHelper;
 
 import org.slf4j.Logger;

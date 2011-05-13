@@ -26,16 +26,16 @@ import org.springframework.stereotype.Service;
 
 import com.opensymphony.xwork2.Action;
 
-import mic.contacta.gateway.ContactaGateway;
+import mic.contacta.domain.AppointmentModel;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.domain.CoverageModel.CoverageType;
+import mic.contacta.gateway.PbxGateway;
 import mic.contacta.gateway.SipAccountConverter;
 import mic.contacta.json.PhoneJson;
 import mic.contacta.json.SipAccountJson;
 import mic.contacta.json.WizardJson;
-import mic.contacta.model.AppointmentModel;
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.model.CoverageModel.CoverageType;
-import mic.contacta.server.api.ContactaException;
-import mic.contacta.server.spi.PhonebarService;
+import mic.contacta.server.ContactaException;
+import mic.contacta.server.PhonebarService;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.GatewayException;
 import mic.organic.gateway.Json;
@@ -54,7 +54,7 @@ public class ContactaSmd extends AbstractContactaAction
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
   @Autowired private PhonebarService phonebarService;
-  @Autowired private ContactaGateway contactaGateway;
+  @Autowired private PbxGateway pbxGateway;
   @Autowired private SipAccountConverter sipAccountConverter;
 
 
@@ -89,19 +89,19 @@ public class ContactaSmd extends AbstractContactaAction
     DatastoreJson<? extends Json> store = null;
     /*if (StringUtils.equalsIgnoreCase(key, "person"))
     {
-      List<PersonJson> jsonList = contactaGateway.personLoad();
+      List<PersonJson> jsonList = pbxGateway.personLoad();
       //List<ContactModel> modelList = contactaConverter.sampleContactList();
       //List<ContactJson> jsonList = contactaConverter.contactModelToJson(modelList);
       store = new mic.organic.dojo.DefaultDatastoreJson<PersonJson>(DEFAULT_DATASTORE_ID, /*DEFAULT_DATASTORE_TITLE* /"lastName", jsonList);
     }
     else*/ if (StringUtils.equalsIgnoreCase(key, "account"))
     {
-      List<SipAccountJson> jsonList = contactaGateway.sipList();
+      List<SipAccountJson> jsonList = pbxGateway.sipList();
       store = new mic.organic.gateway.DefaultDatastoreJson<SipAccountJson>(DatastoreJson.IDENTIFIER, "login", jsonList);
     }
     else if (StringUtils.equalsIgnoreCase(key, "phone"))
     {
-      List<PhoneJson> jsonList = contactaGateway.phoneList();
+      List<PhoneJson> jsonList = pbxGateway.phoneList();
       store = new mic.organic.gateway.DefaultDatastoreJson<PhoneJson>(DatastoreJson.IDENTIFIER, "macAddress", jsonList);
     }
     //log().info("store={}", store);
@@ -117,10 +117,10 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public String wizardPhonePerson(WizardJson json) throws GatewayException
   {
-    SipAccountJson account = contactaGateway.sipPersist(json.getAccount());
-    PhoneJson phone = contactaGateway.phonePersist(json.getPhone());
+    SipAccountJson account = pbxGateway.sipPersist(json.getAccount());
+    PhoneJson phone = pbxGateway.phonePersist(json.getPhone());
 
-    contactaGateway.phoneAddAccount(phone.getId(), account.getLogin());
+    pbxGateway.phoneAddAccount(phone.getId(), account.getLogin());
 
     return SUCCESS;
   }
@@ -135,7 +135,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public List<PhoneJson> phoneLoad()
   {
-    return contactaGateway.phoneList();
+    return pbxGateway.phoneList();
   }
 
 
@@ -146,7 +146,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public PhoneJson phoneCreateUpdate(PhoneJson json) throws GatewayException
   {
-    return contactaGateway.phonePersist(json);
+    return pbxGateway.phonePersist(json);
   }
 
 
@@ -159,7 +159,7 @@ public class ContactaSmd extends AbstractContactaAction
   {
     try
     {
-      contactaGateway.phoneDelete(ids);
+      pbxGateway.phoneRemove(ids);
     }
     catch(Exception e)
     {
@@ -176,7 +176,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public SipAccountJson phoneAddAccount(int phoneId, String login) throws ContactaException
   {
-    SipAccountModel sip = contactaGateway.phoneAddAccount(phoneId, login);
+    SipAccountModel sip = pbxGateway.phoneAddAccount(phoneId, login);
     if (sip != null)
     {
       return sipAccountConverter.modelToJson(sip, null);
@@ -196,7 +196,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public List<SipAccountJson> accountLoad()
   {
-    return contactaGateway.sipList();
+    return pbxGateway.sipList();
   }
 
 
@@ -207,7 +207,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public SipAccountJson accountCreateUpdate(SipAccountJson json) throws GatewayException
   {
-    return contactaGateway.sipPersist(json);
+    return pbxGateway.sipPersist(json);
   }
 
 
@@ -220,7 +220,7 @@ public class ContactaSmd extends AbstractContactaAction
   {
     try
     {
-      contactaGateway.sipRemove(ids);
+      pbxGateway.sipRemove(ids);
     }
     catch(Exception e)
     {
@@ -239,7 +239,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public String checkAsterisk()
   {
-    return contactaGateway.asteriskCheck();
+    return pbxGateway.asteriskCheck();
   }
 
 
@@ -249,7 +249,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public boolean restartAsterisk()
   {
-    return contactaGateway.asteriskRestart();
+    return pbxGateway.asteriskRestart();
   }
 
 
@@ -259,7 +259,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public boolean updateExtensionProfile()
   {
-    contactaGateway.extenProfileUpdate();
+    pbxGateway.extenProfileUpdate();
     return true;
   }
 
@@ -270,10 +270,10 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public boolean addCoverage(String fromLogin, String toLogin, CoverageType type, String options, int timeout)
   {
-    boolean r = contactaGateway.coverageAdd(fromLogin, toLogin, type, options, timeout);
+    boolean r = pbxGateway.coverageAdd(fromLogin, toLogin, type, options, timeout);
     if (r)
     {
-      contactaGateway.extenProfileUpdate();
+      pbxGateway.extenProfileUpdate();
     }
     return r;
   }
@@ -285,10 +285,10 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public boolean removeCoverage(String fromLogin)
   {
-    boolean r = contactaGateway.coverageRemove(fromLogin);
+    boolean r = pbxGateway.coverageRemove(fromLogin);
     if (r)
     {
-      contactaGateway.extenProfileUpdate();
+      pbxGateway.extenProfileUpdate();
     }
     return r;
   }
@@ -360,7 +360,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public String book(long startTs, long endTs, String attendeeString, String subject, String description)
   {
-    AppointmentModel appointment = contactaGateway.book(startTs, endTs, attendeeString, subject, description);
+    AppointmentModel appointment = pbxGateway.book(startTs, endTs, attendeeString, subject, description);
     return appointment != null ? "OK" : "KO";
   }
 
@@ -371,7 +371,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public String cancel(int appointmentId)
   {
-    AppointmentModel appointment = contactaGateway.cancel(appointmentId);
+    AppointmentModel appointment = pbxGateway.cancel(appointmentId);
     return appointment != null ? "OK" : "KO";
   }
 
@@ -382,7 +382,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public String remail(int appointmentId)
   {
-    AppointmentModel appointment = contactaGateway.remail(appointmentId);
+    AppointmentModel appointment = pbxGateway.remail(appointmentId);
     return appointment != null ? "OK" : "KO";
   }
 
@@ -392,7 +392,7 @@ public class ContactaSmd extends AbstractContactaAction
   @SMDMethod
   public void notifyCheckCfg(String exten)
   {
-    contactaGateway.asteriskSipNotifyCheckCfg(exten);
+    pbxGateway.asteriskSipNotifyCheckCfg(exten);
   }
 
 }

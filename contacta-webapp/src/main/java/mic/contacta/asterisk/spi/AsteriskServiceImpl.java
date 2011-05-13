@@ -36,10 +36,10 @@ import org.asteriskjava.manager.action.*;
 import org.asteriskjava.manager.response.*;
 import org.asteriskjava.live.ManagerCommunicationException;
 
-import mic.contacta.server.api.Call;
-import mic.contacta.server.api.ChannelStatusLine;
-import mic.contacta.server.api.ContactaConstants;
-import mic.contacta.server.api.ContactaException;
+import mic.contacta.domain.Call;
+import mic.contacta.domain.ChannelStatusLine;
+import mic.contacta.server.ContactaConstants;
+import mic.contacta.server.ContactaException;
 import mic.contacta.util.AgentUtil;
 import mic.contacta.util.StatisticsBean;
 
@@ -487,7 +487,7 @@ public class AsteriskServiceImpl implements AsteriskService
 
 
   /*
-   * @see mic.contacta.server.spi.AsteriskService#sendCommand(java.lang.String)
+   * @see mic.contacta.server.AsteriskService#sendCommand(java.lang.String)
    */
   @Override
   public Object sendCommand(String command) throws ContactaException
@@ -673,7 +673,7 @@ public class AsteriskServiceImpl implements AsteriskService
 
 
   /*
-   * @see mic.contacta.server.spi.AsteriskService#findPeerChannel(java.lang.String)
+   * @see mic.contacta.server.AsteriskService#findPeerChannel(java.lang.String)
    */
   @Override
   public ChannelStatusLine findSelfChannel(String exten) throws ContactaException
@@ -705,7 +705,7 @@ public class AsteriskServiceImpl implements AsteriskService
 
 
   /*
-   * @see mic.contacta.server.spi.AsteriskService#findParkChannel(java.lang.String)
+   * @see mic.contacta.server.AsteriskService#findParkChannel(java.lang.String)
    */
   @Override
   public ChannelStatusLine findParkChannel(String exten) throws ContactaException
@@ -741,7 +741,7 @@ public class AsteriskServiceImpl implements AsteriskService
    * SIP/8001-084edd60    8001@nazionali:1     Ringing AppDial((Outgoing Line))
    * SIP/8000-08587748    s@macro-stdexten:4   Ring    Dial(SIP/8001|30)
    *
-   * @see mic.contacta.server.spi.AsteriskService#findParkChannel(java.lang.String)
+   * @see mic.contacta.server.AsteriskService#findParkChannel(java.lang.String)
    */
   @Override
   public ChannelStatusLine findRingingChannel(String exten) throws ContactaException
@@ -1025,7 +1025,7 @@ public class AsteriskServiceImpl implements AsteriskService
 
   /*
    * URGENT improve me :)
-   * @see mic.contacta.server.spi.AsteriskService#sendCommand(org.asteriskjava.manager.action.OriginateAction)
+   * @see mic.contacta.server.AsteriskService#sendCommand(org.asteriskjava.manager.action.OriginateAction)
    */
   @Override
   public void sendCommand(OriginateAction originateAction) throws ContactaException

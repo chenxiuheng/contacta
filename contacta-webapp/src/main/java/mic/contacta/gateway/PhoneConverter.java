@@ -18,8 +18,8 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import mic.contacta.domain.PhoneModel;
 import mic.contacta.json.PhoneJson;
-import mic.contacta.model.PhoneModel;
 import mic.organic.gateway.AbstractJsonConverter;
 
 /**
@@ -38,27 +38,27 @@ public class PhoneConverter extends AbstractJsonConverter<PhoneModel, PhoneJson>
    *
    */
   @Override
-  public PhoneModel jsonToModel(PhoneJson from, PhoneModel to)
+  public PhoneModel jsonToModel(PhoneJson src, PhoneModel dst)
   {
-    if (to == null)
+    if (dst == null)
     {
-      to = new PhoneModel();
+      dst = new PhoneModel();
     }
-    super.jsonToModel(from, to);
+    super.jsonToModel(src, dst);
     //this.silentCopy(from, to);
 
-    to.setCode(from.getCode());
-    to.setLocation(from.getLocation());
+    dst.setCode(src.getCode());
+    dst.setLocation(src.getLocation());
     // TODO to.getOwner(from.getOwner().getId());
     // FIXME to.setProduct(from.getProduct().getCode());
-    to.setSerialNumber(from.getSerialNumber());
-    to.setLocation(from.getLocation());
-    to.setInfo(from.getInfo());
-    if (from.getHasConfig() == false)
+    dst.setSerialNumber(src.getSerialNumber());
+    dst.setLocation(src.getLocation());
+    dst.setInfo(src.getInfo());
+    if (src.getHasConfig() == false)
     {
-      to.setConfig(null);
+      dst.setConfig(null);
     }
-    return to;
+    return dst;
   }
 
 
@@ -66,41 +66,24 @@ public class PhoneConverter extends AbstractJsonConverter<PhoneModel, PhoneJson>
    *
    */
   @Override
-  public PhoneJson modelToJson(PhoneModel from, PhoneJson to)
+  public PhoneJson modelToJson(PhoneModel src, PhoneJson dst)
   {
-    if (to == null)
+    if (dst == null)
     {
-      to = new PhoneJson();
+      dst = new PhoneJson();
     }
-    super.modelToJson(from, to);
-    //this.silentCopy(from, to);
-//    try
-//    {
-//      PropertyUtils.copyProperties(from, to);
-//      //BeanUtils.copyProperties(from, to);
-//    }
-//    catch (IllegalAccessException e)
-//    {
-//      log().warn(e.getMessage());
-//    }
-//    catch (InvocationTargetException e)
-//    {
-//      log().warn(e.getMessage());
-//    }
-//    catch (NoSuchMethodException e)
-//    {
-//      log().warn(e.getMessage());
-//    }
-    to.setCode(from.getCode());
-    to.setHasConfig(StringUtils.isNotBlank(from.getConfig()));
-    to.setIpAddress(from.getIpAddress());
-    to.setLastBoot(from.getLastBoot());
-    to.setLocation(from.getLocation());
+    super.modelToJson(src, dst);
+
+    dst.setCode(src.getCode());
+    dst.setHasConfig(StringUtils.isNotBlank(src.getConfig()));
+    dst.setIpAddress(src.getIpAddress());
+    dst.setLastBoot(src.getLastBoot());
+    dst.setLocation(src.getLocation());
     // TODO to.getOwner(from.getOwner().getId());
-    to.setProduct(from.getProduct().getCode());
-    to.setSerialNumber(from.getSerialNumber());
-    to.setLocation(from.getLocation());
-    to.setInfo(from.getInfo());
+    dst.setProduct(src.getProduct().getCode());
+    dst.setSerialNumber(src.getSerialNumber());
+    dst.setLocation(src.getLocation());
+    dst.setInfo(src.getInfo());
 
 
 //    //json.setVendor(model.getVendor().toString());
@@ -127,7 +110,7 @@ public class PhoneConverter extends AbstractJsonConverter<PhoneModel, PhoneJson>
 //    }
 
 
-    return to;
+    return dst;
   }
 
 

@@ -17,8 +17,8 @@ package mic.contacta.gateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import mic.contacta.domain.CoverageModel;
 import mic.contacta.json.CoverageJson;
-import mic.contacta.model.CoverageModel;
 import mic.organic.gateway.AbstractJsonConverter;
 
 /**
@@ -36,17 +36,17 @@ public class CoverageConverter extends AbstractJsonConverter<CoverageModel, Cove
   /*
    *
    */
-  public CoverageModel jsonToModel(CoverageJson from, CoverageModel to)
+  public CoverageModel jsonToModel(CoverageJson src, CoverageModel dst)
   {
-    if (to == null)
+    if (dst == null)
     {
-      to = new CoverageModel();
+      dst = new CoverageModel();
     }
 
-    super.jsonToModel(from, to);
+    super.jsonToModel(src, dst);
     //to.setCode(from.getCode());
 
-    return to;
+    return dst;
   }
 
 
@@ -54,28 +54,25 @@ public class CoverageConverter extends AbstractJsonConverter<CoverageModel, Cove
    *
    */
   @Override
-  public CoverageJson modelToJson(CoverageModel from, CoverageJson to)
+  public CoverageJson modelToJson(CoverageModel src, CoverageJson dst)
   {
-    if (to == null)
+    if (dst == null)
     {
-      to = new CoverageJson();
+      dst = new CoverageJson();
     }
 
-    super.modelToJson(from, to);
-
-    // TODO: non e' da mettere nell'AbstractConverter e cambiare l'interfaccia?
-    to.setId(from.getId());
+    super.modelToJson(src, dst);
     //to.setCode(from.getCode());
 
-    to.setFromCid(from.getFromCid());
-    to.setToCid(from.getToCid());
+    dst.setFromCid(src.getFromCid());
+    dst.setToCid(src.getToCid());
     //json.setCode(model.getCode());
-    to.setType(from.getType().toString());
-    to.setOptions(from.getOptions());
-    to.setRank(from.getRank());
-    to.setRingTimeout(from.getRingTimeout());
+    dst.setType(src.getType().toString());
+    dst.setOptions(src.getOptions());
+    dst.setRank(src.getRank());
+    dst.setRingTimeout(src.getRingTimeout());
 
-    return to;
+    return dst;
   }
 
 

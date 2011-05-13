@@ -28,7 +28,7 @@ import com.opensymphony.xwork2.Preparable;
 
 import static mic.organic.core.OrganicConstants.*;
 
-import mic.contacta.server.spi.ContactaConfiguration;
+import mic.contacta.server.ContactaConfiguration;
 import mic.organic.util.Stats;
 
 

@@ -21,9 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import mic.contacta.server.api.ContactaException;
-import mic.contacta.server.api.Line;
-import mic.contacta.server.spi.ContactaService;
+import mic.contacta.domain.Line;
+import mic.contacta.server.ContactaException;
+import mic.contacta.server.ContactaService;
 
 
 /**

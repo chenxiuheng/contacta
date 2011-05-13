@@ -66,7 +66,7 @@ public class PeerlistCompleteHandler extends AbstractHandler<PeerlistCompleteEve
 
 
   /*
-   * @see mic.contacta.server.spi.Handler#handleEvent()
+   * @see mic.contacta.server.Handler#handleEvent()
    */
   @Override
   public void handleEvent(PeerlistCompleteEvent event)

@@ -14,8 +14,8 @@
  */
 package mic.contacta.web;
 
-import mic.contacta.server.api.ContactaConstants;
-import mic.contacta.server.spi.ContactaService;
+import mic.contacta.server.ContactaConstants;
+import mic.contacta.server.ContactaService;
 import mic.organic.core.OrganicException;
 
 import org.apache.commons.vfs.FileObject;

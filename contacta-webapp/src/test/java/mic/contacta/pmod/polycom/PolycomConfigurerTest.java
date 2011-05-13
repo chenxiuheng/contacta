@@ -26,12 +26,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
-import mic.contacta.model.PhoneModel;
+import mic.contacta.domain.PhoneModel;
 import mic.contacta.pmod.common.Configurer;
 import mic.contacta.pmod.common.ProvisioningContext;
 import mic.contacta.pmod.common.ProvisioningSession;
-import mic.contacta.server.api.ContactaConstants;
-import mic.contacta.server.spi.AbstractProvisioningTests;
+import mic.contacta.server.AbstractProvisioningTests;
+import mic.contacta.server.ContactaConstants;
 import mic.organic.core.OrganicException;
 
 

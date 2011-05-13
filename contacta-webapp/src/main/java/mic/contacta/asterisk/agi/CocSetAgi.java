@@ -25,11 +25,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mic.contacta.asterisk.agi.AbstractContactaAgi;
-import mic.contacta.model.CocModel;
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.server.dao.CocDao;
-import mic.contacta.server.spi.ContactaService;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.dao.CocDao;
+import mic.contacta.domain.CocModel;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.server.ContactaService;
+import mic.contacta.server.PbxService;
 import mic.contacta.util.ContactaUtils;
 
 
@@ -53,7 +53,7 @@ public class CocSetAgi extends AbstractContactaAgi
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
   @Autowired private ContactaService contactaService;
-  @Autowired private SipService sipService;
+  @Autowired private PbxService pbxService;
   @Autowired private CocDao cocDao;
 
 
@@ -77,7 +77,7 @@ public class CocSetAgi extends AbstractContactaAgi
     channel.exec("Background", "agent-user");
     channel.exec("Read", "digito||3");
     String loginExten = channel.getVariable("digito");
-    SipAccountModel loginSip = sipService.sipByLogin(loginExten);
+    SipAccountModel loginSip = pbxService.sipByLogin(loginExten);
     if (loginSip == null)
     {
       log().warn("{}: who are you?!?!?", loginExten);
@@ -94,7 +94,7 @@ public class CocSetAgi extends AbstractContactaAgi
     if (StringUtils.equals(pin, s))
     {
       loginSip.getSipUser().setContext("internazionali");
-      sipService.sipUpdate(loginSip);
+      pbxService.sipUpdate(loginSip);
       channel.exec("Playback", "beep");
       channel.exec("Playback", "beep");
       channel.exec("Playback", "beep");
@@ -118,7 +118,7 @@ public class CocSetAgi extends AbstractContactaAgi
   public void service(AgiRequest request, AgiChannel channel) throws AgiException
   {
     String callerExten = request.getCallerIdNumber();
-    SipAccountModel callerSip = sipService.sipByLogin(callerExten);
+    SipAccountModel callerSip = pbxService.sipByLogin(callerExten);
     if (callerSip == null)
     {
       log().warn("{}: who are you?!?!?", callerExten);
@@ -148,7 +148,7 @@ public class CocSetAgi extends AbstractContactaAgi
     if (StringUtils.equals(pin, secret))
     {
       callerSip.getSipUser().setContext("internazionali");
-      callerSip = sipService.sipUpdate(callerSip);
+      callerSip = pbxService.sipUpdate(callerSip);
       channel.exec("Wait", "1");
       channel.exec("Playback", "beep");
       channel.exec("Playback", "beep");

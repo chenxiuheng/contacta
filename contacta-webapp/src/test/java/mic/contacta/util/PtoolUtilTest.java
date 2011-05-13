@@ -16,7 +16,7 @@ package mic.contacta.util;
 
 import static org.testng.Assert.assertEquals;
 
-import mic.contacta.model.SipAccountModel;
+import mic.contacta.domain.SipAccountModel;
 import mic.contacta.util.ContactaUtils;
 
 import org.slf4j.Logger;

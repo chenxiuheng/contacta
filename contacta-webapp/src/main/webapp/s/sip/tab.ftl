@@ -51,7 +51,8 @@
 <div dojoType="dijit.layout.BorderContainer"gutters="false" liveSplitters="false" class="gridpad">
  <div dojoType="dijit.layout.ContentPane" region="top" class="toolbarContainer">
   <div dojoType="dijit.Toolbar" class="toolbarToolbar">
-   [@organicPadButtons pad ui/]
+   [#assign hide = ["filter"] /]
+   [@organicPadButtons2 pad ui hide /]
    <button dojoType="dijit.form.DropDownButton" iconClass="ico50" label="${m.t("label.sip.coverage")}">
     <div dojoType="dijit.Menu">
      <div dojoType="dijit.MenuItem" iconClass="ico50" label="${m.t("label.sip.coverage.add")}" onclick="${pad}.coverage.show()"></div>
@@ -73,7 +74,7 @@
  </div>
 
  <div dojoType="dijit.layout.ContentPane" region="center" class="gridPane">
-  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid"></table>
+  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid" sortInfo="1"></table>
  </div>
 
  <div dojoType="dijit.layout.ContentPane" splitter="true" region="right" class="detailPane">

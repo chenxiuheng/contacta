@@ -17,7 +17,7 @@ package mic.contacta.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import mic.contacta.gateway.ContactaGateway;
+import mic.contacta.gateway.PbxGateway;
 import mic.organic.core.Model;
 import mic.organic.gateway.AbstractJsonSmd;
 import mic.organic.gateway.Json;
@@ -33,7 +33,7 @@ public abstract class AbstractContactaSmd<T extends Json> extends AbstractJsonSm
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired protected ContactaGateway contactaGateway;
+  @Autowired protected PbxGateway pbxGateway;
 
 
   /*

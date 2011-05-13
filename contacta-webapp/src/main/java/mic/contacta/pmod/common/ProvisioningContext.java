@@ -22,7 +22,7 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import mic.contacta.model.PhoneModel;
+import mic.contacta.domain.PhoneModel;
 
 
 /**

@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import mic.contacta.asterisk.spi.AbstractHandler;
-import mic.contacta.server.api.ContactaConstants;
+import mic.contacta.server.ContactaConstants;
 
 
 /**
@@ -159,7 +159,7 @@ public class NewExtenHandler extends AbstractHandler<NewExtenEvent>
 
 
   /*
-   * @see mic.contacta.server.spi.Handler#handleEvent()
+   * @see mic.contacta.server.Handler#handleEvent()
    */
   @Override
   public void handleEvent(NewExtenEvent event)

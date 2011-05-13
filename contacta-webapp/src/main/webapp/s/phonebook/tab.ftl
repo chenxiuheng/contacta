@@ -52,7 +52,8 @@
    [/#if]
   </div>
   <div dojoType="dijit.Toolbar" class="toolbarToolbar">
-   [@organicPadButtons pad ui/]
+   [#assign hide = ["filter"] /]
+   [@organicPadButtons2 pad ui hide /]
    <span class="dijit dijitReset dijitLeft dijitInline dijitButton" style="margin-top:0px; font-size:11px;">
     <label for="${ui}.quickSelect" style="font-size:9px;">${m.t("label.quickSearch")}</label><br/>
     <select jsId="${ui}.quickSelect" dojoType="dijit.form.ComboBox" style="width:80px;">
@@ -68,7 +69,7 @@
  </div>
 
  <div dojoType="dijit.layout.ContentPane" region="center" class="gridPane">
-  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid">
+  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid" sortInfo="1">
   </table>
  </div>
 

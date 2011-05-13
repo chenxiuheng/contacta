@@ -66,7 +66,7 @@ public class PeerEntryHandler extends AbstractHandler<PeerEntryEvent>
 
 
   /*
-   * @see mic.contacta.server.spi.Handler#handleEvent()
+   * @see mic.contacta.server.Handler#handleEvent()
    */
   @Override
   public void handleEvent(PeerEntryEvent event)

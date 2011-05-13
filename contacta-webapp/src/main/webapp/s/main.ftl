@@ -69,11 +69,10 @@ dojo.addOnUnload(function()
 [#--   THE PAGE                                                             --]
 [#-- ====================================================================== --]
 <div id="thePage" jsId="ui.thePage" dojoType="dijit.layout.BorderContainer" gutters="false" style="width:100%; height:100%; display:none;">
- [#-- menubar --]
+ [#-- menubar
  <div jsId="ui.menubar" dojoType="dijit.layout.ContentPane" style="height:31px; border-bottom:1px solid #4E9595; border-right:1px solid #4E9595;" region="top">
   <div style="padding:2px 10px 1px 10px;" class="organicBg">
    <div style="float:right; padding:2px 4px;"><div class="ico25" title="Logout" onclick="organic.util.logout()"></div></div>
-   [#--<div style="float:right; padding-top:13px; padding-bottom:0px; padding-right:20px; color:white; font-size:9px;">${m.t("label.version")}</div>--]
    <div style="float:left; margin-right:80px; width:152px; height:25px; background:transparent url('${base}/skin/static/logo.png') no-repeat left bottom;"></div>
    <div style="white-space:nowrap; color:navy; font-weight:bold;">
     [#if organicSession.admin]
@@ -83,6 +82,29 @@ dojo.addOnUnload(function()
     <div style="height:28px; color:yellow; vertical-align:bottom;"><p>Welcome ${organicSession.account.label}<p></div>
     [/#if]
    </div>
+  </div>
+ </div> --]
+
+ [#-- menubar --]
+ <div jsId="ui.menubar" dojoType="dijit.layout.ContentPane" region="top">
+  <div dojoType="dijit.Toolbar" class="toolbarToolbar" style="background:#EAF5FD; border-top:1px solid #769DC0; border-bottom:1px solid #769DC0;">
+   <div style="" class="dijit dijitReset dijitLeft dijitInline dijitButton menubarLabel">
+    <span style="">Welcome <b>${organicSession.account.label} (${organicSession.account.code})</b></span>
+    [#--<span>
+     </span>${m.t("label.site")}: <b>[#list organicSession.scopeRoleList("site") as s]${s.code}[#if s_has_next], [/#if][/#list]</b>,
+     </span>${m.t("label.function")}: <b>[#list organicSession.scopeRoleList("function") as s]${s.code}[#if s_has_next], [/#if][/#list]</b>
+    </span>
+<div data-dojo-type="openinnovation.ToolbarSeparator" data-dojo-props='label:"${m.t("label.plan")}"'></div>
+       --]
+   </div>
+   <span data-dojo-type="dijit.ToolbarSeparator"></span>
+   [#if organicSession.admin]
+   <div dojoType="dijit.form.Button" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.contactaTabContainer)"><span>${m.t("label.user")}</span></div>
+   <div dojoType="dijit.form.Button" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.adminTabContainer)"><span>${m.t("label.admin")}</span></div>
+   [/#if]
+   <span data-dojo-type="dijit.ToolbarSeparator"></span>
+   <button dojoType="dijit.form.Button" iconClass="icoKeys" title="Change password" onclick="location='${base}/o/password.action';"></button>
+   <button dojoType="dijit.form.Button" iconClass="ico25" title="Logout" onclick="organic.util.logout();return false;"></button>
   </div>
  </div>
 
@@ -196,6 +218,10 @@ dojo.addOnUnload(function()
   <div jsId="ui.contactaTabContainer" dojoType="dijit.layout.TabContainer">
    <div dojoType="dijit.layout.ContentPane" title="${m.t("label.phonebar")}">
     [#include "./phonebook/tab.ftl"/]
+   </div>
+
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.calls")}">
+    [#include "./calls/tab.ftl"/]
    </div>
 
    [#if organicConfiguration.develMode]

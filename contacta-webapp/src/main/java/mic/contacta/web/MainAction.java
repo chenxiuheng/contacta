@@ -23,12 +23,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import mic.contacta.model.PbxContextModel;
-import mic.contacta.model.PbxProfileModel;
-import mic.contacta.server.dao.PbxContextDao;
-import mic.contacta.server.dao.PbxProfileDao;
-import mic.contacta.server.spi.ContactaConfiguration;
-import mic.contacta.server.spi.ContactaSession;
+import mic.contacta.dao.PbxContextDao;
+import mic.contacta.dao.PbxProfileDao;
+import mic.contacta.domain.PbxContextModel;
+import mic.contacta.domain.PbxProfileModel;
+import mic.contacta.server.ContactaConfiguration;
+import mic.contacta.server.ContactaSession;
 import mic.organic.web.OrganicLoginAction;
 
 

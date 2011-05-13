@@ -35,7 +35,7 @@
  <context:component-scan base-package="mic.contacta.asterisk.agi"/>
  <context:component-scan base-package="mic.contacta.asterisk.aop"/>
  <context:component-scan base-package="mic.contacta.asterisk.handlers"/>
- <context:component-scan base-package="mic.contacta.server.spi"/>
+ <context:component-scan base-package="mic.contacta.server"/>
  <bean class="mic.contacta.asterisk.spi.ExtenHintWriter"/>
  <bean class="mic.contacta.asterisk.spi.ExtenProfileWriter"/>
 

@@ -18,7 +18,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.vfs.FileObject;
 import org.apache.commons.vfs.FileSystemException;
 import mic.contacta.pmod.common.AbstractTemplatePres;
-import mic.contacta.server.spi.TemplateService;
+import mic.contacta.server.TemplateService;
 
 /**
  *

@@ -29,8 +29,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import mic.contacta.model.AppointmentModel;
-import mic.contacta.server.spi.CalendarService;
+import mic.contacta.domain.AppointmentModel;
+import mic.contacta.server.CalendarService;
 import mic.organic.aaa.ldap.PersonDao;
 
 

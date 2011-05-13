@@ -17,14 +17,14 @@ package mic.contacta.webapp;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import mic.contacta.gateway.ContactaGateway;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.gateway.PbxGateway;
 import mic.contacta.gateway.SipAccountConverter;
 import mic.contacta.json.SipAccountJson;
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.server.api.ContactaConstants;
-import mic.contacta.server.api.ContactaException;
-import mic.contacta.server.spi.AbstractProvisioningTests;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.server.AbstractProvisioningTests;
+import mic.contacta.server.ContactaConstants;
+import mic.contacta.server.ContactaException;
+import mic.contacta.server.PbxService;
 import mic.organic.core.OrganicException;
 
 import org.slf4j.Logger;
@@ -45,8 +45,8 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private ContactaGateway contactaGateway;
-  @Autowired private SipService sipService;
+  @Autowired private PbxGateway pbxGateway;
+  @Autowired private PbxService pbxService;
 
   @Autowired private SipAccountConverter sipAccountConverter;
 
@@ -60,7 +60,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
   {
     createAccountAndPhone("");
 
-    SipAccountModel accountModel = sipService.sipByLogin("login");
+    SipAccountModel accountModel = pbxService.sipByLogin("login");
 
     // Create a different one
     SipAccountJson account = sipAccountConverter.modelToJson(accountModel, null);
@@ -68,7 +68,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     account.setLogin("xxxlogin");
     account.setEmail("xxxemail");
 
-    account = contactaGateway.sipPersist(account);
+    account = pbxGateway.sipPersist(account);
 
     assertTrue(true);
 
@@ -82,7 +82,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     String message = "";
     try
     {
-      account = contactaGateway.sipPersist(account);
+      account = pbxGateway.sipPersist(account);
     }
     catch (Exception e)
     {
@@ -116,7 +116,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
 
     try
     {
-      account = contactaGateway.sipPersist(account);
+      account = pbxGateway.sipPersist(account);
     }
     catch (Exception e)
     {
@@ -139,7 +139,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
   {
     createAccountAndPhone("");
 
-    SipAccountModel accountModel = sipService.sipByLogin("login");
+    SipAccountModel accountModel = pbxService.sipByLogin("login");
 
     // Create a different one
     SipAccountJson account = sipAccountConverter.modelToJson(accountModel, null);
@@ -147,14 +147,14 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     account.setLogin("zzzlogin");
     account.setEmail("zzzemail");
 
-    account = contactaGateway.sipPersist(account);
+    account = pbxGateway.sipPersist(account);
 
     assertTrue(true);
 
     // TODO because of updateProfile
     // Update to a non-existing login
 //    account.setLogin("yyylogin");
-//    account = contactaGateway.accountCreateUpdate(account);
+//    account = pbxGateway.accountCreateUpdate(account);
 
 //    assertTrue(true);
 
@@ -165,7 +165,7 @@ public class ContactaGatewayTest extends AbstractProvisioningTests
     String message = "";
     try
     {
-      account = contactaGateway.sipPersist(account);
+      account = pbxGateway.sipPersist(account);
     }
     catch (Exception e)
     {

@@ -9,17 +9,17 @@
  <entity class="mic.organic.aaa.model.RoleModel"><table name="acrol"/></entity>
  <entity class="mic.organic.aaa.model.AccountModel"><table name="acacc"/></entity>
 
- <entity class="mic.contacta.model.ProductModel"/>
- <entity class="mic.contacta.model.PhoneModel"/>
- <entity class="mic.contacta.model.SipAccountModel"/>
- <entity class="mic.contacta.model.CoverageModel"/>
- <entity class="mic.contacta.model.CocModel"/>
- <entity class="mic.contacta.model.SipUserModel"/>
- <entity class="mic.contacta.model.VoicemailModel"/>
- <entity class="mic.contacta.model.ExtenModel"/>
- <entity class="mic.contacta.model.ConferenceModel"/>
- <entity class="mic.contacta.model.AppointmentModel"/>
+ <entity class="mic.contacta.domain.ProductModel"/>
+ <entity class="mic.contacta.domain.PhoneModel"/>
+ <entity class="mic.contacta.domain.SipAccountModel"/>
+ <entity class="mic.contacta.domain.CoverageModel"/>
+ <entity class="mic.contacta.domain.CocModel"/>
+ <entity class="mic.contacta.domain.SipUserModel"/>
+ <entity class="mic.contacta.domain.VoicemailModel"/>
+ <entity class="mic.contacta.domain.ExtenModel"/>
+ <entity class="mic.contacta.domain.ConferenceModel"/>
+ <entity class="mic.contacta.domain.AppointmentModel"/>
 
- <entity class="mic.contacta.model.PbxContextModel"/>
- <entity class="mic.contacta.model.PbxProfileModel"/>
+ <entity class="mic.contacta.domain.PbxContextModel"/>
+ <entity class="mic.contacta.domain.PbxProfileModel"/>
 </entity-mappings>

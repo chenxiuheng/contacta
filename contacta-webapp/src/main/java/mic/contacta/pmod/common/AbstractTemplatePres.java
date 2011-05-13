@@ -24,7 +24,7 @@ import org.apache.commons.vfs.FileSystemException;
 import org.apache.commons.vfs.VFS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import mic.contacta.server.spi.TemplateService;
+import mic.contacta.server.TemplateService;
 import mic.organic.core.OrganicException;
 
 

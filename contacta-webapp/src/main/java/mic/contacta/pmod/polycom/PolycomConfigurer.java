@@ -35,17 +35,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import mic.contacta.model.PhoneModel;
-import mic.contacta.model.ProductModel;
+import mic.contacta.domain.PhoneModel;
+import mic.contacta.domain.ProductModel;
+import mic.contacta.pmod.common.Contacta404Exception;
 import mic.contacta.pmod.common.ProvisioningResource;
 import mic.contacta.pmod.common.AbstractConfigurer;
 import mic.contacta.pmod.common.ProvisioningSession;
 import mic.contacta.pmod.common.ProvisioningContext;
-import mic.contacta.server.api.Contacta404Exception;
-import mic.contacta.server.spi.InventoryService;
-import mic.contacta.server.spi.ProvisioningService;
-import mic.contacta.server.spi.ProvisioningServiceImpl;
-import mic.contacta.server.spi.TemplateService;
+import mic.contacta.server.InventoryService;
+import mic.contacta.server.ProvisioningService;
+import mic.contacta.server.ProvisioningServiceImpl;
+import mic.contacta.server.TemplateService;
 import mic.contacta.util.ContactaHelper;
 import mic.organic.core.OrganicException;
 
@@ -470,7 +470,7 @@ public class PolycomConfigurer extends AbstractConfigurer
     else
     {
       String macAddress = extractMacAddressFromResourceName(resourceName);
-      /*PhoneModel*/ phone = inventoryService.findPhoneByMacAddress(macAddress);
+      /*PhoneModel*/ phone = inventoryService.phoneByMacAddress(macAddress);
       if (resourceName.endsWith(DIRECTORY_SUFFIX))
       {
         params.put("phone", phone);

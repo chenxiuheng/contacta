@@ -16,11 +16,11 @@ package mic.contacta.webapp;
 
 import java.util.List;
 
-import mic.contacta.gateway.ContactaGateway;
+import mic.contacta.dao.SipAccountDao;
+import mic.contacta.gateway.PbxGateway;
 import mic.contacta.json.PhoneJson;
 import mic.contacta.json.SipAccountJson;
-import mic.contacta.server.api.ContactaConstants;
-import mic.contacta.server.dao.SipAccountDao;
+import mic.contacta.server.ContactaConstants;
 import mic.organic.core.OrganicException;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.Json;
@@ -51,7 +51,7 @@ public class PerfItest extends AbstractTransactionalTestNGSpringContextTests
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private ContactaGateway contactaGateway;
+  @Autowired private PbxGateway pbxGateway;
   @Autowired private SipAccountDao sipDao;
 
   private String method;
@@ -89,19 +89,19 @@ public class PerfItest extends AbstractTransactionalTestNGSpringContextTests
     DatastoreJson<? extends Json> store = null;
     /*if (StringUtils.equalsIgnoreCase(key, "person"))
     {
-      List<PersonJson> jsonList = contactaGateway.personLoad();
+      List<PersonJson> jsonList = pbxGateway.personLoad();
       //List<ContactModel> modelList = ContactaConverterImpl.sampleContactList();
       //List<ContactJson> jsonList = ContactaConverterImpl.contactModelToJson(modelList);
       store = new mic.organic.dojo.DefaultDatastoreJson<PersonJson>(DEFAULT_DATASTORE_ID, /*DEFAULT_DATASTORE_TITLE* /"lastName", jsonList);
     }
     else*/ if (StringUtils.equalsIgnoreCase(key, "account"))
     {
-      List<SipAccountJson> jsonList = contactaGateway.sipList();
+      List<SipAccountJson> jsonList = pbxGateway.sipList();
       store = new mic.organic.gateway.DefaultDatastoreJson<SipAccountJson>(DatastoreJson.IDENTIFIER, "login", jsonList);
     }
     else if (StringUtils.equalsIgnoreCase(key, "phone"))
     {
-      List<PhoneJson> jsonList = contactaGateway.phoneList();
+      List<PhoneJson> jsonList = pbxGateway.phoneList();
       store = new mic.organic.gateway.DefaultDatastoreJson<PhoneJson>(DatastoreJson.IDENTIFIER, "macAddress", jsonList);
     }
     return store;

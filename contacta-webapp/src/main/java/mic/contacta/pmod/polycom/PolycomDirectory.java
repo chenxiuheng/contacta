@@ -25,8 +25,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mic.contacta.model.PhoneModel;
-import mic.contacta.server.spi.InventoryService;
+import mic.contacta.domain.PhoneModel;
+import mic.contacta.server.InventoryService;
 import mic.contacta.util.ContactaUtils;
 
 
@@ -163,12 +163,12 @@ public class PolycomDirectory
         String macAddress = resourceName.substring(0, 12);
         macAddress = ContactaUtils.macAddressHexToText(macAddress);
 
-        PhoneModel phone = inventoryService.findPhoneByMacAddress(macAddress);
+        PhoneModel phone = inventoryService.phoneByMacAddress(macAddress);
         if (phone != null)
         {
           //log().info("setting for {} directory={}", macAddress, directory);
           phone.setDirectory(directory);
-          inventoryService.updatePhone(phone);
+          inventoryService.phonePersist(phone);
         }
         else
         {

@@ -28,28 +28,28 @@
  <context:component-scan base-package="mic.organic.aaa.jpa"/>
  <context:component-scan base-package="mic.organic.aaa.dao"/>
  <context:component-scan base-package="mic.organic.aaa.spi"/>
- <context:component-scan base-package="mic.contacta.server.dao"/>
+ <context:component-scan base-package="mic.contacta.dao"/>
 <!--
- <context:component-scan base-package="mic.contacta.server.spi">
-  <context:exclude-filter type="assignable" expression="mic.contacta.server.spi.ContactaService"/>
-  <context:exclude-filter type="assignable" expression="mic.contacta.server.spi.CalendarService"/>
-  <context:exclude-filter type="assignable" expression="mic.contacta.server.spi.PhonebarService"/>
+ <context:component-scan base-package="mic.contacta.server">
+  <context:exclude-filter type="assignable" expression="mic.contacta.server.ContactaService"/>
+  <context:exclude-filter type="assignable" expression="mic.contacta.server.CalendarService"/>
+  <context:exclude-filter type="assignable" expression="mic.contacta.server.PhonebarService"/>
  </context:component-scan>
 
- <bean class="mic.contacta.server.spi.ContactaConfiguration"/>
- <bean class="mic.contacta.server.spi.InventoryServiceImpl"/>
- <bean class="mic.contacta.server.spi.SipServiceImpl"/>
- <bean class="mic.contacta.server.spi.CocServiceImpl"/>
+ <bean class="mic.contacta.server.ContactaConfiguration"/>
+ <bean class="mic.contacta.server.InventoryServiceImpl"/>
+ <bean class="mic.contacta.server.PbxServiceImpl"/>
+ <bean class="mic.contacta.server.CocServiceImpl"/>
  -->
 
  <context:component-scan base-package="mic.contacta.pmod.polycom"/>
  <context:component-scan base-package="mic.contacta.pmod.thomson"/>
 
- <bean class="mic.contacta.server.spi.ContactaConfiguration"/>
- <bean class="mic.contacta.server.spi.TemplateServiceImpl"/>
- <bean class="mic.contacta.server.spi.InventoryServiceImpl"/>
- <bean class="mic.contacta.server.spi.SipServiceImpl"/>
- <bean class="mic.contacta.server.spi.ProvisioningServiceImpl"/>
+ <bean class="mic.contacta.server.ContactaConfiguration"/>
+ <bean class="mic.contacta.server.TemplateServiceImpl"/>
+ <bean class="mic.contacta.server.InventoryServiceImpl"/>
+ <bean class="mic.contacta.server.PbxServiceImpl"/>
+ <bean class="mic.contacta.server.ProvisioningServiceImpl"/>
  <bean class="mic.contacta.asterisk.spi.ExtenHintWriter"/>
  <bean class="mic.contacta.asterisk.spi.ExtenProfileWriter"/>
 

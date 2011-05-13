@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import mic.contacta.server.api.ContactaConstants;
+import mic.contacta.server.ContactaConstants;
 
 
 /**

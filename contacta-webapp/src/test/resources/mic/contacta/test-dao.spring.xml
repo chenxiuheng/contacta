@@ -20,6 +20,6 @@
  <!--================================================================-->
  <context:annotation-config/>
  <import resource="classpath:/mic/contacta/test-orm.spring.xml"/>
- <context:component-scan base-package="mic.contacta.server.dao"/>
+ <context:component-scan base-package="mic.contacta.dao"/>
 
 </beans>

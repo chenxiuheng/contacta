@@ -112,8 +112,8 @@
   -->
  <import resource="classpath:/mic/contacta/contacta-security.spring.xml"/>
  <context:component-scan base-package="mic.contacta.pmod"/>
- <context:component-scan base-package="mic.contacta.server.dao"/>
- <context:component-scan base-package="mic.contacta.server.spi"/>
+ <context:component-scan base-package="mic.contacta.dao"/>
+ <context:component-scan base-package="mic.contacta.server"/>
  <context:component-scan base-package="mic.contacta.gateway"/>
  <context:component-scan base-package="mic.contacta.web"/>
 
@@ -121,13 +121,13 @@
  <context:component-scan base-package="mic.contacta.asterisk.spi"/>
 
  <!--  -->
- <bean id="organicSession" class="mic.contacta.server.spi.ContactaSession" scope="session">
+ <bean id="organicSession" class="mic.contacta.server.ContactaSession" scope="session">
   <aop:scoped-proxy/>
  </bean>
 
 
  <!-- contactaService -->
- <bean id="contactaService" class="mic.contacta.server.spi.ContactaServiceImpl" lazy-init="false" primary="true">
+ <bean id="contactaService" class="mic.contacta.server.ContactaServiceImpl" lazy-init="false" primary="true">
   <property name="configurerList">
    <util:list>
     <ref bean="thomson2022Configurer"/>
@@ -206,7 +206,7 @@
  <!--================================================================-->
  <!--
  <bean id="conferenceJob" class="org.springframework.scheduling.quartz.JobDetailBean">
-  <property name="jobClass" value="mic.contacta.server.spi.ConferenceActivatorJob"/>
+  <property name="jobClass" value="mic.contacta.server.ConferenceActivatorJob"/>
   <property name="jobDataAsMap">
    <map>
     <entry key="message" value="This is a message from the Spring configuration file!"/>

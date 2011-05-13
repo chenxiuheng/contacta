@@ -21,14 +21,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import mic.contacta.dao.PbxContextDao;
+import mic.contacta.dao.PbxProfileDao;
+import mic.contacta.domain.PbxContextModel;
+import mic.contacta.domain.PbxProfileModel;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.domain.VoicemailModel;
 import mic.contacta.json.PhoneJson;
 import mic.contacta.json.SipAccountJson;
-import mic.contacta.model.PbxContextModel;
-import mic.contacta.model.PbxProfileModel;
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.model.VoicemailModel;
-import mic.contacta.server.dao.PbxContextDao;
-import mic.contacta.server.dao.PbxProfileDao;
 import mic.organic.gateway.AbstractJsonConverter;
 
 /**
@@ -50,66 +50,65 @@ public class SipAccountConverter extends AbstractJsonConverter<SipAccountModel, 
    *
    */
   @Override
-  public SipAccountModel jsonToModel(SipAccountJson from, SipAccountModel to)
+  public SipAccountModel jsonToModel(SipAccountJson src, SipAccountModel dst)
   {
-    if (to == null)
+    if (dst == null)
     {
-      to = new SipAccountModel();
+      dst = new SipAccountModel();
     }
+    super.jsonToModel(src, dst);
+    dst.setCode(src.getLogin()); // alias: login
 
-    super.jsonToModel(from, to);
-    to.setCode(from.getLogin()); // alias: login
+    String email = src.getEmail();
+    email = StringUtils.isNotBlank(email) ? email : src.getLogin()+"@interni.local";
+    dst.setLabel(src.getFullName());
+    dst.setEmail(email);
+    dst.setPassword(src.getPassword());
+    dst.setCallgroup(src.getCallgroup());
+    dst.setPickupgroup(src.getPickupgroup());
+    dst.setVmSendEmail(src.isVmSendEmail());
+    dst.setRingTimeout(src.getRingTimeout());
 
-    String email = from.getEmail();
-    email = StringUtils.isNotBlank(email) ? email : from.getLogin()+"@interni.local";
-    to.setLabel(from.getFullName());
-    to.setEmail(email);
-    to.setPassword(from.getPassword());
-    to.setCallgroup(from.getCallgroup());
-    to.setPickupgroup(from.getPickupgroup());
-    to.setVmSendEmail(from.isVmSendEmail());
-    to.setRingTimeout(from.getRingTimeout());
-
-    PbxContextModel pbxContext = pbxContextDao.findByCode(from.getContext());
+    PbxContextModel pbxContext = pbxContextDao.findByCode(src.getContext());
     if (pbxContext != null)
     {
-      to.setContext(pbxContext);
-      to.getSipUser().setContext(pbxContext.getCode());
+      dst.setContext(pbxContext);
+      dst.getSipUser().setContext(pbxContext.getCode());
     }
-    PbxProfileModel pbxProfile = pbxProfileDao.findByCode(from.getProfileName());
-    if(from.getProfileName().equals("none"))
+    PbxProfileModel pbxProfile = pbxProfileDao.findByCode(src.getProfileName());
+    if(src.getProfileName().equals("none"))
     {
-      to.setProfile(null);
+      dst.setProfile(null);
     }
     else
     {
-      to.setProfile(pbxProfile);
-      to.setProfileOptions(from.getProfileOptions());
+      dst.setProfile(pbxProfile);
+      dst.setProfileOptions(src.getProfileOptions());
     }
 
-    to.setVmEnabled(from.getVmEnabled());
-    if (from.getVmEnabled())
+    dst.setVmEnabled(src.getVmEnabled());
+    if (src.getVmEnabled())
     {
-      String vmEmail = to.getVmSendEmail() ? to.getPerson().getEmail() : "";
-      if (to.getVmBox() != null)
+      String vmEmail = dst.getVmSendEmail() ? dst.getPerson().getEmail() : "";
+      if (dst.getVmBox() != null)
       {
-        to.getVmBox().setPin(from.getVmPin());
-        to.getVmBox().setEmail(vmEmail);
+        dst.getVmBox().setPin(src.getVmPin());
+        dst.getVmBox().setEmail(vmEmail);
       }
       else
       {
-        VoicemailModel vmBox = SipAccountModel.buildVmBox(to.getLogin(), from.getVmPin(), to.getLabel(), vmEmail);
-        to.setVmBox(vmBox);
+        VoicemailModel vmBox = SipAccountModel.buildVmBox(dst.getLogin(), src.getVmPin(), dst.getLabel(), vmEmail);
+        dst.setVmBox(vmBox);
       }
     }
     else
     {
-      to.setVmBox(null);
+      dst.setVmBox(null);
     }
-    String mailbox = to.getVmEnabled() ? to.getLogin()+"@"+to.getVoicemailContext() : null;
-    to.getSipUser().setMailbox(mailbox);
+    String mailbox = dst.getVmEnabled() ? dst.getLogin()+"@"+dst.getVoicemailContext() : null;
+    dst.getSipUser().setMailbox(mailbox);
 
-    return to;
+    return dst;
   }
 
 
@@ -117,61 +116,55 @@ public class SipAccountConverter extends AbstractJsonConverter<SipAccountModel, 
    *
    */
   @Override
-  public SipAccountJson modelToJson(SipAccountModel from, SipAccountJson to)
+  public SipAccountJson modelToJson(SipAccountModel src, SipAccountJson dst)
   {
-    if (to == null)
+    if (dst == null)
     {
-      to = new SipAccountJson();
+      dst = new SipAccountJson();
     }
+    super.modelToJson(src, dst);
+    //dst.setCode(src.getCode());
 
-    super.modelToJson(from, to);
+    String context = src.getContext() != null ? src.getContext().getCode() : null;
 
-    String context = from.getContext() != null ? from.getContext().getCode() : null;
+    dst.setEmail(src.getEmail());
+    dst.setFirstName(src.getLabel());
+    dst.setLastName(src.getLabel());
+    dst.setFullName(src.getLabel());
 
-    // TODO: non e' da mettere nell'AbstractConverter e cambiare l'interfaccia?
-    to.setId(from.getId());
+    dst.setLogin(src.getLogin());
+    dst.setPassword(src.getPassword());
+    dst.setProfileName(src.getProfile() != null ? src.getProfile().getCode() : null);
+    dst.setProfileOptions(src.getProfileOptions());
+    dst.setContext(context);
+    dst.setCallgroup(src.getCallgroup());
+    dst.setPickupgroup(src.getPickupgroup());
+    dst.setCallwaiting(true);
+    dst.setRingTimeout(src.getRingTimeout());
 
-    //to.setCode(from.getCode());
-    to.setId(from.getId());
-
-    to.setEmail(from.getEmail());
-    to.setFirstName(from.getLabel());
-    to.setLastName(from.getLabel());
-    to.setFullName(from.getLabel());
-
-    to.setLogin(from.getLogin());
-    to.setPassword(from.getPassword());
-    to.setProfileName(from.getProfile() != null ? from.getProfile().getCode() : null);
-    to.setProfileOptions(from.getProfileOptions());
-    to.setContext(context);
-    to.setCallgroup(from.getCallgroup());
-    to.setPickupgroup(from.getPickupgroup());
-    to.setCallwaiting(true);
-    to.setRingTimeout(from.getRingTimeout());
-
-    to.setVmSendEmail(from.getVmSendEmail());
-    to.setVmEnabled(from.getVmEnabled());
+    dst.setVmSendEmail(src.getVmSendEmail());
+    dst.setVmEnabled(src.getVmEnabled());
     //if(from.getVmEnabled())
     {
       //to.setVmPin(from.getVmBox().getPin()); // URGENT c'era questo
     }
     //else
     {
-      to.setVmPin("");
+      dst.setVmPin("");
     }
 
-    if (from.getCoc() != null)
+    if (src.getCoc() != null)
     {
-      to.setCocLogin(from.getCoc().getLogin());
-      to.setCocPin(from.getCoc().getPin());
+      dst.setCocLogin(src.getCoc().getLogin());
+      dst.setCocPin(src.getCoc().getPin());
     }
 
-    if(from.getPhone() != null)
+    if(src.getPhone() != null)
     {
-      to.setPhone(from.getPhone().getMacAddress());
+      dst.setPhone(src.getPhone().getMacAddress());
     }
 
-    return to;
+    return dst;
   }
 
 
@@ -180,53 +173,53 @@ public class SipAccountConverter extends AbstractJsonConverter<SipAccountModel, 
    * dimensioni: 17 o 22.  il primo e' un subarray di un'altra custom query
    * URGENT ci sono da rifare le 2 query delle table perche' sono incomprensibili e immodificabili!!!!!
    */
-  public SipAccountJson modelToJsonBrief(Object[] from)
+  public SipAccountJson modelToJsonBrief(Object[] src)
   {
     SipAccountJson to = new SipAccountJson();
-    to.setId((Integer) from[0]);
+    to.setId((Integer) src[0]);
 
-    to.setLogin((String) from[1]);
-    to.setPassword((String) from[2]);
-    to.setProfileName((String) from[3]);
-    to.setProfileOptions((String) from[4]);
-    to.setContext((String) from[5]);
-    to.setCallgroup((String) from[6]);
-    to.setPickupgroup((String) from[7]);
+    to.setLogin((String) src[1]);
+    to.setPassword((String) src[2]);
+    to.setProfileName((String) src[3]);
+    to.setProfileOptions((String) src[4]);
+    to.setContext((String) src[5]);
+    to.setCallgroup((String) src[6]);
+    to.setPickupgroup((String) src[7]);
     to.setCallwaiting(true);
 
-    if (from[8] != null)
+    if (src[8] != null)
     {
-      to.setVmEnabled((Boolean) from[8]);
+      to.setVmEnabled((Boolean) src[8]);
     }
     //if(json.getVmEnabled())
     {
-      to.setVmPin((String) from[9]);
+      to.setVmPin((String) src[9]);
     }
     /*else
     {
       json.setVmPin("");
     }*/
 
-    to.setEmail((String) from[10]);
-    to.setFirstName((String) from[11]);
-    to.setLastName((String) from[12]);
-    to.setFullName((String) from[13]);
+    to.setEmail((String) src[10]);
+    to.setFirstName((String) src[11]);
+    to.setLastName((String) src[12]);
+    to.setFullName((String) src[13]);
 
-    to.setCocLogin((String) from[14]);
-    to.setCocPin((String) from[15]);
+    to.setCocLogin((String) src[14]);
+    to.setCocPin((String) src[15]);
 
-    to.setPhone((String) from[16]);
+    to.setPhone((String) src[16]);
 
-    if (from.length > 17)
+    if (src.length > 17)
     {
-      to.setVmSendEmail((Boolean) from[21]);
-      to.setRingTimeout((Integer) from[22]);
+      to.setVmSendEmail((Boolean) src[21]);
+      to.setRingTimeout((Integer) src[22]);
     }
 
-    if (from.length > 23) // FIXME uhm, this can be very slow
+    if (src.length > 23) // FIXME uhm, this can be very slow
     {
       //SipUserModel sip = model.getSipUser();
-      Object o = from[23];
+      Object o = src[23];
       boolean r = false;
       if (o instanceof String)
       {

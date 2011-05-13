@@ -26,10 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import mic.contacta.gateway.ContactaGateway;
-import mic.contacta.server.api.ContactaConstants;
-import mic.contacta.server.spi.ContactaService;
-import mic.contacta.server.spi.PhonebarService;
+import mic.contacta.gateway.PbxGateway;
+import mic.contacta.server.ContactaConstants;
+import mic.contacta.server.ContactaService;
+import mic.contacta.server.PhonebarService;
 import mic.contacta.util.ContactaHelper;
 import mic.organic.core.OrganicSpringHelper;
 
@@ -48,7 +48,7 @@ public class ContactaServlet extends HttpServlet
   private static final String REPLICA = "/replica";
   private static final String OUTLOOK = "/outlook";
 
-  private ContactaGateway contactaGateway;
+  private PbxGateway pbxGateway;
 
 
   /*
@@ -85,7 +85,7 @@ public class ContactaServlet extends HttpServlet
       //throw new ServletException(e);
     }
 
-    contactaGateway = (ContactaGateway) (OrganicSpringHelper.getService(ContactaGateway.SERVICE_NAME));
+    pbxGateway = (PbxGateway) (OrganicSpringHelper.getService(PbxGateway.SERVICE_NAME));
   }
 
 
@@ -199,7 +199,7 @@ public class ContactaServlet extends HttpServlet
         response.setContentType(ContactaConstants.MIMETYPE_TEXT_PLAIN);
         try
         {
-          contactaGateway.extenProfileUpdate();
+          pbxGateway.extenProfileUpdate();
           writer.println("OK");
         }
         catch(Exception e)

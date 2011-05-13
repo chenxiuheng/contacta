@@ -20,8 +20,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.model.SipAccountModel.Presence;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.domain.SipAccountModel.Presence;
 
 
 /**

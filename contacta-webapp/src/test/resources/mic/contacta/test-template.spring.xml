@@ -24,6 +24,6 @@
  <context:component-scan base-package="mic.organic.vfs"/>
  <context:component-scan base-package="mic.organic.scripting"/>
 
- <bean class="mic.contacta.server.spi.ContactaConfiguration"/>
- <bean class="mic.contacta.server.spi.TemplateServiceImpl"/>
+ <bean class="mic.contacta.server.ContactaConfiguration"/>
+ <bean class="mic.contacta.server.TemplateServiceImpl"/>
 </beans>

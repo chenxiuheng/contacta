@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mic.contacta.asterisk.spi.AsteriskService;
-import mic.contacta.server.spi.ProvisioningService;
+import mic.contacta.server.ProvisioningService;
 
 
 /**

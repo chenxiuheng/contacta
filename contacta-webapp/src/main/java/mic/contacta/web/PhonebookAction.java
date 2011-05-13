@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import mic.contacta.pmod.thomson.MenuItem;
-import mic.contacta.server.spi.ContactaConfiguration;
+import mic.contacta.server.ContactaConfiguration;
 import mic.organic.aaa.model.PersonModel;
 import mic.organic.aaa.spi.AddressbookService;
 import mic.organic.aaa.web.AaaGateway;

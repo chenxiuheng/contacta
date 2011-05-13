@@ -24,8 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mic.contacta.asterisk.agi.AbstractContactaAgi;
 import mic.contacta.asterisk.spi.AsteriskService;
-import mic.contacta.server.api.ChannelStatusLine;
-import mic.contacta.server.api.ContactaException;
+import mic.contacta.domain.ChannelStatusLine;
+import mic.contacta.server.ContactaException;
 
 
 /**

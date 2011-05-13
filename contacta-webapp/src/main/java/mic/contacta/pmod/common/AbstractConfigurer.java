@@ -25,9 +25,9 @@ import org.apache.commons.vfs.FileSystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import mic.contacta.model.ProductModel;
-import mic.contacta.server.spi.ContactaConfiguration;
-import mic.contacta.server.spi.TemplateService;
+import mic.contacta.domain.ProductModel;
+import mic.contacta.server.ContactaConfiguration;
+import mic.contacta.server.TemplateService;
 import mic.organic.vfs.OrganicVfs;
 
 

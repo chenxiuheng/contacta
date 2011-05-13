@@ -24,8 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.server.PbxService;
 import mic.organic.aaa.model.PersonModel;
 import mic.organic.aaa.spi.AccountService;
 import mic.organic.aaa.spi.AddressbookService;
@@ -43,7 +42,7 @@ public class SkypeOutAgi extends AbstractContactaAgi
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private SipService sipService;
+  @Autowired private PbxService pbxService;
   @Autowired private AddressbookService addressbookService;
   @Autowired private AccountService accountService;
 
@@ -69,7 +68,7 @@ public class SkypeOutAgi extends AbstractContactaAgi
     log().info("request:\n{}", builder.toString());
 
     String callerIdNumber = request.getCallerIdNumber();
-    //SipAccountModel pickerSip = sipService.sipByLogin(callerIdNumber);
+    //SipAccountModel pickerSip = pbxService.sipByLogin(callerIdNumber);
     String calleeIdNumber = request.getExtension();  // callee
     PersonModel person = addressbookService.personByExtension(calleeIdNumber);
     String skype2exten = null;
@@ -82,7 +81,7 @@ public class SkypeOutAgi extends AbstractContactaAgi
       skype2exten = person.getUri();
       log().info("skype2exten={}", skype2exten);
     }
-//    SipAccountModel calleeSip = sipService.sipByLogin(calleeIdNumber);
+//    SipAccountModel calleeSip = pbxService.sipByLogin(calleeIdNumber);
 //    if (calleeSip == null)
 //    {
 //      log().warn("{}: who is she?!?!?", calleeIdNumber);

@@ -11,8 +11,8 @@
    </div>
    <input dojoType="dijit.form.TextBox" name="id" style="display:none;"/>
    <table>
-    <tr><td>${m.t("label.pbxcontext.code")}</td><td><input dojoType="dijit.form.TextBox" name="code"/></td></tr>
-    <tr><td>${m.t("label.pbxcontext.label")}</td><td><input dojoType="dijit.form.TextBox" name="label"/></td></tr>
+    <tr><td>${m.t("label.code")}</td><td><input dojoType="dijit.form.TextBox" name="code"/></td></tr>
+    <tr><td>${m.t("label.label")}</td><td><input dojoType="dijit.form.TextBox" name="label"/></td></tr>
    </table>
   </div>
   [@oko6 pad/]
@@ -30,7 +30,7 @@
  </div>
 
  <div dojoType="dijit.layout.ContentPane" region="center" class="gridPane">
-  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid">
+  <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid" sortInfo="1">
   </table>
  </div>
 

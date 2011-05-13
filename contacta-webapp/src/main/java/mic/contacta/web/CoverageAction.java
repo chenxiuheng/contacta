@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import mic.contacta.gateway.ContactaGateway;
+import mic.contacta.gateway.PbxGateway;
 import mic.contacta.json.CoverageJson;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -38,7 +38,7 @@ public class CoverageAction extends AbstractDatastoreAction
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @Autowired private ContactaGateway contactaGateway;
+  @Autowired private PbxGateway pbxGateway;
 
 
   /*
@@ -46,7 +46,7 @@ public class CoverageAction extends AbstractDatastoreAction
    */
   public String findAll()
   {
-    List<CoverageJson> jsonList = contactaGateway.coverageList();
+    List<CoverageJson> jsonList = pbxGateway.coverageList();
     DatastoreJson<CoverageJson> datastore = new DefaultDatastoreJson<CoverageJson>(DatastoreJson.IDENTIFIER, "title", jsonList);
     setStore(datastore);
     return SUCCESS;

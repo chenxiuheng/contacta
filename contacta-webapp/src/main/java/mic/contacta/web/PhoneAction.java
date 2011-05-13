@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import mic.contacta.json.PhoneJson;
-import mic.contacta.server.spi.InventoryService;
+import mic.contacta.server.InventoryService;
 import mic.organic.core.Model;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -64,7 +64,7 @@ public class PhoneAction extends AbstractContactaSmd<PhoneJson>
   {
     try
     {
-      return contactaGateway.phonePersist(json);
+      return pbxGateway.phonePersist(json);
     }
     catch (Exception e)
     {
@@ -82,7 +82,7 @@ public class PhoneAction extends AbstractContactaSmd<PhoneJson>
   {
     try
     {
-      return contactaGateway.phoneDelete(ids);
+      return pbxGateway.phoneRemove(ids);
     }
     catch (Exception e)
     {
@@ -98,7 +98,7 @@ public class PhoneAction extends AbstractContactaSmd<PhoneJson>
   @Override
   public PhoneJson find(int id)
   {
-    return null; //FIXME uncomment contactaGateway.phoneFind(id);
+    return null; //FIXME uncomment pbxGateway.phoneFind(id);
   }
 
 
@@ -108,7 +108,7 @@ public class PhoneAction extends AbstractContactaSmd<PhoneJson>
   @Override
   public Model findModel(Integer oid)
   {
-    return inventoryService.findPhone(oid);
+    return inventoryService.phoneFind(oid);
   }
 
 
@@ -119,7 +119,7 @@ public class PhoneAction extends AbstractContactaSmd<PhoneJson>
   @Override
   public DatastoreJson<PhoneJson> findAll()
   {
-    List<PhoneJson> jsonList = contactaGateway.phoneList();
+    List<PhoneJson> jsonList = pbxGateway.phoneList();
     DatastoreJson<PhoneJson> store = new DefaultDatastoreJson<PhoneJson>(DatastoreJson.IDENTIFIER, "macAddress", jsonList);
     return store;
   }

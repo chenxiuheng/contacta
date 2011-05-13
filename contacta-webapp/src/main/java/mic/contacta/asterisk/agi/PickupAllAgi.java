@@ -27,9 +27,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mic.contacta.asterisk.agi.AbstractContactaAgi;
-import mic.contacta.model.SipAccountModel;
-import mic.contacta.server.dao.SipAccountDao;
-import mic.contacta.server.spi.SipService;
+import mic.contacta.dao.SipAccountDao;
+import mic.contacta.domain.SipAccountModel;
+import mic.contacta.server.PbxService;
 
 
 /**
@@ -45,7 +45,7 @@ public class PickupAllAgi extends AbstractContactaAgi
 
   public static final String VARNAME_PICKUP = "PICKUP";
 
-  @Autowired private SipService sipService;
+  @Autowired private PbxService pbxService;
   @Autowired private SipAccountDao sipAccountDao;
 
   /*
@@ -65,7 +65,7 @@ public class PickupAllAgi extends AbstractContactaAgi
   public void service(AgiRequest request, AgiChannel channel) throws AgiException
   {
     String pickerExten = request.getCallerIdNumber();
-    SipAccountModel pickerSip = sipService.sipByLogin(pickerExten);
+    SipAccountModel pickerSip = pbxService.sipByLogin(pickerExten);
     if (pickerSip == null)
     {
       log().warn("{}: who are you?!?!?", pickerExten);

@@ -20,7 +20,7 @@ import java.util.Date;
 
 import static mic.organic.core.OrganicConstants.*;
 
-import mic.contacta.server.spi.ImportService;
+import mic.contacta.server.ImportService;
 import mic.organic.vfs.OrganicVfs;
 
 import org.apache.commons.lang.SystemUtils;
