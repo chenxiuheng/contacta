@@ -89,15 +89,16 @@ public class ContactaBuilder extends OrganicBuilder
 
 
   /**
+   * @param label TODO
    * @param suffix
    * @return
    */
-  public SipAccountModel buildSipAccount(String login, String password)
+  public SipAccountModel buildSipAccount(String login, String password, String label)
   {
     SipAccountModel account = new SipAccountModel();
     account.setCode(login);
     account.setPassword(password);
-    account.setLabel("contacta administrator");
+    account.setLabel(label);
     account.setEmail(login+"@localhost");
     //account.getSipUser().setCallgroup("callGroup" + suffix);
     //account.getSipUser().setPickupgroup("pickup" + suffix);

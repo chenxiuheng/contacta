@@ -63,6 +63,7 @@ public class ContactaConfiguration extends OrganicConfiguration
    */
   public ContactaConfiguration()
   {
+    super();
   }
 
 
