@@ -19,9 +19,12 @@ import java.util.List;
 import org.apache.struts2.json.annotations.SMDMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import mic.contacta.gateway.PbxGateway;
 import mic.contacta.json.CallsJson;
+import mic.contacta.server.ContactaSession;
 import mic.organic.core.Model;
 import mic.organic.gateway.DatastoreJson;
 import mic.organic.gateway.DefaultDatastoreJson;
@@ -39,6 +42,8 @@ public class CallsAction extends AbstractContactaSmd<CallsJson>
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
+
+  @Autowired protected ContactaSession contactaSession;
 
 
   /*
@@ -104,7 +109,8 @@ public class CallsAction extends AbstractContactaSmd<CallsJson>
   @Override
   public DatastoreJson<CallsJson> findAll()
   {
-    List<CallsJson> jsonList = new ArrayList<CallsJson>();//callsDao.findAll();
+    String exten = contactaSession.getAccount().getCode();
+    List<CallsJson> jsonList = pbxGateway.missedSkypeCalls(exten);
     DatastoreJson<CallsJson> store = new DefaultDatastoreJson<CallsJson>(DatastoreJson.IDENTIFIER, DatastoreJson.LABEL, jsonList);
     return store;
   }

@@ -621,6 +621,7 @@ public class PbxGatewayImpl implements PbxGateway
   /*
    * @see mic.contacta.gateway.PbxGateway#missedSkypeCalls(java.lang.String)
    */
+  @Transactional(propagation=Propagation.REQUIRES_NEW, readOnly=true)
   @Override
   public List<CallsJson> missedSkypeCalls(String exten)
   {
