@@ -108,9 +108,10 @@
   <dependency><groupId>org.slf4j</groupId><artifactId>jcl-over-slf4j</artifactId><scope>runtime</scope></dependency>
   <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-log4j12</artifactId><scope>runtime</scope></dependency>
 
+  <dependency><groupId>org.freemarker</groupId><artifactId>freemarker</artifactId></dependency>
   <dependency><groupId>commons-httpclient</groupId><artifactId>commons-httpclient</artifactId></dependency>
-  <dependency><groupId>net.sf.opencsv</groupId><artifactId>opencsv</artifactId></dependency>
   <dependency><groupId>commons-vfs</groupId><artifactId>commons-vfs</artifactId></dependency>
+  <dependency><groupId>net.sf.opencsv</groupId><artifactId>opencsv</artifactId></dependency>
 
   <dependency><groupId>org.quartz-scheduler</groupId><artifactId>quartz</artifactId></dependency>
   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-ehcache</artifactId></dependency>
@@ -124,6 +125,8 @@
   <dependency><groupId>org.springframework</groupId><artifactId>spring-jdbc</artifactId></dependency>
   <dependency><groupId>org.springframework</groupId><artifactId>spring-orm</artifactId></dependency>
   <dependency><groupId>org.springframework</groupId><artifactId>spring-oxm</artifactId></dependency>
+  <dependency><groupId>org.springframework</groupId><artifactId>spring-context-support</artifactId></dependency>
+  <dependency><groupId>org.springframework</groupId><artifactId>spring-webmvc</artifactId></dependency>
 
   <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-core</artifactId></dependency>
 
@@ -135,6 +138,11 @@
 
   <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-core</artifactId></dependency>
   <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-json-plugin</artifactId></dependency>
+  <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-codebehind-plugin</artifactId><scope>runtime</scope></dependency>
+  <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-spring-plugin</artifactId><scope>runtime</scope></dependency>
+  <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-sitemesh-plugin</artifactId><scope>runtime</scope></dependency>
+  <dependency><groupId>ognl</groupId><artifactId>ognl</artifactId><scope>runtime</scope></dependency>
+  <dependency><groupId>opensymphony</groupId><artifactId>sitemesh</artifactId><scope>runtime</scope></dependency>
   <dependency><groupId>org.dojotoolkit</groupId><artifactId>dojo</artifactId><classifier>organic</classifier><scope>runtime</scope></dependency>
 
   <dependency><groupId>com.sun.script</groupId><artifactId>freemarker-engine</artifactId></dependency>
