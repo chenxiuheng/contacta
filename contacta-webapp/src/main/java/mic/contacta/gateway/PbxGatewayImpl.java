@@ -35,6 +35,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import mic.contacta.dao.AppointmentDao;
 import mic.contacta.dao.CoverageDao;
+import mic.contacta.dao.PbxContextDao;
+import mic.contacta.dao.PbxProfileDao;
 import mic.contacta.domain.*;
 import mic.contacta.domain.CoverageModel.CoverageType;
 import mic.contacta.json.CallsJson;
@@ -325,7 +327,7 @@ public class PbxGatewayImpl implements PbxGateway
         for (SipAccountModel account : phone.getSipAccountList())
         {
           account.setPhone(null);
-          pbxService.sipUpdate(account);
+          pbxService.sipPersist(account);
         }
         rs[i] = inventoryService.phoneDelete(phone);
         if (rs[i] == false)
@@ -419,6 +421,10 @@ public class PbxGatewayImpl implements PbxGateway
   }
 
 
+  @Autowired PbxContextDao pbxContextDao;
+  @Autowired PbxProfileDao pbxProfileDao;
+
+
   /**
    *
    */
@@ -437,9 +443,26 @@ public class PbxGatewayImpl implements PbxGateway
     }
     model = sipAccountConverter.jsonToModel(json, model);
 
+    PbxContextModel pbxContext = pbxContextDao.findByCode(json.getContext());
+    if (pbxContext != null)
+    {
+      model.setContext(pbxContext);
+      model.getSipUser().setContext(pbxContext.getCode());
+    }
+    PbxProfileModel pbxProfile = pbxProfileDao.findByCode(json.getProfileName());
+    if(json.getProfileName().equals("none"))
+    {
+      model.setProfile(null);
+    }
+    else
+    {
+      model.setProfile(pbxProfile);
+      model.setProfileOptions(json.getProfileOptions());
+    }
+
     if (json.getId() == 0)
     {
-      pbxService.sipCreate(model);
+      pbxService.sipPersist(model);
       addCoc(json, model);
     }
     else
@@ -457,7 +480,7 @@ public class PbxGatewayImpl implements PbxGateway
       {
         addCoc(json, model);
       }
-      pbxService.sipUpdate(model);
+      pbxService.sipPersist(model);
     }
 
     extenProfileUpdate();

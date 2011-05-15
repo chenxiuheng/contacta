@@ -226,7 +226,7 @@ public class PhonebarServiceImpl implements PhonebarService
   @Override
   public String dial(SipAccountModel sipAccount, String exten)
   {
-    log().info("displayName={}, exten={}", sipAccount.getLabel(), exten);
+    log().info("displayName={} calls exten={}", sipAccount.getLabel(), exten);
 
     log().warn("========= USER REGISTERED CHECK IS TURNED OFF =========");
     SipUserModel sipUser = sipAccount.getSipUser();
@@ -237,16 +237,17 @@ public class PhonebarServiceImpl implements PhonebarService
     }
     String context = sipUser.getContext();
     String callerId = sipUser.getCallerid();
+    String callerNum = sipAccount.getLogin();
 
     OriginateAction originateAction = new OriginateAction();
     originateAction.setAsync(false);
-    originateAction.setChannel("SIP/"+sipAccount.getLogin());
+    originateAction.setChannel("SIP/"+callerNum);
     originateAction.setContext(context);
     originateAction.setExten(exten);
     originateAction.setPriority(1);
     originateAction.setCallerId(callerId);
 
-    log().info("originate: siplogin={}, context={}", sipAccount.getLogin(), context);
+    log().info("originate: callerNum={}, context={}", callerNum, context);
     try
     {
       asteriskService.sendCommand(originateAction);

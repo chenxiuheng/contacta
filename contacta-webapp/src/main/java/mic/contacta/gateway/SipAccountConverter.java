@@ -19,12 +19,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import mic.contacta.dao.PbxContextDao;
-import mic.contacta.dao.PbxProfileDao;
-import mic.contacta.domain.PbxContextModel;
-import mic.contacta.domain.PbxProfileModel;
 import mic.contacta.domain.SipAccountModel;
 import mic.contacta.domain.VoicemailModel;
 import mic.contacta.json.PhoneJson;
@@ -41,9 +36,6 @@ public class SipAccountConverter extends AbstractJsonConverter<SipAccountModel, 
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
-
-  @Autowired PbxContextDao pbxContextDao;
-  @Autowired PbxProfileDao pbxProfileDao;
 
 
   /*
@@ -68,23 +60,6 @@ public class SipAccountConverter extends AbstractJsonConverter<SipAccountModel, 
     dst.setPickupgroup(src.getPickupgroup());
     dst.setVmSendEmail(src.isVmSendEmail());
     dst.setRingTimeout(src.getRingTimeout());
-
-    PbxContextModel pbxContext = pbxContextDao.findByCode(src.getContext());
-    if (pbxContext != null)
-    {
-      dst.setContext(pbxContext);
-      dst.getSipUser().setContext(pbxContext.getCode());
-    }
-    PbxProfileModel pbxProfile = pbxProfileDao.findByCode(src.getProfileName());
-    if(src.getProfileName().equals("none"))
-    {
-      dst.setProfile(null);
-    }
-    else
-    {
-      dst.setProfile(pbxProfile);
-      dst.setProfileOptions(src.getProfileOptions());
-    }
 
     dst.setVmEnabled(src.getVmEnabled());
     if (src.getVmEnabled())

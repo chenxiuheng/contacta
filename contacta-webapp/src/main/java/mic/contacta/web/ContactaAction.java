@@ -48,7 +48,7 @@ import mic.organic.gateway.Json;
  */
 @Service("contactaAction")
 @Scope("request")
-public class ContactaSmd extends AbstractContactaAction
+public class ContactaAction extends AbstractContactaAction
 {
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }

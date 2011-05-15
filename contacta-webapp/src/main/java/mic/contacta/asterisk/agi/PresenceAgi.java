@@ -92,7 +92,7 @@ public class PresenceAgi extends AbstractContactaAgi
         presence = (presence == Presence.Online) ? Presence.Dnd : Presence.Online;
         log().info("callerExten={}, setting presence={}", callerExten, presence.toString());
         callerSip.setPresence(presence);
-        pbxService.sipUpdate(callerSip);
+        pbxService.sipPersist(callerSip);
         channel.exec("Wait", "1");
         switch (presence)
          {

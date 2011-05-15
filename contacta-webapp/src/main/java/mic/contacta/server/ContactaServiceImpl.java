@@ -147,7 +147,7 @@ public class ContactaServiceImpl implements ContactaService
       for (SipAccountModel account : accountList)
       {
         account.getVmBox().setEmail(account.getVmSendEmail() ? account.getEmail() : "");
-        pbxService.sipUpdate(account);
+        pbxService.sipPersist(account);
       }
 
       pbxService.upgradeCheck();

@@ -35,21 +35,12 @@ public interface PbxService extends Service
 
 
   /**
-   * Create a Sip account
+   * Persist a Sip account
    *
    * @param model
    * @return
    */
-  SipAccountModel sipCreate(SipAccountModel account);
-
-
-  /**
-   * Update the Sip account
-   *
-   * @param model
-   * @return
-   */
-  SipAccountModel sipUpdate(SipAccountModel account);
+  SipAccountModel sipPersist(SipAccountModel account);
 
 
   /**

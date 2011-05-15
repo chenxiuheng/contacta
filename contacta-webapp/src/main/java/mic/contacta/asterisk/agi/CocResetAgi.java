@@ -78,7 +78,7 @@ public class CocResetAgi extends AbstractContactaAgi
       return;
     }
     callerSip.getSipUser().setContext(callerSip.getContext().getCode());
-    pbxService.sipUpdate(callerSip);
+    pbxService.sipPersist(callerSip);
     channel.exec("Wait", "1");
     channel.exec("Playback", "beep");
 

@@ -161,24 +161,20 @@ public class PbxServiceImpl implements PbxService
    */
   @Transactional(propagation=Propagation.MANDATORY)
   @Override
-  public SipAccountModel sipCreate(SipAccountModel account)
+  public SipAccountModel sipPersist(SipAccountModel account)
   {
-    //validateProfile(account);
-    return sipAccountDao.create(account);
-  }
-
-
-  /*
-   * @see mic.contacta.server.ptool.SipService#updateSipAccount(mic.contacta.ptool.dao.SipAccountModel)
-   */
-  @Transactional(propagation=Propagation.MANDATORY)
-  @Override
-  public SipAccountModel sipUpdate(SipAccountModel model)
-  {
-    //validateProfile(model);
-    String callerId = '"'+model.getLabel()+"\" <"+model.getLogin()+">";
-    model.getSipUser().setCallerid(callerId);
-    return sipAccountDao.update(model);
+    if (account.getId() == 0)
+    {
+      //validateProfile(account);
+      return sipAccountDao.create(account);
+    }
+    else
+    {
+      //validateProfile(model);
+      String callerId = '"'+account.getLabel()+"\" <"+account.getLogin()+">";
+      account.getSipUser().setCallerid(callerId);
+      return sipAccountDao.update(account);
+    }
   }
 
 

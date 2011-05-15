@@ -90,11 +90,16 @@ public class ContactaBuilder extends OrganicBuilder
 
   /**
    * @param label TODO
+   * @param context TODO
    * @param suffix
    * @return
    */
-  public SipAccountModel buildSipAccount(String login, String password, String label)
+  public SipAccountModel buildSipAccount(String login, String password, String label, String context)
   {
+    if (context == null)
+    {
+      context = "root";
+    }
     SipAccountModel account = new SipAccountModel();
     account.setCode(login);
     account.setPassword(password);
@@ -103,7 +108,7 @@ public class ContactaBuilder extends OrganicBuilder
     //account.getSipUser().setCallgroup("callGroup" + suffix);
     //account.getSipUser().setPickupgroup("pickup" + suffix);
     //account.setCallWaiting(callWaiting);
-    account.getSipUser().setContext("root");
+    account.getSipUser().setContext(context);
     account.getSipUser().setName(login);
     account.getSipUser().setUsername(login);
     account.getSipUser().setCallerid(account.getCallerId());

@@ -163,7 +163,7 @@ public class ImportServiceImpl implements ImportService
 
       account.setProfile(pbxProfileDao.findByCode(profile));
       account.setProfileOptions(profileOptions);
-      account = pbxService.sipCreate(account);
+      account = pbxService.sipPersist(account);
 
       /*URGENT if(voicemail)
       {

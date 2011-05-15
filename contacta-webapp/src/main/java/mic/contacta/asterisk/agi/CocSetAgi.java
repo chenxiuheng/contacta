@@ -94,7 +94,7 @@ public class CocSetAgi extends AbstractContactaAgi
     if (StringUtils.equals(pin, s))
     {
       loginSip.getSipUser().setContext("internazionali");
-      pbxService.sipUpdate(loginSip);
+      pbxService.sipPersist(loginSip);
       channel.exec("Playback", "beep");
       channel.exec("Playback", "beep");
       channel.exec("Playback", "beep");
@@ -148,7 +148,7 @@ public class CocSetAgi extends AbstractContactaAgi
     if (StringUtils.equals(pin, secret))
     {
       callerSip.getSipUser().setContext("internazionali");
-      callerSip = pbxService.sipUpdate(callerSip);
+      callerSip = pbxService.sipPersist(callerSip);
       channel.exec("Wait", "1");
       channel.exec("Playback", "beep");
       channel.exec("Playback", "beep");
