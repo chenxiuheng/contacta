@@ -31,6 +31,8 @@ public class CallsJson extends BasicJson
   private String uniqueid;
   private String userfield;
 
+  private String exten;  // used by skype integration missed calls
+
 
   /**
    *
@@ -328,5 +330,22 @@ public class CallsJson extends BasicJson
     this.userfield = userfield;
   }
 
+
+  /**
+   * @return the exten
+   */
+  public String getExten()
+  {
+    return exten;
+  }
+
+
+  /**
+   * @param exten the exten to set
+   */
+  public void setExten(String exten)
+  {
+    this.exten = exten;
+  }
 
 }

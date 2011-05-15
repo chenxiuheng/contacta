@@ -655,7 +655,13 @@ public class PbxGatewayImpl implements PbxGateway
       List<CdrModel> modelList = pbxService.missedSkypeCalls(person.getUri());
       for (CdrModel model : modelList)
       {
-        jsonList.add(callsConverter.modelToJson(model));
+        CallsJson json = callsConverter.modelToJson(model);
+        PersonModel caller = addressbookService.personByUri(model.getSrc());
+        if (caller != null)
+        {
+          json.setExten(caller.getExtension());
+        }
+        jsonList.add(json);
       }
     }
     else
