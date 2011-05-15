@@ -88,8 +88,16 @@ dojo.addOnUnload(function()
  [#-- menubar --]
  <div jsId="ui.menubar" dojoType="dijit.layout.ContentPane" region="top">
   <div dojoType="dijit.Toolbar" class="toolbarToolbar" style="background:#EAF5FD; border-top:1px solid #769DC0; border-bottom:1px solid #769DC0;">
+   [#if organicSession.admin]
+   <button dojoType="dijit.form.DropDownButton" iconClass="ico31" label="<b>${organicSession.account.label} (${organicSession.account.code})</b>">
+    <div dojoType="dijit.Menu">
+     <div dojoType="dijit.MenuItem" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.contactaTabContainer)"><span>${m.t("label.user")}</span></div>
+     <div dojoType="dijit.MenuItem" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.adminTabContainer)"><span>${m.t("label.admin")}</span></div>
+    </div>
+   </button>
+   [#else]
    <div style="" class="dijit dijitReset dijitLeft dijitInline dijitButton menubarLabel">
-    <span style="">Welcome <b>${organicSession.account.label} (${organicSession.account.code})</b></span>
+    <span class="ico31" style="padding-left:28px;"><b>${organicSession.account.label} (${organicSession.account.code})</b></span>
     [#--<span>
      </span>${m.t("label.site")}: <b>[#list organicSession.scopeRoleList("site") as s]${s.code}[#if s_has_next], [/#if][/#list]</b>,
      </span>${m.t("label.function")}: <b>[#list organicSession.scopeRoleList("function") as s]${s.code}[#if s_has_next], [/#if][/#list]</b>
@@ -97,10 +105,17 @@ dojo.addOnUnload(function()
 <div data-dojo-type="openinnovation.ToolbarSeparator" data-dojo-props='label:"${m.t("label.plan")}"'></div>
        --]
    </div>
-   <span data-dojo-type="dijit.ToolbarSeparator"></span>
-   [#if organicSession.admin]
-   <div dojoType="dijit.form.Button" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.contactaTabContainer)"><span>${m.t("label.user")}</span></div>
-   <div dojoType="dijit.form.Button" showLabel="true" onclick="ui.mainStackPane.selectChild(ui.adminTabContainer)"><span>${m.t("label.admin")}</span></div>
+   [/#if]
+    <div dojoType="dijit.form.Button" iconClass="icoMissedCalls" onclick=""><span>${m.t("label.missedCalls")}</span></div>
+   [#if organicSession.account??]
+    <input jsId="ui.digitInput" dojoType="dijit.form.TextBox" value="" placeholder="555012345" style="width:10em;height:20px;"/>
+    <div dojoType="dijit.form.Button" iconClass="ico30" onclick="contacta.dial()"><span>${m.t("label.dial")}</span></div>
+    <div dojoType="dijit.form.Button" iconClass="ico33" onclick="contacta.transfer()"><span>${m.t("label.transfer")}</span></div>
+    <div dojoType="dijit.form.Button" iconClass="ico32" onclick="contacta.hold()"><span>${m.t("label.hold")}</span></div>
+    <div dojoType="dijit.form.Button" iconClass="ico32" onclick="contacta.unhold()"><span>${m.t("label.unhold")}</span></div>
+    <div dojoType="dijit.form.Button" iconClass="ico30" onclick="contacta.answer()"><span>${m.t("label.answer")}</span></div>
+   [#else]
+    <b><i>${m.t("short.phonebar.unavailable")}</i></b>
    [/#if]
    <span data-dojo-type="dijit.ToolbarSeparator"></span>
    <button dojoType="dijit.form.Button" iconClass="icoKeys" title="Change password" onclick="location='${base}/o/password.action';"></button>

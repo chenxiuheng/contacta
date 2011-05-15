@@ -108,6 +108,11 @@ public class ContactaInitialData extends AbstractInitialData
   @Override
   protected void localPersons(Map<String, PersonModel> personMap)
   {
+    findOrCreatePerson(personMap, "openinnovation.pbx", "PBX", "Openinnovation", null, "+3900030", "30", "pbx@localhost", "openinnovation.pbx");
+    findOrCreatePerson(personMap, "openinnovation.demo", "Demo", "Openinnovation", null, "+3900033", "33", "demo@localhost", "openinnovation.demo");
+    findOrCreatePerson(personMap, "linphone.mic", "Linphone35", "Chrome", null, "+3900035", "35", "linphone@localhost", null);
+    findOrCreatePerson(personMap, "michele.bianchi", "Michele", "Bianchi", null, "+3900833", "833", "mic@localhost", "michele.bianchi");
+    findOrCreatePerson(personMap, "roberto.grasso", "Roberto", "Grasso", null, "+3900834", "834", "rob@localhost", "roberto.grasso");
   }
 
 
@@ -124,10 +129,32 @@ public class ContactaInitialData extends AbstractInitialData
    * @see mic.organic.core.AbstractInitialData#localPolicies(java.util.Map, java.util.Map, java.util.Map, java.util.Map)
    */
   @Override
-  protected void localPolicies(Map<String, PolicyModel> policyMap, Map<String, RoleModel> roleMap, Map<String, OperationModel> operationMap, Map<String, AccountModel> accountMap)
+  protected void localPolicies(Map<String, PolicyModel> policyMap, Map<String, RoleModel> roleMap, Map<String, OperationModel> operationMap, Map<String, ? extends AccountModel> accountMap)
   {
-    // TODO Auto-generated method stub
+    AccountModel root = accountService.accountByLogin("root");
+    if (root != null)
+    {
+      authorizationService.addPolicy(root, roleMap.get(ROLE_SUPERVISOR), operationMap.get(ROLE_SUPERVISOR), null);
+      authorizationService.addPolicy(root, roleMap.get(ROLE_ADMIN), operationMap.get(ROLE_ADMIN), null);
+    }
+    else
+    {
+      log().warn("cannot find sip.login: root");
+      return;
+    }
 
+    String[] users = { "30", "33", "35", "41", "42" };
+    for (String login : users)
+    {
+      AccountModel sip = accountService.accountByLogin(login);
+      if (sip != null)
+      {
+      }
+      else
+      {
+        log().warn("cannot find sip.login: {}", login);
+      }
+    }
   }
 
 
@@ -165,10 +192,13 @@ public class ContactaInitialData extends AbstractInitialData
       accountMap = new HashMap<String, SipAccountModel>();
     }
     Long count = (Long)(entityManager.createQuery("select count(*) from AccountModel").getSingleResult());
-    if (count == 0)
+    //if (count == 0)
     {
-      findOrCreateSipAccount(accountMap, "41", "41", "Administrator (root)", null, roleMap.get(ROLE_USER), roleMap.get(ROLE_ADMIN));
-      findOrCreateSipAccount(accountMap, "42", "42", "Administrator (root)", null, roleMap.get(ROLE_USER), roleMap.get(ROLE_ADMIN));
+      findOrCreateSipAccount(accountMap, "30", "30", "OI-PBX", null, roleMap.get(ROLE_USER));
+      findOrCreateSipAccount(accountMap, "33", "33", "OI-Demo", null, roleMap.get(ROLE_USER));
+      findOrCreateSipAccount(accountMap, "35", "35", "Linphone35", null, roleMap.get(ROLE_USER));
+      //AccountModel sip41 = findOrCreateSipAccount(accountMap, "41", "41", "Michele Bianchi", null, roleMap.get(ROLE_USER));
+      //AccountModel sip42 = findOrCreateSipAccount(accountMap, "42", "42", "Roberto Grasso", null, roleMap.get(ROLE_USER));
 
       //localAccounts(operationMap, roleMap, groupMap, accountMap);
     }
@@ -225,8 +255,8 @@ public class ContactaInitialData extends AbstractInitialData
     Map<String, OperationModel> operationMap = initialOperations();
     Map<String, RoleModel> roleMap = initialRoles();
     Map<String, GroupModel> groupMap = initialGroups(roleMap);
-    Map<String, AccountModel> accountMap = new HashMap<String, AccountModel>(); //initialAccounts(operationMap, roleMap, groupMap);
-    initialSipAccounts(null, operationMap, roleMap, groupMap);
+    Map<String, ? extends AccountModel> accountMap = null; //initialAccounts(operationMap, roleMap, groupMap);
+    accountMap = initialSipAccounts(null, operationMap, roleMap, groupMap);
     Map<String, PolicyModel> policyMap = initialPolicies(roleMap, operationMap, accountMap);
     Map<String, PersonModel> personMap = initialPersons();
     Map<String, OrganizationModel> organizationMap = initialOrganizations();

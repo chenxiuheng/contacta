@@ -12,6 +12,8 @@
 .ico12 { width:120px; height:120px; background:transparent url('./buttons/120/person-n-phone.png') no-repeat top left; }
 .ico13 { width:120px; height:120px; background:transparent url('./buttons/120/assign-phone.png') no-repeat top left; }
 
+.icoMissedCalls { width:22px; height:22px; background:transparent url('./buttons/22/missedCalls.png') no-repeat top left; }
+
 .adminTab { margin:auto; width:1000px; height:700px; }
 .adminTabContent {  border:1px solid silver; width:1000px; height:700px; }
 

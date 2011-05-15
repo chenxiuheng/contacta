@@ -91,7 +91,7 @@ public class InventoryServiceImpl implements InventoryService
   @Override
   public PhoneModel phonePersist(PhoneModel model)
   {
-    return phonePersist(model);
+    return phonePersist(model, null);
   }
 
 
