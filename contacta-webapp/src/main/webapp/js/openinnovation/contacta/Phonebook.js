@@ -68,10 +68,11 @@ dojo.declare("openinnovation.contacta.Calls", openinnovation.organic.gridpad.Con
   constructor: function(args)
   {
     this.structure = [{ cells: [[
-     { name:'Nome completo', field:'displayName', width:'14em' },
-     { name:'Telefono', field:'phone', width:'6em' },
-     { name:'Interno', field:'extension', width:'4em' },
-     { name:'Skype', field:'uri', width:'12em' }
+     { name:'Chiamante', field:'clid', width:'20em' },
+     { name:'Skype ID', field:'src', width:'12em', cellStyles:'text-align:center;' },
+     { name:'disposition', field:'disposition', width:'10em', cellStyles:'text-align:center;' },
+     { name:'Data', field:'calldate', width:'12em', cellStyles:'text-align:center;' },
+     { name:'Chiamato', field:'dst', width:'16em' }
     ]] } ];
   },
 

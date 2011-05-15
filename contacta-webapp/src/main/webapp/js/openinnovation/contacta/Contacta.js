@@ -68,8 +68,6 @@ dojo.declare("openinnovation.contacta.Contacta", null,
       this.pbxcontext.refresh();
       this.pbxprofile.refresh();
       this.product.refresh();
-      this.calls = new openinnovation.contacta.Calls();
-      this.calls.refresh();
 
       this.phone = new openinnovation.contacta.Phone();
       this.sip = new openinnovation.contacta.Sip();
@@ -108,6 +106,8 @@ dojo.declare("openinnovation.contacta.Contacta", null,
 
     this.phonebook = new openinnovation.contacta.Phonebook();
     this.phonebook.refresh();
+    this.calls = new openinnovation.contacta.Calls();
+    this.calls.refresh();
 
     //this.addressbookService = new dojo.rpc.JsonService("${base}/smd/addressbook.action");
 
@@ -183,6 +183,15 @@ dojo.declare("openinnovation.contacta.Contacta", null,
   downloadConfiguration:function(/*String*/fileType)
   {
     window.location.replace('/d/download-configuration.action?fileType='+fileType);
+  },
+
+
+  /*
+   *
+   */
+  missedCalls:function()
+  {
+    ui.contactaTabContainer.selectChild(ui.contacta.callsTab);
   },
 
 

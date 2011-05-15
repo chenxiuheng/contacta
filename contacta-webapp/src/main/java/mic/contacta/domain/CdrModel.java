@@ -49,7 +49,7 @@ userfield character varying(255) DEFAULT '' NOT NULL
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @Table(name="stcdr")
 @NamedQueries({
-  @NamedQuery(name="cdrMissedSkype", query="from CdrModel where dst=:dst and disposition='NO ANSWER' and dstchannel like 'Skype/%'")
+  @NamedQuery(name="cdrMissedSkype", query="from CdrModel where dst=:dst and disposition='NO ANSWER' and channel like 'Skype/%'")
 })
 public class CdrModel implements Model, Json
 {

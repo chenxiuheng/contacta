@@ -106,7 +106,7 @@ dojo.addOnUnload(function()
        --]
    </div>
    [/#if]
-    <div dojoType="dijit.form.Button" iconClass="icoMissedCalls" onclick=""><span>${m.t("label.missedCalls")}</span></div>
+    <div dojoType="dijit.form.Button" iconClass="icoMissedCalls" onclick="contacta.missedCalls()"><span>${m.t("label.missedCalls")}</span></div>
    [#if organicSession.account??]
     <input jsId="ui.digitInput" dojoType="dijit.form.TextBox" value="" placeholder="555012345" style="width:10em;height:20px;"/>
     <div dojoType="dijit.form.Button" iconClass="ico30" onclick="contacta.dial()"><span>${m.t("label.dial")}</span></div>
@@ -235,7 +235,7 @@ dojo.addOnUnload(function()
     [#include "./phonebook/tab.ftl"/]
    </div>
 
-   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.calls")}">
+   <div dojoType="dijit.layout.ContentPane" title="${m.t("label.calls")}" jsId="ui.contacta.callsTab">
     [#include "./calls/tab.ftl"/]
    </div>
 

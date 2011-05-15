@@ -14,7 +14,6 @@
  */
 package mic.contacta.web;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.struts2.json.annotations.SMDMethod;
 import org.slf4j.Logger;
@@ -22,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import mic.contacta.gateway.PbxGateway;
 import mic.contacta.json.CallsJson;
 import mic.contacta.server.ContactaSession;
 import mic.organic.core.Model;

@@ -625,11 +625,19 @@ public class PbxGatewayImpl implements PbxGateway
   @Override
   public List<CallsJson> missedSkypeCalls(String exten)
   {
-    List<CdrModel> modelList = pbxService.missedSkypeCalls(exten);
     List<CallsJson> jsonList = new ArrayList<CallsJson>();
-    for (CdrModel model : modelList)
+    PersonModel person = addressbookService.personByExtension(exten);
+    if (person != null && StringUtils.isNotBlank(person.getUri()))
     {
-      jsonList.add(callsConverter.modelToJson(model));
+      List<CdrModel> modelList = pbxService.missedSkypeCalls(person.getUri());
+      for (CdrModel model : modelList)
+      {
+        jsonList.add(callsConverter.modelToJson(model));
+      }
+    }
+    else
+    {
+      log().warn("cannot find a person for exten:{}");  // FIXME connect sipaccount to person
     }
     return jsonList;
   }

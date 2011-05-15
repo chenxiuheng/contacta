@@ -25,7 +25,8 @@
 <div dojoType="dijit.layout.BorderContainer" gutters="false" liveSplitters="false" class="gridpad">
  <div dojoType="dijit.layout.ContentPane" region="top" class="toolbarContainer">
   <div dojoType="dijit.Toolbar" class="toolbarToolbar">
-   [@organicPadButtons pad ui/]
+   [#assign hide = ["filter", "new", "edit", "remove"] /]
+   [@organicPadButtons2 pad ui hide/]
   </div>
  </div>
 
@@ -33,9 +34,10 @@
   <table jsId="${ui}.grid" dojoType="dojox.grid.DataGrid" sortInfo="1">
   </table>
  </div>
-
+ [#--
  <div dojoType="dijit.layout.ContentPane" splitter="true" region="right" class="detailPane">
   <div jsId="${ui}.detailPane" dojoType="dijit.layout.ContentPane" preventCache="true" class="detailPaneInner"></div>
  </div>
+ --]
 </div>
 
