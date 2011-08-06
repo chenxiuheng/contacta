@@ -58,7 +58,12 @@
   <jetty6.version>6.1.26</jetty6.version>
   <struts2.version>2.2.3</struts2.version>
   <mule3.version>3.1.1</mule3.version>
-  <cxf.version>2.4.0</cxf.version>
+  <cxf.version>2.4.1</cxf.version>
+  <hibernate.version>3.6.6.Final</hibernate.version>
+  <spring.core.version>3.0.5.RELEASE</spring.core.version>
+  <spring.security.version>3.0.5.RELEASE</spring.security.version>
+  <spring.ldap.version>1.3.1.RELEASE</spring.ldap.version>
+  <port>7029</port>
  </properties>
 
  <!--================================================================-->
@@ -793,22 +798,22 @@
    <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-codebehind-plugin</artifactId><version>${struts2.version}</version></dependency>
 
    <!-- spring and addons -->
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-core</artifactId><version>3.0.5.RELEASE</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-aop</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-beans</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-context</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-context-support</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-oxm</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-tx</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-jdbc</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-orm</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-jms</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-web</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-webmvc</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework</groupId><artifactId>spring-test</artifactId><version>3.0.5.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-core</artifactId><version>1.3.1.RELEASE</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
-   <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-core-tiger</artifactId><version>1.3.1.RELEASE</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
-   <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-test</artifactId><version>1.3.1.RELEASE</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-core</artifactId><version>${spring.core.version}</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-aop</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-beans</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-context</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-context-support</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-oxm</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-tx</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-jdbc</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-orm</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-jms</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-web</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-webmvc</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework</groupId><artifactId>spring-test</artifactId><version>${spring.core.version}</version></dependency>
+   <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-core</artifactId><version>${spring.ldap.version}</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-core-tiger</artifactId><version>${spring.ldap.version}</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
+   <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-test</artifactId><version>${spring.ldap.version}</version><exclusions><exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion></exclusions></dependency>
    <dependency><groupId>com.sun</groupId><artifactId>ldapbp</artifactId><version>1.0</version></dependency>
    <!--
    <dependency>
@@ -821,20 +826,20 @@
    </dependency>
    -->
    <dependency>
-    <groupId>org.springframework.security</groupId><artifactId>spring-security-core</artifactId><version>3.0.4.RELEASE</version>
+    <groupId>org.springframework.security</groupId><artifactId>spring-security-core</artifactId><version>${spring.security.version}</version>
     <exclusions>
      <exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion>
      <exclusion><groupId>org.springframework</groupId><artifactId>spring-support</artifactId></exclusion>
     </exclusions>
    </dependency>
-   <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-config</artifactId><version>3.0.4.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-web</artifactId><version>3.0.4.RELEASE</version></dependency>
-   <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-core-tiger</artifactId><version>3.0.4.RELEASE</version></dependency>
+   <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-config</artifactId><version>${spring.security.version}</version></dependency>
+   <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-web</artifactId><version>${spring.security.version}</version></dependency>
+   <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-core-tiger</artifactId><version>${spring.security.version}</version></dependency>
 
    <!-- hibernate and addons -->
-   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate</artifactId><version>3.6.2.Final</version></dependency>
-   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-core</artifactId><version>3.6.2.Final</version></dependency>
-   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-envers</artifactId><version>3.6.2.Final</version></dependency>
+   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate</artifactId><version>${hibernate.version}</version></dependency>
+   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-core</artifactId><version>${hibernate.version}</version></dependency>
+   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-envers</artifactId><version>${hibernate.version}</version></dependency>
    <dependency>
     <groupId>org.hibernate</groupId><artifactId>hibernate-tools</artifactId><version>3.2.4.GA</version>
     <exclusions>
@@ -844,10 +849,10 @@
    <!--
    <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-annotations</artifactId><version>3.6.0.Final</version></dependency>
    -->
-   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-c3p0</artifactId><version>3.6.2.Final</version></dependency>
-   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-validator</artifactId><version>4.2.0.Beta2</version></dependency>
-   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-search</artifactId><version>3.3.0.Final</version></dependency>
-   <dependency><groupId>org.hibernate.javax.persistence</groupId><artifactId>hibernate-jpa-2.0-api</artifactId><version>1.0.0.Final</version></dependency>
+   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-c3p0</artifactId><version>${hibernate.version}</version></dependency>
+   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-validator</artifactId><version>4.2.0.Final</version></dependency>
+   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-search</artifactId><version>3.4.0.Final</version></dependency>
+   <dependency><groupId>org.hibernate.javax.persistence</groupId><artifactId>hibernate-jpa-2.0-api</artifactId><version>1.0.1.Final</version></dependency>
    <dependency><groupId>org.hibernate</groupId><artifactId>ejb3-persistence</artifactId><version>3.3.2.Beta1</version></dependency>
    <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-commons-annotations</artifactId><version>3.2.0.Final</version></dependency>
    <dependency>
@@ -859,7 +864,7 @@
    <!--
    <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-cglib-repack</artifactId><version>2.1_3</version></dependency>
    -->
-   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-ehcache</artifactId><version>3.6.2.Final</version>
+   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-ehcache</artifactId><version>${hibernate.version}</version>
     <exclusions>
      <exclusion><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId></exclusion>
     </exclusions>
@@ -968,12 +973,12 @@
    </dependency>
 
    <!-- asterisk-->
-   <dependency><groupId>org.asteriskjava</groupId><artifactId>asterisk-java</artifactId><version>1.0.0_20110427</version></dependency>
+   <dependency><groupId>org.asteriskjava</groupId><artifactId>asterisk-java</artifactId><version>1.0.0.M3</version></dependency>
 
-   <dependency><groupId>org.aspectj</groupId><artifactId>aspectjrt</artifactId><version>1.6.10</version></dependency>
-   <dependency><groupId>org.aspectj</groupId><artifactId>aspectjweaver</artifactId><version>1.6.10</version></dependency>
+   <dependency><groupId>org.aspectj</groupId><artifactId>aspectjrt</artifactId><version>1.6.11</version></dependency>
+   <dependency><groupId>org.aspectj</groupId><artifactId>aspectjweaver</artifactId><version>1.6.11</version></dependency>
 
-   <dependency><groupId>cglib</groupId><artifactId>cglib</artifactId><version>2.2</version></dependency>
+   <dependency><groupId>cglib</groupId><artifactId>cglib</artifactId><version>2.2.2</version></dependency>
    <dependency><groupId>javassist</groupId><artifactId>javassist</artifactId><version>3.12.1.GA</version></dependency>
 
    <dependency><groupId>bouncycastle</groupId><artifactId>bcmail-jdk14</artifactId><version>140</version></dependency>
@@ -985,13 +990,14 @@
    <dependency><groupId>org.codehaus.groovy</groupId><artifactId>groovy</artifactId><version>1.8.0</version></dependency>
    <dependency><groupId>org.codehaus.groovy</groupId><artifactId>groovy-all</artifactId><version>1.8.0</version></dependency>
 
-   <dependency><groupId>org.freemarker</groupId><artifactId>freemarker</artifactId><version>2.3.16</version></dependency>
+   <dependency><groupId>org.freemarker</groupId><artifactId>freemarker</artifactId><version>2.3.18</version></dependency>
    <dependency><groupId>opensymphony</groupId><artifactId>sitemesh</artifactId><version>2.4.2</version></dependency>
    <dependency><groupId>org.quartz-scheduler</groupId><artifactId>quartz</artifactId><version>1.8.4</version></dependency>
-   <dependency><groupId>ognl</groupId><artifactId>ognl</artifactId><version>3.0.1</version></dependency>
+   <dependency><groupId>ognl</groupId><artifactId>ognl</artifactId><version>3.0.2</version></dependency>
    <dependency><groupId>bsf</groupId><artifactId>bsf</artifactId><version>2.4.0</version></dependency>
 
-   <dependency><groupId>net.sf.opencsv</groupId><artifactId>opencsv</artifactId><version>2.1</version></dependency>
+   <dependency><groupId>net.sourceforge.jexcelapi</groupId><artifactId>jxl</artifactId><version>2.6.12</version></dependency>
+   <dependency><groupId>net.sf.opencsv</groupId><artifactId>opencsv</artifactId><version>2.3</version></dependency>
     <!-- TODO 1.7.2 / 2.3.2 -->
    <!--
    <dependency><groupId>net.sf.ehcache</groupId><artifactId>ehcache</artifactId><version>2.4.0</version></dependency>
@@ -1059,7 +1065,7 @@
      <exclusion><groupId>gnujaxp</groupId><artifactId>gnujaxp</artifactId></exclusion>
     </exclusions>
    </dependency>
-   <dependency><groupId>jfree</groupId><artifactId>jfreechart</artifactId><version>1.0.12</version>
+   <dependency><groupId>jfree</groupId><artifactId>jfreechart</artifactId><version>1.0.13</version>
     <exclusions>
      <exclusion><groupId>junit</groupId><artifactId>junit</artifactId></exclusion>
      <exclusion><groupId>gnujaxp</groupId><artifactId>gnujaxp</artifactId></exclusion>
@@ -1076,7 +1082,7 @@
    </dependency>
 
    <!-- testing -->
-   <dependency><groupId>org.testng</groupId><artifactId>testng</artifactId><version>6.0.1</version></dependency>
+   <dependency><groupId>org.testng</groupId><artifactId>testng</artifactId><version>6.1.1</version></dependency>
    <dependency><groupId>junit</groupId><artifactId>junit</artifactId><version>4.8.2</version></dependency>
    <dependency><groupId>org.easymock</groupId><artifactId>easymock</artifactId><version>3.0</version></dependency>
    <dependency><groupId>xmlunit</groupId><artifactId>xmlunit</artifactId><version>1.3</version></dependency>

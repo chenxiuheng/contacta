@@ -103,18 +103,19 @@
   <dependency><groupId>mic</groupId><artifactId>organic-core</artifactId><scope>test</scope><classifier>tests</classifier></dependency>
   <dependency><groupId>mic</groupId><artifactId>organic-webapp</artifactId><type>war</type><scope>runtime</scope></dependency>
 
+  <dependency><groupId>xml-apis</groupId><artifactId>xml-apis</artifactId><scope>provided</scope></dependency>
+  <dependency><groupId>xerces</groupId><artifactId>xercesImpl</artifactId><scope>provided</scope></dependency>
+
   <!-- apache.org, jakarta.apache.org, codehaus.org, sf.net ... -->
   <dependency><groupId>log4j</groupId><artifactId>log4j</artifactId><scope>compile</scope></dependency>
   <dependency><groupId>org.slf4j</groupId><artifactId>jcl-over-slf4j</artifactId><scope>runtime</scope></dependency>
   <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-log4j12</artifactId><scope>runtime</scope></dependency>
 
-  <dependency><groupId>org.freemarker</groupId><artifactId>freemarker</artifactId></dependency>
   <dependency><groupId>commons-httpclient</groupId><artifactId>commons-httpclient</artifactId></dependency>
   <dependency><groupId>commons-vfs</groupId><artifactId>commons-vfs</artifactId></dependency>
   <dependency><groupId>net.sf.opencsv</groupId><artifactId>opencsv</artifactId></dependency>
 
   <dependency><groupId>org.quartz-scheduler</groupId><artifactId>quartz</artifactId></dependency>
-  <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-ehcache</artifactId></dependency>
     <!-- TODO 1.7.2 / 2.3.2 -->
    <!--
    <dependency><groupId>net.sf.ehcache</groupId><artifactId>ehcache</artifactId><version>1.7.2</version></dependency>
@@ -130,11 +131,7 @@
 
   <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-core</artifactId></dependency>
 
-  <dependency><groupId>org.hibernate.javax.persistence</groupId><artifactId>hibernate-jpa-2.0-api</artifactId></dependency>
-  <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-entitymanager</artifactId></dependency>
   <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-envers</artifactId></dependency>
-  <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-validator</artifactId></dependency>
-  <dependency><groupId>org.jasypt</groupId><artifactId>jasypt</artifactId></dependency>
 
   <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-core</artifactId></dependency>
   <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-json-plugin</artifactId></dependency>
@@ -172,4 +169,3 @@
  </dependencies>
 
 </project>
-
