@@ -1,6 +1,6 @@
 /**
- * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
- * Copyright(C) 1999-2011 info@openinnovation.it
+ * Contacta webapp, http://www.openinnovation.it - Michele Bianchi
+ * Copyright(C) 1999-2012 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation
@@ -16,7 +16,7 @@ package mic.contacta.server;
 
 import java.util.List;
 
-import org.apache.commons.vfs.FileObject;
+import org.apache.commons.vfs2.FileObject;
 
 import mic.contacta.domain.Line;
 import mic.organic.core.Component;

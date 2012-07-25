@@ -2,7 +2,7 @@
 // ==============================================================================================
 //  Cdr
 // ==============================================================================================
-dojo.declare("openinnovation.contacta.Coc", openinnovation.organic.gridpad.Controller,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.Coc", openinnovation.organic.gridpad.Controller,
 {
   classCode:"coc",
 
@@ -34,6 +34,6 @@ dojo.declare("openinnovation.contacta.Coc", openinnovation.organic.gridpad.Contr
     return form;
   },
 
-  endOfLib:null
-});
+  endOfLib: null
+}); });
 

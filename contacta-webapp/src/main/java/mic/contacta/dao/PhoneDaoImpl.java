@@ -1,6 +1,6 @@
 /**
- * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
- * Copyright(C) 1999-2011 info@openinnovation.it
+ * Contacta webapp, http://www.openinnovation.it - Michele Bianchi
+ * Copyright(C) 1999-2012 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation
@@ -66,7 +66,7 @@ public class PhoneDaoImpl extends AbstractCodeDao<PhoneModel> implements PhoneDa
   public List<PhoneModel> findByPerson(PersonModel person)
   {
     String query = "from PhoneModel where person=:value";
-    List<PhoneModel> list = entityManager.createQuery(query).setParameter("value", person).getResultList();
+    List<PhoneModel> list = entityManager().createQuery(query).setParameter("value", person).getResultList();
     return list;
   }
 
@@ -78,7 +78,7 @@ public class PhoneDaoImpl extends AbstractCodeDao<PhoneModel> implements PhoneDa
   @Override
   public List<String> findMacAddressList()
   {
-    List<String> list = entityManager.createQuery("select p.code from PhoneModel as p").getResultList();
+    List<String> list = entityManager().createQuery("select p.code from PhoneModel as p").getResultList();
     return list;
   }
 

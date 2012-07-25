@@ -1,6 +1,6 @@
 /**
- * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
- * Copyright(C) 1999-2011 info@openinnovation.it
+ * Contacta webapp, http://www.openinnovation.it - Michele Bianchi
+ * Copyright(C) 1999-2012 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation
@@ -21,7 +21,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.asteriskjava.manager.action.OriginateAction;
 import org.asteriskjava.manager.response.CommandResponse;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ import mic.contacta.dao.AppointmentDao;
 import mic.contacta.domain.AppointmentModel;
 import mic.contacta.domain.ConferenceLine;
 import mic.contacta.domain.ConferenceModel;
-import mic.organic.mail.*;
+import mic.organic.um.*;
 
 
 /**
@@ -171,7 +171,7 @@ public class CalendarServiceImpl implements CalendarService
   /*
    * this test send an email!!!
    */
-  private Mail createMail(AppointmentModel appointment)
+  private EmailModel createMail(AppointmentModel appointment)
   {
     String from = appointment.getMail();
     String attendees = appointment.getAttendees();
@@ -196,18 +196,18 @@ public class CalendarServiceImpl implements CalendarService
       recipients.add(new MailAddress(MailAddressType.To, attendee));
     }
 
-    Mail mail = freemarkerEmailProducer.produce("sendpin", it_IT, MailFormat.plain, params);
-    if (mail != null)
+    EmailModel emailModel = freemarkerEmailProducer.produce("sendpin", it_IT, MailFormat.Plain, params);
+    if (emailModel != null)
     {
-      mail.setFrom(new MailAddress(MailAddressType.To, from));
-      mail.setSubject(subject);
+      emailModel.setFrom(new MailAddress(MailAddressType.To, from));
+      emailModel.setSubject(subject);
       //mail.setBody("This is a test email.");
-      mail.setRecipients(recipients);
+      emailModel.setRecipients(recipients);
 
-      mailService.enqueue(mail);
+      mailService.enqueue(emailModel);
     }
     mailQueueWorker.run();
-    return mail;
+    return emailModel;
   }
 
 

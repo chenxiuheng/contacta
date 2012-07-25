@@ -1,6 +1,6 @@
 /**
- * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
- * Copyright(C) 1999-2011 info@openinnovation.it
+ * Contacta webapp, http://www.openinnovation.it - Michele Bianchi
+ * Copyright(C) 1999-2012 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation
@@ -63,7 +63,7 @@ public class CdrDaoImpl extends AbstractDao<CdrModel> implements CdrDao
   @Override
   public List<CdrModel> missedSkypeCalls(String exten)
   {
-    List<CdrModel> list = entityManager.createNamedQuery("cdrMissedSkype").setParameter("dst", exten).getResultList();
+    List<CdrModel> list = entityManager().createNamedQuery("cdrMissedSkype").setParameter("dst", exten).getResultList();
     return list;
   }
 

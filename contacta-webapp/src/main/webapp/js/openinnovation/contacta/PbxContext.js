@@ -7,7 +7,7 @@ dojo.require("openinnovation.organic.Organic");
 // ==============================================================================================
 //  PbxContext
 // ==============================================================================================
-dojo.declare("openinnovation.contacta.PbxContext", openinnovation.organic.gridpad.Controller,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.PbxContext", openinnovation.organic.gridpad.Controller,
 {
   classCode:"pbxcontext",
 
@@ -52,14 +52,14 @@ dojo.declare("openinnovation.contacta.PbxContext", openinnovation.organic.gridpa
     return form;
   },
 
-  endOfLib:null
-});
+  endOfLib: null
+}); });
 
 
 // ==============================================================================================
 //  PbxProfile
 // ==============================================================================================
-dojo.declare("openinnovation.contacta.PbxProfile", openinnovation.organic.gridpad.Controller,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.PbxProfile", openinnovation.organic.gridpad.Controller,
 {
   classCode:"pbxprofile",
 
@@ -93,14 +93,14 @@ dojo.declare("openinnovation.contacta.PbxProfile", openinnovation.organic.gridpa
     return form;
   },
 
-  endOfLib:null
-});
+  endOfLib: null
+}); });
 
 
 // ==============================================================================================
 //  Product
 // ==============================================================================================
-dojo.declare("openinnovation.contacta.Product", openinnovation.organic.gridpad.Controller,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.Product", openinnovation.organic.gridpad.Controller,
 {
   classCode:"product",
 
@@ -135,14 +135,14 @@ dojo.declare("openinnovation.contacta.Product", openinnovation.organic.gridpad.C
     return form;
   },
 
-  endOfLib:null
-});
+  endOfLib: null
+}); });
 
 
 // ==============================================================================================
 //  Cdr
 // ==============================================================================================
-dojo.declare("openinnovation.contacta.Cdr", openinnovation.organic.gridpad.Controller,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.Cdr", openinnovation.organic.gridpad.Controller,
 {
   classCode:"cdr",
 
@@ -188,6 +188,6 @@ dojo.declare("openinnovation.contacta.Cdr", openinnovation.organic.gridpad.Contr
     return form;
   },
 
-  endOfLib:null
-});
+  endOfLib: null
+}); });
 

@@ -29,11 +29,31 @@
  <!-- build -->
  <build>
   <plugins>
+   <!-- compiler -->
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <configuration>
+     <source>1.7</source>
+     <target>1.7</target>
+     <compilerArgument>-proc:none</compilerArgument>
+     <showDeprecation>true</showDeprecation>
+     <showWarnings>true</showWarnings>
+    </configuration>
+   </plugin>
    <!-- test -->
    <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-surefire-plugin</artifactId>
     <configuration>
+     <excludes>
+      <exclude>mic/leanplan/**/Old*Test.java</exclude>
+     </excludes>
+     <!--
+     <suiteXmlFiles>
+      <suiteXmlFile>src/test/testng.xml</suiteXmlFile>
+     </suiteXmlFiles>
+     -->
     </configuration>
    </plugin>
 
@@ -67,7 +87,7 @@
      <scanIntervalSeconds>0</scanIntervalSeconds>
      <connectors>
       <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-       <port>8088</port>
+       <port>${port}</port>
        <maxIdleTime>60000</maxIdleTime>
       </connector>
      </connectors>
@@ -85,7 +105,76 @@
     </configuration>
    </plugin>
 
+   <!-- annotation processor -->
+   <!-- maven-processor-plugin -->
+   <plugin>
+    <groupId>org.bsc.maven</groupId>
+    <artifactId>maven-processor-plugin</artifactId>
+    <version>2.0.5</version>
+    <executions>
+     <execution>
+      <id>process</id>
+      <goals>
+       <goal>process</goal>
+      </goals>
+      <phase>generate-sources</phase>
+      <configuration>
+       <outputDirectory>target/metamodel</outputDirectory>
+      </configuration>
+     </execution>
+    </executions>
+   </plugin>
+   <!-- build-helper-maven-plugin -->
+   <plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>build-helper-maven-plugin</artifactId>
+    <version>1.7</version>
+    <executions>
+     <execution>
+      <id>add-source</id>
+      <phase>generate-sources</phase>
+      <goals>
+       <goal>add-source</goal>
+      </goals>
+      <configuration>
+       <sources>
+        <source>target/metamodel</source>
+       </sources>
+      </configuration>
+     </execution>
+    </executions>
+   </plugin>
   </plugins>
+
+  <pluginManagement>
+   <plugins>
+    <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+    <plugin>
+     <groupId>org.eclipse.m2e</groupId>
+     <artifactId>lifecycle-mapping</artifactId>
+     <version>1.0.0</version>
+     <configuration>
+      <lifecycleMappingMetadata>
+       <pluginExecutions>
+        <pluginExecution>
+         <pluginExecutionFilter>
+          <groupId>org.bsc.maven</groupId>
+          <artifactId>maven-processor-plugin</artifactId>
+          <versionRange>[2.0.5,)</versionRange>
+          <goals>
+           <goal>process</goal>
+          </goals>
+         </pluginExecutionFilter>
+         <action>
+          <ignore></ignore>
+         </action>
+        </pluginExecution>
+       </pluginExecutions>
+      </lifecycleMappingMetadata>
+     </configuration>
+    </plugin>
+   </plugins>
+  </pluginManagement>
  </build>
 
  <reporting>
@@ -102,6 +191,11 @@
   <dependency><groupId>mic</groupId><artifactId>organic-core</artifactId></dependency>
   <dependency><groupId>mic</groupId><artifactId>organic-core</artifactId><scope>test</scope><classifier>tests</classifier></dependency>
   <dependency><groupId>mic</groupId><artifactId>organic-webapp</artifactId><type>war</type><scope>runtime</scope></dependency>
+  <dependency><groupId>org.hibernate</groupId><artifactId>hibernate-jpamodelgen</artifactId></dependency>
+
+  <dependency><groupId>org.jasypt</groupId><artifactId>jasypt</artifactId></dependency>
+  <dependency><groupId>org.jasypt</groupId><artifactId>jasypt-spring31</artifactId></dependency>
+  <dependency><groupId>org.jasypt</groupId><artifactId>jasypt-hibernate4</artifactId></dependency>
 
   <dependency><groupId>xml-apis</groupId><artifactId>xml-apis</artifactId><scope>provided</scope></dependency>
   <dependency><groupId>xerces</groupId><artifactId>xercesImpl</artifactId><scope>provided</scope></dependency>
@@ -112,17 +206,9 @@
   <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-log4j12</artifactId><scope>runtime</scope></dependency>
 
   <dependency><groupId>commons-httpclient</groupId><artifactId>commons-httpclient</artifactId></dependency>
-  <dependency><groupId>commons-vfs</groupId><artifactId>commons-vfs</artifactId></dependency>
   <dependency><groupId>net.sf.opencsv</groupId><artifactId>opencsv</artifactId></dependency>
 
   <dependency><groupId>org.quartz-scheduler</groupId><artifactId>quartz</artifactId></dependency>
-    <!-- TODO 1.7.2 / 2.3.2 -->
-   <!--
-   <dependency><groupId>net.sf.ehcache</groupId><artifactId>ehcache</artifactId><version>1.7.2</version></dependency>
-   <dependency><groupId>net.sf.ehcache</groupId><artifactId>ehcache-core</artifactId><version>2.4.1</version></dependency>
-   <dependency><groupId>net.sf.ehcache</groupId><artifactId>ehcache-terracotta</artifactId><version>2.1.1</version></dependency>
-   <dependency><groupId>net.sf.ehcache</groupId><artifactId>ehcache-terracotta-root</artifactId><version>2.1.1</version></dependency>
-    -->
   <dependency><groupId>org.springframework</groupId><artifactId>spring-jdbc</artifactId></dependency>
   <dependency><groupId>org.springframework</groupId><artifactId>spring-orm</artifactId></dependency>
   <dependency><groupId>org.springframework</groupId><artifactId>spring-oxm</artifactId></dependency>
@@ -142,7 +228,9 @@
   <dependency><groupId>opensymphony</groupId><artifactId>sitemesh</artifactId><scope>runtime</scope></dependency>
   <dependency><groupId>org.dojotoolkit</groupId><artifactId>dojo</artifactId><classifier>organic</classifier><scope>runtime</scope></dependency>
 
+  <!--
   <dependency><groupId>com.sun.script</groupId><artifactId>freemarker-engine</artifactId></dependency>
+  -->
   <dependency><groupId>org.asteriskjava</groupId><artifactId>asterisk-java</artifactId></dependency>
 
   <!-- javax/java.sun.com -->
@@ -157,15 +245,6 @@
   <dependency><groupId>com.h2database</groupId><artifactId>h2</artifactId><scope>test</scope></dependency>
   <dependency><groupId>org.springframework</groupId><artifactId>spring-test</artifactId><scope>test</scope></dependency>
   <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-test</artifactId><scope>test</scope></dependency>
-
-  <!--
-  <dependency><groupId>junit</groupId><artifactId>junit</artifactId><scope>test</scope></dependency>
-  <dependency><groupId>org.easymock</groupId><artifactId>easymock</artifactId><scope>test</scope></dependency>
-  <dependency><groupId>c3p0</groupId><artifactId>c3p0</artifactId><scope>test</scope><optional>true</optional></dependency>
-  <dependency><groupId>postgresql</groupId><artifactId>postgresql</artifactId><scope>test</scope><optional>true</optional></dependency>
-  <dependency><groupId>hsqldb</groupId><artifactId>hsqldb</artifactId><scope>test</scope></dependency>
-   -->
-
  </dependencies>
 
 </project>

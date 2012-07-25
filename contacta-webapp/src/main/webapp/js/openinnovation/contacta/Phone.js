@@ -7,7 +7,7 @@ dojo.require("openinnovation.organic.Organic");
 // ==============================================================================================
 //  phone
 // ==============================================================================================
-dojo.declare("openinnovation.contacta.Phone", openinnovation.organic.gridpad.Controller,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.Phone", openinnovation.organic.gridpad.Controller,
 {
   classCode:"phone",
 
@@ -370,7 +370,7 @@ dojo.declare("openinnovation.contacta.Phone", openinnovation.organic.gridpad.Con
   },
 
 
-  endOfLib:null
-});
+  endOfLib: null
+}); });
 
 

@@ -7,7 +7,7 @@ dojo.require("openinnovation.organic.Organic");
 // ==============================================================================================
 //  account
 // ==============================================================================================
-dojo.declare("openinnovation.contacta.Sip", openinnovation.organic.gridpad.Controller,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.Sip", openinnovation.organic.gridpad.Controller,
 {
   classCode:"sip",
 
@@ -312,8 +312,8 @@ dojo.declare("openinnovation.contacta.Sip", openinnovation.organic.gridpad.Contr
     }
   },
 
-  endOfLib:null
-});
+  endOfLib: null
+}); });
 
 
 /*

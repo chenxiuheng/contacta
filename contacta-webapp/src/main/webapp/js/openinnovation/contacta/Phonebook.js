@@ -8,7 +8,7 @@ dojo.require("openinnovation.organic.Organic");
 //  Phonebook
 // ==============================================================================================
 dojo.provide("openinnovation.contacta.Phonebook");
-dojo.declare("openinnovation.contacta.Phonebook", openinnovation.organic.gridpad.Controller,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.Phonebook", openinnovation.organic.gridpad.Controller,
 {
   classCode:'phonebook',
   quickField:'displayName',
@@ -53,15 +53,15 @@ dojo.declare("openinnovation.contacta.Phonebook", openinnovation.organic.gridpad
   },
 
 
-  endOfLib:null
-});
+  endOfLib: null
+}); });
 
 
 // ==============================================================================================
 //  Calls
 // ==============================================================================================
 dojo.provide("openinnovation.contacta.Calls");
-dojo.declare("openinnovation.contacta.Calls", openinnovation.organic.gridpad.Controller,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.Calls", openinnovation.organic.gridpad.Controller,
 {
   classCode:'calls',
 
@@ -122,6 +122,6 @@ dojo.declare("openinnovation.contacta.Calls", openinnovation.organic.gridpad.Con
   },
 
 
-  endOfLib:null
-});
+  endOfLib: null
+}); });
 

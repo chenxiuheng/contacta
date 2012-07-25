@@ -1,6 +1,6 @@
 /**
- * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
- * Copyright(C) 1999-2011 info@openinnovation.it
+ * Contacta webapp, http://www.openinnovation.it - Michele Bianchi
+ * Copyright(C) 1999-2012 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation
@@ -68,7 +68,7 @@ public class AppointmentDaoImpl extends AbstractDao<AppointmentModel> implements
   @Override
   public List<AppointmentModel> findByMail(String mail)
   {
-    List<AppointmentModel> list = entityManager.createQuery("from AppointmentModel where mail=?1 order by startTime").setParameter(1, mail).getResultList();
+    List<AppointmentModel> list = entityManager().createQuery("from AppointmentModel where mail=?1 order by startTime").setParameter(1, mail).getResultList();
     return list;
   }
 
@@ -80,7 +80,7 @@ public class AppointmentDaoImpl extends AbstractDao<AppointmentModel> implements
   @Override
   public List<AppointmentModel> findOverlapping(AppointmentModel appointment)
   {
-    List<AppointmentModel> list = entityManager.createQuery("from AppointmentModel where ?1 between startTime and endTime or ?2 between startTime and endTime")
+    List<AppointmentModel> list = entityManager().createQuery("from AppointmentModel where ?1 between startTime and endTime or ?2 between startTime and endTime")
                                                .setParameter(1, appointment.getStartTime(), TemporalType.TIMESTAMP)
                                                .setParameter(2, appointment.getEndTime(), TemporalType.TIMESTAMP)
                                                .getResultList();

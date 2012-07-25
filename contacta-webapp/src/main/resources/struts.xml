@@ -4,5 +4,5 @@
 <struts>
  <include file="struts-default.xml"/>
  <include file="mic/organic/organic.struts.xml"/>
- <include file="mic/contacta/contacta.struts.xml"/>
+ <include file="mic/contacta/struts.xml"/>
 </struts>

@@ -8,7 +8,7 @@ dojo.require('openinnovation.organic.Organic');
  * =========================
  */
 dojo.provide("openinnovation.contacta.Contacta");
-dojo.declare("openinnovation.contacta.Contacta", null,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.Contacta", null,
 {
   contactaService:null,
   develMode:false,

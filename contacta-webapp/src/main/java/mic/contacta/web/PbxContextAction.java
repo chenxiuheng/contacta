@@ -1,6 +1,6 @@
 /**
- * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
- * Copyright(C) 1999-2011 info@openinnovation.it
+ * Contacta webapp, http://www.openinnovation.it - Michele Bianchi
+ * Copyright(C) 1999-2012 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation
@@ -72,7 +72,7 @@ public class PbxContextAction extends AbstractContactaSmd<PbxContextModel>
 
 
   /*
-   * @see mic.miirc.webapp.JsonSmd#remove(int[])
+   * @see mic.miirc.webapp.JsonSmd#remove(long[])
    */
   @SMDMethod
   @Override
@@ -90,7 +90,7 @@ public class PbxContextAction extends AbstractContactaSmd<PbxContextModel>
 
 
   /*
-   * @see mic.miirc.webapp.JsonSmd#find(int)
+   * @see mic.miirc.webapp.JsonSmd#find(long)
    */
   @SMDMethod
   @Override

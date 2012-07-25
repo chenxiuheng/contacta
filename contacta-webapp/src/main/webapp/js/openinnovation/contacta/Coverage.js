@@ -7,7 +7,7 @@ dojo.require("openinnovation.organic.Organic");
 // ==============================================================================================
 //  coverage
 // ==============================================================================================
-dojo.declare("openinnovation.contacta.Coverage", null,
+require(['dojo/_base/declare'], function(declare) { declare("openinnovation.contacta.Coverage", null,
 {
   constructor: function()
   {
@@ -68,7 +68,7 @@ dojo.declare("openinnovation.contacta.Coverage", null,
    */
   showDetail:function(event)
   {
-  	var item = event.grid.getItem(event.rowIndex);
+        var item = event.grid.getItem(event.rowIndex);
     this.currentJson = organic.util.itemToJs(this._store, item);
     ui.coverageDetail.setHref('${base}/s/coverage-detail.action?code='+this.currentJson.id);
 

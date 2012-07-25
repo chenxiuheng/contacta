@@ -1,6 +1,6 @@
 /**
- * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
- * Copyright(C) 1999-2011 info@openinnovation.it
+ * Contacta webapp, http://www.openinnovation.it - Michele Bianchi
+ * Copyright(C) 1999-2012 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation
@@ -79,7 +79,7 @@ public class SipAccountDaoImpl extends AbstractForeverDao<SipAccountModel> imple
                   " left join stsip sip on ca.sipuser_id=sip.id";
 
     String query = "select "+select+from;
-    List<Object[]> oList = entityManager.createNativeQuery(query).getResultList();
+    List<Object[]> oList = entityManager().createNativeQuery(query).getResultList();
     return oList;
   }
 
@@ -92,7 +92,7 @@ public class SipAccountDaoImpl extends AbstractForeverDao<SipAccountModel> imple
   public List<SipAccountModel> findAccountByCallgroup(String callgroup)
   {
     String query = "from SipAccountModel where callgroup=:value";
-    List<SipAccountModel> list = entityManager.createQuery(query).setParameter("value", callgroup).getResultList();
+    List<SipAccountModel> list = entityManager().createQuery(query).setParameter("value", callgroup).getResultList();
     return list;
   }
 

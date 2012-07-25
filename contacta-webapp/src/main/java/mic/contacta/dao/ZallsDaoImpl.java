@@ -1,6 +1,6 @@
 /**
- * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
- * Copyright(C) 1999-2011 info@openinnovation.it
+ * Contacta webapp, http://www.openinnovation.it - Michele Bianchi
+ * Copyright(C) 1999-2012 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation
@@ -65,7 +65,7 @@ public class ZallsDaoImpl extends AbstractDao<ZallsModel> implements ZallsDao
   public List<ZallsModel> findByPerson(PersonModel person)
   {
     String query = "from ZallsModel where person=:value";
-    List<ZallsModel> list = entityManager.createQuery(query).setParameter("value", person).getResultList();
+    List<ZallsModel> list = entityManager().createQuery(query).setParameter("value", person).getResultList();
     return list;
   }
 
@@ -77,7 +77,7 @@ public class ZallsDaoImpl extends AbstractDao<ZallsModel> implements ZallsDao
   @Override
   public List<String> findMacAddressList()
   {
-    List<String> list = entityManager.createQuery("select p.code from ZallsModel as p").getResultList();
+    List<String> list = entityManager().createQuery("select p.code from ZallsModel as p").getResultList();
     return list;
   }
 

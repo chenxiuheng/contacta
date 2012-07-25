@@ -1,6 +1,6 @@
 /**
- * Contacta, http://www.openinnovation.it - Michele Bianchi, Roberto Grasso
- * Copyright(C) 1999-2011 info@openinnovation.it
+ * Contacta webapp, http://www.openinnovation.it - Michele Bianchi
+ * Copyright(C) 1999-2012 info@openinnovation.it
  *
  * This program is free software; you can redistribute it and/or modify it under the terms
  * of the GNU General Public License v2 as published by the Free Software Foundation
@@ -65,10 +65,10 @@ public class CoverageDaoImpl extends AbstractDao<CoverageModel> implements Cover
   @Override
   public void deleteReverse(SipAccountModel toSip)
   {
-    entityManager.createQuery("delete from CoverageModel where toSip=:sip").setParameter("sip", toSip).executeUpdate();
+    entityManager().createQuery("delete from CoverageModel where toSip=:sip").setParameter("sip", toSip).executeUpdate();
     //FIXME convert from postgresql query to hql
     //entityManager.createQuery("UPDATE SipAccountModel c SET hasCoverage = false where c.id NOT IN (SELECT distinct fromsip_id from CoverageModel)").setParameter("sipId", toSip).executeUpdate();
-    entityManager.createNativeQuery("UPDATE acacc c SET hascoverage = false where c.id NOT IN (SELECT distinct fromsip_id from cocvg)").executeUpdate();
+    entityManager().createNativeQuery("UPDATE acacc c SET hascoverage = false where c.id NOT IN (SELECT distinct fromsip_id from cocvg)").executeUpdate();
   }
 
 }
