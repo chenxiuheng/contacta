@@ -34,8 +34,8 @@
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-compiler-plugin</artifactId>
     <configuration>
-     <source>1.7</source>
-     <target>1.7</target>
+     <source>1.6</source>
+     <target>1.6</target>
      <compilerArgument>-proc:none</compilerArgument>
      <showDeprecation>true</showDeprecation>
      <showWarnings>true</showWarnings>
@@ -209,6 +209,11 @@
   <dependency><groupId>net.sf.opencsv</groupId><artifactId>opencsv</artifactId></dependency>
 
   <dependency><groupId>org.quartz-scheduler</groupId><artifactId>quartz</artifactId></dependency>
+  <dependency><groupId>com.atlassian.crowd</groupId><artifactId>embedded-crowd-api</artifactId></dependency>
+  <dependency><groupId>com.atlassian.crowd</groupId><artifactId>crowd-integration-client-rest</artifactId></dependency>
+  <!--
+  <dependency><groupId>com.atlassian.crowd</groupId><artifactId>crowd-integration-springsecurity</artifactId><scope>runtime</scope></dependency>
+  -->
   <dependency><groupId>org.springframework</groupId><artifactId>spring-jdbc</artifactId></dependency>
   <dependency><groupId>org.springframework</groupId><artifactId>spring-orm</artifactId></dependency>
   <dependency><groupId>org.springframework</groupId><artifactId>spring-oxm</artifactId></dependency>
@@ -226,7 +231,7 @@
   <dependency><groupId>org.apache.struts</groupId><artifactId>struts2-sitemesh-plugin</artifactId><scope>runtime</scope></dependency>
   <dependency><groupId>ognl</groupId><artifactId>ognl</artifactId><scope>runtime</scope></dependency>
   <dependency><groupId>opensymphony</groupId><artifactId>sitemesh</artifactId><scope>runtime</scope></dependency>
-  <dependency><groupId>org.dojotoolkit</groupId><artifactId>dojo</artifactId><classifier>organic</classifier><scope>runtime</scope></dependency>
+  <dependency><groupId>org.dojotoolkit</groupId><artifactId>dojo</artifactId><classifier>mini</classifier><scope>runtime</scope></dependency>
 
   <!--
   <dependency><groupId>com.sun.script</groupId><artifactId>freemarker-engine</artifactId></dependency>
@@ -245,6 +250,8 @@
   <dependency><groupId>com.h2database</groupId><artifactId>h2</artifactId><scope>test</scope></dependency>
   <dependency><groupId>org.springframework</groupId><artifactId>spring-test</artifactId><scope>test</scope></dependency>
   <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-test</artifactId><scope>test</scope></dependency>
+  <!--  -->
+  <dependency><groupId>net.bull.javamelody</groupId><artifactId>javamelody-core</artifactId><version>1.37.0</version></dependency>
  </dependencies>
 
 </project>

@@ -14,14 +14,14 @@
   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
-  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.4.xsd
+  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
   ">
 
  <!--================================================================-->
  <!--    security                                                      -->
  <!--================================================================-->
  <!-- http -->
- <security:http auto-config="false" lowercase-comparisons="true">
+ <security:http auto-config="false">
   <security:form-login login-page="/o/login.action" login-processing-url="/o/j_spring_security_check.action" default-target-url="/" authentication-failure-url="/o/denied.action"/>
   <security:logout logout-url="/j_spring_security_logout" logout-success-url="/o/logout.action"/>
   <security:intercept-url pattern="/a/*" access="ROLE_ADMIN"/>

@@ -13,7 +13,7 @@
    <table>
     <tr><td>${m.t("label.firstName")}</td><td><input jsId="${ui}.firstName" dojoType="dijit.form.ValidationTextBox" name="firstName" required="true"/></td></tr>
     <tr><td>${m.t("label.lastName")}</td><td><input jsId="${ui}.lastName" dojoType="dijit.form.ValidationTextBox" name="lastName" required="true"/></td></tr>
-    <tr><td>${m.t("label.displayName")}</td><td><input jsId="${ui}.displayName" dojoType="dijit.form.ValidationTextBox" name="displayName" required="true"/><div dojoType="dijit.form.Button" onclick="${ui}.displayName.attr('value', ${ui}.firstName.attr('value')+' '+${ui}.lastName.attr('value'));return false;"><span>Auto</span></div></td></tr>
+    <tr><td>${m.t("label.displayName")}</td><td><input jsId="${ui}.displayName" dojoType="dijit.form.ValidationTextBox" name="displayName" required="true"/><div dojoType="dijit.form.Button" onclick="${ui}.displayName.set('value', ${ui}.firstName.get('value')+' '+${ui}.lastName.get('value'));return false;"><span>Auto</span></div></td></tr>
     <tr><td>${m.t("label.email")}</td><td><input dojoType="dijit.form.ValidationTextBox" name="email"/></td></tr>
     <tr><td>${m.t("label.phone")}</td><td><input dojoType="dijit.form.TextBox" name="phone"/></td></tr>
     <tr><td>${m.t("label.extension")}</td><td><input dojoType="dijit.form.TextBox" name="extension"/></td></tr>
@@ -26,7 +26,7 @@
     <tr><td>${m.t("label.bornDate")}</td><td><input dojoType="dijit.form.DateTextBox" name="bornDate" constraints="{formatLength:'short'}"/></td></tr>
     <tr><td>${m.t("label.bornIn")}</td><td><input dojoType="dijit.form.TextBox" name="bornIn"/></td></tr>
     <tr><td>${m.t("label.uri")}</td><td><input dojoType="dijit.form.TextBox" name="uri"/></td></tr>
-    <tr><td>${m.t("label.status")}</td><td><input dojoType="dijit.form.TextBox" name="status" readOnly="true"/></td></tr>
+    <tr><td>${m.t("label.status")}</td><td><input dojoType="dijit.form.TextBox" name="status" value="Online" readOnly="true"/></td></tr>
     <tr><td>Note</td><td><textarea dojoType="dijit.form.Textarea" name="info"></textarea></td></tr>
    </table>
   </div>

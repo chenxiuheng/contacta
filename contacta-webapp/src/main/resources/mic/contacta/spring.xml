@@ -3,7 +3,8 @@
 <!-- Copyright (c) 1999-2011 [michele.bianchi@gmail.com] -->
 <!-- All rights reserved. -->
 <!-- :xml.validate=true: -->
-<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns="http://www.springframework.org/schema/beans"
  xmlns:p="http://www.springframework.org/schema/p"
  xmlns:context="http://www.springframework.org/schema/context"
@@ -19,7 +20,7 @@
   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
-  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.3.xsd
+  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
   ">
 
  <!--================================================================-->
@@ -46,7 +47,7 @@
   <property name="cacheSeconds" value="-1"/>
   <property name="basenames">
    <list>
-    <value>classpath:/mic/contacta/contacta-messages</value>
+    <value>classpath:/mic/contacta/messages</value>
     <value>classpath:/mic/organic/organic-messages</value>
    </list>
   </property>
@@ -70,7 +71,7 @@
 
  <!--================================================================-->
  <!--    jasypt/organicEncryptor                                     -->
- <!--================================================================-->
+ <!--================================================================
  <bean id="organicEncryptor" class="org.jasypt.encryption.pbe.PooledPBEStringEncryptor">
   <property name="algorithm">
    <value>PBEWithMD5AndDES</value>
@@ -90,12 +91,13 @@
   <property name="encryptor">
    <ref bean="organicEncryptor"/>
   </property>
- </bean>
+ </bean>-->
 
  <!--================================================================-->
  <!--   imports                                                      -->
  <!--================================================================-->
  <context:component-scan base-package="mic.organic.vfs"/>
+ <context:component-scan base-package="mic.organic.util"/>
  <context:component-scan base-package="mic.organic.l10n"/>
  <context:component-scan base-package="mic.organic.scripting"/>
  <context:component-scan base-package="mic.organic.aaa.dao"/>
@@ -107,18 +109,17 @@
 
  <context:component-scan base-package="mic.organic.gateway"/>
 
+ <context:component-scan base-package="mic.organic.um"/>
+
  <!--
  <context:component-scan base-package="mic.contacta.server.jmx"/>
   -->
- <import resource="classpath:/mic/contacta/contacta-security.spring.xml"/>
+ <import resource="classpath:/mic/contacta/security.spring.xml"/>
  <context:component-scan base-package="mic.contacta.pmod"/>
  <context:component-scan base-package="mic.contacta.dao"/>
  <context:component-scan base-package="mic.contacta.server"/>
  <context:component-scan base-package="mic.contacta.gateway"/>
  <context:component-scan base-package="mic.contacta.web"/>
-
- <context:component-scan base-package="mic.contacta.asterisk.agi"/>
- <context:component-scan base-package="mic.contacta.asterisk.spi"/>
 
  <!--  -->
  <bean id="organicSession" class="mic.contacta.server.ContactaSession" scope="session">
@@ -141,7 +142,7 @@
  <!--   cache                                                        -->
  <!--================================================================-->
  <!-- cacheManager -->
- <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+ <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="true">
   <property name="configLocation" value="classpath:/mic/contacta/ehcache.xml"/>
  </bean>
 
@@ -152,8 +153,9 @@
  </bean>
 
  <!--================================================================-->
- <!--   asterisk                                                       -->
+ <!--   asterisk                                                     -->
  <!--================================================================-->
+ <context:component-scan base-package="mic.contacta.asterisk.spi"/>
  <context:component-scan base-package="mic.contacta.asterisk.agi"/>
  <context:component-scan base-package="mic.contacta.asterisk.aop"/>
  <context:component-scan base-package="mic.contacta.asterisk.handlers"/>
@@ -235,7 +237,7 @@
  <!--    mail                                                          -->
  <!--================================================================-->
  <!-- scans -->
- <context:component-scan base-package="mic.organic.um"/>
+ <context:component-scan base-package="mic.organic.testng.um"/>
 
  <!-- mailSender -->
  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

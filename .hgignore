@@ -3,10 +3,49 @@ glob:.classpath
 glob:.project
 glob:.settings
 glob:.springBeans
+glob:.externalToolBuilders
 glob:logs
+glob:contacta-webapp/src/main/resources/mic/organic/dojo180
+relre:.*\.orig
 relre:.*\.log
-
-syntax: regexp
-^contacta-webapp/contacta\.properties$
+relre:.*\.class
+relre:.*\.dump
+relre:.*\.pgdump
+relre:.*\.[wej]ar
 syntax: regexp
 ^contacta-webapp/jetty-env\.xml$
+syntax: regexp
+^contacta-webapp/contacta\.properties$
+
+syntax: regexp
+^tman-webapp/jetty-env\.xml$
+syntax: regexp
+^tman-webapp/contacta\.properties$
+syntax: regexp
+\.pgdump$
+
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/js/openinnovation/organic$
+
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/s/account$
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/s/group$
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/s/operation$
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/s/organization$
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/s/person$
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/s/policy$
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/s/role$
+
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/js/dgrid$
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/js/put-selector$
+#syntax: regexp
+#^contacta-webapp/src/main/webapp/js/xstyle$
+

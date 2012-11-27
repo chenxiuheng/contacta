@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- :xml.validate=true:mode=xml: -->
-<web-app metadata-complete="true" version="2.5"
- xmlns="http://java.sun.com/xml/ns/javaee"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
- <!--================================================================-->
- <!--                                                                -->
- <!--================================================================-->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" metadata-complete="true" version="2.5">
+ <display-name>leanplan Server</display-name>
+ <listener>
+  <listener-class>net.bull.javamelody.SessionListener</listener-class>
+ </listener>
  <display-name>Contacta Server</display-name>
  <listener>
   <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -24,7 +22,7 @@
  </context-param> -->
  <context-param>
   <param-name>contextConfigLocation</param-name>
-  <param-value>classpath:/mic/contacta/contacta.spring.xml</param-value>
+  <param-value>classpath:/mic/contacta/spring.xml</param-value>
  </context-param>
 
  <!-- or application/x-javascript
@@ -41,7 +39,6 @@
   <filter-name>springSecurityFilterChain</filter-name>
   <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
  </filter>
- <!--  struts2 (or StrutsPrepareAndExecuteFilter w/o sitemesh -->
  <filter>
   <filter-name>struts2-prepare</filter-name>
   <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter</filter-class>
@@ -50,7 +47,6 @@
   <filter-name>struts2-execute</filter-name>
   <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter</filter-class>
  </filter>
- <!-- sitemesh filter -->
  <filter>
   <filter-name>sitemesh</filter-name>
   <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
@@ -81,8 +77,6 @@
   <filter-name>springSecurityFilterChain</filter-name>
   <url-pattern>/*</url-pattern>
  </filter-mapping>
-
- <!--struts2 w/ sitemesh -->
  <filter-mapping>
   <filter-name>struts2-prepare</filter-name>
   <url-pattern>*.action</url-pattern>
@@ -99,9 +93,17 @@
   <filter-name>struts2-execute</filter-name>
   <url-pattern>/struts/*</url-pattern>
  </filter-mapping>
+ <filter>
+  <filter-name>monitoring</filter-name>
+  <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+ </filter>
+ <filter-mapping>
+  <filter-name>monitoring</filter-name>
+  <url-pattern>/*</url-pattern>
+ </filter-mapping>
 
  <!--================================================================-->
- <!--   servlets'n'mappings                                           -->
+ <!--   servlets                                                     -->
  <!--================================================================-->
  <servlet>
   <servlet-name>sitemesh-freemarker</servlet-name>
@@ -112,8 +114,6 @@
   </init-param>
   <load-on-startup>1</load-on-startup>
  </servlet>
-
- <!-- Skin Servlet -->
  <servlet>
   <display-name>Skin Servlet</display-name>
   <servlet-name>skin</servlet-name>
@@ -226,7 +226,7 @@
  <!--                                                                        -->
  <!-- ====================================================================== -->
  <session-config>
-  <session-timeout>60</session-timeout>
+  <session-timeout>240</session-timeout>
  </session-config>
 
  <!-- welcome-file-list -->
@@ -244,16 +244,22 @@
   <exception-type>java.io.IOException</exception-type>
   <location>/exception.html</location>
  </error-page>
+ <!-- <login-config> <auth-method>BASIC</auth-method> </login-config> -->
 
- <!--
- <login-config>
-  <auth-method>BASIC</auth-method>
- </login-config>
- -->
+ <!-- cxf
+ <servlet>
+  <servlet-name>cxf</servlet-name>
+  <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>cxf</servlet-name>
+  <url-pattern>/services/*</url-pattern>
+ </servlet-mapping> -->
 
- <!-- ====================================================================== -->
- <!--   resources                                                            -->
- <!-- ====================================================================== -->
+ <!--======================================================================-->
+ <!--  resources                                                           -->
+ <!--======================================================================-->
  <resource-ref>
   <res-ref-name>jdbc/contactaDs</res-ref-name>
   <res-type>javax.sql.DataSource</res-type>

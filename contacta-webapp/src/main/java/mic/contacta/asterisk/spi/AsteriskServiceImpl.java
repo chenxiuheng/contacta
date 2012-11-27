@@ -62,7 +62,7 @@ public class AsteriskServiceImpl implements AsteriskService
   private static final String SHOW_CHANNELS = "show channels";
   private static final String SHOW_CHANNELS_CONCISE = "show channels concise";
 
-  @Autowired private AgiServer agiServer;
+  @Autowired(required=false) private AgiServer agiServer;
   @Autowired private EventDispatcher eventDispatcher;
 
   private ManagerConnectionFactory factory;
@@ -271,7 +271,7 @@ public class AsteriskServiceImpl implements AsteriskService
   public synchronized void connectAsterisk() throws ContactaException
   {
     //log().debug("connections={}, connected={}", connections, checkConnection());
-  if (connections == 0)
+    if (connections == 0)
     {
       try
       {
@@ -284,15 +284,15 @@ public class AsteriskServiceImpl implements AsteriskService
         }
         else
         {
-        	try
-        	{
-			String astversion = managerConnection.getVersion().toString();
-                        log().info("The version of Asterisk is "+ astversion);
-        	}
-    		catch (ManagerCommunicationException ever) {
-    			log().warn("Unable to get Asterisk version", ever);
-    			throw new ContactaException(ever.getMessage(), ever);
-    		}
+          try
+          {
+            String astversion = managerConnection.getVersion().toString();
+            log().info("The version of Asterisk is "+ astversion);
+          }
+          catch (ManagerCommunicationException ever) {
+            log().warn("Unable to get Asterisk version", ever);
+            throw new ContactaException(ever.getMessage(), ever);
+          }
         }
       }
       catch (IOException e)

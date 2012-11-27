@@ -1,4 +1,11 @@
-[#ftl]<!-- $Revision: 671 $  :encoding=UTF-8:-->
+[#ftl/][#-- :encoding=UTF-8: --]
+[#setting number_format="0.####"/]
+
+[#assign canDoAdmin = authz.canDo("OP_ADMIN")/]
+
+[#assign gpad = "contacta"/]
+[#assign gui = "ui.global"/]
+
 [#include "../WEB-INF/organic/macro.ftl"/]
 <html>
 <head>
@@ -7,60 +14,104 @@
 @import url('${base}/skin/contacta.css');
 </style>
 <script type="text/javascript">
-passthrough = function(msg) { if (window.console) { console.log('flash', msg); } };  // for catching messages from Flash
-dojo.require("dojo.i18n");
-dojo.requireLocalization('contacta', 'contacta'+"-messages");
 </script>
-<script type="text/javascript" src="${base}/js/openinnovation/organic/Organic.js"></script>
-<script type="text/javascript" src="${base}/js/openinnovation/organic/gridpad/Controller.js"></script>
-<script type="text/javascript" src="${base}/js/openinnovation/organic/Aaa.js"></script>
-<script type="text/javascript" src="${base}/js/openinnovation/organic/Mc.js"></script>
-<script type="text/javascript" src="${base}/js/openinnovation/contacta/Phonebook.js"></script>
-<script type="text/javascript" src="${base}/js/openinnovation/contacta/PbxContext.js"></script>
-<script type="text/javascript" src="${base}/js/openinnovation/contacta/Phone.js"></script>
-<script type="text/javascript" src="${base}/js/openinnovation/contacta/Coc.js"></script>
-<script type="text/javascript" src="${base}/js/openinnovation/contacta/Sip.js"></script>
-<script type="text/javascript" src="${base}/js/openinnovation/contacta/Coverage.js"></script>
-<script type="text/javascript" src="${base}/js/openinnovation/contacta/Contacta.js"></script>
 <script type="text/javascript">
-var organic =
-{
-  appName:'contacta',
-  baseUrl:'${base!""}',
-  [#if organicSession??]
-  jsessionid:'${organicSession.sessionId!""}',
-  account:{id:'${organicSession.account.id}',login:'${organicSession.account.code}',displayName:'${organicSession.account.label}',},
-  [#else]
-  jsessionid:null,
-  account:null,
-  [/#if]
-  aaa:null,
-  defaultTsDate:'dd-MM-yyyy',
-  util:new openinnovation.organic.Organic({ baseUrl:'${base!""}' })
-};
+var organic = null;
 var contacta = null;
+//var ui = null;
 
-dojo.addOnLoad(function()
+require(['dojo/parser', 'dojo/ready', 'dojo/_base/unload', 'dijit/registry', 'openinnovation/organic/Organic', 'dojo/i18n!contacta/nls/messages' ],
+function(parser, ready, unload, dijit, Organic, i18n)
 {
- organic.i18n = dojo.i18n.getLocalization(organic.appName, organic.appName+"-messages");
+  organic = new Organic({
+    appName:'contacta',
+    baseUrl:'${base!""}',
+    i18n:i18n,
+    [#if organicSession??]
+    jsessionid:'${organicSession.sessionId!""}',
+    account:{id:'${organicSession.account.id}',login:'${organicSession.account.code}',displayName:'${organicSession.account.label}'},
+    [#else]
+    jsessionid:null,
+    account:null,
+    [/#if]
+    authz:{ replanPartial:true, replanFull:true },
+    aaa:null
+  });
+  try
+  {
+    //var r = parser.parse();
+    //console.warn('parse result', r);
+  }
+  catch(e)
+  {
+   console.warn('cannot parse', e);
+  }
 
- contacta = new openinnovation.contacta.Contacta({
-     develMode:${organicConfiguration.develMode?string},
-     session:
-     {
-       admin:${organicSession.admin?string},
-       user:${organicSession.user?string},
-       guest:${organicSession.guest?string}
-     }
-   });
-  contacta.init();
+  ready(function()
+  {
+    try
+    {
+      require(['openinnovation/organic/Aaa', 'openinnovation/contacta/Contacta'], function(Aaa, Contacta)
+      {
+        organic.aaa = new Aaa();
+        contacta = new Contacta({
+          develMode:${organicConfiguration.develMode?string},
+          session:
+          {
+            admin:${organicSession.admin?string},
+            user:${organicSession.user?string},
+            guest:${organicSession.guest?string}
+          }
+        });
+        contacta.init();
+      });
+    }
+    catch(e)
+    {
+     console.warn('cannot require', e);
+    }
+  });
+
+  unload.addOnUnload(function()
+  {
+    console.log('You are leaving the page');
+    //dojo.cookie('lpPrefs', dojo.toJson(contacta.prefs), { expires:14 });
+    console.log('prefs saved');
+  });
 });
 
-dojo.addOnUnload(function()
+
+function downloadCsv()
 {
-  console.log("You're leaving the page");
-  //alert("You're leaving the page");
-});
+  window.location.replace('/d/download-csv.action');
+}
+
+
+function uploadCleanInfo() /*dojox.FileInput*/
+{
+  dojo.byId("uploadNewInfo").innerHTML = "";
+  dojo.byId("uploadUpdateInfo").innerHTML = "";
+}
+
+
+function watchCheckbox(checkbox, descriptionId, vtb)
+{
+  var description = dojo.byId(descriptionId);
+
+  if(!checkbox.getValue())
+  {
+    vtb._setDisabledAttr(true);
+    dojo.style(description, "color", "grey");
+  }
+  else
+  {
+    vtb._setDisabledAttr(false);
+    dojo.style(description, "color", "black");
+  }
+
+}
+
+
 </script>
 </head>
 <body>
@@ -68,7 +119,8 @@ dojo.addOnUnload(function()
 [#-- ====================================================================== --]
 [#--   THE PAGE                                                             --]
 [#-- ====================================================================== --]
-<div id="thePage" jsId="ui.thePage" dojoType="dijit.layout.BorderContainer" gutters="false" style="width:100%; height:100%; display:none;">
+[#-- ui.thePage --]
+<div id="thePage" data-dojo-id="ui.thePage" data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="gutters:false, style:{minWidth:'900px', fontFamily:'Verdana,Arial,Helvetica,sansSerif'}">
  [#-- menubar
  <div jsId="ui.menubar" dojoType="dijit.layout.ContentPane" style="height:31px; border-bottom:1px solid #4E9595; border-right:1px solid #4E9595;" region="top">
   <div style="padding:2px 10px 1px 10px;" class="organicBg">

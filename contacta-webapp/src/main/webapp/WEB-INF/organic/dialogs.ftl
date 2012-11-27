@@ -1,4 +1,8 @@
-[#ftl][#-- $Id$ --]
+[#ftl][#-- :encoding=UTF-8: --]
+[#setting number_format="0.####"/]
+
+[#assign gpad = "contacta"/]
+[#assign gui = "ui.global"/]
 
 [#include "./dialogs-common.ftl"/]
 
@@ -63,7 +67,7 @@
   <table>
    <tr><td>${m.t("label.firstName")}</td><td><input jsId="firstNameInputB" dojoType="dijit.form.TextBox" name="account.firstName"/></td></tr>
    <tr><td>${m.t("label.lastName")}</td><td><input jsId="lastNameInputB" dojoType="dijit.form.TextBox" name="account.lastName"/></td></tr>
-   <tr><td>${m.t("label.fullName")}</td><td><input jsId="fullNameInputB" dojoType="dijit.form.TextBox" name="account.fullName"/><div dojoType="dijit.form.Button" onclick="fullNameInputB.attr('value', firstNameInputB.attr('value')+' '+lastNameInputB.attr('value'));"><span>${m.t("label.sip.auto")}</span></div></td></tr>
+   <tr><td>${m.t("label.fullName")}</td><td><input jsId="fullNameInputB" dojoType="dijit.form.TextBox" name="account.fullName"/><div dojoType="dijit.form.Button" onclick="fullNameInputB.set('value', firstNameInputB.get('value')+' '+lastNameInputB.get('value'));"><span>${m.t("label.sip.auto")}</span></div></td></tr>
    <tr><td colspan="2"><hr/></td></tr>
    <tr><td>${m.t("label.sip.login")}</td><td><input dojoType="dijit.form.ValidationTextBox" name="account.login" regExp="\d{4}" promptMessage="${m.t("message.login.prompt")}" invalidMessage="${m.t("message.login.invalid")}" required="true"/></td></tr>
    <tr><td>${m.t("label.sip.password")}</td><td><input dojoType="dijit.form.TextBox" name="account.password" required="true"/></td></tr>

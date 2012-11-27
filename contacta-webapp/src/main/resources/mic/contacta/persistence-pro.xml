@@ -3,12 +3,15 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
  <!-- contacta-pro -->
- <persistence-unit name="contacta-pro" transaction-type="RESOURCE_LOCAL">
+ <persistence-unit name="organic" transaction-type="RESOURCE_LOCAL">
   <provider>org.hibernate.ejb.HibernatePersistence</provider>
   <mapping-file>mic/organic/aaa-orm-mapping.xml</mapping-file>
-  <mapping-file>mic/contacta/contacta-orm-mapping.xml</mapping-file>
+  <mapping-file>mic/contacta/orm-mapping.xml</mapping-file>
+  <!-- FIXME: enable validation
   <validation-mode>CALLBACK</validation-mode>
+   -->
   <exclude-unlisted-classes>true</exclude-unlisted-classes>
+  <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
   <properties>
    <property name="hibernate.id.new_generator_mappings" value="true"/>
    <property name="hibernate.hbm2ddl.auto" value="validate"/>
@@ -18,22 +21,6 @@
    <property name="hibernate.cache.use_second_level_cache" value="true"/>
    <property name="hibernate.show_sql" value="false"/>
    <property name="hibernate.format_sql" value="false"/>
-  </properties>
- </persistence-unit>
-
- <!-- contacta-dev -->
- <persistence-unit name="contacta-dev" transaction-type="RESOURCE_LOCAL">
-  <provider>org.hibernate.ejb.HibernatePersistence</provider>
-  <mapping-file>mic/organic/aaa-orm-mapping.xml</mapping-file>
-  <mapping-file>mic/contacta/contacta-orm-mapping.xml</mapping-file>
-  <exclude-unlisted-classes/>
-  <properties>
-   <property name="hibernate.id.new_generator_mappings" value="true"/>
-   <property name="hibernate.hbm2ddl.auto" value="update"/>
-   <property name="hibernate.bytecode.provider" value="javassist"/>
-   <property name="hibernate.show_sql" value="false"/>
-   <property name="hibernate.format_sql" value="false"/>
-   <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory"/>
   </properties>
  </persistence-unit>
 

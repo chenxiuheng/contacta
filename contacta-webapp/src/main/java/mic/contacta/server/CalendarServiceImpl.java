@@ -36,6 +36,8 @@ import mic.contacta.dao.AppointmentDao;
 import mic.contacta.domain.AppointmentModel;
 import mic.contacta.domain.ConferenceLine;
 import mic.contacta.domain.ConferenceModel;
+import mic.organic.core.OrganicException;
+import mic.organic.testng.um.*;
 import mic.organic.um.*;
 
 
@@ -171,7 +173,7 @@ public class CalendarServiceImpl implements CalendarService
   /*
    * this test send an email!!!
    */
-  private EmailModel createMail(AppointmentModel appointment)
+  private MailModel createMail(AppointmentModel appointment)
   {
     String from = appointment.getMail();
     String attendees = appointment.getAttendees();
@@ -196,18 +198,25 @@ public class CalendarServiceImpl implements CalendarService
       recipients.add(new MailAddress(MailAddressType.To, attendee));
     }
 
-    EmailModel emailModel = freemarkerEmailProducer.produce("sendpin", it_IT, MailFormat.Plain, params);
-    if (emailModel != null)
+    MailModel mailModel = freemarkerEmailProducer.produce("sendpin", it_IT, MailFormat.Plain, params);
+    if (mailModel != null)
     {
-      emailModel.setFrom(new MailAddress(MailAddressType.To, from));
-      emailModel.setSubject(subject);
+      mailModel.setFrom(new MailAddress(MailAddressType.To, from));
+      mailModel.setSubject(subject);
       //mail.setBody("This is a test email.");
-      emailModel.setRecipients(recipients);
+      mailModel.setRecipients(recipients);
 
-      mailService.enqueue(emailModel);
+      try
+      {
+        mailService.enqueue(mailModel);
+      }
+      catch (IllegalArgumentException e)
+      {
+        log().warn(e.getMessage(), e);
+      }
     }
     mailQueueWorker.run();
-    return emailModel;
+    return mailModel;
   }
 
 

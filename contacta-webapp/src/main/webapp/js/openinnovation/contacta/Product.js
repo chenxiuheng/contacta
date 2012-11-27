@@ -6,15 +6,18 @@ define(
 ],
 function(dojo, declare, Controller)
 {
-  return declare("openinnovation.contacta.Coc", [ Controller ],
+  return declare("openinnovation.contacta.Product", [ Controller ],
   {
-    classCode:"coc",
+    classCode:"product",
 
     constructor: function(args)
     {
       this.structure = [{ cells: [[
-       { field:'login', width:'8em' },
-       { field:'pin', width:'8em' }
+       { name:this._i18n.titleCode, field:'code', width:'5em' },
+       { name:this._i18n.titleLabel, field:'vendor', width:'5em' },
+       { name:this._i18n.titleCommand, field:'model', width:'5em' },
+       { name:this._i18n.titleLabel, field:'version', width:'5em' },
+       { name:this._i18n.titleCommand, field:'userAgent', width:'20em' }
       ]] } ];
     },
 

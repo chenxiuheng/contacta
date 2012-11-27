@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import mic.contacta.asterisk.spi.AsteriskService;
 import mic.contacta.dao.CdrDao;
 import mic.contacta.domain.CdrModel;
 import mic.contacta.domain.CdrQueryModel;
@@ -201,7 +200,6 @@ public class CdrAction extends AbstractContactaSmd<CdrModel>
 
   protected final static String[] CALL_DISPOSITION = { "ANSWERED", "FAILED", "NO ANSWER" };
 
-  private AsteriskService asteriskService;
   private List<CdrModel> cdrList;
   private CdrQueryModel cdrQuery;
 

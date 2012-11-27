@@ -45,7 +45,7 @@ public class PhonebarServiceImpl implements PhonebarService
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
   @Autowired private SipUserDao sipUserDao;
-  @Autowired private AsteriskService asteriskService;
+  @Autowired(required=false) private AsteriskService asteriskService;
 
   @Autowired private PersonDao personDao;
 

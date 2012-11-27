@@ -37,7 +37,6 @@ public class SampleAgi implements AgiScript //extends BaseAgiScript
   static private Logger logger; @SuppressWarnings("static-access")
   protected Logger log()  { if (this.logger == null) this.logger = LoggerFactory.getLogger(this.getClass()); return this.logger; }
 
-  @SuppressWarnings("unused")
   @Autowired private AsteriskService asteriskService;
 
 

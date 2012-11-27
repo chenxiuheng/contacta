@@ -20,7 +20,7 @@ var a =
 
         // errData = { fileName, lineNumber, message, name, stack }
         ui.organicErrorForm.setValues(errData);
-        //ui.organicErrorStack.attr('content', errData.stack);
+        //ui.organicErrorStack.set('content', errData.stack);
       }),
       onComplete:dojo.hitch(this,function(items, request)
       {

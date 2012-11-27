@@ -1,4 +1,5 @@
-[#ftl][#-- $Revision: 674 $  :encoding=UTF-8:--]
+[#ftl][#-- :encoding=UTF-8: --]
+[#setting number_format="0.####"/]
 
 [#include "./macro-common.ftl"/]
 

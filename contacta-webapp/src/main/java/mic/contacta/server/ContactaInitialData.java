@@ -145,8 +145,8 @@ public class ContactaInitialData extends AbstractInitialData
     AccountModel root = accountService.accountByLogin("root");
     if (root != null)
     {
-      authorizationService.addPolicy(root, roleMap.get(ROLE_SUPERVISOR), operationMap.get(ROLE_SUPERVISOR), null);
-      authorizationService.addPolicy(root, roleMap.get(ROLE_ADMIN), operationMap.get(ROLE_ADMIN), null);
+      authorizationService.addPolicy(root, roleMap.get(ROLE_SUPERVISOR), operationMap.get(OP_SUPERVISOR), null);
+      authorizationService.addPolicy(root, roleMap.get(ROLE_ADMIN), operationMap.get(OP_ADMIN), null);
     }
     else
     {
